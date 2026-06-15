@@ -4,9 +4,9 @@ Use this catalog for non-skill tools, frameworks, protocols, and services that s
 
 | Phase | Tool | Type | Label | Notes |
 | --- | --- | --- | --- | --- |
+| Align |  | Planning or documentation |  |  |
 | Build |  | Framework |  |  |
 | Equip |  | MCP server or API |  |  |
 | Evaluate |  | Eval framework |  |  |
 | Deploy |  | Runtime |  |  |
 | Observe |  | Observability |  |  |
-

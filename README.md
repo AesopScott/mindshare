@@ -5,7 +5,7 @@ MAPS is a skill-based framework for building multi-agent systems.
 It turns the agent development lifecycle into reusable phase skills:
 
 ```text
-define -> design -> build -> equip -> evaluate -> deploy -> observe -> improve
+phase alignment -> define -> design -> build -> equip -> evaluate -> deploy -> observe -> improve
 ```
 
 Each phase has two artifacts:
@@ -17,6 +17,7 @@ Each phase has two artifacts:
 
 | Phase | Core question | Primary output |
 | --- | --- | --- |
+| Align | What lifecycle, structure, naming, scope, and scaffolding are we agreeing to use? | Phase alignment brief |
 | Define | What job should this agent or system do, for whom, and within what boundaries? | Agent brief |
 | Design | How should the agent or agents reason, coordinate, escalate, and stay aligned? | System design |
 | Build | How do we implement the agent loop, prompts, state, and orchestration? | Working agent |
@@ -52,4 +53,3 @@ MAPS catalogs repos and skills by phase. A good catalog entry should explain:
 - Fit, maintenance, adoption, license, security, docs, and teaching value.
 
 Start with `catalogs/repos.md` and `catalogs/skills.md`.
-

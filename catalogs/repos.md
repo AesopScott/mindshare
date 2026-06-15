@@ -25,7 +25,7 @@ Use this catalog to map useful repositories to MAPS phases.
 
 | Phase | Repo | Label | Notes |
 | --- | --- | --- | --- |
+| Align |  |  | Repos that help define lifecycle structure, curriculum scaffolds, or skill repository organization. |
 | All | https://github.com/microsoft/ai-agents-for-beginners | Useful reference | Strong curriculum coverage for agent concepts and production topics. |
 | Skills | https://github.com/VoltAgent/awesome-agent-skills | Useful reference | Broad index of Agent Skills-compatible repositories. |
 | Skills | https://github.com/hqhq1025/skill-optimizer | Useful reference | Skill lifecycle tooling for mining, personalizing, and generalizing skills. |
-

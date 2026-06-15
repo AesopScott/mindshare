@@ -6,6 +6,7 @@ Use this catalog to map reusable Agent Skills to MAPS phases.
 
 | Phase | Skill | Source | Label | Why it helps |
 | --- | --- | --- | --- | --- |
+| Align |  |  |  |  |
 | Define |  |  |  |  |
 | Design |  |  |  |  |
 | Build |  |  |  |  |
@@ -18,4 +19,3 @@ Use this catalog to map reusable Agent Skills to MAPS phases.
 ## Notes
 
 Prefer skills that encode repeatable workflow knowledge. Use tools or MCP servers for execution capability and skills for method, judgment, and process.
-

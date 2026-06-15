@@ -67,7 +67,7 @@ window.MAPS_MANIFEST = {
   ],
   templates: [
     "phase-alignment-brief.md",
-    "agent-brief.md",
+    "agent-definition-template.md",
     "workflow-spec.md",
     "tool-map.md",
     "eval-scorecard.md",
@@ -111,7 +111,7 @@ window.MAPS_MANIFEST = {
       skills: ["define-agent"],
       repos: ["AesopScott/maps"],
       tools: ["Git", "Agent Skills"],
-      templates: ["agent-brief.md"],
+      templates: ["agent-definition-template.md"],
       catalogs: ["skills.md", "repos.md", "tools.md"]
     }
   }

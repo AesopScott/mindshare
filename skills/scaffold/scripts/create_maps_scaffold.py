@@ -34,7 +34,7 @@ PHASES = [
 
 TEMPLATES = {
     "phase-alignment-brief.md": "# Phase Alignment Brief\n\n## Framework Name\n\n## Purpose\n\n## Audience\n\n## Phase Sequence\n\n```text\nphase alignment -> define -> design -> build -> equip -> evaluate -> deploy -> observe -> improve\n```\n\n## Phase Definitions\n\n| Phase | Purpose | Primary output |\n| --- | --- | --- |\n\n## Repository Or Project Structure\n\n## Naming Decisions\n\n## What Belongs Where\n\n## Open Questions\n\n## Done Criteria\n",
-    "agent-brief.md": "# Agent Brief\n\n## Name\n\n## Agent Handle\n\n## Role Or Mandate\n\n## User Or Operator\n\n## Job To Be Done\n\n## Desired Outcome\n\n## Persona And Tone\n\n## Authorization Level\n\n## Allowed Without Approval\n\n## Approval Required For\n\n## Forbidden Actions\n\n## Tool Access Requested\n\n## In Scope\n\n## Out Of Scope\n\n## Success Criteria\n\n## Failure Criteria\n\n## Human Escalation Points\n\n## Risks And Assumptions\n",
+    "agent-definition-template.md": "# Agent Brief\n\n## Name\n\n## Agent Handle\n\n## Role Or Mandate\n\n## User Or Operator\n\n## Job To Be Done\n\n## Desired Outcome\n\n## Persona And Tone\n\n## Authorization Level\n\n## Allowed Without Approval\n\n## Approval Required For\n\n## Forbidden Actions\n\n## Tool Access Requested\n\n## In Scope\n\n## Out Of Scope\n\n## Success Criteria\n\n## Failure Criteria\n\n## Human Escalation Points\n\n## Risks And Assumptions\n",
     "workflow-spec.md": "# Workflow Spec\n\n## System Goal\n\n## Agent Roles\n\n| Role | Responsibility | Inputs | Outputs | Escalates when |\n| --- | --- | --- | --- | --- |\n\n## Workflow\n\n1.\n\n## State And Memory\n\n## Guardrails\n\n## Human Approval Gates\n\n## Open Questions\n",
     "tool-map.md": "# Tool Map\n\n| Capability | Tool or source | Permission | Used by | Failure behavior |\n| --- | --- | --- | --- | --- |\n\n## Context Sources\n\n## Memory Policy\n\n## Audit Requirements\n\n## Security Notes\n",
     "eval-scorecard.md": "# Eval Scorecard\n\n| Scenario | Expected behavior | Actual behavior | Score | Notes |\n| --- | --- | --- | --- | --- |\n\n## Pass Criteria\n\n## Failure Categories\n\n## Release Recommendation\n",
@@ -225,9 +225,9 @@ def docs_phase1(name: str) -> str:
                 <article><h3>Skills</h3><ul data-maps-skills><li><strong>/define-agent</strong></li></ul></article>
                 <article><h3>Repos</h3><ul data-maps-repos><li>AesopScott/maps</li></ul></article>
                 <article><h3>Tools</h3><ul data-maps-tools><li>Agent Skills</li></ul></article>
-                <article><h3>Templates</h3><ul data-maps-templates><li>templates/agent-brief.md</li></ul></article>
+                <article><h3>Templates</h3><ul data-maps-templates><li>templates/agent-definition-template.md</li></ul></article>
                 <article><h3>Catalogs</h3><ul data-maps-catalogs><li>catalogs/skills.md</li></ul></article>
-                <article><h3>Phase output</h3><p><code>agents/{{agent-handle}}/01-define.md</code>, which Phase 2 Design uses to decide behavior, workflow, handoffs, controls, and tool needs.</p></article>
+                <article><h3>Phase output</h3><p><code>agents/{{agent-handle}}/agent-brief.md</code>, which Phase 2 Design uses to decide behavior, workflow, handoffs, controls, and tool needs.</p></article>
               </section>
             </main>
           </body>
@@ -277,7 +277,7 @@ def docs_manifest() -> str:
           ],
           templates: [
             "phase-alignment-brief.md",
-            "agent-brief.md",
+            "agent-definition-template.md",
             "workflow-spec.md",
             "tool-map.md",
             "eval-scorecard.md",
@@ -304,7 +304,7 @@ def docs_manifest() -> str:
               skills: ["define-agent"],
               repos: ["AesopScott/maps"],
               tools: ["Git", "Agent Skills"],
-              templates: ["agent-brief.md"],
+              templates: ["agent-definition-template.md"],
               catalogs: ["skills.md", "repos.md", "tools.md"]
             }}
           }}

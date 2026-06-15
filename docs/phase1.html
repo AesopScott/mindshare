@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MAPS: Define</title>
-    <meta name="description" content="MAPS Phase 1 defines the agent job, users, scope, boundaries, success criteria, failure criteria, escalation points, risks, and assumptions.">
+    <meta name="description" content="MAPS Phase 1 defines the agent job, users, authorization level, scope, boundaries, success criteria, failure criteria, escalation points, risks, and assumptions.">
     <link rel="stylesheet" href="./styles.css">
     <script src="./maps-manifest.js" defer></script>
     <script src="./maps-render.js" defer></script>
@@ -35,8 +35,8 @@
           <h1>Define the agent before building it.</h1>
           <p class="hero-copy">
             Define converts an agent idea into a brief that can be designed, built, evaluated,
-            and improved. This is APS work inside MAPS: the multi-agent project layer is scaffolded
-            but out of scope for this week's build.
+            and improved. It also states the agent's authorization level: what it can do alone,
+            what needs approval, and what is forbidden.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#brief">Build the agent brief</a>
@@ -82,7 +82,8 @@
             <h2>Definition is the contract.</h2>
             <p>
               A useful agent brief says what the agent is responsible for, who it serves,
-              how success is judged, where it must stop, and what assumptions need proof.
+              how success is judged, what it is authorized to do, where it must stop,
+              and what assumptions need proof.
             </p>
           </div>
 
@@ -99,11 +100,16 @@
             </article>
             <article class="tile">
               <div class="tile-icon">03</div>
+              <h3>Authorization</h3>
+              <p>Set what the agent may do alone, what needs approval, and what is forbidden.</p>
+            </article>
+            <article class="tile">
+              <div class="tile-icon">04</div>
               <h3>Boundaries</h3>
               <p>Separate in-scope work, out-of-scope work, and uncertain territory.</p>
             </article>
             <article class="tile">
-              <div class="tile-icon">04</div>
+              <div class="tile-icon">05</div>
               <h3>Proof</h3>
               <p>Set success criteria, failure criteria, escalation points, risks, and assumptions.</p>
             </article>
@@ -126,6 +132,9 @@
 ## User Or Operator
 ## Job To Be Done
 ## Desired Outcome
+## Authorization Level
+## Approval Required For
+## Forbidden Actions
 ## In Scope
 ## Out Of Scope
 ## Success Criteria

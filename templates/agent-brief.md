@@ -8,6 +8,12 @@
 
 ## Desired Outcome
 
+## Authorization Level
+
+## Approval Required For
+
+## Forbidden Actions
+
 ## In Scope
 
 ## Out Of Scope
@@ -19,4 +25,3 @@
 ## Human Escalation Points
 
 ## Risks And Assumptions
-

@@ -21,7 +21,7 @@ class Phase:
 
 PHASES = [
     Phase("00", "phase-alignment", "Phase Alignment", "phase-alignment", "Phase alignment brief", "Agree on lifecycle structure, names, scope, scaffolding, and where future work belongs."),
-    Phase("01", "define", "Define", "define-agent", "Agent brief", "Clarify the agent job, users, boundaries, success criteria, and risks."),
+    Phase("01", "define", "Define", "define-agent", "Agent brief", "Clarify the agent job, users, authorization level, boundaries, success criteria, and risks."),
     Phase("02", "design", "Design", "design-agent", "System design", "Shape roles, workflow, state, memory, controls, handoffs, and escalation."),
     Phase("03", "build", "Build", "build-agent", "Working agent", "Implement the runnable agent loop, prompts, state, routing, and orchestration."),
     Phase("04", "equip", "Equip", "equip-agent", "Capability map", "Map tools, data, permissions, context, memory, and integrations."),
@@ -34,7 +34,7 @@ PHASES = [
 
 TEMPLATES = {
     "phase-alignment-brief.md": "# Phase Alignment Brief\n\n## Framework Name\n\n## Purpose\n\n## Audience\n\n## Phase Sequence\n\n```text\nphase alignment -> define -> design -> build -> equip -> evaluate -> deploy -> observe -> improve\n```\n\n## Phase Definitions\n\n| Phase | Purpose | Primary output |\n| --- | --- | --- |\n\n## Repository Or Project Structure\n\n## Naming Decisions\n\n## What Belongs Where\n\n## Open Questions\n\n## Done Criteria\n",
-    "agent-brief.md": "# Agent Brief\n\n## Name\n\n## User Or Operator\n\n## Job To Be Done\n\n## Desired Outcome\n\n## In Scope\n\n## Out Of Scope\n\n## Success Criteria\n\n## Failure Criteria\n\n## Human Escalation Points\n\n## Risks And Assumptions\n",
+    "agent-brief.md": "# Agent Brief\n\n## Name\n\n## User Or Operator\n\n## Job To Be Done\n\n## Desired Outcome\n\n## Authorization Level\n\n## Approval Required For\n\n## Forbidden Actions\n\n## In Scope\n\n## Out Of Scope\n\n## Success Criteria\n\n## Failure Criteria\n\n## Human Escalation Points\n\n## Risks And Assumptions\n",
     "workflow-spec.md": "# Workflow Spec\n\n## System Goal\n\n## Agent Roles\n\n| Role | Responsibility | Inputs | Outputs | Escalates when |\n| --- | --- | --- | --- | --- |\n\n## Workflow\n\n1.\n\n## State And Memory\n\n## Guardrails\n\n## Human Approval Gates\n\n## Open Questions\n",
     "tool-map.md": "# Tool Map\n\n| Capability | Tool or source | Permission | Used by | Failure behavior |\n| --- | --- | --- | --- | --- |\n\n## Context Sources\n\n## Memory Policy\n\n## Audit Requirements\n\n## Security Notes\n",
     "eval-scorecard.md": "# Eval Scorecard\n\n| Scenario | Expected behavior | Actual behavior | Score | Notes |\n| --- | --- | --- | --- | --- |\n\n## Pass Criteria\n\n## Failure Categories\n\n## Release Recommendation\n",
@@ -198,7 +198,7 @@ def docs_phase1(name: str) -> str:
           <body data-maps-phase="1">
             <main>
               <h1>Define</h1>
-              <p>Phase 1 turns an agent idea into an agent brief with the job, user, outcome, boundaries, success criteria, failure criteria, escalation points, risks, and assumptions.</p>
+              <p>Phase 1 turns an agent idea into an agent brief with the job, user, outcome, authorization level, boundaries, success criteria, failure criteria, escalation points, risks, and assumptions.</p>
               <h2>Agent Brief</h2>
               <pre><code># Agent Brief
 
@@ -206,6 +206,9 @@ def docs_phase1(name: str) -> str:
 ## User Or Operator
 ## Job To Be Done
 ## Desired Outcome
+## Authorization Level
+## Approval Required For
+## Forbidden Actions
 ## In Scope
 ## Out Of Scope
 ## Success Criteria

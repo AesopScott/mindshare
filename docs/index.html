@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAPS: Phase Alignment</title>
+    <meta name="description" content="MAPS teaches Multi-Agent Pipeline Skills, starting with Phase 00: Phase Alignment.">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <nav class="nav" aria-label="Primary">
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true">M</span>
+            <span>MAPS</span>
+          </div>
+          <div class="nav-links">
+            <a href="#alignment">Phase 00</a>
+            <a href="#pipeline">Pipeline</a>
+            <a href="#structure">Structure</a>
+            <a href="https://github.com/AesopScott/maps">GitHub</a>
+          </div>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Multi-Agent Pipeline Skills</p>
+          <h1>First agree on the map.</h1>
+          <p class="hero-copy">
+            MAPS starts with Phase 00: Phase Alignment. This is where the scaffolding,
+            names, boundaries, teaching sequence, and repository structure are agreed
+            before any agent is defined, designed, built, or evaluated.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#alignment">Start with Phase 00</a>
+            <a class="button" href="#structure">See the scaffold</a>
+          </div>
+        </div>
+
+        <div class="map-visual" aria-label="MAPS phase sequence visual">
+          <div class="pipeline-card">
+            <div class="pipeline-title">
+              <span>MAPS phase sequence</span>
+              <small>teaching scaffold</small>
+            </div>
+            <div class="phase-rail">
+              <div class="phase-chip alignment">
+                <span class="phase-number">00</span>
+                <span><strong>Phase Alignment</strong><span>Agree on structure and scaffolding</span></span>
+              </div>
+              <div class="phase-chip">
+                <span class="phase-number">01</span>
+                <span><strong>Define</strong><span>Clarify the agent job and boundaries</span></span>
+              </div>
+              <div class="phase-chip">
+                <span class="phase-number">02</span>
+                <span><strong>Design</strong><span>Shape roles, workflow, memory, controls</span></span>
+              </div>
+              <div class="phase-chip">
+                <span class="phase-number">03</span>
+                <span><strong>Build</strong><span>Implement the runnable agent loop</span></span>
+              </div>
+              <div class="phase-chip">
+                <span class="phase-number">04+</span>
+                <span><strong>Equip through Improve</strong><span>Add capabilities, evidence, release, observation, iteration</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="visual-caption">
+            <span><strong>Current teaching page:</strong> only the scaffold and structure.</span>
+            <a class="button" href="#pipeline">View sequence</a>
+          </div>
+        </div>
+      </section>
+
+      <main>
+        <section id="alignment" class="section">
+          <div class="section-header">
+            <h2>Phase 00 is where the process becomes real.</h2>
+            <p>
+              Before the lifecycle can teach anything, the team needs agreement on
+              what the lifecycle is, what each phase produces, and where the artifacts live.
+            </p>
+          </div>
+
+          <div class="alignment-grid">
+            <article class="tile">
+              <div class="tile-icon">01</div>
+              <h3>Name the lifecycle</h3>
+              <p>MAPS means Multi-Agent Pipeline Skills. The name anchors the teaching frame and the repo.</p>
+            </article>
+            <article class="tile">
+              <div class="tile-icon">02</div>
+              <h3>Agree on phases</h3>
+              <p>The sequence starts with alignment, then moves through define, design, build, equip, evaluate, deploy, observe, and improve.</p>
+            </article>
+            <article class="tile">
+              <div class="tile-icon">03</div>
+              <h3>Scaffold artifacts</h3>
+              <p>Each phase gets a guide, a skill, and at least one template so teaching and agent execution stay connected.</p>
+            </article>
+            <article class="tile">
+              <div class="tile-icon">04</div>
+              <h3>Make room to grow</h3>
+              <p>The first page teaches the structure. Later pages can go deep on one phase at a time without crowding the map.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="pipeline" class="section">
+          <div class="section-header">
+            <h2>The MAPS sequence</h2>
+            <p>
+              The full pipeline is visible from the start. Only Phase 00 is taught here;
+              every later phase gets its own page next.
+            </p>
+          </div>
+
+          <div class="sequence" aria-label="MAPS phases">
+            <a class="phase-link current" href="./index.html">
+              <strong>00 Alignment</strong>
+              <span>Scaffold and agree</span>
+            </a>
+            <span class="phase-link future">
+              <strong>01 Define</strong>
+              <span>Agent brief</span>
+            </span>
+            <span class="phase-link future">
+              <strong>02 Design</strong>
+              <span>System design</span>
+            </span>
+            <span class="phase-link future">
+              <strong>03 Build</strong>
+              <span>Working agent</span>
+            </span>
+            <span class="phase-link future">
+              <strong>04 Equip</strong>
+              <span>Capability map</span>
+            </span>
+            <span class="phase-link future">
+              <strong>05 Evaluate</strong>
+              <span>Eval suite</span>
+            </span>
+            <span class="phase-link future">
+              <strong>06 Deploy</strong>
+              <span>Release plan</span>
+            </span>
+            <span class="phase-link future">
+              <strong>07 Observe</strong>
+              <span>Observation plan</span>
+            </span>
+            <span class="phase-link future">
+              <strong>08 Improve</strong>
+              <span>Improvement backlog</span>
+            </span>
+          </div>
+        </section>
+
+        <section id="structure" class="section">
+          <div class="section-header">
+            <h2>One framework, three teaching surfaces.</h2>
+            <p>
+              The repo separates the curriculum, agent-executable skills, and classroom templates.
+              That keeps each artifact useful in its own setting.
+            </p>
+          </div>
+
+          <div class="structure">
+            <pre class="file-tree" aria-label="MAPS repository structure"><code>maps/
+  docs/
+    index.html
+    styles.css
+  phases/
+    00-phase-alignment.md
+    01-define.md
+    ...
+  skills/
+    phase-alignment/
+      SKILL.md
+    define-agent/
+      SKILL.md
+    ...
+  templates/
+    phase-alignment-brief.md
+    agent-brief.md
+    ...
+  catalogs/
+    repos.md
+    skills.md
+    tools.md</code></pre>
+
+            <div class="artifact-list">
+              <div class="artifact">
+                <code>phases/</code>
+                <p>Phase guides for teaching, discussion, and shared vocabulary.</p>
+              </div>
+              <div class="artifact">
+                <code>skills/</code>
+                <p>Reusable Agent Skills that let compatible agents execute each phase as a workflow.</p>
+              </div>
+              <div class="artifact">
+                <code>templates/</code>
+                <p>Concrete deliverables learners can fill in during exercises or project work.</p>
+              </div>
+              <div class="artifact">
+                <code>catalogs/</code>
+                <p>Curated repos, skills, and tools mapped back to the phase where they create leverage.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="callout">
+            <div>
+              <h2>Next page: one phase at a time.</h2>
+              <p>
+                This page establishes the map. The next layer can add a dedicated page for
+                Define, then Design, then each remaining phase.
+              </p>
+            </div>
+            <a class="button primary" href="https://github.com/AesopScott/maps">Open repo</a>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        MAPS: Multi-Agent Pipeline Skills
+      </footer>
+    </div>
+  </body>
+</html>

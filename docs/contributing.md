@@ -11,7 +11,7 @@ Add catalog entries with enough evidence to make the recommendation auditable:
 - Maintenance signal
 - License
 - Security concerns
-- Teaching value
+- Builder value
 
 ## Add Or Update A Phase
 
@@ -22,9 +22,8 @@ Keep phase docs practical:
 - Activities
 - Outputs
 - Done criteria
-- Teaching exercise
+- Working exercise
 
 ## Add Or Update A Skill
 
-Keep `SKILL.md` concise. Put detailed teaching material in `phases/` and reusable output shells in `templates/`.
-
+Keep `SKILL.md` concise. Put detailed phase material in `phases/` and reusable output shells in `templates/`.

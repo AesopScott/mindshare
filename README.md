@@ -10,7 +10,7 @@ phase alignment -> define -> design -> build -> equip -> evaluate -> deploy -> o
 
 Each phase has two artifacts:
 
-- A phase guide in `phases/` for teaching, documentation, and curriculum.
+- A phase guide in `phases/` for planning, documentation, and shared vocabulary.
 - A reusable Agent Skill in `skills/` for agent-compatible tools that support `SKILL.md`.
 
 ## Phase Map
@@ -31,7 +31,7 @@ Each phase has two artifacts:
 
 ```text
 maps/
-  phases/       Teaching guides for each MAPS phase
+  phases/       Phase guides for each MAPS phase
   skills/       One Agent Skill per phase
   templates/    Reusable phase deliverable templates
   catalogs/     Curated repos, skills, tools, and references
@@ -42,11 +42,11 @@ maps/
 
 Install or copy the folders under `skills/` into an Agent Skills-compatible directory, such as `~/.codex/skills/`, `.agents/skills/`, or another client-specific skills path.
 
-Each skill is intentionally small. The full teaching detail lives in `phases/` and the reusable deliverable shells live in `templates/`.
+Each skill is intentionally small. The phase detail lives in `phases/` and the reusable deliverable shells live in `templates/`.
 
-## Teaching Site
+## Project Site
 
-Open `docs/index.html` to view the first static teaching page for MAPS scaffolding and Phase 00 structure.
+Open `docs/index.html` to view the static project page for MAPS scaffolding and Phase 00 structure.
 
 ## Curation Model
 
@@ -54,6 +54,6 @@ MAPS catalogs repos and skills by phase. A good catalog entry should explain:
 
 - Why it belongs in the phase.
 - Whether it is recommended, useful reference, experimental, or avoid.
-- Fit, maintenance, adoption, license, security, docs, and teaching value.
+- Fit, maintenance, adoption, license, security, docs, and builder value.
 
 Start with `catalogs/repos.md` and `catalogs/skills.md`.

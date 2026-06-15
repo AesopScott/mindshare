@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Agent"
+  short_description: "Design roles, workflow, memory, and controls."
+  default_prompt: "Use design-agent to turn an agent brief into a system design."

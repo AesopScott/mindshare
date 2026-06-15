@@ -32,7 +32,6 @@ Translate the agent brief into a system design that describes roles, workflow, d
 - Risk controls are designed before implementation.
 - The design can be evaluated.
 
-## Teaching Exercise
+## Useful References
 
-Turn an agent brief into a multi-agent workflow spec using `templates/workflow-spec.md`.
-
+- Addy Osmani, "How to write a good spec for AI agents": useful when turning the agent brief into design-ready objectives, context, constraints, acceptance criteria, and boundaries.

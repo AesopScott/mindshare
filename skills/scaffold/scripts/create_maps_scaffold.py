@@ -227,7 +227,7 @@ def docs_phase1(name: str) -> str:
                 <article><h3>Tools</h3><ul data-maps-tools><li>Agent Skills</li></ul></article>
                 <article><h3>Templates</h3><ul data-maps-templates><li>templates/agent-brief.md</li></ul></article>
                 <article><h3>Catalogs</h3><ul data-maps-catalogs><li>catalogs/skills.md</li></ul></article>
-                <article><h3>Phase output</h3><p>A completed Agent Brief that Phase 2 Design can use to decide behavior, workflow, handoffs, controls, and tool needs.</p></article>
+                <article><h3>Phase output</h3><p><code>agents/{{agent-handle}}/01-define.md</code>, which Phase 2 Design uses to decide behavior, workflow, handoffs, controls, and tool needs.</p></article>
               </section>
             </main>
           </body>

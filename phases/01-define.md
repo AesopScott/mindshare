@@ -20,7 +20,7 @@ Clarify what the agent or multi-agent system is supposed to accomplish before de
 
 ## Outputs
 
-- Completed Agent Brief from `templates/agent-brief.md`
+- `agents/{agent-handle}/01-define.md`, created from `templates/agent-brief.md`
 - Authorization boundary
 - Success metrics
 - Non-goals and boundaries
@@ -36,4 +36,4 @@ Clarify what the agent or multi-agent system is supposed to accomplish before de
 
 ## Phase Artifact
 
-Use `/define-agent` to turn a vague agent idea into a completed Agent Brief. This brief is the artifact Phase 2 Design uses to decide behavior, workflow, handoffs, controls, and tool needs.
+Use `/define-agent` to turn a vague agent idea into `agents/{agent-handle}/01-define.md`. Phase 2 Design uses that file to decide behavior, workflow, handoffs, controls, and tool needs.

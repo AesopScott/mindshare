@@ -22,11 +22,13 @@ Use this skill to turn a vague agent idea into an agent brief. Prefer clarity ov
 9. Define observable success and failure criteria.
 10. Name human escalation points.
 11. Capture risks, assumptions, and unknowns.
-12. Produce or update an agent brief.
+12. Produce or update `agents/{agent-handle}/01-define.md`.
 
 ## Output
 
-Return a concise brief with:
+Create or update `agents/{agent-handle}/01-define.md` using `templates/agent-brief.md` as the starting structure.
+
+The completed file contains:
 
 - Name
 - Agent handle
@@ -47,7 +49,7 @@ Return a concise brief with:
 - Escalation points
 - Risks and assumptions
 
-Use `templates/agent-brief.md` from the MAPS repo when working inside this repository.
+Do not overwrite `templates/agent-brief.md`; it is the reusable input template.
 
 ## Done Criteria
 

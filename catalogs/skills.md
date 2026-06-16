@@ -10,7 +10,7 @@ Use this catalog to map reusable Agent Skills to MAPS phases.
 | Align |  |  |  |  |
 | Define | /define-agent | `skills/define-agent` | Recommended | Creates the agent brief, including job, authorization boundary, scope, proof, escalation, and risks. |
 | Define | agent-skills-authoring | https://github.com/zebbern/agent-skills-authoring | Useful reference | Strong reference for writing reusable, discoverable SKILL.md workflows. |
-| Design |  |  |  |  |
+| Design | /design-agent | `skills/design-agent` | Recommended | Runs Research and Recommend before producing the agent design. |
 | Build |  |  |  |  |
 | Equip |  |  |  |  |
 | Evaluate |  |  |  |  |

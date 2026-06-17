@@ -27,6 +27,12 @@
 | Escalation paths |  |  |  |
 | Failure handling |  |  |  |
 | Observability |  |  |  |
+| Test strategy |  |  |  |
+| Acceptance scenarios |  |  |  |
+| Eval shape |  |  |  |
+| Unit/integration/e2e balance |  |  |  |
+| Mock vs real tool policy |  |  |  |
+| Regression gates |  |  |  |
 
 ## Agent Roles
 
@@ -52,5 +58,24 @@
 ## Failure Modes
 
 ## Observability Needs
+
+## Test Strategy
+
+## Acceptance Scenarios
+
+| Scenario | Given | When | Then | Proof method |
+| --- | --- | --- | --- | --- |
+
+## Eval Shape
+
+## Unit Integration E2E Balance
+
+## Mock Vs Real Tool Policy
+
+## Failure Cases
+
+## Regression Gates
+
+## Proof Required Before Phase 3 Build
 
 ## Open Questions

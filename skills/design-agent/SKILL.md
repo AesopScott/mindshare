@@ -1,6 +1,6 @@
 ---
 name: design-agent
-description: Create the MAPS Design phase artifact for an agent or multi-agent system. Use when defining roles, workflows, handoffs, memory, context, guardrails, approvals, escalation paths, and system boundaries from an agent brief.
+description: Create the MAPS Design phase artifact for an agent or multi-agent system. Use when defining roles, workflows, handoffs, memory, context, guardrails, approvals, escalation paths, test-first proof requirements, and system boundaries from an agent brief.
 ---
 
 # Design Agent
@@ -18,7 +18,7 @@ R&R means the agent does the first pass of design judgment.
 1. Read `agents/{agent-handle}/agent-brief.md`.
 2. Identify the agent type, such as search agent, build agent, calendar integration agent, support agent, research agent, workflow agent, or coding agent.
 3. Research comparable agents, reference architectures, product patterns, open-source implementations, platform examples, and design guidance. Use current web or repository research when available.
-4. Analyze what the comparable examples suggest about workflow, tools, memory, controls, approvals, failures, observability, and user experience.
+4. Analyze what the comparable examples suggest about workflow, tools, memory, controls, approvals, failures, observability, test strategy, acceptance scenarios, and user experience.
 5. Produce a recommendation for every design question in this skill.
 6. Present the recommendations with the reasoning and any sources used.
 7. Ask the user to override only the recommendations they disagree with or want to sharpen.
@@ -37,8 +37,9 @@ If research access is unavailable, state that limitation and use known patterns 
 8. Recommend tools, integrations, permissions, and constraints.
 9. Recommend guardrails, human approval gates, escalation paths, and forbidden paths.
 10. Recommend observability needs and evaluation implications.
-11. Ask the user to accept or override the recommendations.
-12. Produce or update `agents/{agent-handle}/agent-design.md`.
+11. Recommend the test-first proof plan: test strategy, acceptance scenarios, eval shape, unit/integration/e2e balance, mock vs real tool policy, failure cases, regression gates, and what must be proven before Phase 3 Build starts.
+12. Ask the user to accept or override the recommendations.
+13. Produce or update `agents/{agent-handle}/agent-design.md`.
 
 ## Output
 
@@ -60,6 +61,14 @@ The completed file contains:
 - Handoffs
 - Failure modes
 - Observability needs
+- Test strategy
+- Acceptance scenarios
+- Eval shape
+- Unit, integration, and e2e balance
+- Mock vs real tool policy
+- Failure cases
+- Regression gates
+- Proof required before Phase 3 Build
 - Open questions
 
 Use `templates/workflow-spec.md` from the MAPS repo when working inside this repository.
@@ -71,4 +80,6 @@ Use `templates/workflow-spec.md` from the MAPS repo when working inside this rep
 - Risks have controls.
 - Recommendations have reasoning.
 - User overrides are captured.
+- Test-first proof requirements are explicit.
+- The design names what must be proven before Phase 3 Build starts.
 - The design can be built and evaluated.

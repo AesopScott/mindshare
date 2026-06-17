@@ -22,6 +22,7 @@ Translate the agent brief into a system design that describes roles, workflow, d
 - Define agent roles and responsibilities.
 - Map workflow states, handoffs, approvals, and escalation.
 - Decide memory, context, guardrails, and policy checks.
+- Define the test-first proof plan before Build: test strategy, acceptance scenarios, eval shape, unit/integration/e2e balance, mock vs real tool policy, failure cases, regression gates, and what must be proven before Phase 3 starts.
 
 ## Outputs
 
@@ -31,6 +32,7 @@ Translate the agent brief into a system design that describes roles, workflow, d
 - Workflow diagram
 - Role definitions
 - Control and escalation plan
+- Test-first proof plan
 
 ## Done Criteria
 
@@ -39,6 +41,8 @@ Translate the agent brief into a system design that describes roles, workflow, d
 - Design choices are recommended before the user is asked to override.
 - Handoffs and stopping conditions are explicit.
 - Risk controls are designed before implementation.
+- Test strategy, acceptance scenarios, eval shape, mock policy, failure cases, and regression gates are explicit.
+- The design names what must be proven before Phase 3 Build starts.
 - The design can be evaluated.
 
 ## Research And Recommend
@@ -48,3 +52,8 @@ R&R is the default Phase 2 method. The agent should inspect the Phase 1 brief, d
 ## Useful References
 
 - Addy Osmani, "How to write a good spec for AI agents": useful when turning the agent brief into design-ready objectives, context, constraints, acceptance criteria, and boundaries.
+- Addy Osmani agent-skills: useful as a skill/workflow alternative for spec, plan, API/interface design, and test-driven development.
+- GSA-TTS AI Agent Specification Template: useful as a deep design-template alternative for agent architecture, autonomy, tools, memory, and oversight.
+- GitHub Spec Kit: useful as a spec-to-plan process alternative.
+- Obra Superpowers test-driven-development skill: useful as a strict TDD workflow reference.
+- Disciplined Agentic Engineering: useful as an ATDD and acceptance-proof reference for agentic work.

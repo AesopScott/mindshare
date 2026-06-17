@@ -33,3 +33,9 @@ Use this catalog to map useful repositories to MAPS phases.
 | Define | https://github.com/tmchow/agent-skills | Useful reference | Cross-runtime skill repository with clear human README vs agent SKILL.md separation and runtime-specific install lanes. |
 | Define | https://github.com/zebbern/agent-skills-authoring | Useful reference | Skill authoring guide with frontmatter, trigger, examples, progressive disclosure, and validation patterns. |
 | Define | https://github.com/GSA-TTS/devCrew_s/blob/master/docs/templates/AI%20Agent%20Specification%20Template.md | Useful reference | Agent specification template with handle, mandate, responsibilities, tool manifest, and resource permissions. |
+| Design | https://github.com/addyosmani/agent-skills | Recommended | Skill/workflow alternative with spec, plan, interface design, ADR, and test-driven-development skills. |
+| Design | https://github.com/GSA-TTS/devCrew_s/blob/master/docs/templates/AI%20Agent%20Specification%20Template.md | Recommended | Design-template alternative for agent architecture, autonomy, reasoning, tools, memory, and oversight. |
+| Design | https://github.com/github/spec-kit | Recommended | Spec-to-plan process alternative for turning intent into specification, plan, and tasks. |
+| Design | https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md | Recommended | Strict TDD skill reference: failing test, minimal implementation, then refactor. |
+| Design | https://github.com/swingerman/disciplined-agentic-engineering | Useful reference | Acceptance Test Driven Development and mutation-testing reference for agentic engineering. |
+| Design | https://github.com/mfranzon/tdd | Useful reference | Focused Claude Code TDD skill that breaks a plan or feature into small testable increments. |

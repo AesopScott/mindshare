@@ -25,6 +25,18 @@ Use this catalog to map useful repositories to MAPS phases.
 
 | Phase | Repo | Label | Notes |
 | --- | --- | --- | --- |
+| Foundation | https://notebooklm.google/ | Recommended | Source-grounded research workspace for collecting sources, asking questions against them, and synthesizing evidence with citations. |
+| Foundation | https://obsidian.md/ | Recommended | Local-first Markdown vault, graph notes, linked project memory, and durable context reference. |
+| Foundation | https://developers.llamaindex.ai/python/framework/understanding/rag/ | Recommended | RAG-readiness reference for source loading, indexing, retrieval, and queryable project knowledge. |
+| Foundation | https://www.atlassian.com/team-playbook/plays/project-kickoff | Recommended | Kickoff reference for purpose, roles, responsibilities, success markers, and next actions. |
+| Foundation | https://www.nngroup.com/articles/service-blueprints-definition/ | Recommended | Service-design reference for mapping people, touchpoints, processes, evidence, and customer/operator journeys. |
+| Shape | https://www.eventstorming.com/book/ | Recommended | Scope First reference for discovering domain events, commands, actors, policies, pain points, and hidden handoffs. |
+| Shape | https://www.omg.org/bpmn/ | Recommended | Workflow-shape reference for tasks, gateways, messages, swimlanes, approvals, and process boundaries. |
+| Shape | https://teamtopologies.com/key-concepts | Recommended | Role-pressure reference for deciding when separation reduces cognitive load or creates coordination cost. |
+| Shape | https://github.com/openai/swarm | Useful reference | Educational handoff reference for lightweight agent coordination, routines, and agent-to-agent transfers. |
+| Shape | https://cookbook.openai.com/examples/orchestrating_agents | Recommended | Practical handoff reference for deciding when to keep one agent, split routines, or transfer control between agents. |
+| Experience Design | https://github.com/shadcn-ui/ui | Recommended | Website and product UI composition reference for polished, accessible React interfaces. |
+| Experience Design | https://github.com/radix-ui/primitives | Recommended | Accessible interaction primitive reference for dialogs, menus, popovers, tabs, tooltips, accordions, and focus behavior. |
 | Align |  |  | Repos that help define lifecycle structure, curriculum scaffolds, or skill repository organization. |
 | All | https://github.com/microsoft/ai-agents-for-beginners | Useful reference | Strong curriculum coverage for agent concepts and production topics. |
 | Skills | https://github.com/VoltAgent/awesome-agent-skills | Useful reference | Broad index of Agent Skills-compatible repositories. |

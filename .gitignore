@@ -4,3 +4,8 @@ Thumbs.db
 *.log
 __pycache__/
 *.pyc
+.env
+.env.*
+!.env.example
+*.local
+.maps/tmp/

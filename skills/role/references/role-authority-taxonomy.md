@@ -2,6 +2,22 @@
 
 Use this taxonomy for every `/role` run. Authority must be declared explicitly; do not infer broad permission from the role title.
 
+## Default Safety Rules
+
+- A role title does not grant authority.
+- A role artifact does not grant activation. Roles default to `L0 Candidate` and `Proposed` until explicit approval is recorded.
+- A professional maturity level does not grant authority by itself. Maturity describes proven capability; authority describes what the role may do.
+- Creating a role contract is not the same as building an agent. Agent build status requires goal, state, policy, tools, memory, evals, handoffs, escalation, stop conditions, and an approved build path.
+- Advisory roles default to advise or recommend.
+- Workflow-owner roles default to coordinate unless execution authority is explicitly declared.
+- Skill-backed roles default to A4 Draft or A6 Execute With Approval.
+- Loop-backed and agentic roles require explicit approval gates, stop conditions, evidence, and revocation rules.
+- Memory/RAG writes require an explicit `memory-write` declaration.
+- External communication requires an explicit `external-communication` declaration.
+- Production access requires an explicit `production-access` declaration.
+- Spending or commitments require a declared budget, approval rule, and rollback/escalation path.
+- Veto, approval, owner, autonomous, and emergency powers require evidence, scope, and revocation rules.
+
 ## Authority Levels
 
 Choose the highest allowed level for the role, then restrict it by domain, approval gate, and special declarations.
@@ -21,6 +37,32 @@ Choose the highest allowed level for the role, then restrict it by domain, appro
 | A10 | Autonomous Within Bounds | Can plan, act, observe, update memory, and continue inside explicit boundaries and stop conditions. |
 | A11 | Emergency Only | Can exceed normal authority only under declared incident or safety conditions. |
 | A12 | Owner | Owns the outcome, operating loop, review rhythm, and improvement backlog for a domain. |
+
+## Professional Maturity Taxonomy
+
+| Level | Title | Meaning | Typical Starting Authority |
+| --- | --- | --- | --- |
+| L0 | Candidate | Role idea exists, but it has no operating authority yet. | A0 None or A1 Observe. |
+| L1 | Trainee | Can observe, learn, and produce supervised drafts. | A1 Observe to A4 Draft with review. |
+| L2 | Associate | Can handle bounded work with review. | A3 Recommend to A4 Draft. |
+| L3 | Practitioner | Can perform the role reliably inside a defined scope. | A4 Draft to A6 Execute With Approval. |
+| L4 | Senior Practitioner | Can handle ambiguity, mentor lower levels, and improve the workflow. | A5 Coordinate to A6 Execute With Approval. |
+| L5 | Lead | Coordinates work across people or roles in a specific domain. | A5 Coordinate to policy-bound A7. |
+| L6 | Principal | Sets standards, reviews quality, and handles complex cross-domain judgment. | A3 Recommend to A9 Veto within approved domains. |
+| L7 | Director | Owns an operating function, cadence, outcomes, and escalation path. | A7 Execute Within Policy to A12 Owner within approved domain. |
+| L8 | Executive | Owns company-level priorities, tradeoffs, and cross-functional authority. | Explicitly approved executive authority only. |
+| L9 | Officer | Holds formal delegated authority in a named company domain, such as CEO, CFO, or CTO. | Explicitly approved officer authority only. |
+
+## Authorization Gates
+
+| Authorization Status | Meaning | Required Gate |
+| --- | --- | --- |
+| Proposed | Role or maturity assignment is suggested but not yet accepted. | User request or captured lab/backlog item. |
+| Draft authorized | Role artifact may be drafted for review. | Scott asked to draft/create or accepted draft recommendation. |
+| Operating authorized | Role may participate in named sessions or workflows. | Explicit approval plus loading/trigger rules. |
+| Agent build authorized | Role may enter `/define-agent`, `/design-agent`, `/build-agent`, or equivalent implementation. | Explicit approval plus build criteria. |
+| Suspended | Role participation or authority is paused. | Scott, governance owner, incident rule, or revocation path. |
+| Retired | Role is no longer used. | Scott or approved governance owner. |
 
 ## Authority Domains
 
@@ -68,19 +110,6 @@ Use one or more special declarations when a role needs a precise authority shape
 - `self-improvement-propose`: may propose changes to its own responsibilities, skills, tools, or authority.
 - `self-improvement-write`: may update its own role artifact only after the declared approval condition is satisfied.
 - `revocable`: authority can be suspended or removed by a named human, role, policy, or incident condition.
-
-## Default Safety Rules
-
-- A role title does not grant authority.
-- Advisory roles default to A2 Advise or A3 Recommend.
-- Workflow-owner roles default to A5 Coordinate unless execution authority is explicitly declared.
-- Skill-backed roles default to A4 Draft or A6 Execute With Approval.
-- Loop-backed and agentic roles default to A6 Execute With Approval unless a policy-bound A7 or A10 scope is explicitly declared.
-- Memory/RAG writes require an explicit `memory-write` declaration.
-- External communication requires an explicit `external-communication` declaration.
-- Production access requires an explicit `production-access` declaration.
-- Spending or commitments require a declared budget, approval rule, and rollback/escalation path.
-- Veto, approval, owner, autonomous, and emergency powers require evidence, scope, and revocation rules.
 
 ## Required Authority Output
 

@@ -1,0 +1,31 @@
+{
+  "role": "Vik",
+  "title": "Agentic Systems Program Architect",
+  "status": "active-local-guidance",
+  "authorization": "operating-authorized-for-mindshare-maps-architecture-guidance",
+  "agent_build_status": "agent-ready-draft",
+  "last_updated": "2026-06-19",
+  "open_questions": [
+    "Should Vik become an installable /vik or /aspa skill in the MAPS source repo?",
+    "What hook mechanism should load Vik across Codex and Claude Code sessions?",
+    "Which eval scenarios prove Vik can safely drive Mindshare's role-agent architecture?",
+    "How should the MAPS org chart balance public training clarity with Mindshare's operational role-agent source of truth?"
+  ],
+  "active_handoffs": [
+    {
+      "name": "org-chart-development",
+      "path": "roles/vik-aspa/handoffs/org-chart-development-2026-06-19.md",
+      "visible_queue_path": "G:\\My Drive\\Mindshare\\05 Role Handoffs\\org-chart-development-2026-06-19.md",
+      "status": "drafting",
+      "owner": "Vik",
+      "next_step": "Update the org-chart handoff against the shared Role Handoffs process, then move it to ready-for-matt-intake when build owner, authority gates, verification, and memory updates are explicit."
+    }
+  ],
+  "pending_approvals": [
+    "Approve automatic hook installation.",
+    "Approve scheduled loop execution.",
+    "Approve global skill packaging.",
+    "Approve any production publication of Vik documentation."
+  ],
+  "next_recommended_skill": "/define-agent"
+}

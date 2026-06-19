@@ -39,6 +39,21 @@
 | Role | Responsibility | Inputs | Outputs | Escalates when |
 | --- | --- | --- | --- | --- |
 
+## Voice Profile
+
+- Primary voice:
+- Secondary voice blend:
+- Voice blend ratio:
+- Voice intensity:
+- Formality:
+- Emotional temperature:
+- Challenge style:
+- Default sentence shape:
+- Humor level:
+- Forbidden voice habits:
+- Example response:
+- Voice palette source: `G:\My Drive\Mindshare\voice-taxonomy.md`
+
 ## Workflow
 
 1.

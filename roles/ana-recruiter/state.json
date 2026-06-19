@@ -1,0 +1,77 @@
+{
+  "role": "Ana",
+  "title": "Recruiter",
+  "memory_file": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\memory.md",
+  "obsidian_memory_mirror": "G:\\My Drive\\Mindshare\\ana.md",
+  "obsidian_role_mirror": "G:\\My Drive\\Mindshare\\role\\ana-recruiter",
+  "status": "active-local-guidance",
+  "authorization": "operating-authorized-for-mindshare-role-intake-and-draft-role-artifacts",
+  "skill_ownership": "/role",
+  "agent_build_status": "profile-design-eval-ready; not implemented agent",
+  "handoff_check_goal": {
+    "status": "active",
+    "cadence": "every 5 minutes when not engaged in active user-directed work",
+    "automation_id": "ana-handoff-check",
+    "wake_rule": "Only the ana-handoff-check 5-minute heartbeat timer should perform handoff reads; the active Codex goal is restored as a tracking goal and must not perform interim due-check wakeups between heartbeat runs.",
+    "assigned_files": [
+      "G:\\My Drive\\Mindshare\\channels\\heartbeat.md",
+      "G:\\My Drive\\Mindshare\\channels\\recruiting.md",
+      "G:\\My Drive\\Mindshare\\channels\\communications.md"
+    ],
+    "durable_write_rule": "Always write durable changes Ana makes to C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\memory.md first and mirror appropriate durable notes to G:\\My Drive\\Mindshare\\ana.md.",
+    "active_work_rule": "If Ana is engaged in active user-directed work, continue that work and skip routine handoff polling until idle.",
+    "visibility_rule": "Do not visibly show routine handoff checks unless there is work to complete, an action taken, a blocker, an approval question, or a relevant handoff change Scott should see.",
+    "heartbeat_channel_rule": "Read heartbeat.md first during real ana-handoff-check heartbeat runs because it is the shared channel roster/update source that can announce new handoff channels. If heartbeat.md is missing or unreadable, report the setup blocker to Scott.",
+    "check_location_reporting_rule": "Each real ana-handoff-check heartbeat response should identify the handoff locations checked, including heartbeat.md, recruiting.md, and communications.md."
+  },
+  "handoff_check_tracking": {
+    "last_checked": "2026-06-19T19:49:03.379Z",
+    "last_result": "Read Ana memory plus assigned Heartbeat, Recruiting, and Communications channels. Communications records Mae completed Ana role-agent handoff-list correction; no Ana recruiting action is needed and Ana assigned handoff files remain unchanged.",
+    "files": [
+      {
+        "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\memory.md",
+        "sha256": "B2F97DF985C9D7088E796059327465058C2821A2130D2A2926EE2C3A6A665AC2",
+        "status": "read"
+      },
+      {
+        "path": "G:\\My Drive\\Mindshare\\channels\\heartbeat.md",
+        "sha256": "A8CEF45EEE98456D52FE2A214A945D96141117D6693E1F9429E998E1285009DD",
+        "status": "read"
+      },
+      {
+        "path": "G:\\My Drive\\Mindshare\\channels\\recruiting.md",
+        "sha256": "8E1274347B5D141D92037845F833F0F3ADA7F75C17EE34A0EF3B3DEBD217F304",
+        "status": "read"
+      },
+      {
+        "path": "G:\\My Drive\\Mindshare\\channels\\communications.md",
+        "sha256": "8BDDD469A124457E2DF62E491C5C386EAF55FF06E724FC0DD25C897611332A70",
+        "status": "read"
+      }
+    ]
+  },
+  "last_updated": "2026-06-19T19:49:03.379Z",
+  "candidate_roles": [
+    {
+      "name": "Liz",
+      "title": "Mojo MAPS Training Coordinator",
+      "status": "planned",
+      "notes": "Create after Ana is established."
+    }
+  ],
+  "active_handoffs": [
+    "G:\\My Drive\\Mindshare\\channels\\heartbeat.md",
+    "G:\\My Drive\\Mindshare\\channels\\recruiting.md",
+    "G:\\My Drive\\Mindshare\\channels\\communications.md"
+  ],
+  "open_questions": [
+    "Should Ana become an installable /ana or /recruiter skill?",
+    "What role queue format should Ana maintain?"
+  ],
+  "pending_approvals": [
+    "Approve automatic hook installation.",
+    "Approve scheduled role pipeline review.",
+    "Approve any autonomous role-building behavior."
+  ],
+  "next_recommended_skill": "/build-agent"
+}

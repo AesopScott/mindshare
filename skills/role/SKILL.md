@@ -25,6 +25,8 @@ If the helper is unavailable, manually append the timestamp, skill, output path,
 
 Before writing files, ask for any missing answers. Do not silently infer the role contract unless the user explicitly asks for a draft.
 
+Ask exactly one question at a time. Do not present the user with a multi-question form, checklist, or table to fill out. Use the required questions below as the internal interview sequence: ask the next most important missing question, wait for the answer, then continue.
+
 Required questions:
 
 - Role name: what role should be created?

@@ -97,6 +97,7 @@ Channel map:
 - Live heartbeat automation is active in Mae's Office as `mae-handoff-check`.
 - Mae heartbeat scope is updated from narrow Communications-only checks to broad periodic communications audit across active role/agent memories, automations, assigned channels, and Heartbeat content quality.
 - `/role` v0.19.0 completed the one-syllable generated-name default, Communications default, roles-directory pointer, and heartbeat authority-response updates.
+- Mae is collecting active-role feedback through Communications on Scott's proposed operating taxonomy: Position -> Operator -> Coordinator -> Principal Agent, and Tool -> Tool Agent. This is feedback collection only and does not approve a canonical taxonomy change.
 
 ## Loading Proposal
 
@@ -123,3 +124,4 @@ Candidate loading rule:
 | 2026-06-19 | Recorded Scott's direction that Communications is the company-wide announcement channel used primarily by Mae and the CEO, and that all active roles and agents should join it in memory and heartbeat automation. | Scott request in Mae's Office. |
 | 2026-06-19 | Expanded Mae's heartbeat mandate to audit all active role and agent memories, heartbeat automations, assigned channels, and Heartbeat content quality, with recommendations for deficiencies and oversubscriptions. | Scott request in Mae's Office. |
 | 2026-06-19 | Recorded Scott's grant that Mae may directly correct communications and handoff channel assignments, including role memory channel lists and heartbeat checked-location prompts. | Scott request in Mae's Office. |
+| 2026-06-19 | Opened a lightweight Heartbeat/Communications survey for active-role feedback on Scott's proposed operating taxonomy; responses route through Communications and do not authorize canonical taxonomy changes. | Delegation from Ana thread. |

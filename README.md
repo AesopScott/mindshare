@@ -44,6 +44,20 @@ Install or copy the folders under `skills/` into an Agent Skills-compatible dire
 
 Each skill is intentionally small. The phase detail lives in `phases/` and the reusable deliverable shells live in `templates/`.
 
+## Skill Operating Contract
+
+MAPS keeps skill behavior consistent across sessions with three layers:
+
+- Always-on instructions in `AGENTS.md` and global Codex instructions for one-question interviews, memory helper usage, completion reports, skill versioning, and validation before publish.
+- Per-skill contracts inside every `SKILL.md`, including `Versioning`, `Changelog`, `Output`, `Completion report`, project-foundation lookup, one-question interviews, and memory-helper instructions.
+- A repo validator at `scripts/validate_maps_skills.py` that checks every MAPS skill for the required operating contract.
+
+Run the validator before publishing skill changes:
+
+```bash
+python scripts/validate_maps_skills.py
+```
+
 ### Non-Phase Builder Skills
 
 MAPS can also include reusable builder skills that support the system but are not lifecycle phases.

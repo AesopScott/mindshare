@@ -8,6 +8,7 @@ Use this catalog to map reusable Agent Skills to MAPS phases.
 | --- | --- | --- | --- | --- |
 | Foundation | /foundation | `skills/foundation` | Recommended | Starts M0 Project Foundation with project intent, notes scaffold, evidence, source inventory, assumptions, decisions, EventStorming Lite, Service Blueprint Lite, and RAG readiness. |
 | Shape | /shape | `skills/shape` | Recommended | Runs M1 System Shape to decide Unknown / Scope First, Single-Agent / APS, or Multi-Agent / MAPS before roster or implementation work. |
+| Role Builder | /role | `skills/role` | Recommended | Creates organization role agents and decides whether each role should be advisory, workflow-owned, skill-backed, loop-backed, agentic, or persona-only. |
 | Align | scaffold | `skills/scaffold` | Recommended | Creates the initial MAPS repository structure before phase work begins. |
 | Align |  |  |  |  |
 | Define | /define-agent | `skills/define-agent` | Recommended | Creates the agent brief, including job, authorization boundary, scope, proof, escalation, and risks. |

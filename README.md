@@ -44,6 +44,12 @@ Install or copy the folders under `skills/` into an Agent Skills-compatible dire
 
 Each skill is intentionally small. The phase detail lives in `phases/` and the reusable deliverable shells live in `templates/`.
 
+### Non-Phase Builder Skills
+
+MAPS can also include reusable builder skills that support the system but are not lifecycle phases.
+
+- `/role` creates role-agent contracts for a root organization or multi-agent corporation. Use it to build advisory, workflow, skill-backed, loop-backed, or agentic organizational roles.
+
 ## Scaffold A New MAPS Repo
 
 Use `skills/scaffold` when invoking `/scaffold` or creating a new MAPS-compatible repository structure.

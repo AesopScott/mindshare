@@ -37,6 +37,11 @@ window.MAPS_MANIFEST = {
       files: ["SKILL.md"]
     },
     {
+      name: "role",
+      displayName: "/role",
+      files: ["SKILL.md", "references/role-patterns.md", "templates/role-agent.md"]
+    },
+    {
       name: "design-agent",
       files: ["SKILL.md"]
     },
@@ -69,6 +74,7 @@ window.MAPS_MANIFEST = {
     "maps-scaffold-template.md",
     "phase-alignment-brief.md",
     "agent-definition-template.md",
+    "role-agent.md",
     "workflow-spec.md",
     "tool-map.md",
     "eval-scorecard.md",

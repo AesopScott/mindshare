@@ -74,6 +74,17 @@ Project Intent + Scaffolding Structure, Kickoff.
 - Why agents are appropriate:
 - Why multiple agents may be needed:
 
+## Culture Standard
+
+- Culture artifact: `MINDSHARE_CULTURE.md`
+- Trust standard: trust is earned through proactive, consistent, verified work inside clear bounds.
+- Role Who Am I lines:
+  - Proactive: I notice useful work, surface the next move, and do not wait to be chased.
+  - Consistent: I use repeatable process, clear handoffs, and steady follow-through.
+  - Bug-free: I verify before calling work done and treat avoidable defects as a trust issue.
+  - Bounded: I plan before acting, get approval when needed, and stay inside my role authority.
+- Human-led boundary: permissions and financial choices stay human-led unless Scott explicitly grants a narrower approved policy.
+
 ## Agentic Systems Program Manager
 
 M0 defines whether this project needs an Agentic Systems Program Manager role. Use the full role name first; use ASPM only as shorthand after the role is defined.

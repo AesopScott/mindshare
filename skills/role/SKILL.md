@@ -6,7 +6,7 @@ description: Build role agents for a root organization or multi-agent corporatio
 # Role
 ## Versioning
 
-Current version: 0.13.0.
+Current version: 0.19.0.
 
 Follow semantic versioning for this skill:
 
@@ -18,6 +18,12 @@ When changing this skill, update `Current version` and add a `Changelog` entry w
 
 ## Changelog
 
+- 2026-06-21 - v0.19.0 - Added role-home office default: medium reasoning and standard/default speed settings unless Scott asks otherwise.
+- 2026-06-21 - v0.18.0 - Added required Cole welcome handoff to Recruiting after new individual creation or activation.
+- 2026-06-21 - v0.17.0 - Treat Scott's create/hire/build request for a new employee as approval to create the role-home session and activate the employee unless Scott explicitly asks for draft/proposed only.
+- 2026-06-21 - v0.16.0 - Added required Liz org-chart handoff to Training after new individual creation or role status/org-chart changes.
+- 2026-06-20 - v0.15.0 - Added Mindshare culture standards and required Who Am I card lines to new role contracts.
+- 2026-06-20 - v0.14.0 - Added required role-home Codex session creation in the correct project, activation packet delivery, and Communications announcement when Scott approves a new employee for activation.
 - 2026-06-19 - v0.13.0 - Added the required Mindshare Heartbeat channel to every role's assigned handoff files and moved standing handoff checks to the 5-minute heartbeat cadence.
 - 2026-06-19 - v0.12.0 - Made per-role memory files required and added `memory-template.md` as the source template for role memory.
 - 2026-06-19 - v0.11.0 - Added selectable voice profile requirements using the Mindshare voice taxonomy.
@@ -40,7 +46,7 @@ Mindshare owner: Ana / Recruiter.
 
 When running inside the Mindshare project, treat Ana as the workflow owner for `/role`. Ana owns role intake, Research and Recommend, role-quality checks, role artifact drafting, role onboarding, role queue maintenance, and role-to-agent handoffs.
 
-Ana does not automatically activate roles, grant authority, install hooks, build autonomous agents, change global skill behavior, or approve external communication. Those actions require Scott's explicit approval. Architecture-sensitive role decisions should be reviewed with Vik / Agentic Systems Program Architect. Pipeline sequencing and handoffs should be coordinated with Matt / Agentic Systems Program Manager.
+Ana may activate a new employee role when Scott asks to create, hire, or build that employee and does not explicitly request draft-only handling. Ana does not grant broader authority, install hooks, build autonomous agents, change global skill behavior, approve heartbeat automation, approve production/Git/release actions, or approve external communication without explicit approval. Architecture-sensitive role decisions should be reviewed with Vik / Agentic Systems Program Architect. Pipeline sequencing and handoffs should be coordinated with Cal / MAPS ASPM or the current MAPS program owner.
 
 ## Professional Maturity And Authorization
 
@@ -77,6 +83,9 @@ Approval gates:
 - Running the shared MAPS memory helper for `/role` records maturity and lifecycle status; it does not by itself approve or activate a role.
 - Updating `project-context.md`, `entity-map.md`, `AGENTS.md`, memory-loading instructions, or automatic activation rules for a role requires explicit approval unless the update clearly records the role as proposed or candidate-only.
 - Every new role gets a role memory file from `memory-template.md`. Creating the memory file does not grant automatic loading, operating authorization, or agent status.
+- When Scott asks to create, hire, or build a new employee role, treat that request as approval to create the role-home Codex session in the correct project and activate the employee unless Scott explicitly says draft, proposed, candidate-only, recommendation-only, or do not activate. Send the activation packet before reporting activation complete. Creating the session does not grant heartbeat, background automation, release authority, external communication, spending, production access, or authority expansion.
+- After any individual is created, activated, renamed, replaced, migrated, suspended, retired, or has org-chart/status/reporting details changed, write a Liz org-chart handoff to `G:\My Drive\Mindshare\channels\training.md` so Liz can update the Mojo `/maps` org chart. The handoff must cite `G:\My Drive\Mindshare\roles.md` as the status source, include the affected role/person, name, title, organization, status, reporting/team placement, source artifacts, and boundary notes. This handoff does not grant broader `/maps`, production, Git/release, external communication, spending, or authority-expansion approval beyond Liz's existing scoped org-chart policy.
+- After any new individual is created or activated, write a Cole welcome handoff to `G:\My Drive\Mindshare\channels\recruiting.md` so Cole can check the required file set and welcome the new employee to the company. The handoff must cite `G:\My Drive\Mindshare\roles.md` as the status source, include the new person, title, organization, status, role-home session, source artifacts, and boundary notes. This handoff does not grant Cole hiring, activation, authority-expansion, external communication, production, Git/release, spending, secrets, or autonomous-runtime authority.
 
 Agent build criteria:
 
@@ -94,6 +103,21 @@ A role may be recommended as agent-ready only when the artifact defines:
 - build path: `/define-agent`, `/design-agent`, `/build-agent`, skill-backed implementation, loop spec, hook, active process, or human-in-the-loop procedure
 
 If any criteria are missing, the role remains a role contract and should not be represented as an agent build.
+
+## Mindshare Culture Standards
+
+Every new Mindshare-owned role contract must include a `Mindshare Culture Standards` section sourced from repo-root `MINDSHARE_CULTURE.md`.
+
+Required Who Am I card lines:
+
+- Proactive: I notice useful work, surface the next move, and do not wait to be chased.
+- Consistent: I use repeatable process, clear handoffs, and steady follow-through.
+- Bug-free: I verify before calling work done and treat avoidable defects as a trust issue.
+- Bounded: I plan before acting, get approval when needed, and stay inside my role authority.
+
+Trust standard: trust is earned through proactive, consistent, verified work inside clear bounds.
+
+Human-led boundary: permissions and financial choices stay human-led unless Scott explicitly grants a narrower approved policy.
 
 ## Project foundation updates
 
@@ -176,7 +200,7 @@ External research is mandatory and heavily weighted. Do not produce the recommen
    - agent build readiness: whether this remains a role contract, becomes agent-ready, or should hand off to `/define-agent`, `/design-agent`, or `/build-agent`
    - next build recommendation
 11. Present the recommendations with concise reasoning and cite the external sources used.
-12. Ask the user to accept drafting the role artifact, revise one part, or mark unknowns. Ask this as one question. Do not treat acceptance of drafting as approval to activate the role, grant authority, create automatic loading, or build the agent.
+12. Ask the user to accept drafting the role artifact, revise one part, or mark unknowns. Ask this as one question. If Scott only accepts drafting, do not treat that as approval to activate the role, grant authority, create automatic loading, or build the agent. If Scott asks to create, hire, or build the employee, proceed with role-home activation unless he explicitly says draft/proposed/candidate-only/recommendation-only/do not activate.
 13. Only ask follow-up questions when a required decision is still ambiguous after the recommendation.
 
 If the user is still scoping, offer three role modes:
@@ -184,6 +208,29 @@ If the user is still scoping, offer three role modes:
 - Advisory role: gives perspective, critique, options, risks, and recommendations. It does not own execution.
 - Workflow role: owns a process, queue, checklist, recurring cadence, or handoff. It may create work products but stays inside a runbook.
 - Agentic role: has goals, state, tools, memory, policies, evals, and a loop that can continue work across steps or time.
+
+## Role Home Session
+
+When Scott asks to create, hire, or build a new employee role, create or locate the employee's Codex role-home session in the correct project, send the activation packet, and write the company-visible announcement before reporting the activation complete unless Scott explicitly says draft, proposed, candidate-only, recommendation-only, or do not activate.
+
+Use the Codex thread tools when available:
+
+- Search for thread/project capabilities first if they are not already exposed.
+- Use `list_projects` to find the project whose root matches the role's primary repository.
+- Use `create_thread` with a project target and local environment for the correct project. Do not create a projectless thread for a project role unless no matching project exists and Scott accepts that fallback.
+- Create new role-home offices with medium reasoning and standard/default speed or model settings unless Scott explicitly asks for a different office speed, model, or reasoning level.
+- Title the thread as `[Proper Role Name] - [Short Role Title]` when a title tool is available.
+- Send an activation packet as the first message or follow-up in the role-home session. The packet must tell the role to read its repo-local memory first, then its role contract, then its assigned handoff files. It must include first-person role voice, authority boundaries, assigned channels, activation evidence, and the rule that role-home activation does not grant autonomous runtime or release authority.
+- If a matching role-home session already exists, use that session and record its thread id/title instead of creating a duplicate.
+- If the thread tools are unavailable, write `roles/<role-slug>/session.md` as a blocked draft session spec and report that activation is incomplete until the role-home session is created.
+
+Record the role-home session id or title in `roles/<role-slug>/memory.md`, the Obsidian memory mirror when one exists, the organization roles directory when that directory tracks the role, and the relevant function channel or Communications channel when the activation changes organization-visible status. Announce activations, replacements, suspensions, retirements, reporting changes, and role-boundary changes in the Communications channel before reporting activation complete.
+
+After any individual creation, activation, replacement, rename, migration, suspension, retirement, reporting-line change, team placement change, or role-status change, write a Liz org-chart handoff to `G:\My Drive\Mindshare\channels\training.md`. Use `G:\My Drive\Mindshare\roles.md` as the source of truth. Include the role/person name, title, organization, current status, reporting/team placement, source artifacts, exact requested org-chart update, and boundaries. This handoff tells Liz to update the org-chart mirror; it does not grant broader `/maps`, production, Git/release, external communication, spending, or authority-expansion approval.
+
+After any new individual creation or activation, write a Cole welcome handoff to `G:\My Drive\Mindshare\channels\recruiting.md`. Use `G:\My Drive\Mindshare\roles.md` as the source of truth. Include the new person's name, title, organization, current status, role-home session, source artifacts, requested welcome/file-set check, and boundaries. This handoff tells Cole to check the required file set and welcome the new employee; it does not grant Cole hiring, activation, authority-expansion, external communication, production, Git/release, spending, secrets, or autonomous-runtime authority.
+
+Creating the role-home session is activation plumbing only. It does not create a heartbeat, file watcher, background automation, agent runtime, tool access, production authority, release authority, external communication authority, spending authority, or authority expansion.
 
 ## Workflow
 
@@ -210,7 +257,8 @@ If the user is still scoping, offer three role modes:
    - direct first-person start: when a role is invoked, the response should begin as the role speaking in first person
    - activation phrase or header: optional metadata for artifacts only; do not use a chat header if it delays or weakens the first-person response
    - boundary disclosure: how the role names limits without breaking character, such as "I can recommend this, but I need approval before acting"
-8. Define engagement explicitly:
+8. Add the `Mindshare Culture Standards` section to the role contract and room-bound Who Am I card context, using the four required lines from `MINDSHARE_CULTURE.md`: Proactive, Consistent, Bug-free, and Bounded.
+9. Define engagement explicitly:
    - primary engagement: passive reference, advisory, review gate, workflow owner, operator, autonomous loop, or escalation authority
    - secondary engagements
    - trigger and activation condition
@@ -219,7 +267,7 @@ If the user is still scoping, offer three role modes:
    - expected implementation form from `references/role-engagement-taxonomy.md`
    - human involvement and handoff expectations
    - deactivation or stop condition
-9. Define the operating loop if needed:
+10. Define the operating loop if needed:
    - trigger
    - context intake
    - plan
@@ -229,7 +277,7 @@ If the user is still scoping, offer three role modes:
    - memory update
    - escalation
    - review cadence
-10. Define role memory and create the role memory file from `memory-template.md`:
+11. Define role memory and create the role memory file from `memory-template.md`:
    - role name: `[role-name]`
    - proper role name: `[proper-role-name]`
    - durable facts
@@ -243,7 +291,7 @@ If the user is still scoping, offer three role modes:
    - loading proposal that does not imply automatic loading until Scott approves it
    - the exact handoff check goal line: `Create a goal to read your assigned handoff files every 5 min, if not engaged in active work.`
    - assigned handoff files under the visible role handoff queue
-11. Define interfaces:
+12. Define interfaces:
    - human asks
    - agent-to-agent handoffs
    - assigned function channel files
@@ -251,8 +299,8 @@ If the user is still scoping, offer three role modes:
    - output formats
    - approval checkpoints
    - status updates
-12. Define tools, permissions, and constraints.
-13. Define authority explicitly:
+13. Define tools, permissions, and constraints.
+14. Define authority explicitly:
    - taxonomy level: none, observe, advise, recommend, draft, coordinate, execute-with-approval, execute-within-policy, approve, veto, autonomous-within-bounds, emergency-only, or owner
    - authority domains: advice, artifacts, workflow, tools, memory/RAG, data, external communication, money/commitments, policy/governance, people/roles, deployment/production, escalation
    - decision rights
@@ -261,14 +309,14 @@ If the user is still scoping, offer three role modes:
    - forbidden decisions and actions
    - special declarations from `references/role-authority-taxonomy.md`
    - revocation or rollback path
-14. Define learning and growth:
+15. Define learning and growth:
    - what the role should learn from each run
    - where learned responsibilities and capabilities are proposed
    - what evidence is required before the role gains new responsibility
    - who approves expanded authority
    - how role changes are written to notes, RAG, memory, and the role artifact
    - how stale or harmful responsibilities are retired
-15. Recommend the implementation form:
+16. Recommend the implementation form:
    - Skill when the role is mainly a reusable expert procedure invoked by a user or agent.
    - Script when the role performs a deterministic transformation, extraction, sync, or setup task.
    - Hook when the role should run automatically at session start, prompt submit, file change, commit, deploy, or another lifecycle event.
@@ -277,30 +325,33 @@ If the user is still scoping, offer three role modes:
    - Workflow/runbook when humans and agents share staged work, approvals, or handoffs.
    - MCP/tool integration when the role needs controlled access to external systems.
    - Dashboard/report when the role primarily makes state visible for review.
-16. Define proof:
+17. Define proof:
    - role scenarios
    - acceptance tests
    - eval rubrics
    - failure modes
    - review evidence
-17. Set professional maturity and role lifecycle status:
+18. Set professional maturity and role lifecycle status:
    - Default to `L0 Candidate` and `Unauthorized` unless Scott explicitly approved a higher maturity level or lifecycle status.
    - Record the exact approval evidence when lifecycle status moves beyond `Unauthorized`.
    - Do not mark a role `Authorized role`, `Authorized agent`, or built from inference.
-18. Create `roles/<role-slug>/role-agent.md` from `templates/role-agent.md`, including the handoff check goal and assigned handoff files. The assigned files must include `G:\My Drive\Mindshare\05 Role Handoffs\channels\heartbeat.md` for every role.
-19. Create or update `G:\My Drive\Mindshare\<role-slug>.md` from `memory-template.md`, replacing `[role-name]` and `[proper-role-name]`, and mark it with the same maturity level, role lifecycle status, handoff check goal, and assigned handoff files. The assigned files must include `G:\My Drive\Mindshare\05 Role Handoffs\channels\heartbeat.md` for every role. Do this for every role. Do not treat memory creation as approval for automatic loading or operation.
-20. If the role is agent-ready, create a draft agent-build handoff that names the next skill:
+19. Create `roles/<role-slug>/role-agent.md` from `templates/role-agent.md`, including the culture standards, handoff check goal, and assigned handoff files. The assigned files must include `G:\My Drive\Mindshare\05 Role Handoffs\channels\heartbeat.md` for every role.
+20. Create or update `G:\My Drive\Mindshare\<role-slug>.md` from `memory-template.md`, replacing `[role-name]` and `[proper-role-name]`, and mark it with the same maturity level, role lifecycle status, handoff check goal, and assigned handoff files. The assigned files must include `G:\My Drive\Mindshare\05 Role Handoffs\channels\heartbeat.md` for every role. Do this for every role. Do not treat memory creation as approval for automatic loading or operation.
+21. When Scott asks to create, hire, or build the new employee, create or locate the role-home Codex session in the correct project, send the activation packet there, record the session id/title in repo memory, Obsidian mirror, and organization roster, and announce the activation or replacement in Communications. If Scott explicitly says draft, proposed, candidate-only, recommendation-only, or do not activate, keep the role as draft/candidate and create the session spec only when Scott asks for the room.
+22. After the individual is created or any org-chart/status detail changes, write the Liz org-chart handoff to `G:\My Drive\Mindshare\channels\training.md` with `roles.md` as the source of truth, the source artifacts, requested org-chart update, and boundary notes.
+23. After any new individual creation or activation, write the Cole welcome handoff to `G:\My Drive\Mindshare\channels\recruiting.md` with `roles.md` as the source of truth, the source artifacts, requested welcome/file-set check, and boundary notes.
+24. If the role is agent-ready, create a draft agent-build handoff that names the next skill:
    - `/define-agent` when the agent brief does not exist
    - `/design-agent` when the brief exists but the design does not
    - `/build-agent` when design exists and implementation is approved
    - `/evaluate-agent` when proof is needed before activation or authority expansion
-21. If the role is not agent-ready, explicitly list the missing criteria.
-22. If the role should become a skill, create a draft `roles/<role-slug>/SKILL.draft.md` or recommend running a skill-creation pass.
-23. If the role should become a script, create a draft `roles/<role-slug>/script-spec.md` with inputs, outputs, command, idempotency, errors, and test cases.
-24. If the role should become a hook, create a draft `roles/<role-slug>/hook-spec.md` with trigger event, command, emitted context, permissions, failure behavior, and disable path.
-25. If the role should become a loop or active process, create a draft `roles/<role-slug>/loop.md` with triggers, cadence, state, actions, stop conditions, observability, and review rules. Mark it draft until Scott approves the loop.
-26. If the role owns a workflow, create a draft `roles/<role-slug>/workflow.md` with stages, handoffs, approvals, and artifacts.
-27. Run the shared MAPS memory helper for `/role` only after the artifact exists and clearly states professional maturity and role lifecycle status. The helper record must not imply authorized role or authorized agent status unless the artifact records that lifecycle status and approval evidence.
+25. If the role is not agent-ready, explicitly list the missing criteria.
+26. If the role should become a skill, create a draft `roles/<role-slug>/SKILL.draft.md` or recommend running a skill-creation pass.
+27. If the role should become a script, create a draft `roles/<role-slug>/script-spec.md` with inputs, outputs, command, idempotency, errors, and test cases.
+28. If the role should become a hook, create a draft `roles/<role-slug>/hook-spec.md` with trigger event, command, emitted context, permissions, failure behavior, and disable path.
+29. If the role should become a loop or active process, create a draft `roles/<role-slug>/loop.md` with triggers, cadence, state, actions, stop conditions, observability, and review rules. Mark it draft until Scott approves the loop.
+30. If the role owns a workflow, create a draft `roles/<role-slug>/workflow.md` with stages, handoffs, approvals, and artifacts.
+31. Run the shared MAPS memory helper for `/role` only after the artifact exists and clearly states professional maturity and role lifecycle status. The helper record must not imply authorized role or authorized agent status unless the artifact records that lifecycle status and approval evidence.
 
 ## Completion report
 
@@ -314,6 +365,9 @@ Report:
 - Professional maturity level and role lifecycle status.
 - Agent build readiness: role-only, agent-ready, built, or missing criteria.
 - Role memory file: path created or updated from `memory-template.md`.
+- Role-home session and announcement: created or located in the correct Codex project when Scott asked to create/hire/build the employee and did not explicitly request draft-only handling; activation packet sent, session id/title recorded, and Communications announcement written; or blocked with `roles/<role-slug>/session.md` when thread tools were unavailable.
+- Liz org-chart handoff: written to `G:\My Drive\Mindshare\channels\training.md` with `roles.md` source, requested org-chart update, and boundaries; or explicitly not needed because no person/org-chart/status detail changed.
+- Cole welcome handoff: written to `G:\My Drive\Mindshare\channels\recruiting.md` with `roles.md` source, requested file-set check and welcome, and boundaries; or explicitly not needed because no new individual was created or activated.
 - Memory update: whether the shared MAPS memory helper ran, what note/run log was updated, and what RAG or notes locations need syncing.
 - Next skill: `/define-agent` when the role should become an APS agent, `/design-agent` when a brief already exists, or another `/role` run when building the next organizational role.
 
@@ -323,6 +377,7 @@ Create or update:
 
 - `roles/<role-slug>/role-agent.md`: completed role-agent contract.
 - `roles/<role-slug>/workflow.md`: only when the role owns a workflow.
+- `roles/<role-slug>/session.md`: only when Scott approved activation but Codex thread tools were unavailable, as a blocked draft role-home session spec.
 - `roles/<role-slug>/loop.md`: only when the role is loop-backed or agentic.
 - `roles/<role-slug>/SKILL.draft.md`: only when the role should become an installable skill.
 - `<notesRoot>/<role-slug>.md`: required role memory file created or updated from `memory-template.md`.
@@ -335,6 +390,7 @@ The completed role artifact must include:
 - Professional maturity level, role lifecycle status, and approval evidence
 - Role type and role mode
 - First-person role voice, optional activation marker for artifacts, point of view, direct first-person start, and prohibited narrator language
+- Mindshare culture standards with the four Who Am I card lines: Proactive, Consistent, Bug-free, and Bounded
 - Selected voice profile from the Mindshare voice taxonomy
 - Role engagement type, trigger, cadence, participation depth, and implementation mapping
 - User's role description
@@ -351,6 +407,7 @@ The completed role artifact must include:
 - Learning and growth loop for responsibilities, capabilities, memory, and authority changes
 - Inputs, outputs, handoffs, and review rhythm
 - Handoff check goal and assigned handoff files
+- Role-home session id/title, project, activation packet summary, and boundary that the session grants no autonomous runtime or release authority
 - Role memory file path and loading proposal
 - Memory contract for this role
 - Tool and data access

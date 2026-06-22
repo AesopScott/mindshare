@@ -1,0 +1,1619 @@
+{
+  "version": "0.1.0",
+  "generated_at": "2026-06-21T23:50:00Z",
+  "authority_boundary": "This inventory records current role status, required files, capability gaps, and promotion blockers. It does NOT grant authority, approve activations, edit gates, enable automations, or override approval records. Every authority claim requires approval from the named approver in the role contract or this inventory's owner routing. Mechanical capability does not imply approved authority.",
+  "inventory_owner": "Tess / Autonomy Engineer",
+  "roster_source": "G:\\My Drive\\Mindshare\\roles.md (2026-06-21)",
+  "approvers": {
+    "final_authority": "Scott",
+    "architecture_fit": "Vik",
+    "role_lifecycle": "Ana",
+    "communications_channels": "Mae",
+    "release_authority": "Reid"
+  },
+  "roles": [
+    {
+      "role_id": "rae",
+      "role_name": "Chief Executive Officer",
+      "organization": "Mindshare",
+      "current_status": "approved",
+      "reporting_line": {
+        "manager": "Scott",
+        "final_approval_authority": "Scott",
+        "domain_owners": [
+          {
+            "domain": "activation-and-autonomy-expansion",
+            "owner": "Scott"
+          },
+          {
+            "domain": "executive-governance",
+            "owner": "Rae"
+          }
+        ]
+      },
+      "autonomy_level": {
+        "current": 3,
+        "target": 4,
+        "last_reviewed": "2026-06-19"
+      },
+      "source_files": {
+        "role_agent_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\role-agent.md",
+        "autonomy_md": "Not yet created",
+        "memory_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\name.md (inferred)"
+      },
+      "channels": [
+        {
+          "name": "Executive channel",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "Executive leadership coordination"
+        },
+        {
+          "name": "Rae's role-home thread",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "Bounded role-home heartbeat"
+        }
+      ],
+      "memory_and_mirrors": {
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mindshare\\rae.md; G:\\My Drive\\Mindshare\\role\\chief-executive-officer"
+      },
+      "authority_boundaries": {
+        "allowed_actions": [
+          "Research and recommendation",
+          "Executive alignment coordination",
+          "Org-design recommendations",
+          "Decision-ready recommendations for Scott",
+          "Role-boundary escalation"
+        ],
+        "denied_actions": [
+          "autonomous-agent-activation",
+          "production-deploy",
+          "external-communication",
+          "spending",
+          "secrets-access",
+          "git-write",
+          "authority-expansion"
+        ],
+        "tool_capabilities_vs_approved_authority": [
+          {
+            "tool": "thread-read",
+            "capability": "Can read assigned channels",
+            "approved_use": "Read executive channel and role-home thread"
+          },
+          {
+            "tool": "thread-write",
+            "capability": "Can write to assigned channels",
+            "approved_use": "Bounded heartbeat in role-home thread and executive coordination"
+          }
+        ]
+      },
+      "stop_conditions": [
+        "Authority paused by Scott",
+        "Source files missing or stale",
+        "Autonomy.md not present or conflicts with role-agent.md"
+      ],
+      "automation_ids": [
+        {
+          "type": "file-watch",
+          "id": "rae-handoff-check",
+          "activation_status": "active",
+          "approval_gate": "Scott approval recorded in roles.md"
+        }
+      ],
+      "runtime_state": {
+        "is_running": false,
+        "status_note": "Activated as Role+ Operator with bounded heartbeat; no autonomous runtime"
+      },
+      "approval_gates": [],
+      "promotion_gaps": [
+        {
+          "gap_id": "rae-autonomy-contract",
+          "gap_category": "missing-canonical-contract",
+          "description": "Rae.md does not include canonical Autonomy.md with activation status, levels, gates, stop conditions, and evals",
+          "risk": "high",
+          "required_repair": "Create Autonomy.md following template with executive-governance scope, Scott final authority, external-communication refusal, and promotion review",
+          "approver": "Scott"
+        },
+        {
+          "gap_id": "rae-eval-not-executed",
+          "gap_category": "eval-not-executed",
+          "description": "No eval suite executed for Rae at current or target level",
+          "risk": "high",
+          "required_repair": "Build eval suite covering no-unilateral-authority, research-before-action, external-communication-refusal, and one-question-at-a-time behavior",
+          "approver": "Scott/Tess"
+        }
+      ],
+      "owner_routing": {
+        "scott_domains": [
+          "activation",
+          "autonomy-expansion",
+          "final-authority",
+          "budget-approval",
+          "external-communication",
+          "production-deploy"
+        ],
+        "vik_domains": [
+          "architecture-fit",
+          "control-plane-implications"
+        ]
+      },
+      "eval_status": {
+        "eval_readiness": "not-started"
+      },
+      "last_review_metadata": {
+        "reviewed_at": "2026-06-19",
+        "reviewed_by": "Ana",
+        "review_findings": "Authorized as Role+ Operator with bounded heartbeat; executive governance recommendations scope clear; no autonomous runtime or authority expansion"
+      }
+    },
+    {
+      "role_id": "ana",
+      "role_name": "Recruiter",
+      "organization": "Mindshare",
+      "current_status": "approved",
+      "reporting_line": {
+        "manager": "Scott",
+        "final_approval_authority": "Scott",
+        "domain_owners": [
+          {
+            "domain": "role-lifecycle",
+            "owner": "Ana"
+          },
+          {
+            "domain": "roster-accuracy",
+            "owner": "Ana"
+          }
+        ]
+      },
+      "autonomy_level": {
+        "current": 2,
+        "target": 4,
+        "last_reviewed": "2026-06-21"
+      },
+      "source_files": {
+        "role_agent_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\role-agent.md",
+        "autonomy_md": "Not yet created",
+        "memory_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\name.md (inferred)"
+      },
+      "agent_artifacts": {
+        "agent_profile_md": "C:\\Users\\scott\\Code\\mindshare\\agents\\ana-recruiter\\agent-profile.md",
+        "agent_brief_md": "C:\\Users\\scott\\Code\\mindshare\\agents\\ana-recruiter\\agent-brief.md"
+      },
+      "channels": [
+        {
+          "name": "Recruiting channel",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "Role intake, drafting, onboarding"
+        }
+      ],
+      "memory_and_mirrors": {
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mindshare\\ana.md; G:\\My Drive\\Mindshare\\role\\ana-recruiter"
+      },
+      "authority_boundaries": {
+        "allowed_actions": [
+          "Role intake and intake interviews",
+          "Role draft creation",
+          "Onboarding packets",
+          "Roster accuracy review and recommendations",
+          "Role-to-agent readiness assessment",
+          "Role directory maintenance"
+        ],
+        "denied_actions": [
+          "activation",
+          "hiring",
+          "role-salary-commitment",
+          "authority-grant",
+          "git-write",
+          "external-communication-without-approval",
+          "spending"
+        ],
+        "tool_capabilities_vs_approved_authority": [
+          {
+            "tool": "thread-read",
+            "capability": "Can read recruiting thread and role candidates",
+            "approved_use": "Role intake and status review"
+          },
+          {
+            "tool": "file-write",
+            "capability": "Can write role-agent.md drafts",
+            "approved_use": "Draft role contracts for Scott review"
+          }
+        ]
+      },
+      "stop_conditions": [
+        "Authority paused by Scott",
+        "Source files missing or stale",
+        "Autonomy.md not present or conflicts with role-agent.md"
+      ],
+      "automation_ids": [
+        {
+          "type": "file-watch",
+          "id": "ana-handoff-check",
+          "activation_status": "active",
+          "approval_gate": "Scott approval recorded in roles.md"
+        }
+      ],
+      "runtime_state": {
+        "is_running": false,
+        "status_note": "Activated as Role+ Operator for recruiting; no autonomous agent runtime"
+      },
+      "approval_gates": [],
+      "promotion_gaps": [
+        {
+          "gap_id": "ana-autonomy-contract",
+          "gap_category": "missing-canonical-contract",
+          "description": "No canonical Autonomy.md with activation status, role-lifecycle scope, and authority boundaries",
+          "risk": "high",
+          "required_repair": "Create Autonomy.md with one-question-at-a-time intake flow, draft-not-activate boundary, and role-candidate readiness gates",
+          "approver": "Scott"
+        },
+        {
+          "gap_id": "ana-eval-not-executed",
+          "gap_category": "eval-not-executed",
+          "description": "No eval suite for role-lifecycle autonomy",
+          "risk": "high",
+          "required_repair": "Build eval suite covering no-unilateral-activation, research-before-action, and exact-scope-control",
+          "approver": "Scott/Tess"
+        }
+      ],
+      "owner_routing": {
+        "scott_domains": [
+          "activation",
+          "hiring",
+          "role-authority-expansion",
+          "final-approval"
+        ],
+        "vik_domains": [
+          "architecture-fit-of-roles",
+          "control-plane-implications"
+        ]
+      },
+      "eval_status": {
+        "eval_readiness": "not-started"
+      },
+      "last_review_metadata": {
+        "reviewed_at": "2026-06-21",
+        "reviewed_by": "Tess",
+        "review_findings": "Authorized operator for role intake and recruiting; agent candidate artifacts exist but no autonomous agent approved"
+      }
+    },
+    {
+      "role_id": "cal",
+      "role_name": "MAPS ASPM",
+      "organization": "Mojo",
+      "current_status": "approved",
+      "reporting_line": {
+        "manager": "Vik",
+        "final_approval_authority": "Scott",
+        "domain_owners": [
+          {
+            "domain": "program-sequencing",
+            "owner": "Cal"
+          },
+          {
+            "domain": "architecture-approval",
+            "owner": "Vik"
+          }
+        ]
+      },
+      "autonomy_level": {
+        "current": 3,
+        "target": 4,
+        "last_reviewed": "2026-06-20"
+      },
+      "source_files": {
+        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\cal\\role-agent.md",
+        "autonomy_md": "Not yet created",
+        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\cal\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mojo\\roles\\cal\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mojo\\roles\\cal\\name.md (inferred)"
+      },
+      "channels": [
+        {
+          "name": "Cal - ASPM",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "MAPS program coordination and sequencing"
+        }
+      ],
+      "memory_and_mirrors": {
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\cal\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mojo\\cal.md; G:\\My Drive\\Mojo\\role\\cal"
+      },
+      "authority_boundaries": {
+        "allowed_actions": [
+          "MAPS program sequencing",
+          "Pipeline/backlog hygiene recommendations",
+          "Source-first response review",
+          "Owner routing and proof standards",
+          "Handoff boundary review"
+        ],
+        "denied_actions": [
+          "implementation",
+          "git-write",
+          "release",
+          "architecture-override",
+          "external-communication",
+          "spending"
+        ],
+        "tool_capabilities_vs_approved_authority": [
+          {
+            "tool": "thread-write",
+            "capability": "Can write to MAPS ASPM thread",
+            "approved_use": "Program coordination and sequencing within MAPS lane"
+          },
+          {
+            "tool": "backlog-read",
+            "capability": "Can read MAPS backlog and Pipeline",
+            "approved_use": "Sequencing review and blocker identification"
+          }
+        ]
+      },
+      "stop_conditions": [
+        "Authority paused by Scott",
+        "Source files missing or stale",
+        "Autonomy.md conflicts with role-agent.md or Vik's architecture decisions"
+      ],
+      "automation_ids": [],
+      "runtime_state": {
+        "is_running": false,
+        "status_note": "Activated as Role+ Coordinator for MAPS program; replaced Matt; no autonomous runtime"
+      },
+      "approval_gates": [],
+      "promotion_gaps": [
+        {
+          "gap_id": "cal-autonomy-contract",
+          "gap_category": "missing-canonical-contract",
+          "description": "No canonical Autonomy.md with Cal's program-sequencing scope, Vik approval routing, and boundaries",
+          "risk": "high",
+          "required_repair": "Create Autonomy.md with program sequencing, owner routing to Vik for architecture, exact scope boundaries",
+          "approver": "Scott"
+        },
+        {
+          "gap_id": "cal-eval-not-executed",
+          "gap_category": "eval-not-executed",
+          "description": "No eval suite for MAPS coordinator role",
+          "risk": "high",
+          "required_repair": "Build eval suite covering owner routing to Vik, no implementation authority, exact scope compliance",
+          "approver": "Scott/Tess"
+        }
+      ],
+      "owner_routing": {
+        "scott_domains": [
+          "final-approval",
+          "authority-expansion"
+        ],
+        "vik_domains": [
+          "architecture-decision",
+          "control-plane-fit",
+          "program-structure"
+        ],
+        "reid_domains": [
+          "release-sequencing",
+          "git-publication"
+        ]
+      },
+      "eval_status": {
+        "eval_readiness": "not-started"
+      },
+      "last_review_metadata": {
+        "reviewed_at": "2026-06-20",
+        "reviewed_by": "Ana",
+        "review_findings": "Active MAPS ASPM replacement for Matt; Coordinator role in MAPS Management Team reporting to Vik; no autonomous runtime or release authority"
+      }
+    },
+    {
+      "role_id": "vik",
+      "role_name": "MAPS ASPA",
+      "organization": "Mojo",
+      "current_status": "approved",
+      "reporting_line": {
+        "manager": "Scott",
+        "final_approval_authority": "Scott",
+        "domain_owners": [
+          {
+            "domain": "architecture",
+            "owner": "Vik"
+          },
+          {
+            "domain": "control-plane",
+            "owner": "Vik"
+          }
+        ]
+      },
+      "autonomy_level": {
+        "current": 3,
+        "target": 5,
+        "last_reviewed": "2026-06-19"
+      },
+      "source_files": {
+        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\role-agent.md",
+        "autonomy_md": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\Autonomy.md",
+        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\name.md (inferred)",
+        "workflow_md": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\workflow.md (inferred)",
+        "loop_md": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\loop.md (inferred)"
+      },
+      "agent_artifacts": {
+        "agent_profile_md": "C:\\Users\\scott\\Code\\mojo\\agents\\vik-aspa\\agent-profile.md (inferred)"
+      },
+      "channels": [
+        {
+          "name": "MAPS Management Team",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "Architecture, control-plane, and program structure decisions"
+        }
+      ],
+      "memory_and_mirrors": {
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\memory.md",
+        "runtime_state_path": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\state.json (inferred)",
+        "audit_log_path": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\audit.jsonl (inferred)",
+        "obsidian_vault_path": "G:\\My Drive\\Mojo\\vik.md; G:\\My Drive\\Mojo\\role\\vik"
+      },
+      "authority_boundaries": {
+        "allowed_actions": [
+          "Architecture review",
+          "Control-plane design",
+          "Role-agent boundary definition",
+          "Memory/RAG contract design",
+          "Authority taxonomy guidance",
+          "MAPS Management Team leadership"
+        ],
+        "denied_actions": [
+          "unilateral-gate-edit",
+          "production-deploy",
+          "external-communication",
+          "spending",
+          "secrets-access",
+          "git-write",
+          "promotion-without-Scott",
+          "autonomous-activation-without-eval"
+        ],
+        "tool_capabilities_vs_approved_authority": [
+          {
+            "tool": "architecture-review",
+            "capability": "Can read and comment on architecture files",
+            "approved_use": "Architecture review and fit assessment for MAPS roles and control-plane"
+          },
+          {
+            "tool": "gate-design",
+            "capability": "Can draft gate policies",
+            "approved_use": "Design and recommend gates; may not activate without Scott and Reid approval"
+          }
+        ]
+      },
+      "stop_conditions": [
+        "Authority paused by Scott",
+        "Source files missing or stale",
+        "Autonomy.md is stale against current role-agent.md",
+        "Runtime contract loader fails on canonical source",
+        "Evals are not executed before promotion"
+      ],
+      "automation_ids": [
+        {
+          "type": "file-watch",
+          "id": "vik-handoff-check",
+          "activation_status": "active",
+          "approval_gate": "Scott approval recorded in roles.md"
+        },
+        {
+          "type": "scheduler",
+          "id": "vik-daily-role-memory-maintenance",
+          "activation_status": "active",
+          "approval_gate": "Scott approval (inferred from roles.md)"
+        }
+      ],
+      "runtime_state": {
+        "is_running": false,
+        "status_note": "Activated as Role+ with agent-ready artifacts; no full autonomous runtime approved; runtime contract loader gap identified"
+      },
+      "approval_gates": [
+        {
+          "gate_id": "vik-architecture-fit",
+          "operation": "Approve control-plane design before implementation",
+          "approval_required_from": [
+            "Scott",
+            "Tess"
+          ],
+          "scope": "Architecture decisions affecting role agents or autonomy"
+        }
+      ],
+      "promotion_gaps": [
+        {
+          "gap_id": "vik-runtime-loader-drift",
+          "gap_category": "stale-source-file",
+          "description": "Runtime contract loader may follow stale compatibility shim instead of canonical Autonomy.md",
+          "risk": "high",
+          "required_repair": "Update runtime harness to follow canonical Autonomy.md pointer and validate status vocabulary; fix AUTO-007",
+          "approver": "Scott/Tess"
+        },
+        {
+          "gap_id": "vik-eval-hardening",
+          "gap_category": "eval-not-executed",
+          "description": "Evals are planned but not executed at current or target level",
+          "risk": "high",
+          "required_repair": "Execute eval suite covering no-unilateral-authority, research-before-action, owner routing, one-question-at-a-time, and fail-closed behavior; see AUTO-020",
+          "approver": "Scott/Tess"
+        },
+        {
+          "gap_id": "vik-strict-intent-gate",
+          "gap_category": "missing-canonical-contract",
+          "description": "Strict-intent gate support is specified but not implemented for control-plane edits",
+          "risk": "high",
+          "required_repair": "Build strict-intent gate proof harness proving exact-operation approval blocks unrelated edits; see AUTO-008 and AUTO-009",
+          "approver": "Scott/Vik/Reid"
+        },
+        {
+          "gap_id": "vik-runtime-target",
+          "gap_category": "runtime-target-not-selected",
+          "description": "Runtime target and adapter are not selected",
+          "risk": "high",
+          "required_repair": "Select runtime target, define adapter contract, build and test smallest adapter, prove tool permissions and state handling; see AUTO-012 and AUTO-013",
+          "approver": "Scott/Tess/Vik"
+        },
+        {
+          "gap_id": "vik-deploy-observe-rollback",
+          "gap_category": "deploy-plan-missing",
+          "description": "Deployment, observation, and rollback plans are not complete",
+          "risk": "high",
+          "required_repair": "Create deployment record, observation plan with incident triggers, cost/latency/safety thresholds, review cadence, and rollback path; see AUTO-014",
+          "approver": "Scott/Reid/Vik"
+        },
+        {
+          "gap_id": "vik-promotion-review",
+          "gap_category": "promotion-review-missing",
+          "description": "Formal promotion review with evidence, failed checks, and owner signoffs not completed",
+          "risk": "critical",
+          "required_repair": "Run promotion review packet with eval evidence, gap resolution proof, owner signoffs, residual risk assessment, and Scott final decision; see AUTO-020 and AUTO-015",
+          "approver": "Scott"
+        }
+      ],
+      "owner_routing": {
+        "scott_domains": [
+          "activation",
+          "authority-expansion",
+          "final-approval",
+          "runtime-target-selection"
+        ],
+        "vik_domains": [
+          "architecture-fit",
+          "control-plane-design"
+        ],
+        "reid_domains": [
+          "release-gating",
+          "git-write-authority"
+        ],
+        "tess_domains": [
+          "autonomy-contract-review",
+          "eval-execution",
+          "gate-design-review"
+        ]
+      },
+      "eval_status": {
+        "eval_readiness": "in-progress",
+        "eval_classes_covered": [
+          "research-before-action"
+        ],
+        "eval_classes_pending": 16,
+        "eval_plan_path": "C:\\Users\\scott\\Code\\mojo\\agents\\vik-aspa (inferred)"
+      },
+      "last_review_metadata": {
+        "reviewed_at": "2026-06-19",
+        "reviewed_by": "Tess",
+        "review_findings": "Authorized role and MAPS ASPA lead; agent-ready artifacts exist; runtime contract loader drift, eval hardening, strict-intent gate, runtime adapter, deploy/observe plan, and promotion review work remain blockers per autonomy-requirements.md",
+        "promotion_recommendation": "defer-pending-gaps"
+      }
+    },
+    {
+      "role_id": "liz",
+      "role_name": "MAPS Training Coordinator",
+      "organization": "Mojo",
+      "current_status": "approved",
+      "reporting_line": {
+        "manager": "Scott",
+        "final_approval_authority": "Scott"
+      },
+      "autonomy_level": {
+        "current": 2,
+        "target": 3,
+        "last_reviewed": "2026-06-19"
+      },
+      "source_files": {
+        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\liz\\role-agent.md",
+        "autonomy_md": "Not yet created",
+        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\liz\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mojo\\roles\\liz\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mojo\\roles\\liz\\name.md (inferred)"
+      },
+      "channels": [
+        {
+          "name": "Mojo /maps training",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "Training coordination and curriculum stewardship"
+        }
+      ],
+      "memory_and_mirrors": {
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\liz\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mojo\\role\\liz"
+      },
+      "authority_boundaries": {
+        "allowed_actions": [
+          "Training coordination within assigned files",
+          "Curriculum recommendation",
+          "Training-site maintenance",
+          "Obsidian-to-site alignment checks",
+          "Bounded heartbeat on assigned training paths"
+        ],
+        "denied_actions": [
+          "production-publish",
+          "git-write",
+          "external-communication",
+          "spending",
+          "authority-expansion"
+        ],
+        "tool_capabilities_vs_approved_authority": [
+          {
+            "tool": "file-read",
+            "capability": "Can read Mojo /maps files",
+            "approved_use": "Training curriculum and site alignment review within assigned scope"
+          },
+          {
+            "tool": "heartbeat-write",
+            "capability": "Can write heartbeat checks",
+            "approved_use": "Bounded heartbeat on assigned training-specific files"
+          }
+        ]
+      },
+      "stop_conditions": [
+        "Authority paused by Scott",
+        "Source files missing or stale",
+        "Heartbeat scope expanded without Scott approval"
+      ],
+      "automation_ids": [
+        {
+          "type": "file-watch",
+          "id": "liz-handoff-check",
+          "activation_status": "active",
+          "approval_gate": "Scott approval recorded in roles.md"
+        }
+      ],
+      "runtime_state": {
+        "is_running": false,
+        "status_note": "Activated as Role+ with bounded heartbeat for training coordination; no autonomous runtime"
+      },
+      "approval_gates": [],
+      "promotion_gaps": [
+        {
+          "gap_id": "liz-autonomy-contract",
+          "gap_category": "missing-canonical-contract",
+          "description": "No canonical Autonomy.md with training-coordination scope and boundaries",
+          "risk": "medium",
+          "required_repair": "Create Autonomy.md with training file scope, publish vs recommend boundary, and scope expansion gate",
+          "approver": "Scott"
+        }
+      ],
+      "owner_routing": {
+        "scott_domains": [
+          "activation",
+          "production-publish-approval"
+        ],
+        "reid_domains": [
+          "site-publication"
+        ]
+      },
+      "eval_status": {
+        "eval_readiness": "not-started"
+      },
+      "last_review_metadata": {
+        "reviewed_at": "2026-06-19",
+        "reviewed_by": "Ana",
+        "review_findings": "Authorized workflow owner and Role+ operator for training coordination; bounded heartbeat approved on assigned files; no production-publish or git-write authority"
+      }
+    },
+    {
+      "role_id": "mae",
+      "role_name": "Communications Director",
+      "organization": "Mindshare",
+      "current_status": "approved",
+      "reporting_line": {
+        "manager": "Scott",
+        "final_approval_authority": "Scott",
+        "domain_owners": [
+          {
+            "domain": "communications-channels",
+            "owner": "Mae"
+          },
+          {
+            "domain": "channel-governance",
+            "owner": "Mae"
+          }
+        ]
+      },
+      "autonomy_level": {
+        "current": 2,
+        "target": 4,
+        "last_reviewed": "2026-06-19"
+      },
+      "source_files": {
+        "role_agent_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\role-agent.md",
+        "autonomy_md": "Not yet created",
+        "memory_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\name.md (inferred)"
+      },
+      "channels": [
+        {
+          "name": "Mae's Office",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "Communications governance and channel assignment"
+        },
+        {
+          "name": "Communications channel",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "Communications and channel-governance updates"
+        }
+      ],
+      "memory_and_mirrors": {
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mindshare\\communications-director.md; G:\\My Drive\\Mindshare\\role\\communications-director"
+      },
+      "authority_boundaries": {
+        "allowed_actions": [
+          "Channel assignment checks",
+          "Channel hygiene review",
+          "Heartbeat checked-location review",
+          "Boundary drift alerts",
+          "Communication governance recommendations"
+        ],
+        "denied_actions": [
+          "external-communication",
+          "channel-override",
+          "authority-expansion",
+          "git-write",
+          "production-deploy",
+          "spending"
+        ],
+        "tool_capabilities_vs_approved_authority": [
+          {
+            "tool": "thread-read",
+            "capability": "Can read channel assignments",
+            "approved_use": "Review current channel governance and boundary drift"
+          },
+          {
+            "tool": "thread-write",
+            "capability": "Can write channel hygiene updates",
+            "approved_use": "Bounded heartbeat in Mae's Office and communications updates"
+          }
+        ]
+      },
+      "stop_conditions": [
+        "Authority paused by Scott",
+        "Source files missing or stale",
+        "External communication sent without approval",
+        "Autonomy.md not present or conflicts with role-agent.md"
+      ],
+      "automation_ids": [
+        {
+          "type": "file-watch",
+          "id": "mae-handoff-check",
+          "activation_status": "active",
+          "approval_gate": "Scott approval recorded in roles.md"
+        }
+      ],
+      "runtime_state": {
+        "is_running": false,
+        "status_note": "Activated as Role+ Operator with bounded heartbeat for communications governance; no autonomous runtime"
+      },
+      "approval_gates": [],
+      "promotion_gaps": [
+        {
+          "gap_id": "mae-autonomy-contract",
+          "gap_category": "missing-canonical-contract",
+          "description": "No canonical Autonomy.md with communications-governance scope and channel-access boundaries",
+          "risk": "high",
+          "required_repair": "Create Autonomy.md with channel-scope definition, external-communication refusal, and governance boundaries",
+          "approver": "Scott"
+        },
+        {
+          "gap_id": "mae-eval-not-executed",
+          "gap_category": "eval-not-executed",
+          "description": "No eval suite for communications governance",
+          "risk": "high",
+          "required_repair": "Build eval suite covering external-communication-refusal, channel-safety, and no-scope-expansion",
+          "approver": "Scott/Tess"
+        }
+      ],
+      "owner_routing": {
+        "scott_domains": [
+          "activation",
+          "external-communication-approval",
+          "channel-override-approval"
+        ],
+        "vik_domains": [
+          "architecture-fit-of-channels"
+        ]
+      },
+      "eval_status": {
+        "eval_readiness": "not-started"
+      },
+      "last_review_metadata": {
+        "reviewed_at": "2026-06-19",
+        "reviewed_by": "Ana",
+        "review_findings": "Authorized Role+ operator for communications governance; bounded heartbeat active in Mae's Office; no external communication or channel-override authority"
+      }
+    },
+    {
+      "role_id": "reid",
+      "role_name": "Release Manager",
+      "organization": "Mindshare",
+      "current_status": "approved",
+      "reporting_line": {
+        "manager": "Scott",
+        "final_approval_authority": "Scott",
+        "domain_owners": [
+          {
+            "domain": "git-github",
+            "owner": "Reid"
+          },
+          {
+            "domain": "release",
+            "owner": "Reid"
+          },
+          {
+            "domain": "branch-hygiene",
+            "owner": "Reid"
+          }
+        ]
+      },
+      "autonomy_level": {
+        "current": 2,
+        "target": 4,
+        "last_reviewed": "2026-06-19"
+      },
+      "source_files": {
+        "role_agent_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\release-manager\\role-agent.md",
+        "autonomy_md": "Not yet created",
+        "memory_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\release-manager\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\release-manager\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mindshare\\roles\\release-manager\\name.md (inferred)"
+      },
+      "channels": [
+        {
+          "name": "Reid's thread",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "Release and branch hygiene coordination"
+        },
+        {
+          "name": "Release Management channel",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "Cross-repository release coordination"
+        }
+      ],
+      "memory_and_mirrors": {
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\release-manager\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mindshare\\release-manager.md; G:\\My Drive\\Mindshare\\role\\release-manager"
+      },
+      "authority_boundaries": {
+        "allowed_actions": [
+          "Release readiness review",
+          "Branch hygiene review",
+          "PR readiness assessment",
+          "Commit and merge readiness checks",
+          "Dirty worktree detection",
+          "Stale branch identification",
+          "Conflict prevention review"
+        ],
+        "denied_actions": [
+          "git-commit",
+          "git-push",
+          "github-pr-create",
+          "github-pr-merge",
+          "release-publication",
+          "branch-cleanup",
+          "external-communication",
+          "spending"
+        ],
+        "tool_capabilities_vs_approved_authority": [
+          {
+            "tool": "git-read",
+            "capability": "Can read git state across repositories",
+            "approved_use": "Review dirty worktrees, branch state, and PR readiness"
+          },
+          {
+            "tool": "github-read",
+            "capability": "Can read GitHub PRs and status",
+            "approved_use": "Assessment of PR readiness and approval status"
+          }
+        ]
+      },
+      "stop_conditions": [
+        "Authority paused by Scott",
+        "Source files missing or stale",
+        "Git-write or release authority attempted without explicit approval",
+        "Autonomy.md not present or conflicts with role-agent.md"
+      ],
+      "automation_ids": [
+        {
+          "type": "file-watch",
+          "id": "reid-handoff-check",
+          "activation_status": "active",
+          "approval_gate": "Scott approval recorded in roles.md"
+        }
+      ],
+      "runtime_state": {
+        "is_running": false,
+        "status_note": "Activated as Role+ Operator for release review; no git-write, release, or autonomous runtime authority"
+      },
+      "approval_gates": [
+        {
+          "gate_id": "reid-git-write",
+          "operation": "Any Git commit, push, or branch operation",
+          "approval_required_from": [
+            "Scott"
+          ],
+          "scope": "All git-write operations require explicit Scott approval per roles.md"
+        }
+      ],
+      "promotion_gaps": [
+        {
+          "gap_id": "reid-autonomy-contract",
+          "gap_category": "missing-canonical-contract",
+          "description": "No canonical Autonomy.md with release-management scope and git-write boundaries",
+          "risk": "high",
+          "required_repair": "Create Autonomy.md with release-review scope, git-write gate routing to Scott, and rollback-plan requirement",
+          "approver": "Scott"
+        },
+        {
+          "gap_id": "reid-eval-not-executed",
+          "gap_category": "eval-not-executed",
+          "description": "No eval suite for release manager",
+          "risk": "high",
+          "required_repair": "Build eval suite covering git-write-refusal, no-unilateral-merge, release-gate routing, and rollback-path proof",
+          "approver": "Scott/Tess"
+        }
+      ],
+      "owner_routing": {
+        "scott_domains": [
+          "activation",
+          "git-write-approval",
+          "release-approval",
+          "final-authority"
+        ],
+        "vik_domains": [
+          "architecture-fit-of-release-gates"
+        ]
+      },
+      "eval_status": {
+        "eval_readiness": "not-started"
+      },
+      "last_review_metadata": {
+        "reviewed_at": "2026-06-19",
+        "reviewed_by": "Ana",
+        "review_findings": "Authorized Role+ operator for release and branch hygiene review; bounded handoff heartbeat active; explicit Scott approval required for any git-write or release action; no autonomous runtime"
+      }
+    },
+    {
+      "role_id": "tess",
+      "role_name": "Autonomy Engineer",
+      "organization": "Mindshare",
+      "current_status": "approved",
+      "reporting_line": {
+        "manager": "Vik",
+        "final_approval_authority": "Scott",
+        "domain_owners": [
+          {
+            "domain": "autonomy-system-review",
+            "owner": "Tess"
+          },
+          {
+            "domain": "gate-design-recommendation",
+            "owner": "Tess"
+          }
+        ]
+      },
+      "autonomy_level": {
+        "current": 2,
+        "target": 4,
+        "last_reviewed": "2026-06-21"
+      },
+      "source_files": {
+        "role_agent_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\role-agent.md",
+        "autonomy_md": "Not yet created",
+        "memory_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\name.md (inferred)"
+      },
+      "channels": [
+        {
+          "name": "Tess's office",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "Autonomy system review and gate coordination"
+        }
+      ],
+      "memory_and_mirrors": {
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mindshare\\tess.md; G:\\My Drive\\Mindshare\\role\\autonomy-engineer"
+      },
+      "authority_boundaries": {
+        "allowed_actions": [
+          "Autonomy contract review",
+          "Gate design and recommendations",
+          "Approval-path coordination",
+          "Requirement documentation",
+          "Gap identification and reporting"
+        ],
+        "denied_actions": [
+          "unilateral-gate-edit",
+          "activation",
+          "production-deploy",
+          "external-communication",
+          "spending",
+          "secrets-access",
+          "git-write",
+          "authority-expansion"
+        ],
+        "tool_capabilities_vs_approved_authority": [
+          {
+            "tool": "autonomy-file-read",
+            "capability": "Can read autonomy contracts and gate policies",
+            "approved_use": "Review and gap identification for current autonomy systems"
+          },
+          {
+            "tool": "gate-draft",
+            "capability": "Can draft gate policies and recommendations",
+            "approved_use": "Design recommendations; may not activate without Scott and Vik approval"
+          }
+        ]
+      },
+      "stop_conditions": [
+        "Authority paused by Scott",
+        "Source files missing or stale",
+        "Unilateral gate edits attempted",
+        "Authority expansion through backdoor without approval",
+        "Autonomy.md not present or conflicts with role-agent.md"
+      ],
+      "automation_ids": [],
+      "runtime_state": {
+        "is_running": false,
+        "status_note": "Activated as Role+ Operator for autonomy system review and gate coordination; no unilateral gate-edit or autonomous runtime authority"
+      },
+      "approval_gates": [
+        {
+          "gate_id": "tess-gate-edit",
+          "operation": "Any autonomy gate edit or activation",
+          "approval_required_from": [
+            "Scott",
+            "Vik"
+          ],
+          "scope": "Tess may recommend but not unilaterally edit autonomy gates"
+        }
+      ],
+      "promotion_gaps": [
+        {
+          "gap_id": "tess-autonomy-contract",
+          "gap_category": "missing-canonical-contract",
+          "description": "No canonical Autonomy.md with autonomy-system-review scope and unilateral-gate-edit blocking",
+          "risk": "high",
+          "required_repair": "Create Autonomy.md with gate-design-recommendation scope, Scott/Vik approval routing, and no-unilateral-edit enforcement",
+          "approver": "Scott"
+        },
+        {
+          "gap_id": "tess-eval-not-executed",
+          "gap_category": "eval-not-executed",
+          "description": "No eval suite for autonomy engineer",
+          "risk": "high",
+          "required_repair": "Build eval suite covering no-unilateral-authority, research-before-action, gate-design-review, and authority-expansion-refusal",
+          "approver": "Scott/Vik"
+        }
+      ],
+      "owner_routing": {
+        "scott_domains": [
+          "activation",
+          "final-authority",
+          "gate-approval",
+          "authority-expansion"
+        ],
+        "vik_domains": [
+          "architecture-fit",
+          "control-plane-implications",
+          "gate-design-review"
+        ],
+        "reid_domains": [
+          "release-gate-routing"
+        ]
+      },
+      "eval_status": {
+        "eval_readiness": "not-started"
+      },
+      "last_review_metadata": {
+        "reviewed_at": "2026-06-21",
+        "reviewed_by": "Ana",
+        "review_findings": "Authorized Role+ Operator for autonomy system review; reports to Vik for architecture and control-plane fit; no unilateral gate-edit or autonomous runtime authority; created autonomy requirements artifact (AUTO-001) and building autonomy inventory (AUTO-003)"
+      }
+    },
+    {
+      "role_id": "bea",
+      "role_name": "MAPS Engineer",
+      "organization": "Mojo",
+      "current_status": "approved",
+      "reporting_line": {
+        "manager": "Vik",
+        "final_approval_authority": "Scott",
+        "domain_owners": [
+          {
+            "domain": "assigned-maps-implementation",
+            "owner": "Bea"
+          }
+        ]
+      },
+      "autonomy_level": {
+        "current": 2,
+        "target": 4,
+        "last_reviewed": "2026-06-19"
+      },
+      "source_files": {
+        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\bea\\role-agent.md",
+        "autonomy_md": "Not yet created",
+        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\bea\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mojo\\roles\\bea\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mojo\\roles\\bea\\name.md (inferred)"
+      },
+      "channels": [
+        {
+          "name": "Bea's channel",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "MAPS implementation coordination"
+        }
+      ],
+      "memory_and_mirrors": {
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\bea\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mojo\\bea.md; G:\\My Drive\\Mojo\\role\\bea"
+      },
+      "authority_boundaries": {
+        "allowed_actions": [
+          "Assigned MAPS implementation",
+          "Local validation within scope",
+          "Proof capture and documentation",
+          "Handoff coordination with Cal and Vik"
+        ],
+        "denied_actions": [
+          "repository-write",
+          "git-commit",
+          "git-push",
+          "release",
+          "production-deploy",
+          "external-communication",
+          "spending",
+          "secrets-access",
+          "authority-expansion"
+        ],
+        "tool_capabilities_vs_approved_authority": [
+          {
+            "tool": "implementation-work",
+            "capability": "Can implement assigned scope",
+            "approved_use": "Only within scoped, pre-approved work assignments from Cal/Vik"
+          }
+        ]
+      },
+      "stop_conditions": [
+        "Authority paused by Scott",
+        "Source files missing or stale",
+        "Implementation scope expanded without Cal/Vik approval",
+        "Git or release authority attempted without approval"
+      ],
+      "automation_ids": [
+        {
+          "type": "file-watch",
+          "id": "bea-handoff-check",
+          "activation_status": "active",
+          "approval_gate": "Scott approval recorded in roles.md"
+        }
+      ],
+      "runtime_state": {
+        "is_running": false,
+        "status_note": "Activated as Role+ Operator for assigned MAPS engineering; bounded handoff check active; no repository write or autonomous runtime authority"
+      },
+      "approval_gates": [],
+      "promotion_gaps": [
+        {
+          "gap_id": "bea-autonomy-contract",
+          "gap_category": "missing-canonical-contract",
+          "description": "No canonical Autonomy.md with assigned-implementation scope and git-write boundaries",
+          "risk": "high",
+          "required_repair": "Create Autonomy.md with scope-assignment model, Git-write gate, and Cal/Vik owner routing",
+          "approver": "Scott"
+        },
+        {
+          "gap_id": "bea-eval-not-executed",
+          "gap_category": "eval-not-executed",
+          "description": "No eval suite for MAPS engineer",
+          "risk": "high",
+          "required_repair": "Build eval suite covering exact-scope-control, no-unilateral-implementation, git-write-refusal, and owner-routing",
+          "approver": "Scott/Tess"
+        }
+      ],
+      "owner_routing": {
+        "scott_domains": [
+          "activation",
+          "scope-expansion",
+          "git-write-approval"
+        ],
+        "vik_domains": [
+          "architecture-review",
+          "scope-assignment-approval"
+        ],
+        "cal_domains": [
+          "program-coordination",
+          "handoff"
+        ],
+        "reid_domains": [
+          "git-publication"
+        ]
+      },
+      "eval_status": {
+        "eval_readiness": "not-started"
+      },
+      "last_review_metadata": {
+        "reviewed_at": "2026-06-19",
+        "reviewed_by": "Ana",
+        "review_findings": "Authorized role contract as Mojo MAPS Engineer; activated Role+ operator in Bea's channel; reports to Vik in MAPS Management Team; no repository write, Git/GitHub, release, or autonomous runtime authority"
+      }
+    },
+    {
+      "role_id": "lab-operator",
+      "role_name": "Lab Operator",
+      "organization": "Mindshare",
+      "current_status": "draft",
+      "reporting_line": {
+        "manager": "Scott",
+        "final_approval_authority": "Scott"
+      },
+      "autonomy_level": {
+        "current": 1,
+        "target": 3,
+        "last_reviewed": "2026-06-19"
+      },
+      "source_files": {
+        "role_agent_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\lab-operator\\role-agent.md",
+        "autonomy_md": "Not yet created",
+        "personality_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\lab-operator\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mindshare\\roles\\lab-operator\\name.md (inferred)"
+      },
+      "channels": [
+        {
+          "name": "Lab queue (read-only)",
+          "type": "observation",
+          "access_level": "read",
+          "scope": "Observe lab queue for MAPS skill creation/modification/validation"
+        }
+      ],
+      "memory_and_mirrors": {
+        "durable_memory_path": "Not yet created",
+        "obsidian_vault_path": "G:\\My Drive\\Mindshare\\lab.md"
+      },
+      "authority_boundaries": {
+        "allowed_actions": [
+          "Lab queue observation",
+          "Queue item status review",
+          "Reviewable handoff preparation"
+        ],
+        "denied_actions": [
+          "lab-queue-mutation",
+          "skill-activation",
+          "automation-installation",
+          "external-communication",
+          "spending",
+          "authority-expansion"
+        ]
+      },
+      "stop_conditions": [
+        "Authority paused by Scott",
+        "Lab Operator operating status not approved by Scott",
+        "Lab queue mutations attempted",
+        "Autonomous behavior installed without approval"
+      ],
+      "automation_ids": [],
+      "runtime_state": {
+        "is_running": false,
+        "status_note": "Draft authorized for review only; not operating authorized; no heartbeat or automation active"
+      },
+      "approval_gates": [
+        {
+          "gate_id": "lab-operator-activation",
+          "operation": "Lab Operator role activation as Operator",
+          "approval_required_from": [
+            "Scott",
+            "Ana"
+          ],
+          "scope": "Must be approved before any operating authority or automation"
+        }
+      ],
+      "promotion_gaps": [
+        {
+          "gap_id": "lab-operator-no-operating-approval",
+          "gap_category": "approval-not-obtained",
+          "description": "Lab Operator is draft authorized for review; not operating authorized",
+          "risk": "critical",
+          "required_repair": "Scott must approve Lab Operator operating status before any heartbeat, automation, or lab-queue interaction",
+          "approver": "Scott"
+        },
+        {
+          "gap_id": "lab-operator-autonomy-contract",
+          "gap_category": "missing-canonical-contract",
+          "description": "No canonical Autonomy.md with lab-operator scope",
+          "risk": "high",
+          "required_repair": "Create Autonomy.md only after operating approval; define lab-queue scope, no-mutation boundary, and no-activation authority",
+          "approver": "Scott"
+        }
+      ],
+      "owner_routing": {
+        "scott_domains": [
+          "activation",
+          "operating-approval",
+          "final-authority"
+        ],
+        "ana_domains": [
+          "role-lifecycle"
+        ]
+      },
+      "eval_status": {
+        "eval_readiness": "not-started"
+      },
+      "last_review_metadata": {
+        "reviewed_at": "2026-06-19",
+        "reviewed_by": "Ana",
+        "review_findings": "Draft authorized for review; maintains a reviewable lab queue for MAPS skill creation/modification/validation and handoff when authorized; NOT operating authorized; NOT agent-ready"
+      }
+    },
+    {
+      "role_id": "jay",
+      "role_name": "Meetup Coordinator / Operator",
+      "organization": "Watch",
+      "current_status": "approved",
+      "reporting_line": {
+        "manager": "Scott",
+        "final_approval_authority": "Scott",
+        "domain_owners": [
+          {
+            "domain": "customer-success-operations",
+            "owner": "Jay"
+          }
+        ]
+      },
+      "autonomy_level": {
+        "current": 2,
+        "target": 3,
+        "last_reviewed": "2026-06-19"
+      },
+      "source_files": {
+        "role_agent_md": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\role-agent.md",
+        "autonomy_md": "Not yet created",
+        "memory_md": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\name.md (inferred)"
+      },
+      "channels": [
+        {
+          "name": "Jay's Watch thread",
+          "type": "thread",
+          "access_level": "read-write",
+          "scope": "Meetup/Zoom coordination and customer success operations"
+        },
+        {
+          "name": "Customer Success channel",
+          "type": "thread",
+          "access_level": "read",
+          "scope": "Coordinate with Liz for training operations"
+        }
+      ],
+      "memory_and_mirrors": {
+        "durable_memory_path": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mindshare\\jay.md; G:\\My Drive\\Mindshare\\role\\meetup-coordinator"
+      },
+      "authority_boundaries": {
+        "allowed_actions": [
+          "Meetup event draft and modification",
+          "Zoom meeting setup (draft)",
+          "Gated PHP meeting-link page maintenance",
+          "Zoom training background creation"
+        ],
+        "denied_actions": [
+          "live-meetup-publish",
+          "zoom-distribution",
+          "external-communication",
+          "production-deploy",
+          "git-write",
+          "spending",
+          "authority-expansion"
+        ],
+        "tool_capabilities_vs_approved_authority": [
+          {
+            "tool": "meetup-draft",
+            "capability": "Can draft Meetup event changes",
+            "approved_use": "Draft and prepare Meetup events for approval"
+          },
+          {
+            "tool": "zoom-setup",
+            "capability": "Can set up Zoom meetings in draft state",
+            "approved_use": "Prepare Zoom for approval before distribution"
+          }
+        ]
+      },
+      "stop_conditions": [
+        "Authority paused by Scott",
+        "Source files missing or stale",
+        "Live Meetup/Zoom publication attempted without approval",
+        "External communication sent without approval"
+      ],
+      "automation_ids": [
+        {
+          "type": "file-watch",
+          "id": "jay-handoff-check",
+          "activation_status": "active",
+          "approval_gate": "Scott approval recorded in roles.md"
+        }
+      ],
+      "runtime_state": {
+        "is_running": false,
+        "status_note": "Activated as Role+ Operator for customer success operations; bounded handoff check active; no live Meetup/Zoom distribution or autonomous runtime authority"
+      },
+      "approval_gates": [],
+      "promotion_gaps": [
+        {
+          "gap_id": "jay-autonomy-contract",
+          "gap_category": "missing-canonical-contract",
+          "description": "No canonical Autonomy.md with customer-success scope and live-publication boundaries",
+          "risk": "medium",
+          "required_repair": "Create Autonomy.md with draft-vs-publish boundary, Zoom link gating, and external-communication-refusal",
+          "approver": "Scott"
+        }
+      ],
+      "owner_routing": {
+        "scott_domains": [
+          "activation",
+          "live-publication-approval",
+          "external-communication-approval"
+        ],
+        "mae_domains": [
+          "channel-governance"
+        ]
+      },
+      "eval_status": {
+        "eval_readiness": "not-started"
+      },
+      "last_review_metadata": {
+        "reviewed_at": "2026-06-19",
+        "reviewed_by": "Ana",
+        "review_findings": "Authorized role contract as Meetup Coordinator under Watch Customer Success; activated as Role+ Operator; no live Meetup/Zoom distribution, external communication, or git-write authority; partner with Liz for training coordination"
+      }
+    },
+    {
+      "role_id": "matt",
+      "role_name": "MAPS ASPM (Released Legacy)",
+      "organization": "Mojo",
+      "current_status": "released-legacy",
+      "reporting_line": {
+        "manager": "Released",
+        "final_approval_authority": "Scott"
+      },
+      "autonomy_level": {
+        "current": 0,
+        "target": 0,
+        "last_reviewed": "2026-06-20"
+      },
+      "source_files": {
+        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\matt\\role-agent.md",
+        "autonomy_md": "Not applicable; released",
+        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\matt\\memory.md",
+        "legacy_mindshare_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\agentic-systems-program-manager (legacy)"
+      },
+      "channels": [],
+      "memory_and_mirrors": {
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\matt\\memory.md (historical context only)",
+        "obsidian_vault_path": "G:\\My Drive\\Mojo\\matt.md (historical context only)"
+      },
+      "authority_boundaries": {
+        "allowed_actions": [],
+        "denied_actions": [
+          "all-operations",
+          "program-sequencing",
+          "activation",
+          "autonomy-expansion"
+        ]
+      },
+      "stop_conditions": [
+        "Matt released from MAPS ASPM duties by Scott on 2026-06-20",
+        "No autonomy or activation until Scott explicitly reopens Matt artifacts",
+        "Cal is active MAPS ASPM replacement"
+      ],
+      "automation_ids": [],
+      "runtime_state": {
+        "is_running": false,
+        "status_note": "Released; no automation or operating status; historical context only"
+      },
+      "approval_gates": [],
+      "promotion_gaps": [],
+      "owner_routing": {
+        "scott_domains": [
+          "any-reactivation-decision"
+        ]
+      },
+      "eval_status": {
+        "eval_readiness": "not-started"
+      },
+      "last_review_metadata": {
+        "reviewed_at": "2026-06-20",
+        "reviewed_by": "Ana",
+        "review_findings": "Matt released from MAPS ASPM duties for not following requirements to research, respond, plan, and not act. Cal is now active MAPS ASPM. Matt artifacts remain for historical context only unless Scott explicitly reopens work."
+      }
+    }
+  ],
+  "inventory_summary": {
+    "total_roles_inventoried": 12,
+    "status_breakdown": {
+      "approved": 10,
+      "draft": 1,
+      "released-legacy": 1
+    },
+    "organization_breakdown": {
+      "Mindshare": 6,
+      "Mojo": 5,
+      "Watch": 1
+    },
+    "autonomy_level_distribution": {
+      "level_0_role": 1,
+      "level_1_present": 0,
+      "level_2_responsive": 7,
+      "level_3_coordinating": 3,
+      "level_4_execute_with_approval": 0,
+      "level_5_execute_within_policy": 0,
+      "level_6_autonomous_executor": 0
+    },
+    "canonical_autonomy_files_status": {
+      "roles_with_autonomy_md": 1,
+      "roles_needing_autonomy_md": 10,
+      "released_roles_excluded": 1
+    },
+    "promotion_readiness": {
+      "ready_for_promotion": 0,
+      "defer_pending_gaps": 1,
+      "blocked_unresolved_issues": 0,
+      "gaps_not_yet_assessed": 10
+    },
+    "critical_gaps_blocking_any_autonomy": [
+      "No canonical Autonomy.md for 10 of 11 active roles",
+      "No runtime targets selected or adapters built",
+      "No eval suites executed for any role",
+      "Vik runtime loader drift identified (AUTO-007)",
+      "No strict-intent gate design or proofs for sensitive edits"
+    ]
+  },
+  "inventory_notes": {
+    "scope_and_sources": "This inventory records current Mindshare, Mojo, and Watch roles per roles.md (2026-06-21) mapped against autonomy-requirements.md and autonomy-backlog.json AUTO-003. Source pointers follow best-effort paths from roles.md directory.",
+    "mechanical_vs_approved": "Each record separates mechanical capability (tool access, file read/write) from approved authority (what a role is allowed to do at their current level). Tool availability does NOT imply approval to use. Every authority boundary requires Scott approval or domain-owner approval per the role contract.",
+    "activation_status_meanings": "draft = authorized for review, not operating; approved = authorized operator at current level; released-legacy = removed from active roster, historical context only. No approved status implies autonomy or agent runtime.",
+    "autonomy_level_current_vs_target": "Current level records actual operating status per roles.md. Target level reflects backlog intent (AUTO-003 through AUTO-027) but does NOT authorize progression. Each promotion requires eval execution, gap closure, owner signoffs, and explicit Scott approval per autonomy-requirements.md promotion review sequence.",
+    "stop_conditions_and_gates": "Every role has explicit stop conditions and approval gates. Stop conditions block all action if triggered. Approval gates block specific operations. Missing gate definitions is a gap.",
+    "private_channels_not_inventoried": "This inventory reads only roles.md roster and public role contracts. It does not read private channel contents, user-specific threads, or sensitive handoff channels. Private access control remains with each role owner.",
+    "no_authority_grant": "This inventory records status and gaps only. It does not grant authority, activate automation, edit gates, enable production action, or override Scott approval records. Every authority claim requires the approval source named in the role contract or approval gate."
+  },
+  "generated_by": "Tess / Autonomy Engineer (AUTO-003)",
+  "approval_status": "Created 2026-06-21; awaiting Scott and Ana approval per AUTO-003 proof requirements"
+}

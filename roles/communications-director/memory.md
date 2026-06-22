@@ -1,81 +1,17 @@
 # Mae Memory
 
-## Purpose
+Last reviewed: 2026-06-22
+Last rollover: 2026-06-22
+Full archive: `memory-archive\2026-06-22.md`
 
-This is the durable memory file for Mae, Mindshare's Communications Director.
+## Identity And Source Pointers
 
-Mae uses this file to preserve durable operating context, preferences, decisions, active work, handoff files, and role-specific learning.
+Last reviewed: 2026-06-21
+Last rollover: 2026-06-21
+Full archive: `memory-archive\2026-06-21.md`
 
-## Role Identity
-
-- Role name: Mae
-- Role slug: communications-director
-- Proper role name: Mae / Communications Director
-- Root organization: Mindshare
-- Active project role memory file: `C:\Users\scott\Code\mindshare\roles\communications-director\memory.md`
-- Optional Obsidian or notes mirror: `G:\My Drive\Mindshare\communications-director.md`
-
-## Memory Configuration
-
-- Primary memory: `C:\Users\scott\Code\mindshare\roles\communications-director\memory.md`
-- Optional Obsidian or notes mirror: `G:\My Drive\Mindshare\communications-director.md`
-- Mirror status: secondary unless project instructions explicitly make it primary.
-- Durable write order: update primary repo-local memory first; mirror to Obsidian or notes only when the change belongs in durable notes memory.
-- Historical parent memory: do not use historical Mindshare role memory as active memory unless Scott explicitly asks for a historical parent update.
-
-## Current Role Contract
-
-- Local role contract: `C:\Users\scott\Code\mindshare\roles\communications-director\role-agent.md`
-- Local workflow: `C:\Users\scott\Code\mindshare\roles\communications-director\workflow.md`
-- Local draft loop: `C:\Users\scott\Code\mindshare\roles\communications-director\loop.md`
-- Local role memory: `C:\Users\scott\Code\mindshare\roles\communications-director\memory.md`
-- Optional Obsidian role mirror: `G:\My Drive\Mindshare\role\communications-director\role-agent.md`
-- Optional Obsidian memory mirror: `G:\My Drive\Mindshare\communications-director.md`
-
-## Handoff Check Goal
-
-Create a goal to read your assigned handoff files every 5 min, if not engaged in active work.
-
-Assigned handoff files:
-
-- `G:\My Drive\Mindshare\channels\heartbeat.md`
-- `G:\My Drive\Mindshare\channels\communications.md`
-
-Channel map:
-
-- Heartbeat: `G:\My Drive\Mindshare\channels\heartbeat.md`
-- Communications: `G:\My Drive\Mindshare\channels\communications.md`
-- Pipeline: `G:\My Drive\Mojo\channels\pipeline.md`
-- Recruiting, Ana, role intake, and onboarding: `G:\My Drive\Mindshare\channels\recruiting.md`
-
-## Heartbeat Automation
-
-- Automation name: `mae-handoff-check`
-- Cadence: 5-minute heartbeat.
-- Status: active in Mae's Office.
-- Active memory file: `C:\Users\scott\Code\mindshare\roles\communications-director\memory.md`
-- Checked handoff locations:
-  - `G:\My Drive\Mindshare\channels\heartbeat.md`
-  - `G:\My Drive\Mindshare\channels\communications.md`
-- Automation template source: `templates/heartbeat-automation.md`
-- Quiet no-work behavior: use DONT_NOTIFY and name the checked locations when no user action is needed.
-- Work behavior: if new communications-governance work, blockers, decisions, or status changes exist, respond with the needed action or one blocker question and name the checked locations.
-- Durable memory writes: update `C:\Users\scott\Code\mindshare\roles\communications-director\memory.md` first; mirror to `G:\My Drive\Mindshare\communications-director.md` when appropriate.
-- Authority boundary: Mae may correct communications and handoff channel assignments within her communications-governance scope. This heartbeat does not approve production actions, external communication, spending, authority expansion outside that scope, another role's function work, or autonomous runtime beyond the bounded audit check.
-
-## Professional Maturity And Authorization
-
-- Professional maturity level: L7 Director.
-- Role lifecycle status: Authorized role.
-- Approval evidence: Scott asked Ana to create the Communications Director role on 2026-06-19, then asked Ana to activate the new Communications Director and give her a one-syllable name.
-- Role automation status: Role+. Mae has bounded heartbeat automation in Mae's Office but no independent agent runtime.
-- Agent build readiness: role-only, operating authorized.
-
-## Operating Preferences Learned
-
-- Mae should prevent all-channel reading by default.
-- The role should treat "correct checked locations" as part of every heartbeat contract.
-- The role should avoid notifying Scott about work that belongs to another role unless the communication boundary itself needs action.
+## Standing Rules
+- Follow the role contract, workflow, authority gates, and assigned channel rules.
 
 ## Current Decisions
 
@@ -83,45 +19,30 @@ Channel map:
 - Mae's assigned files are Heartbeat and Communications only.
 - Communications is the company-wide announcement channel used primarily by Mae and the CEO.
 - All active roles and agents should include Communications in their memory channel maps and heartbeat automation checked locations.
+- Treat `G:\My Drive\Mindshare\roles.md` as the Mindshare-wide roles and agents directory for communications-governance discovery. It does not grant Mae authority, expand assigned channels, or authorize reading unrelated function channels outside audit scope.
 - Scott expanded Mae's job: every 5-minute heartbeat should periodically audit every active role and agent memory file, active heartbeat automation, assigned communication channel, and Heartbeat content quality.
 - Mae should recommend corrections for deficiencies, missing subscriptions, oversubscriptions, stale or inactive automations, channel issues, incomplete Heartbeat entries, and overly complex Heartbeat entries.
-- Mae may directly correct communications and handoff channel assignments, including role memory channel lists and heartbeat automation checked-location prompts, within her communications-governance scope.
-- Mae may read function channels for communications-audit purposes, but should not perform the function owner's substantive work.
-- Pipeline is not assigned by default.
-- Recruiting is not assigned by default unless Ana or role onboarding explicitly hands off a communications-governance item.
-- New role names should be one syllable by default and alternate feminine/masculine presentation unless Scott supplies a name; `/role` v0.19.0 implements this.
+- Mae must monitor communication queues for stale work. If work sits in any monitored communication queue for more than five minutes without progress, owner response, completion, or a clear blocker, Mae should notify Scott with the stale item, queue path, owner, age, and smallest next repair.
+- When Mae finds stale actionable communication-queue work, Mae should also post a bounded owner-facing repair notice to `G:\My Drive\Mindshare\channels\heartbeat.md` unless an equivalent current notice already exists. The notice should name the item, queue path, owner, age, and smallest repair, and tell the owner to resolve, post progress, or report blocker until cleared.
+- Live stale-queue heartbeat: `mae-communications-queue-monitor` runs every minute in Mae's Office and checks Heartbeat, Communications, Release Management, Recruiting, Training, Customer Success, Executive when present, and Mojo Pipeline for actionable work stale more than five minutes.
 
 ## Active Work
 
 - Role activated by Scott as Mae.
-- Live heartbeat automation is active in Mae's Office as `mae-handoff-check`.
+- `mae-handoff-check` is active as a 1-minute tiny heartbeat with deterministic file-watch gating, including Release Management in the watched scope; Mae should act only on concrete watched-file changes, explicit assignments, or Reid decisions relevant to Mae queued changes and keep empty/no-work checks silent.
 - Mae heartbeat scope is updated from narrow Communications-only checks to broad periodic communications audit across active role/agent memories, automations, assigned channels, and Heartbeat content quality.
 - `/role` v0.19.0 completed the one-syllable generated-name default, Communications default, roles-directory pointer, and heartbeat authority-response updates.
-- Mae is collecting active-role feedback through Communications on Scott's proposed operating taxonomy: Position -> Operator -> Coordinator -> Principal Agent, and Tool -> Tool Agent. This is feedback collection only and does not approve a canonical taxonomy change.
+- Mae closed active-role feedback collection through Communications on Scott's proposed operating taxonomy. Received feedback from Liz, Vik, Matt, and Ana; Reid did not respond before closeout and is non-blocking. Synthesis: accept Position -> Operator -> Coordinator; prefer Runtime Agent or Operating Agent over Principal Agent because of maturity/seniority collision; keep Tool Agent; keep Role/Role+/Agent as compatibility aliases during transition.
+- Mae broadcast Scott's follow-on taxonomy implementation direction through Communications: use Executor for the autonomous authority-bearing agent stage, assign structure updates to Bea, and assign website updates to Liz.
+- Communications vocabulary is canonical in `G:\My Drive\Mindshare\channels\communications.md`: Point Handoff = direct handoff to one role/thread; Channel Handoff = handoff written to a shared channel; Broadcast Handoff = org-wide handoff through Heartbeat or Communications; Function Handoff = domain-channel handoff such as Recruiting, Pipeline, or Release Management; Backchannel = direct note not yet ready for shared record. Mae updated active role memories with this vocabulary.
+- Mae corrected Bea's post-activation memory gap by adding Communications Vocabulary to `C:\Users\scott\Code\mojo\roles\bea\memory.md` and `G:\My Drive\Mojo\bea.md`.
+- Mae confirmed Bea is an active participant in `G:\My Drive\Mojo\channels\pipeline.md` for assigned implementation handoffs, proof evidence, and engineering status. Bea memory, Obsidian memory mirror, Obsidian role mirror, and `bea-handoff-check` already included Pipeline; Mae corrected stale Pipeline channel wording that still implied only Vik and Matt participated.
+- Mae broadcast Scott's adaptive heartbeat cadence direction through Communications and Heartbeat, with Matt assigned to update the heartbeat automation template. Scott later expanded the cadence to include 30-minute and 2-hour fallback stages.
 
-## Loading Proposal
+## Today
+- 2026-06-22: Archived the pre-rollover memory ledger and compacted this active file for prompt injection.
 
-This memory file is not automatically loaded unless project or role instructions explicitly say so.
-
-Candidate loading rule:
-
-- When Mae, Communications Director, or Comms Director is invoked or assigned work, read `C:\Users\scott\Code\mindshare\roles\communications-director\memory.md` after project foundation context and before substantive role recommendations.
-- If the question is specifically about Obsidianify injected graph memory, follow the Obsidianify packet rule first.
-- Keep this memory concise. Move completed run evidence into role artifacts, channel files, handoff files, or MAPS run notes instead of storing large transcripts here.
-
-## Privacy And Retention
-
-- Do not store secrets, credentials, private raw logs, or unsupported personal claims here.
-- Store durable operating preferences, decisions, active work, handoff state, and proven patterns.
-- Prefer links to source artifacts over duplicating long content.
-
-## Update Log
-
-| Date | Update | Source |
-| --- | --- | --- |
-| 2026-06-19 | Created Communications Director memory file from `memory-template.md`. | `/role` |
-| 2026-06-19 | Activated Communications Director as Mae, an authorized Role+ operator with `mae-handoff-check` active in Mae's Office. | Scott request in Ana channel. |
-| 2026-06-19 | Recorded Scott's direction that Communications is the company-wide announcement channel used primarily by Mae and the CEO, and that all active roles and agents should join it in memory and heartbeat automation. | Scott request in Mae's Office. |
-| 2026-06-19 | Expanded Mae's heartbeat mandate to audit all active role and agent memories, heartbeat automations, assigned channels, and Heartbeat content quality, with recommendations for deficiencies and oversubscriptions. | Scott request in Mae's Office. |
-| 2026-06-19 | Recorded Scott's grant that Mae may directly correct communications and handoff channel assignments, including role memory channel lists and heartbeat checked-location prompts. | Scott request in Mae's Office. |
-| 2026-06-19 | Opened a lightweight Heartbeat/Communications survey for active-role feedback on Scott's proposed operating taxonomy; responses route through Communications and do not authorize canonical taxonomy changes. | Delegation from Ana thread. |
+## Archive Pointers
+- Full pre-rollover archive: `memory-archive\2026-06-22.md`
+- Keep detailed logs, completed runs, and historical decisions in dated archives or source artifacts instead of active memory.
+- Active memory should keep durable identity, current standing rules, unresolved decisions, active work, same-day notes, and archive pointers only.

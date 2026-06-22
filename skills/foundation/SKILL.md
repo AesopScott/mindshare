@@ -6,7 +6,7 @@ description: Start M0 Project Foundation for a MAPS project. Use when kicking of
 # Foundation
 ## Versioning
 
-Current version: 0.3.0.
+Current version: 0.4.0.
 
 Follow semantic versioning for this skill:
 
@@ -18,6 +18,7 @@ When changing this skill, update `Current version` and add a `Changelog` entry w
 
 ## Changelog
 
+- 2026-06-20 - v0.4.0 - Added root `MINDSHARE_CULTURE.md` as a required foundation artifact for Mindshare-owned repos.
 - 2026-06-19 - v0.3.0 - Added Git remote detection, connect-existing-remote support, and GitHub remote creation guidance.
 - 2026-06-19 - v0.2.0 - Added incremental scaffold audits, Git initialization, and env/secrets template setup.
 - 2026-06-19 - v0.1.0 - Established the initial MAPS skill version baseline and changelog tracking.
@@ -162,6 +163,7 @@ If `project-foundation.md` or `.maps/foundation-preferences.json` already exists
    - Create `.env.local` only when the developer confirms they want an ignored local secrets file.
    - Never write real secret values into project files.
 8. Create the working knowledge scaffold using confirmed locations:
+   - `MINDSHARE_CULTURE.md` at repo root
    - `notes/daily/`
    - `notes/interviews/`
    - `notes/research/`
@@ -219,6 +221,7 @@ Create or update these concrete outputs in the current project:
 - `.gitignore`: includes env/secrets ignore rules while preserving `.env.example`.
 - `.env.example`: first env/secrets template with placeholders only.
 - `.env.local`: optional ignored local env file only when explicitly confirmed.
+- `MINDSHARE_CULTURE.md`: repo-root culture standards artifact with Mindshare's trust standard, Who Am I card lines, and human-led permission/financial boundary.
 - `<notesRoot>/maps-runs/[project]-foundation-helper-notes.md`: named `/foundation` helper note for notes/RAG ingestion.
 - `<rag.location>/maps-runs/[project]-foundation-helper-notes.md`: mirrored named `/foundation` helper note when a RAG location is configured.
 - Notes scaffold: the selected notes root with `daily/`, `interviews/`, `research/`, and `decisions/`.
@@ -236,6 +239,7 @@ The completed `project-foundation.md` must include:
 - Source inventory
 - Git readiness, repository status, and remote status
 - Env/secrets scaffold and secret-handling rules
+- Culture standard and `MINDSHARE_CULTURE.md` repo-root status
 - Agentic Systems Program Manager: need, status, authority, and M1 guidance handoff
 - Assumptions
 - Decisions

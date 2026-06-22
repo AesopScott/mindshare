@@ -31,6 +31,20 @@ Answer from that packet only. Do not use Graphify or inspect other files unless 
 If the packet is missing, say: "No Obsidianify session packet is available in this project yet."
 <!-- Obsidianify: end -->
 
+## MindShare Conference Room
+
+When Scott says this is the MindShare conference room, asks to invite everyone, invites a subset of team members, asks for open conversation across roles, asks for a room read, asks for round robin, asks for objections, or otherwise frames the prompt as a multi-role room conversation:
+
+- Use `rooms/conference-room.md` as the room contract.
+- Use `rooms/conference-room-prompt-protocol.md` as the prompt protocol.
+- First read `G:\My Drive\Mindshare\roles.md` to resolve active roles, aliases, migrations, teams, and organizations.
+- For every invited role, load that role's Who Am I card. If no dedicated `WhoAmI.md` exists, synthesize it from `role-agent.md`, `personality.md` when present and relevant, `memory.md` when relevant, `MINDSHARE_CULTURE.md`, and the role directory entry.
+- Everyone invited is considered present. Every invited role must proactively respond when their role can add material value to the prompt.
+- Silence is allowed only when the role has no useful contribution, the prompt is outside the role boundary, or participation would create noise. In round robin mode, state each role's contribution or pass reason.
+- Keep role contributions first-person from inside the role voice.
+- Do not let room participation expand authority, activate a role, grant channel access, approve automation, approve external communication, approve spending, approve production action, or approve autonomous runtime.
+- Record durable memory, handoffs, or channel updates only when Scott asks, approves, or the project memory contract requires it for completed MAPS work.
+
 <!-- Vik / Agentic Systems Program Architect: start -->
 ## Vik / Agentic Systems Program Architect
 

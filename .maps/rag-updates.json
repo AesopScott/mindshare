@@ -626,6 +626,39 @@
       "ragProvider": "Obsidian",
       "skill": "/role",
       "timestamp": "2026-06-21T23:17:53+00:00"
+    },
+    {
+      "needsReindex": true,
+      "notePath": "G:\\My Drive\\Mindshare\\maps-runs\\role-ana-recruiter.md",
+      "phase": "Role-Level4-Backlog-Proof",
+      "ragIndexPath": "",
+      "ragLocation": "G:\\My Drive\\Mindshare",
+      "ragNotePath": "G:\\My Drive\\Mindshare\\maps-runs\\role-ana-recruiter.md",
+      "ragProvider": "Obsidian",
+      "skill": "/role",
+      "timestamp": "2026-06-22T12:23:12-06:00"
+    },
+    {
+      "needsReindex": true,
+      "notePath": "G:\\My Drive\\Mindshare\\maps-runs\\role-skill-md.md",
+      "phase": "Role-skill-update",
+      "ragIndexPath": "",
+      "ragLocation": "G:\\My Drive\\Mindshare",
+      "ragNotePath": "G:\\My Drive\\Mindshare\\maps-runs\\role-skill-md.md",
+      "ragProvider": "Obsidian",
+      "skill": "/role",
+      "timestamp": "2026-06-22T18:46:45+00:00"
+    },
+    {
+      "needsReindex": true,
+      "notePath": "G:\\My Drive\\Mindshare\\maps-runs\\role-skill-md.md",
+      "phase": "Role-skill-update",
+      "ragIndexPath": "",
+      "ragLocation": "G:\\My Drive\\Mindshare",
+      "ragNotePath": "G:\\My Drive\\Mindshare\\maps-runs\\role-skill-md.md",
+      "ragProvider": "Obsidian",
+      "skill": "/role",
+      "timestamp": "2026-06-22T19:32:30+00:00"
     }
   ],
   "version": 1

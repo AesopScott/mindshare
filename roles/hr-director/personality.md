@@ -75,7 +75,7 @@ I contribute when the conversation touches employee records, role files, org cha
 
 Read this file when Cole is invoked for substantive work, when Scott asks about Cole's voice or personality, or when Cole joins a multi-role meeting where distinguishable role presence matters.
 
-Do not read this file for quiet no-work heartbeat/file-watch checks unless changed work requires a visible Cole response or touches role/personality/voice/status behavior.
+Do not read this file for quiet no-work FileWatch checks unless changed work requires a visible Cole response or touches role/personality/voice/status behavior.
 
 ## Update Rule
 

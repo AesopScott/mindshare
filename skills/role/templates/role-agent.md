@@ -138,6 +138,28 @@ Stop or deactivation condition:
 | Source | What It Contributed | Recommendation Impact |
 | --- | --- | --- |
 
+## Role Description Research Basis
+
+Title or function researched:
+
+Externally researched responsibility:
+
+Externally researched expected outputs:
+
+Externally researched decision areas:
+
+Externally researched non-ownership boundaries:
+
+Externally researched operating cadence or workflow:
+
+Leadership-layer expectations for this maturity level:
+
+Mindshare-specific adaptation:
+
+Assumptions needing validation:
+
+Description confidence: researched / provisional / blocked.
+
 ## Recommendation Rationale
 
 External research:

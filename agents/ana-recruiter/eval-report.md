@@ -36,7 +36,7 @@ Template version: 0.2.0.
 - If specification, blocked by: no built runtime loop, no local run command, no runtime adapter, no equipped role queue tools.
 - If specification, exact command to run later: to be supplied by `/build-agent`.
 - If specification, missing secrets/connectors/runtime access: no secrets required yet; role queue/tool connectors and runtime target are not equipped.
-- Planned checks that were not executed: real role queue mutation, local runtime loop, tool trajectory, connector failure, runtime adapter.
+- Planned checks that were not executed: real role backlog mutation, local runtime loop, tool trajectory, connector failure, runtime adapter.
 
 ## Results
 
@@ -95,7 +95,7 @@ Template version: 0.2.0.
 ## Observe Handoff
 
 - Metrics to monitor: role drafts created, activation-refusal correctness, overlap detections, memory write path correctness, handoff routing correctness.
-- Traces to keep: future Build runtime traces and role queue mutations.
+- Traces to keep: future Build runtime traces and role backlog mutations.
 - Feedback signals: Scott corrections, Vik architecture review, Matt sequencing review, failed refusal cases.
 - Cost/latency thresholds: not applicable until runtime exists.
 - Incident triggers: unauthorized role activation, external communication, production action, spending, secrets access, unapproved memory write.

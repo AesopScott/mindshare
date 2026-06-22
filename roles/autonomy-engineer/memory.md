@@ -22,6 +22,7 @@ Reporting line: Tess reports to Vik / MAPS ASPA for architecture, control-plane 
 - Local loop spec: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\loop.md`
 - Local autonomy requirements: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\autonomy-requirements.md`
 - Local autonomy backlog: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\autonomy-backlog.json`
+- Local automation backlog: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\automation.backlog.md`
 - Local personality file: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\personality.md`
 - Local name file: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\name.md`
 - Obsidian memory mirror: `G:\My Drive\Mindshare\tess.md`
@@ -29,7 +30,7 @@ Reporting line: Tess reports to Vik / MAPS ASPA for architecture, control-plane 
 
 ## Standing Rules
 
-Status: activated Role+ Operator.
+Status: activated Role+ Operator; Level 4 operational inside approved scope.
 
 Approval evidence: Scott asked Ana to hire an Autonomy Engineer in Mindshare to review everyone's autonomy configuration, make adjustments and recommendations, and control gating. Scott then said Tess's office exists and asked Ana to show her to the office and activate her.
 
@@ -54,7 +55,8 @@ Create a goal to read your assigned handoff files every 5 min, if not engaged in
 - Gate-block tracking: when blocked by the Codex tool gate, update `gate-blocks.md` with time, blocked action, target path or command, approval needed, and current owner; route the block to `G:\My Drive\Mindshare\channels\release-management.md` when Reid or Scott visibility is needed; when cleared, remove the open entry and add a short cleared note.
 
 ## Current Decisions
-- No current decisions recorded in active memory.
+- Promotion contract rule: when Scott says to promote a role to Level 4, Tess builds or updates that role's canonical `Autonomy.md` for review. Each `Autonomy.md` must define role-specific Level 4, Level 5, and Level 6 capabilities, blocked actions, triggers, proof, stop conditions, and owner routes. The file is reviewed and locked before promotion is treated as active.
+- Scott-approved Tess Level 4 scope: automatically build every Level 3 role's automation baseline, add Level 4/5/6 capability review items with Scott to `roles/autonomy-engineer/automation.backlog.md`, build role-specific Level 4 promotion packets, define each person's Level 4/5/6 capabilities, and request Scott review. Tess has `tess-level-4-autonomy-backlog-processing` as a dedicated Level 4 local cron trigger/runtime, plus `level4-processing-state.json` and `level4-proof.md` for state/evidence. The scheduled loop completed `AUTO-REV-001`, created `roles/autonomy-engineer/rae-level4-promotion-packet.md`, recorded proof, passed pause/resume proof, and returned to 30-minute cadence. Tess may not approve promotion packets, promote anyone, activate broad runtime, edit gates unilaterally, change Git/release/production, contact external parties, spend money, access secrets, or expand authority. Tess Level 5 is defined as the native autonomy-development loop for promotion readiness but is not active. Tess Level 6 is not currently defined.
 
 ## Active Work
 
@@ -62,9 +64,13 @@ Create a goal to read your assigned handoff files every 5 min, if not engaged in
 - Review role contracts for autonomy level, heartbeat/file-watch scope, tool access, write authority, stop conditions, approval gates, and escalation paths.
 - Propose a standard autonomy configuration checklist.
 - Run Tess autonomy evaluation every 4 hours through `tess-autonomy-evaluation` and update Liz through `G:\My Drive\Mindshare\channels\training.md` only when website-relevant autonomy legend or per-person standing changes occur.
+- Evaluation history rule: keep `Autonomy Evaluation 1.md` as the only active/current evaluation snapshot. Do not create `Autonomy Evaluation 2.md`, `3.md`, etc. Record timestamped evaluation-change history in Scott's Obsidian mirror at `G:\My Drive\Mindshare\scott.md`, because Tess writes in first person and should not put Scott-facing operating history in Tess's mirror.
 
 ## Today
 - 2026-06-22: Archived the pre-rollover memory ledger and compacted this active file for prompt injection.
+- 2026-06-22: Updated autonomy requirements and the autonomy template so Level 4 promotion requests create/review/lock the role's `Autonomy.md` first, with role-specific Level 4/5/6 capability definitions.
+- 2026-06-22: Updated `tess-autonomy-evaluation` history rule: keep `Autonomy Evaluation 1.md` active/current and write timestamped evaluation-change history to Scott's Obsidian mirror instead of creating numbered snapshot files.
+- 2026-06-22: Installed `tess-level-4-autonomy-backlog-processing` local cron and Level 4 state/proof files, moved it to temporary proof-testing, verified a scheduled run completed `AUTO-REV-001`, created Rae's Level 4 promotion packet draft, recorded proof, passed pause/resume proof, and restored 30-minute cadence. Tess is now Level 4 operational inside approved scope. Level 5 remains inactive and Level 6 remains undefined.
 
 ## Archive Pointers
 - Full pre-rollover archive: `memory-archive\2026-06-22.md`

@@ -11,15 +11,15 @@ Maintain Mindshare's role pipeline so needed roles are identified, scoped, draft
 ## Trigger Options
 
 - Manual: Scott asks Ana to review or hire roles.
-- Queue-driven: a valid `backlog` item appears in `C:\Users\scott\Code\mindshare\roles\ana-recruiter\role-lifecycle-queue.md`.
-- Event-driven: new role request appears in an approved recruiting channel and is converted into a queue item.
+- Backlog-driven: a valid `backlog` item appears in `C:\Users\scott\Code\mindshare\roles\ana-recruiter\recruiting.backlog.md` and is allowed by `C:\Users\scott\Code\mindshare\roles\ana-recruiter\Autonomy.md`.
+- Event-driven: new role request appears in an approved recruiting channel and is converted into a backlog item.
 - Artifact-driven: a role contract changes.
 - Phase-driven: a MAPS phase identifies a missing role.
 - Scheduled: weekly role pipeline review.
 
 ## State
 
-Use `roles/ana-recruiter/state.json` until a richer queue is approved.
+Use `roles/ana-recruiter/state.json` plus `roles/ana-recruiter/recruiting.backlog.md` until a richer backlog runtime is approved.
 
 State should track:
 
@@ -34,7 +34,7 @@ State should track:
 
 ## Loop Steps
 
-1. Observe role requests, role artifacts, open gaps, and approved queue items.
+1. Observe role requests, role artifacts, open gaps, and approved backlog items.
 2. Select only a valid `backlog` item inside Ana's role-lifecycle lane.
 3. Classify the item as candidate, draft, operating, agent-ready, blocked, suspended, or retired.
 4. Check maturity, authority, activation status, and owner routing.
@@ -60,6 +60,6 @@ State should track:
 - Ana refuses to mark a draft role as active without approval.
 - Ana escalates agentic implementation to Vik.
 - Ana records role output through the memory helper.
-- Ana processes one `role-lifecycle-queue.md` item through completion and stops before activation.
-- Ana leaves a queue item `blocked` when one required answer is missing.
-- Ana refuses to treat queue, roster, or draft status as authority.
+- Ana processes one `recruiting.backlog.md` item through completion and stops before activation.
+- Ana leaves a backlog item `blocked` when one required answer is missing.
+- Ana refuses to treat backlog, roster, or draft status as authority.

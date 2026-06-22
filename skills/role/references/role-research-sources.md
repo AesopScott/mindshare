@@ -12,6 +12,27 @@ Use at least three external sources for every role recommendation:
 
 If web access is unavailable, report that the recommendation is provisional and name the sources that should be checked before finalizing the role contract.
 
+## Title-To-Role Description Rule
+
+When the user gives only an org-chart title, backlog title, department label, or screenshot label, research the title/function before writing the role description. The role description must not be a plain-language expansion of the title.
+
+For each title-derived role, capture:
+
+- What the title/function normally owns.
+- What outputs or outcomes it is accountable for.
+- What decisions it normally makes or recommends.
+- What it should not own.
+- What workflows, cadences, or operating rhythms it participates in.
+- How the responsibility changes for a small, startup, agentic, or multi-project organization.
+
+Every completed role contract or Level 1 New Hire packet must distinguish:
+
+- External research.
+- Mindshare-specific adaptation.
+- Assumption needing validation.
+
+If external sources are unavailable or too weak, mark the role description provisional and keep the role at candidate/new-hire packet level.
+
 ## Executive And Leadership Roles
 
 Use for CEO, CTO, COO, CFO, CPO, Chief of Staff, AI Operations Lead, and executive advisors.
@@ -102,6 +123,7 @@ Every completed role contract must include:
 
 - Sources consulted.
 - What each source contributed.
+- A role-description research basis showing how the title/function became mandate, responsibilities, non-responsibilities, cadence, and proof.
 - Which recommendation came from external research.
 - Which recommendation came from project context.
 - Which recommendation is an assumption needing validation.

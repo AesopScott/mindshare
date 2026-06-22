@@ -39,7 +39,7 @@ name = "Ana handoff check"
 status = "ACTIVE"
 rrule = "FREQ=MINUTELY;INTERVAL=1"
 target_thread_id = "019ee052-168c-7da3-a3c3-df936e5c1c92"
-source_heartbeat_status = "ACTIVE"
+source_heartbeat_status = "PAUSED"
 watch_state_path = "watch_state.json"
 baseline_on_first_run = true
 resume_on_first_run = false
@@ -58,9 +58,10 @@ watched_paths = [
 prompt_on_change = """
 File-watch change detected.
 
-Review only the compact change packet below. Always check whether Release Management contains a Reid approval, conditional approval, or block relevant to this role.
-If no action is needed, do not print an EMPTY heartbeat. If the runtime requires an envelope, use DONT_NOTIFY only with one short quiet message.
-If action is needed, respond with the action taken, needed action, or one blocker question.
+Use compact change packet below as change inventory. Read named source files for evidence needed to decide current work. Always check whether Release Management contains a Reid approval, conditional approval, or block relevant to this role.
+Only show this file-watch change to Scott when there is a concrete backlog or handoff item assigned to Ana, an Ana-owned action due, an Ana blocker, or an Ana-relevant approval question. General file changes, non-Ana items, closed packets, or no-work checks must stay silent.
+If no Ana-assigned action is needed, do not print an EMPTY heartbeat or visible file-watch message. If the runtime requires an envelope, use DONT_NOTIFY only with one short quiet message or FILE_WATCH_ACK NO_ACTION_BECAUSE with no extra prose.
+If Ana action is needed, respond with the action taken, needed action, or one blocker question.
 """
 ```
 

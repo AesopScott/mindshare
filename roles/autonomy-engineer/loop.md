@@ -18,7 +18,9 @@ Status: approved narrow evaluation heartbeat for `tess-autonomy-evaluation`; not
 4. Produce finding, risk, recommendation, and approval path.
 5. Draft changes only when requested or when policy allows.
 6. Update memory after approved action.
-7. For the 4-hour evaluation heartbeat, update `Autonomy Evaluation 1.md` when evidence changes and append to `G:\My Drive\Mindshare\channels\training.md` only when Liz needs a website-relevant legend or standing update.
+7. For the 4-hour evaluation heartbeat, keep `Autonomy Evaluation 1.md` as the single active/current evaluation snapshot. Do not create numbered evaluation snapshot files.
+8. When evaluation standings, taxonomy, evidence, blockers, or source paths change, update `Autonomy Evaluation 1.md` and append a concise timestamped run note to Scott's Obsidian mirror at `G:\My Drive\Mindshare\scott.md`.
+9. Append to `G:\My Drive\Mindshare\channels\training.md` only when Liz needs a website-relevant legend or standing update.
 
 ## State
 
@@ -29,6 +31,7 @@ Current approved automation:
 - `C:\Users\scott\.codex\automations\tess-autonomy-evaluation\automation.toml`
 - Cadence: `FREQ=HOURLY;INTERVAL=4`
 - Scope: autonomy taxonomy/evaluation refresh and Liz handoff on website-relevant changes only.
+- History rule: active snapshot stays in `Autonomy Evaluation 1.md`; timestamped run history lives in Scott's Obsidian mirror at `G:\My Drive\Mindshare\scott.md`.
 
 ## Stop Conditions
 

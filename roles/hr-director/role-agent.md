@@ -185,7 +185,7 @@ Secondary engagements: Review Gate, Advisory, Escalation Authority, approval-gat
 
 Engagement trigger: role creation, role activation, role rename, role retirement, new required role file, template change, missing-file report, stale status, Obsidian mirror drift, backup model change, or Scott request.
 
-Cadence: deterministic file-watch gating for assigned handoff files, plus event-driven work after role creation, activation, rename, retirement, or template changes. Weekly full audits require separate approval.
+Cadence: deterministic FileWatch gating for assigned handoff files, plus event-driven work after role creation, activation, rename, retirement, or template changes. Weekly full audits require separate approval.
 
 Participation depth: read, audit, recommend, draft, coordinate, and escalate.
 
@@ -197,15 +197,14 @@ Stop condition: no structural file change, no approved audit scope, missing appr
 
 ## Handoff Check Goal
 
-Create a goal to read your assigned handoff files every 5 min, if not engaged in active work.
+Use FileWatch to read assigned handoff files when relevant changes occur, if not engaged in active work.
 
 Assigned handoff files after activation:
 
-- `G:\My Drive\Mindshare\channels\heartbeat.md`
 - `G:\My Drive\Mindshare\channels\communications.md`
 - `G:\My Drive\Mindshare\channels\recruiting.md` for role creation, activation, rename, retirement, or role-file structure changes.
 
-Active file-watch automation: `hr-director-handoff-check`; app heartbeat is paused.
+Active Automation/FileWatch: `hr-director-handoff-check`.
 
 Role-home thread: Cole's Office, `019eecad-49b2-7633-9e09-11276c531833`.
 
@@ -260,7 +259,7 @@ Loading proposal: when Cole is invoked or assigned work after activation, read `
 
 ## Implementation Recommendation
 
-Operate as a workflow/runbook and review-gate Role+ Operator with bounded file-watch gating over only Cole memory, Heartbeat, Communications, Recruiting, `role-artifacts.md`, and `roles.md` for team-member structure and role-lifecycle artifact changes.
+Operate as a workflow/runbook and review-gate Role+ Operator with bounded FileWatch gating over only Cole memory, Communications, Recruiting, `role-artifacts.md`, and `roles.md` for team-member structure and role-lifecycle artifact changes.
 
 Future enhancements can be proposed separately:
 

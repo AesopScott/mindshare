@@ -6,7 +6,7 @@ description: Build role agents for a root organization or multi-agent corporatio
 # Role
 ## Versioning
 
-Current version: 0.19.0.
+Current version: 0.21.0.
 
 Follow semantic versioning for this skill:
 
@@ -18,6 +18,8 @@ When changing this skill, update `Current version` and add a `Changelog` entry w
 
 ## Changelog
 
+- 2026-06-22 - v0.21.0 - Added Level 1 New Hire packet visibility rule: completed Level 1 packets must be represented in `roles.md` as non-activated roster-visible candidates and routed to Liz for org-chart mirroring.
+- 2026-06-22 - v0.20.0 - Added mandatory title-to-role research gate: role descriptions, Level 1 New Hire packets, and role contracts must research what the title/function actually does before drafting responsibilities.
 - 2026-06-21 - v0.19.0 - Added role-home office default: medium reasoning and standard/default speed settings unless Scott asks otherwise.
 - 2026-06-21 - v0.18.0 - Added required Cole welcome handoff to Recruiting after new individual creation or activation.
 - 2026-06-21 - v0.17.0 - Treat Scott's create/hire/build request for a new employee as approval to create the role-home session and activate the employee unless Scott explicitly asks for draft/proposed only.
@@ -85,6 +87,7 @@ Approval gates:
 - Every new role gets a role memory file from `memory-template.md`. Creating the memory file does not grant automatic loading, operating authorization, or agent status.
 - When Scott asks to create, hire, or build a new employee role, treat that request as approval to create the role-home Codex session in the correct project and activate the employee unless Scott explicitly says draft, proposed, candidate-only, recommendation-only, or do not activate. Send the activation packet before reporting activation complete. Creating the session does not grant heartbeat, background automation, release authority, external communication, spending, production access, or authority expansion.
 - After any individual is created, activated, renamed, replaced, migrated, suspended, retired, or has org-chart/status/reporting details changed, write a Liz org-chart handoff to `G:\My Drive\Mindshare\channels\training.md` so Liz can update the Mojo `/maps` org chart. The handoff must cite `G:\My Drive\Mindshare\roles.md` as the status source, include the affected role/person, name, title, organization, status, reporting/team placement, source artifacts, and boundary notes. This handoff does not grant broader `/maps`, production, Git/release, external communication, spending, or authority-expansion approval beyond Liz's existing scoped org-chart policy.
+- After any Level 1 New Hire packet is completed, update `G:\My Drive\Mindshare\roles.md` with a roster-visible non-activated entry or Level 1 packet section before notifying Liz. The roster entry must make clear that the person/seat is a Level 1 New Hire packet only: not an activated operator, not an office, no runtime, no channels, no authority, and no Level 2+ answering/research authority. Then write a Liz org-chart handoff to `G:\My Drive\Mindshare\channels\training.md` so Liz can mirror the Level 1 packet on the website. This Liz handoff is required even when no role-home office was created.
 - After any new individual is created or activated, write a Cole welcome handoff to `G:\My Drive\Mindshare\channels\recruiting.md` so Cole can check the required file set and welcome the new employee to the company. The handoff must cite `G:\My Drive\Mindshare\roles.md` as the status source, include the new person, title, organization, status, role-home session, source artifacts, and boundary notes. This handoff does not grant Cole hiring, activation, authority-expansion, external communication, production, Git/release, spending, secrets, or autonomous-runtime authority.
 
 Agent build criteria:
@@ -165,19 +168,32 @@ After those three answers are known, stop interviewing and run Research and Reco
 
 External research is mandatory and heavily weighted. Do not produce the recommended role contract from project context or the bundled role-pattern ladder alone. Use project context to localize the answer, but use external sources to define the role capability, responsibilities, boundaries, proof, and operating model.
 
+Role descriptions are research outputs, not title expansions. When a role starts from an org-chart title, backlog title, department label, or screenshot label, first research what that title/function normally owns before drafting mandate, job to be done, responsibilities, non-responsibilities, authority, workflow, or success evidence. Do not infer a role description only from the words in the title.
+
+Title-to-role research gate:
+
+- Build a short role-description research basis before drafting the role contract or Level 1 New Hire packet.
+- Use external sources to answer: what this title/function owns, what outputs it is accountable for, what decisions it normally makes, what it should not own, what workflows or cadences it participates in, and how this changes in a small/startup/agentic organization.
+- Separate three things in the artifact: externally researched responsibility, Mindshare-specific adaptation, and assumption needing validation.
+- If the role is a director/functional-lead seat, research both the function and the leadership layer. Example: for `Sales Director`, research sales leadership responsibilities and sales operating cadence, not only generic sales tasks.
+- If sources conflict or are too generic, write the conflict and choose the safer narrower Mindshare-specific description as a recommendation, not a fact.
+- If web access is unavailable, mark the description provisional and leave the role at candidate/new-hire packet level until research can be completed.
+- A role description fails the `/role` completion gate if it lacks sources, source impact notes, and explicit assumptions.
+
 1. Read M0 foundation, M1 shape, and any existing role or organization artifacts if available.
 2. Use `references/role-patterns.md` to classify the role mode.
 3. Read `references/role-engagement-taxonomy.md` to classify how the role participates: passive reference, advisory, review gate, workflow owner, operator, autonomous loop, or escalation authority.
 4. Read `references/role-authority-taxonomy.md` to classify authority level, domains, gates, and special declarations.
 5. Read `G:\My Drive\Mindshare\voice-taxonomy.md` when available and use it as the selectable voice palette.
 6. Read `references/role-research-sources.md` and select the mandatory source mix for the role type.
-7. Research comparable human role definitions, agent role patterns, operating models, workflows, and public references.
+7. Research comparable human role definitions, title/function ownership, agent role patterns, operating models, workflows, and public references.
 8. Use at least three external sources for every role recommendation:
    - one role-domain source for the human role or function
    - one operating-model or workflow source
    - one agent/governance/source-of-control reference when the role will use tools, memory, RAG, approvals, or autonomy
 9. If web access is unavailable, use the bundled source list as the research plan and tell the user the recommendation is blocked or provisional until sources can be checked.
 10. Recommend the rest of the role contract:
+   - role-description research basis: title/function ownership, expected outputs, decision areas, non-ownership boundaries, operating cadence, and small/startup/agentic adaptation
    - professional maturity level and role lifecycle status
    - role type and mode
    - selected voice profile: primary voice, secondary blend, ratio, intensity, formality, emotional temperature, challenge style, sentence shape, humor level, forbidden voice habits, and example response
@@ -226,7 +242,16 @@ Use the Codex thread tools when available:
 
 Record the role-home session id or title in `roles/<role-slug>/memory.md`, the Obsidian memory mirror when one exists, the organization roles directory when that directory tracks the role, and the relevant function channel or Communications channel when the activation changes organization-visible status. Announce activations, replacements, suspensions, retirements, reporting changes, and role-boundary changes in the Communications channel before reporting activation complete.
 
-After any individual creation, activation, replacement, rename, migration, suspension, retirement, reporting-line change, team placement change, or role-status change, write a Liz org-chart handoff to `G:\My Drive\Mindshare\channels\training.md`. Use `G:\My Drive\Mindshare\roles.md` as the source of truth. Include the role/person name, title, organization, current status, reporting/team placement, source artifacts, exact requested org-chart update, and boundaries. This handoff tells Liz to update the org-chart mirror; it does not grant broader `/maps`, production, Git/release, external communication, spending, or authority-expansion approval.
+After any individual creation, activation, replacement, rename, migration, suspension, retirement, reporting-line change, team placement change, role-status change, or Level 1 New Hire packet completion, write a Liz org-chart handoff to `G:\My Drive\Mindshare\channels\training.md`. Use `G:\My Drive\Mindshare\roles.md` as the source of truth. Include the role/person or seat name, title, organization, current status, reporting/team placement, source artifacts, exact requested org-chart update, and boundaries. This handoff tells Liz to update the org-chart mirror; it does not grant broader `/maps`, production, Git/release, external communication, spending, or authority-expansion approval.
+
+Level 1 New Hire packet visibility rule:
+
+- Before marking a Level 1 packet complete, write or update a roster-visible entry in `G:\My Drive\Mindshare\roles.md`.
+- Use status text similar to: `Level 1 New Hire packet; not activated; no authority`.
+- If the person has no name yet, list the seat/title as an unassigned Level 1 packet rather than inventing a person.
+- Point to the Level 1 packet artifact.
+- Write the Liz handoff after the roster source is updated.
+- Do not write a Cole welcome handoff for an unassigned Level 1 packet unless an actual new individual was created or activated.
 
 After any new individual creation or activation, write a Cole welcome handoff to `G:\My Drive\Mindshare\channels\recruiting.md`. Use `G:\My Drive\Mindshare\roles.md` as the source of truth. Include the new person's name, title, organization, current status, role-home session, source artifacts, requested welcome/file-set check, and boundaries. This handoff tells Cole to check the required file set and welcome the new employee; it does not grant Cole hiring, activation, authority-expansion, external communication, production, Git/release, spending, secrets, or autonomous-runtime authority.
 
@@ -335,10 +360,10 @@ Creating the role-home session is activation plumbing only. It does not create a
    - Default to `L0 Candidate` and `Unauthorized` unless Scott explicitly approved a higher maturity level or lifecycle status.
    - Record the exact approval evidence when lifecycle status moves beyond `Unauthorized`.
    - Do not mark a role `Authorized role`, `Authorized agent`, or built from inference.
-19. Create `roles/<role-slug>/role-agent.md` from `templates/role-agent.md`, including the culture standards, handoff check goal, and assigned handoff files. The assigned files must include `G:\My Drive\Mindshare\05 Role Handoffs\channels\heartbeat.md` for every role.
+19. Create `roles/<role-slug>/role-agent.md` from `templates/role-agent.md`, including the culture standards, role-description research basis, handoff check goal, and assigned handoff files. The assigned files must include `G:\My Drive\Mindshare\05 Role Handoffs\channels\heartbeat.md` for every role.
 20. Create or update `G:\My Drive\Mindshare\<role-slug>.md` from `memory-template.md`, replacing `[role-name]` and `[proper-role-name]`, and mark it with the same maturity level, role lifecycle status, handoff check goal, and assigned handoff files. The assigned files must include `G:\My Drive\Mindshare\05 Role Handoffs\channels\heartbeat.md` for every role. Do this for every role. Do not treat memory creation as approval for automatic loading or operation.
 21. When Scott asks to create, hire, or build the new employee, create or locate the role-home Codex session in the correct project, send the activation packet there, record the session id/title in repo memory, Obsidian mirror, and organization roster, and announce the activation or replacement in Communications. If Scott explicitly says draft, proposed, candidate-only, recommendation-only, or do not activate, keep the role as draft/candidate and create the session spec only when Scott asks for the room.
-22. After the individual is created or any org-chart/status detail changes, write the Liz org-chart handoff to `G:\My Drive\Mindshare\channels\training.md` with `roles.md` as the source of truth, the source artifacts, requested org-chart update, and boundary notes.
+22. After the individual is created, any org-chart/status detail changes, or any Level 1 New Hire packet is completed, update `G:\My Drive\Mindshare\roles.md` first when needed, then write the Liz org-chart handoff to `G:\My Drive\Mindshare\channels\training.md` with `roles.md` as the source of truth, the source artifacts, requested org-chart update, and boundary notes.
 23. After any new individual creation or activation, write the Cole welcome handoff to `G:\My Drive\Mindshare\channels\recruiting.md` with `roles.md` as the source of truth, the source artifacts, requested welcome/file-set check, and boundary notes.
 24. If the role is agent-ready, create a draft agent-build handoff that names the next skill:
    - `/define-agent` when the agent brief does not exist
@@ -366,7 +391,7 @@ Report:
 - Agent build readiness: role-only, agent-ready, built, or missing criteria.
 - Role memory file: path created or updated from `memory-template.md`.
 - Role-home session and announcement: created or located in the correct Codex project when Scott asked to create/hire/build the employee and did not explicitly request draft-only handling; activation packet sent, session id/title recorded, and Communications announcement written; or blocked with `roles/<role-slug>/session.md` when thread tools were unavailable.
-- Liz org-chart handoff: written to `G:\My Drive\Mindshare\channels\training.md` with `roles.md` source, requested org-chart update, and boundaries; or explicitly not needed because no person/org-chart/status detail changed.
+- Liz org-chart handoff: written to `G:\My Drive\Mindshare\channels\training.md` with `roles.md` source, requested org-chart update, and boundaries; required for Level 1 New Hire packet completion, individual creation/activation, or org-chart/status changes; or explicitly not needed only when none of those changed.
 - Cole welcome handoff: written to `G:\My Drive\Mindshare\channels\recruiting.md` with `roles.md` source, requested file-set check and welcome, and boundaries; or explicitly not needed because no new individual was created or activated.
 - Memory update: whether the shared MAPS memory helper ran, what note/run log was updated, and what RAG or notes locations need syncing.
 - Next skill: `/define-agent` when the role should become an APS agent, `/design-agent` when a brief already exists, or another `/role` run when building the next organizational role.
@@ -396,6 +421,7 @@ The completed role artifact must include:
 - User's role description
 - Research summary and recommendation rationale
 - External sources used and how each source shaped the recommendation
+- Role-description research basis: externally researched responsibility, Mindshare-specific adaptation, and assumptions needing validation
 - Advisory/workflow/skill/loop decision
 - Engagement taxonomy and engagement rationale
 - Implementation recommendation: skill, script, hook, active process, scheduled loop, workflow/runbook, MCP/tool integration, dashboard/report, or human operating procedure

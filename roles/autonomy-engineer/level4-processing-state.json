@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "role": "Tess / Autonomy Engineer",
+  "status": "level4_operational",
+  "automation_id": "tess-level-4-autonomy-backlog-processing",
+  "automation_kind": "cron",
+  "cadence": "30 minutes",
+  "level4_scope": [
+    "automation_baseline_review",
+    "promotion_packet_construction",
+    "level_4_5_6_capability_definition",
+    "scott_review_routing"
+  ],
+  "denied_actions": [
+    "approve_promotions",
+    "promote_roles",
+    "activate_broad_runtime",
+    "edit_gates_unilaterally",
+    "git_github_release",
+    "production",
+    "external_communication",
+    "spending",
+    "secrets",
+    "authority_expansion"
+  ],
+  "visibility": {
+    "required_for_non_noop_runs": true,
+    "local_log": "roles/autonomy-engineer/level4-visible-log.md",
+    "heartbeat_channel": "G:\\My Drive\\Mindshare\\channels\\heartbeat.md"
+  },
+  "work_loop_rule": {
+    "continue_until_empty": true,
+    "after_each_item": "re-read automation.backlog.md before selecting next eligible item",
+    "stop_when": [
+      "no_eligible_item_remains",
+      "remaining_items_blocked_errored_or_cancelled",
+      "stop_condition_risk_or_time_limit_requires_stop"
+    ]
+  },
+  "last_check_utc": "2026-06-22T21:40:00Z",
+  "last_result": "complete",
+  "current_item": null,
+  "last_item": {
+    "id": "AUTO-REV-013",
+    "role": "Lane",
+    "org": "Mojo",
+    "result": "complete",
+    "output": "roles/autonomy-engineer/lane-level4-promotion-packet.md",
+    "review_request": "Scott review requested in packet and proof file",
+    "blocked_actions": [
+      "promotion_approval",
+      "role_promotion",
+      "runtime_activation",
+      "gate_edit",
+      "git_github_release",
+      "production",
+      "external_communication",
+      "spending",
+      "secrets",
+      "authority_expansion"
+    ]
+  },
+  "next_action": "Scott review ready packets; no remaining blocked or backlog items in automation.backlog.md after creating missing Autonomy.md contracts for Cole, June, Paige, and Lane",
+  "gate_status": {
+    "authority": "pass",
+    "contract": "pass",
+    "trigger": "pass",
+    "runtime": "pass",
+    "work_loop": "pass",
+    "state": "pass",
+    "evidence": "pass",
+    "boundary": "pass_by_contract",
+    "review": "pass_by_contract",
+    "revocation": "pass_pause_resume_drill",
+    "display": "pass"
+  },
+  "created_utc": "2026-06-22T19:50:13Z",
+  "updated_utc": "2026-06-22T21:40:00Z"
+}

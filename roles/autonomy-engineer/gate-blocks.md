@@ -17,4 +17,4 @@ When gate clears, move/remove the entry from `Open Blocks` and add a short note 
 
 ## Cleared Blocks
 
-None.
+- 2026-06-22T13:55:00Z - Rename block cleared by Scott approval and patch-level rename. `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\level5-promotion-packet-policy.md` moved to `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\level4-promotion-packet-policy.md`; current references updated.

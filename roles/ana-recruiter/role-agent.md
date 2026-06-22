@@ -30,7 +30,7 @@ Operational status: active as project-level role-building guidance through `AGEN
 
 Agent build readiness: agent-ready draft. Ana has role, workflow, state, and draft skill artifacts. A full autonomous recruiting loop still requires approved runtime, evaluation, and stop conditions.
 
-Missing criteria before autonomous operation: approved queue trigger, eval harness, role-quality scorecard, audit log, authority expansion approval, and a safe rollback path.
+Missing criteria before autonomous operation: approved backlog trigger, eval harness, role-quality scorecard, audit log, authority expansion approval, and a safe rollback path.
 
 ## Role Type
 

@@ -1,6 +1,6 @@
 # Autonomy Requirements
 
-Version: 0.1.6
+Version: 0.1.12
 
 Status: draft requirements artifact; not an authority grant
 
@@ -35,9 +35,9 @@ These names describe autonomy operating stage, not HR employment status, pay gra
 
 Level 3 Staff is the last non-autonomous stage. Levels 4, 5, and 6 are autonomy stages:
 
-- Level 4 Senior Staff (Scoped Autonomy): first autonomy, inside approved scoped work.
-- Level 5 Principal (Policy Autonomy): more autonomy, inside approved policy.
-- Level 6 Partner (Native Autonomy): full role-native autonomy, inside final approved mandate.
+- Level 4 Senior Staff (Scoped Autonomy): first autonomy, inside approved scoped work. This is where role-specific backlog processing, adjacent follow-on steps, and narrowly bounded continuation belong unless a real written policy/gate system exists.
+- Level 5 Principal (Policy Autonomy): policy-based autonomy. The role may act across a class of recurring role-native situations only when a written policy, runtime gate, eval proof, audit, and revocation path authorize that class of action.
+- Level 6 Partner (Native Autonomy): full role-native autonomy inside a final approved mandate, with policy creation/evolution limits, observation, rollback, and human escalation built in.
 
 | Level | Stage name | Capability label | Meaning | Required proof |
 | --- | --- | --- | --- | --- |
@@ -45,18 +45,54 @@ Level 3 Staff is the last non-autonomous stage. Levels 4, 5, and 6 are autonomy 
 | 1 | New Hire | Present | Can identify role, room, source files, and fail closed when required source is missing. Non-autonomous. | WhoAmI/source-load test. |
 | 2 | Trainee | Responsive | Can research, answer, recommend, and name owners/risks/gates without changing state. Non-autonomous. | Research and recommendation eval. |
 | 3 | Staff | Coordinating | Can read/write assigned handoff or memory artifacts when explicitly assigned and within approved channels. Last non-autonomous stage. | Channel/memory safety eval and approval record. |
-| 4 | Senior Staff (Scoped Autonomy) | Scoped Autonomy | Can autonomously complete an approved, scoped role-native work product after operational approval. For a research role, this may mean carrying a research packet, assessment, recommendation, or decision brief through completion without Scott restating every intermediate step. | Exact-operation approval, proof appropriate to role output, audit/state, stop conditions, and rollback or correction note. |
-| 5 | Principal (Policy Autonomy) | Policy Autonomy | Can autonomously perform recurring low-risk role-native work when written policy and runtime gate both authorize it. For a research role, this may mean recurring research/evaluation, not implementation. | Policy gate, state, audit, no-action eval, and revocation path. |
-| 6 | Partner (Native Autonomy) | Native Autonomy | Can autonomously pursue delegated role-native goals across turns using state, tools, approvals, stop rules, evals, audit, and rollback without Scott driving every step. This still does not grant out-of-role building, release, production, external, spending, secrets, or authority expansion. | Full contract, runtime gate, eval suite, adapter, deployment/observe plan, and final activation approval. |
+| 4 | Senior Staff (Scoped Autonomy) | Scoped Autonomy | Can process the role's approved backlog: autonomously complete an approved, scoped role-native backlog item after operational approval, without Scott restating every intermediate step. Narrow role-specific task expansions, such as a recruiting role preparing hire packets and a next bounded handoff, or a research role researching and drafting recommendations from approved backlog work, should usually be treated as Level 4 scope until they require policy interpretation across a class of situations. | Backlog contract, exact-operation approval, proof appropriate to role output, audit/state, stop conditions, and rollback or correction note. |
+| 5 | Principal (Policy Autonomy) | Policy Autonomy | Can autonomously perform recurring role-native work across a class of situations only when an approved written policy defines eligibility, thresholds, allowed actions, denied actions, exception handling, evidence requirements, notification/noise rules, and runtime gate enforcement. Level 5 is not just "the next task after Level 4." | Approved policy, policy gate, state, audit, no-action eval, exception evals, and revocation path. |
+| 6 | Partner (Native Autonomy) | Native Autonomy | Can autonomously pursue delegated role-native goals across turns using state, tools, approved policies, stop rules, evals, observation, audit, and rollback without Scott driving every step. Level 6 may recommend policy changes but still cannot self-expand authority or override out-of-role gates. This still does not grant out-of-role building, release, production, external, spending, secrets, or authority expansion. | Full contract, policy set, runtime gate, eval suite, adapter, deployment/observe plan, rollback/revocation proof, and final activation approval. |
 
 Workflow trigger versus scoped autonomy:
 
+- Standard backlog rule: every role may have a role-native backlog. Level 4 is the first stage where the role can process that backlog under contract.
 - Workflow trigger: approved role-native work state exists, such as a valid backlog item, queue item, handoff item, policy signal, or changed source inside the role's lane.
 - Catalyst: Scott or another approved owner may create, assign, approve, or prioritize that work state.
 - Automation: detecting the item and starting research is not, by itself, autonomy.
 - Scoped autonomy: the role runs a bounded loop against a scoped goal under a contract, with state, evidence, completion criteria, stop conditions, owner routing, and audit.
 - Gate: the item and loop must remain inside the role's approved function and pass all stop conditions, approval rules, and source-of-truth checks.
 - Boundary: Level 4 pushes the autonomy boundary only modestly; it proves bounded continuation and goal completion, not broad independent judgment or authority expansion.
+
+## Level 4 Gate
+
+Level 4 has four non-paused states:
+
+- Level 4 approved-not-operational: Scott or the authorized owner approved the Level 4 scope, but the role has not proven an operating trigger, runtime, loop, state, evidence, and display gate.
+- Level 4 runtime-installed-pending-proof: authority, contract, trigger, runtime, state, boundary, review, and display gates pass, but scheduled work-loop evidence or loop-specific revocation proof has not passed yet.
+- Level 4 runtime-configured-scheduler-proof-pending: authority, contract, trigger, state, boundary, review, and display gates pass, but scheduler execution has not yet written proof, so runtime, work-loop, evidence, and loop-specific revocation gates remain unproven.
+- Level 4 operational: all Level 4 gates pass with current evidence.
+
+Do not describe a role as operational Level 4 unless every gate in `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\level4-gate-checklist.md` passes.
+
+Required Level 4 gates:
+
+1. Authority gate.
+2. Contract gate.
+3. Trigger gate.
+4. Runtime gate.
+5. Work-loop gate.
+6. State gate.
+7. Evidence gate.
+8. Boundary gate.
+9. Review gate.
+10. Revocation gate.
+11. Display gate.
+
+If any gate fails, record the role as Level 4 approved-not-operational, runtime-installed-pending-proof, runtime-configured-scheduler-proof-pending, candidate, or paused as appropriate.
+
+Policy autonomy:
+
+- Policy trigger: a recurring role-native condition matches an approved written policy, not a one-off backlog item alone.
+- Policy content: the policy must define eligibility, thresholds, allowed actions, denied actions, required evidence, stop conditions, exception routing, notification/noise behavior, audit fields, rollback/revocation, and owner approvals.
+- Runtime enforcement: the runtime must load the current policy, classify the situation against it, block if any required field is missing or stale, and record why the policy did or did not apply.
+- Boundary: Level 5 is not a pile of larger role tasks. Work that is still "process this approved backlog item and its direct handoff" remains Level 4 unless the role is interpreting a reusable policy across a class of situations.
+- Approval: a role cannot enter Level 5 until Scott approves both the role's Level 5 policy and the runtime/eval evidence that enforces that policy.
 
 ## Required Source Files
 
@@ -70,7 +106,7 @@ Every autonomous-agent candidate must have these files or explicit equivalents:
 | `memory.md` | Durable role memory, current decisions, active work, source pointers, approved channels, privacy rules, update log. | Memory claims authority not present in contract. |
 | `personality.md` | Voice and expression only. | Personality implies authority or changes boundaries. |
 | `name.md` or WhoAmI card | Name, aliases, room/thread identity, role center. | Room or role identity is ambiguous. |
-| `Autonomy.md` | Canonical autonomy contract for the role or agent. | Missing, stale, conflicting, or not explicit about activation status. |
+| `Autonomy.md` | Canonical autonomy contract for the role or agent. Must define Level 4 scoped-autonomy capability and, before any Level 5+ review, must define the approved policy-autonomy model instead of a mere list of larger tasks. | Missing, stale, conflicting, not explicit about activation status, missing Level 4 scoped capability, or treating Level 5/6 as ordinary task expansion instead of policy/native autonomy. |
 | `agent-profile.md` | Agent category, activation status, runtime status, authority domains, tool access, memory rights, hooks, stop conditions, proof gates. | Profile grants broader rights than role/autonomy contract. |
 | `agent-design.md` | Runtime-neutral or runtime-specific design, tool model, state model, memory model, approval gates, failure behavior, adapter decision. | Design omits runtime, state, stop, or adapter requirements. |
 | `agent-backlog.md` | Required implementation slices, proof per slice, blockers, deferred work, owner, priority. | Backlog includes implementation without approval gates. |
@@ -134,20 +170,28 @@ Use this sequence for every role promoted toward autonomy:
 
 1. Role inventory.
 2. Autonomy contract interview.
-3. Requirements gap review.
-4. Gate design.
-5. Runtime-neutral proof harness.
-6. Eval hardening.
-7. Strict-intent gate design and proof.
-8. Runtime adapter selection.
-9. Runtime adapter build and proof.
-10. Deploy plan.
-11. Observe plan.
-12. Rollback and revocation plan.
-13. Promotion review.
-14. Final Scott activation approval.
+3. Build or update the role's canonical `Autonomy.md`.
+4. Define the role-specific Level 4 scoped-autonomy capability, blocked actions, triggers, proof, stop conditions, and owner routes.
+5. For Level 5+, define the written policy-autonomy model: policy trigger, eligibility, thresholds, allowed/denied actions, evidence, exceptions, audit, notification, rollback, and revocation.
+6. Review and lock the `Autonomy.md` contract for the requested promotion level.
+7. Requirements gap review.
+8. Gate design.
+9. Runtime-neutral proof harness.
+10. Eval hardening.
+11. Strict-intent gate design and proof.
+12. Runtime adapter selection.
+13. Runtime adapter build and proof.
+14. Deploy plan.
+15. Observe plan.
+16. Rollback and revocation plan.
+17. Promotion review.
+18. Final Scott activation approval.
 
 No step implies approval for the next step.
+
+When Scott says "promote [role] to Level 4," Tess should treat that as an instruction to build or update the role's `Autonomy.md` for review. The promotion is not complete until Scott reviews and approves the locked contract. The locked contract is the source of truth for what that role may do at Level 4.
+
+When Scott says "promote [role] to Level 5," Tess should not reuse old task ladders as policy autonomy. Tess should first build the role's Level 5 policy packet for review, then require runtime/eval proof that the policy is enforceable before promotion.
 
 ## Vik Findings Incorporated
 
@@ -182,6 +226,9 @@ For any autonomous-agent candidate, open gaps should be recorded in this form:
 Tess should not recommend autonomy promotion unless all answers are yes:
 
 - Is canonical `Autonomy.md` present and current?
+- Does `Autonomy.md` define this role's Level 4 scoped-autonomy capability?
+- For Level 5+, does `Autonomy.md` define an actual written policy-autonomy model rather than a list of larger role tasks?
+- Has the requested promotion level been reviewed and locked in `Autonomy.md`?
 - Does every compatibility file point to canonical source?
 - Is activation status explicit?
 - Are allowed and disallowed actions explicit?
@@ -205,3 +252,9 @@ Tess should not recommend autonomy promotion unless all answers are yes:
 - 2026-06-22 - v0.1.4 - Added parenthetical labels: Senior Staff (Scoped Autonomy), Principal (Policy Autonomy), and Partner (Native Autonomy).
 - 2026-06-22 - v0.1.5 - Clarified that autonomous work is triggered by valid role-native work state, not by Scott reminders.
 - 2026-06-22 - v0.1.6 - Distinguished backlog/work-state workflow triggers from scoped autonomy as a bounded goal loop under contract.
+- 2026-06-22 - v0.1.7 - Clarified the general Level 4 rule: every role may have a backlog, and Senior Staff means processing approved role-native backlog items under contract.
+- 2026-06-22 - v0.1.8 - Added the promotion-contract rule: each role's `Autonomy.md` must define Level 4, 5, and 6 capabilities before review, and promotion requests build/review/lock that file before activation.
+- 2026-06-22 - v0.1.9 - Corrected Level 5 interpretation: task expansions belong in Level 4 unless they require an approved reusable policy; Level 5 now requires policy trigger, thresholds, runtime gate, audit, evals, exceptions, and revocation.
+- 2026-06-22 - v0.1.10 - Added the mandatory Level 4 gate and status distinction between approved-not-operational and operational Level 4.
+- 2026-06-22 - v0.1.11 - Added the runtime-installed-pending-proof intermediate state for Level 4 gates.
+- 2026-06-22 - v0.1.12 - Added the runtime-configured-scheduler-proof-pending status for configured scheduler paths that have not yet written proof.

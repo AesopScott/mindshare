@@ -19,17 +19,15 @@
   },
   "agent_build_readiness": "role-only",
   "activation_approved": true,
-  "heartbeat_automation": {
+  "automation": {
     "name": "hr-director-handoff-check",
     "status": "ACTIVE",
-    "kind": "heartbeat",
-    "rrule": "FREQ=MINUTELY;INTERVAL=5",
+    "kind": "FileWatch",
     "target_thread_id": "019eecad-49b2-7633-9e09-11276c531833"
   },
   "primary_voice": "Reviewer",
   "secondary_voice_blend": "Operator 30%, Diplomat 20%, Analyst 10%",
   "assigned_handoff_files": [
-    "G:\\My Drive\\Mindshare\\channels\\heartbeat.md",
     "G:\\My Drive\\Mindshare\\channels\\communications.md",
     "G:\\My Drive\\Mindshare\\channels\\recruiting.md"
   ],
@@ -43,7 +41,7 @@
     "loop": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\loop.md",
     "memory": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\memory.md",
     "team_member_file_structure": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\team-member-file-structure.md",
-    "heartbeat_automation": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\heartbeat-automation.md",
+    "automation": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\automation.md",
     "session": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\session.md"
   },
   "mirror_files": {
@@ -54,6 +52,6 @@
     "role_agent": "G:\\My Drive\\Mindshare\\role\\hr-director\\role-agent.md",
     "room_card": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\cole.md"
   },
-  "correction_note": "An earlier heartbeat was mistakenly attached to Ana's office and was deleted before durable activation records were updated. The active heartbeat is attached to Cole's actual office thread.",
+  "correction_note": "An earlier Automation entry was mistakenly attached to Ana's office and was deleted before durable activation records were updated. The active FileWatch is attached to Cole's actual office thread.",
   "last_updated": "2026-06-21T00:00:00-06:00"
 }

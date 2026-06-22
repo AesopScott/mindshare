@@ -1,6 +1,6 @@
 # Cole - HR Director Loop Draft
 
-Status: heartbeat active for assigned handoff files only; no autonomous audit loop is approved.
+Status: FileWatch active for assigned handoff files only; no autonomous audit loop is approved.
 
 ## Proposed Trigger
 
@@ -11,7 +11,7 @@ Status: heartbeat active for assigned handoff files only; no autonomous audit lo
 
 ## Proposed Cadence
 
-5-minute bounded handoff heartbeat for assigned files, event-driven after structure changes, plus weekly full audit only if Scott approves.
+Bounded FileWatch for assigned files, event-driven after structure changes, plus weekly full audit only if Scott approves.
 
 ## State
 

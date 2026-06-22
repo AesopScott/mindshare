@@ -23,19 +23,18 @@ When the role owns a workflow:
 
 - `workflow.md`
 
-When the role has a proposed loop, hook, script, skill, or automation:
+When the role has a proposed loop, hook, script, skill, FileWatch, or Automation:
 
 - `loop.md`
 - `hook-spec.md`
 - `script-spec.md`
 - `SKILL.draft.md`
-- `heartbeat-automation.md`
 - `automation.md`
 
 When the role is activated:
 
 - role-home session record or session id in memory/roster
-- heartbeat or file-watch configuration only when approved
+- FileWatch configuration only when approved
 - assigned handoff files in memory and contract
 - Communications announcement when activation is approved
 - entry in `G:\My Drive\Mindshare\role-artifacts.md`
@@ -76,7 +75,7 @@ When Mindshare is the memory root, each role should have:
 - Cole may create missing stage-required structural files and mirrors when the requirement is clear, file content is template-derived, and the action does not change role authority, lifecycle, autonomy, Git/release, production, external communication, spending, secrets, or another owner's substantive content.
 - Role lifecycle, roster, or `/role` output: Ana.
 - Organization notice or channel guidance: Mae.
-- Autonomy, gate, heartbeat, hook, loop, runtime, or authority implication: Tess and Vik.
+- Autonomy, gate, FileWatch, Automation, hook, loop, runtime, or authority implication: Tess and Vik.
 - Git, release, branch, PR, or promotion file: Reid.
 - Backup expectation: Bea.
 - Public/training website status mirror: Liz when in scope.

@@ -13,22 +13,22 @@
 
 - Agent profile enabled: yes
 - Manual invocation enabled: yes
-- Autonomous runtime installed: no
+- Autonomous runtime installed: Level 4 scoped recruiting lifecycle approved; `ana-l4-recruiting-backlog-processing` active on 4-hour steady cadence
 - Production publishing allowed: no
 
 ## Autonomy
 
-- Current category: Agent profile, human-in-the-loop
+- Current category: Level 4 scoped autonomy, approval-gated beyond backlog processing
 
-Current level: Level 3 Staff / agent profile, human-in-the-loop.
+Current level: Level 4 Senior Staff (Scoped Autonomy).
 
-Target level under preparation: Level 4 Senior Staff (Scoped Autonomy) for approved role-lifecycle queue items.
+Target level under preparation: Level 5 Principal (Policy Autonomy) for company-position research and approved Level 5+ leader hiring-demand conversations.
 
-Ana may recommend, draft, coordinate, and prepare role artifacts. Ana may not run an autonomous recruiting loop until the queue trigger, stop conditions, evaluation plan, proof path, and approval path are designed and approved.
+Ana may process approved recruiting backlog items through internal role-lifecycle preparation, promote backlog items to Level 1, promote Level 1 to Level 2 after 24 hours, and promote Level 2 to Level 3 after five days. Ana may not promote hired roles to Level 4+, grant authority beyond the packet stage, externally recruit, or activate broad runtime.
 
-Proposed Level 4 trigger: a valid `backlog` item in `C:\Users\scott\Code\mindshare\roles\ana-recruiter\role-lifecycle-queue.md`.
+Approved Level 4 triggers: a valid `backlog` item in `C:\Users\scott\Code\mindshare\roles\ana-recruiter\recruiting.backlog.md`, or a timed promotion-eligible item in `C:\Users\scott\Code\mindshare\roles\ana-recruiter\recruiting.pipeline.json`, governed by `C:\Users\scott\Code\mindshare\roles\ana-recruiter\Autonomy.md`.
 
-Proposed Level 4 boundary: complete role-lifecycle work products only; no role activation, authority grants, external communication, Git/release, production, spending, secrets, hooks, scheduler installation, global skill changes, or autonomous runtime activation.
+Approved Level 4 boundary: internal Level 1/2/3 role-lifecycle work products only; no external recruiting, human hiring, Level 4+ promotion for hired roles, authority grants beyond packet definitions, Git/release, production, spending, secrets, hooks, scheduler installation, global skill changes, or broad autonomous runtime activation.
 
 ## Authority
 
@@ -73,7 +73,8 @@ Not allowed:
 - Project AGENTS.md activation: enabled for guidance.
 - Role-intake trigger: candidate only.
 - Scheduled role pipeline review: candidate only.
-- Autonomous loop: not installed.
+- Autonomous loop: Level 4 recruiting lifecycle loop approved by contract; `ana-l4-recruiting-backlog-processing` checks every 4 hours. Once processing starts, Ana continues until the backlog, Level 1 promotion queue, and Level 2 promotion queue have no eligible items or one item blocks/errors.
+- Proof testing: complete. Ana produced one Level 1 processing proof and two follow-up empty-backlog proofs under the Level 1 New Hire packet standard, reaching 3 of 3 consecutive successful proof runs.
 
 ## Memory Rights
 
@@ -97,7 +98,9 @@ Forbidden:
 | Architecture review | Vik | Required before build | Review hooks, loops, memory, and authority expansion. |
 | Pipeline movement | Matt | Ready for sequencing | Move Ana through Design, Build, Equip, Evaluate. |
 | Activation approval | Scott | Required | Approve runtime, hooks, memory, and authority changes explicitly. |
-| Level 4 scoped autonomy | Scott + Vik review | Proposed, not approved | Approve `role-lifecycle-queue.md` as the trigger and Ana's exact scoped work products before stage upgrade. |
+| Level 4 scoped autonomy | Scott | Approved active | `recruiting.backlog.md` and `recruiting.pipeline.json` are the trigger/state sources and Ana's role `Autonomy.md` is the locked capability contract. `ana-l4-recruiting-backlog-processing` is active on the 4-hour steady cadence for backlog-to-Level-1 and timed Level-1/2/3 progression. |
+| Level 5 policy autonomy | Scott | Defined, not active | Requires leadership-role taxonomy, company-position research policy, leader-hiring-demand policy, runtime gate, eval proof, audit, rollback, and revocation before activation. |
+| Level 6 native autonomy | Scott | Deferred | Scott does not currently need Ana Level 6. |
 
 ## Design Sync
 
@@ -110,5 +113,5 @@ Forbidden:
 
 ## Next Skill
 
-- Next step: Level 4 scoped-autonomy approval review after queue contract, proof scenarios, and Vik control-plane review.
+- Next step: Maintain the Level 4 recruiting lifecycle loop on the 4-hour steady cadence. Draft and review Ana's Level 5 policies before any policy-autonomy activation.
 - Next MAPS skill if building a broader runtime later: /build-agent after Scott accepts design/backlog and Vik reviews control-plane boundaries.

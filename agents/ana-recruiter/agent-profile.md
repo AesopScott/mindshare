@@ -20,9 +20,15 @@
 
 - Current category: Agent profile, human-in-the-loop
 
-Current level: Agent profile, human-in-the-loop.
+Current level: Level 3 Staff / agent profile, human-in-the-loop.
 
-Ana may recommend, draft, coordinate, and prepare role artifacts. Ana may not run an autonomous recruiting loop until the runtime, triggers, stop conditions, evaluation plan, and approval path are designed and approved.
+Target level under preparation: Level 4 Senior Staff (Scoped Autonomy) for approved role-lifecycle queue items.
+
+Ana may recommend, draft, coordinate, and prepare role artifacts. Ana may not run an autonomous recruiting loop until the queue trigger, stop conditions, evaluation plan, proof path, and approval path are designed and approved.
+
+Proposed Level 4 trigger: a valid `backlog` item in `C:\Users\scott\Code\mindshare\roles\ana-recruiter\role-lifecycle-queue.md`.
+
+Proposed Level 4 boundary: complete role-lifecycle work products only; no role activation, authority grants, external communication, Git/release, production, spending, secrets, hooks, scheduler installation, global skill changes, or autonomous runtime activation.
 
 ## Authority
 
@@ -91,6 +97,7 @@ Forbidden:
 | Architecture review | Vik | Required before build | Review hooks, loops, memory, and authority expansion. |
 | Pipeline movement | Matt | Ready for sequencing | Move Ana through Design, Build, Equip, Evaluate. |
 | Activation approval | Scott | Required | Approve runtime, hooks, memory, and authority changes explicitly. |
+| Level 4 scoped autonomy | Scott + Vik review | Proposed, not approved | Approve `role-lifecycle-queue.md` as the trigger and Ana's exact scoped work products before stage upgrade. |
 
 ## Design Sync
 
@@ -103,4 +110,5 @@ Forbidden:
 
 ## Next Skill
 
-- Next MAPS skill: /build-agent after Scott accepts design/backlog and Vik reviews control-plane boundaries.
+- Next step: Level 4 scoped-autonomy approval review after queue contract, proof scenarios, and Vik control-plane review.
+- Next MAPS skill if building a broader runtime later: /build-agent after Scott accepts design/backlog and Vik reviews control-plane boundaries.

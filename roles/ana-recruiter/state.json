@@ -7,7 +7,16 @@
   "status": "active-local-guidance",
   "authorization": "operating-authorized-for-mindshare-role-intake-and-draft-role-artifacts",
   "skill_ownership": "/role",
-  "agent_build_status": "profile-design-eval-ready; not implemented agent",
+  "agent_build_status": "profile-design-eval-ready; not implemented agent; Level 4 scoped-autonomy path prepared but not approved",
+  "autonomy_stage": {
+    "current_level": 3,
+    "current_stage": "Level 3 Staff",
+    "target_level": 4,
+    "target_stage": "Level 4 Senior Staff (Scoped Autonomy)",
+    "level_4_status": "readiness-path-prepared-not-approved",
+    "level_4_trigger_source": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\role-lifecycle-queue.md",
+    "level_4_boundary": "role-lifecycle work products only; no activation, authority grant, external communication, Git/release, production, spending, secrets, hooks, scheduler installation, global skill change, or autonomous runtime activation"
+  },
   "handoff_check_goal": {
     "status": "active",
     "cadence": "every 5 minutes when not engaged in active user-directed work",
@@ -69,6 +78,7 @@
     "What role queue format should Ana maintain?"
   ],
   "pending_approvals": [
+    "Approve Ana Level 4 Senior Staff scoped autonomy for role-lifecycle queue items.",
     "Approve automatic hook installation.",
     "Approve scheduled role pipeline review.",
     "Approve any autonomous role-building behavior."

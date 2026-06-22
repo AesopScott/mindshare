@@ -55,6 +55,8 @@ Use read-only checks first:
 - `git diff --stat`
 - GitHub PR, check, release, ruleset, and branch protection metadata when approved.
 
+When Claude CLI is useful for release review or command-risk analysis, use the low-token profile because that work type is narrow and evidence-based. In Mindshare, use `C:\Users\scott\Code\mindshare\scripts\invoke-claude-low-token.ps1`; in another repo, use that repo's local wrapper when present or mirror the same profile. Do not apply this blanketly to every Reid interaction; use it for bounded release-risk analysis, command review, and token/log inspection. Run deterministic Git/status checks outside Claude whenever possible.
+
 ### 3. Classify
 
 Classify the request:

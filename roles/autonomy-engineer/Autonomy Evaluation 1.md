@@ -1,6 +1,6 @@
 # Autonomy Evaluation 1
 
-Version: 0.1.8
+Version: 0.1.10
 
 Date: 2026-06-22
 
@@ -34,6 +34,7 @@ Source rule: writable access is not authority. Tool availability is not authorit
 - Current local role files under `C:\Users\scott\Code\mojo\roles`
 - Current local role files under `C:\Users\scott\Code\watch\roles`
 - Current agent profile files under `C:\Users\scott\Code\mindshare\agents`, `C:\Users\scott\Code\mojo\agents`, and `C:\Users\scott\Code\watch\agents`
+- Current app automation records under `C:\Users\scott\.codex\automations`
 
 ## Taxonomy Used
 
@@ -70,7 +71,7 @@ Workflow trigger versus scoped autonomy: at autonomous stages, the workflow trig
 
 No current non-human role is approved as Level 6 Partner.
 
-Most active teammates sit between Level 2 Trainee and Level 3 Staff, meaning they are not autonomous. A smaller group has Level 4 Senior Staff target paths or policy-scoped autonomy candidates, but no one has approved Level 6 Partner status. Vik is furthest along for architecture/control-plane autonomy and memory-maintenance automation, but still lacks final promotion approval for Principal or Partner status. Paige and Lane are active operators missing canonical autonomy contracts. Matt is released legacy context.
+Most active teammates sit between Level 2 Trainee and Level 3 Staff, meaning they are not broad autonomous agents. A smaller group has bounded automation, Level 4 Senior Staff target paths, or policy-scoped autonomy candidates, but no one has approved Level 6 Partner status. Vik is furthest along for architecture/control-plane autonomy and memory-maintenance automation, but still lacks final promotion approval for Principal or Partner status. Tess has an approved narrow 4-hour evaluation heartbeat, but her canonical contract keeps her at Level 3 Staff outside that scheduled evaluation scope. Paige and Lane are active operators missing canonical autonomy contracts. Matt is released legacy context.
 
 ## Current Standing By Role
 
@@ -78,14 +79,14 @@ Most active teammates sit between Level 2 Trainee and Level 3 Staff, meaning the
 | --- | --- | --- | --- | --- | --- | --- |
 | Scott | Mindshare | Human Authority | Not applicable | Not applicable | Not applicable | Final human approver for activation, autonomy, authority expansion, production, external communication, spending, secrets, and commitments. |
 | Rae | Mindshare | Coordinator | Level 3 - Staff | `rae-handoff-check` active per roster | `agents/rae-ceo/agent-profile.md`; role `Autonomy.md` exists | Strong Staff. Target Level 4 Senior Staff. Needs eval execution and explicit operational approval for Level 4 actions. No autonomous runtime. |
-| Ana | Mindshare | Operator | Level 3 - Staff | `ana-handoff-check` active per roster | `agents/ana-recruiter/agent-profile.md`; role `Autonomy.md` exists | Role-lifecycle operator with autonomy-readiness docs. Can draft and coordinate inside recruiting scope. No unilateral activation authority. No autonomous runtime. |
+| Ana | Mindshare | Operator | Level 3 - Staff; Level 4 Senior Staff path prepared, not approved | `ana-handoff-check` active per roster; proposed `role-lifecycle-queue.md` trigger prepared but not activated | `agents/ana-recruiter/agent-profile.md`; role `Autonomy.md`; `role-lifecycle-queue.md`; updated proof/eval artifacts exist | Role-lifecycle operator with Level 4 scoped-autonomy design prepared for approved queue-triggered role-lifecycle work products. Still not promoted: no role activation authority, no authority grants, no external recruiting, no Git/release, no production, no broad autonomous runtime. Needs Vik control-plane review and explicit Scott approval before Level 4 standing. |
 | Matt | Mojo | Released | No active path | Legacy only | `roles/matt/Autonomy.md` legacy block exists | Released by Scott on 2026-06-20. No promotion path active. Use Cal for active MAPS ASPM work. |
 | Cal | Mojo | Coordinator | Level 3 - Staff | None observed in roster | `agents/cal-aspm/agent-profile.md`; role `Autonomy.md` exists | Active MAPS ASPM coordinator. Strong Staff. Target Level 4 Senior Staff after approval. No implementation, Git/release, architecture override, or autonomous runtime authority. |
-| Vik | Mojo | Coordinator / architecture lead | Level 4 Senior Staff (Scoped Autonomy); target Level 5 Principal candidate | `vik-handoff-check`; `vik-daily-role-memory-maintenance` listed active in roster | `agents/vik-aspa/agent-profile.md`; role `Autonomy.md`; eval/deploy/observe/promotion artifacts exist | Converted to Level 4 for valid backlog-triggered research/architecture goal loops. Still not Principal, Partner, Agent, deployed runtime, or builder. Needs final promotion review, strict evidence that runtime/gates/evals are complete, and Scott approval before Principal/Partner use. |
+| Vik | Mojo | Coordinator / architecture lead | Level 4 Senior Staff (Scoped Autonomy); target Level 5 Principal candidate | `vik-visible-backlog-research` active 30-minute visible backlog heartbeat; `vik-daily-role-memory-maintenance` active daily cron; `vik-handoff-check` queue/file-watch sidecar paused | `agents/vik-aspa/agent-profile.md`; role `Autonomy.md`; eval/deploy/observe/promotion artifacts exist | Converted to Level 4 for valid backlog-triggered research/architecture goal loops. Current evidence includes a second-cycle VA-008 through VA-017 rerun under the stricter productization/proof/visibility contract. Still not Principal, Partner, Agent, deployed runtime, or builder. Needs final promotion review, strict evidence that runtime/gates/evals are complete, and Scott approval before Principal/Partner use. |
 | Liz | Mojo | Operator / workflow owner | Level 3 - Staff with policy-scoped `/maps` execution boundary | `liz-handoff-check` active per roster | `agents/liz-training/agent-profile.md`; role `Autonomy.md` exists | Training coordinator with bounded heartbeat and site/training mirror scope. No production publish, Git/release, or autonomous runtime authority. |
 | Mae | Mindshare | Operator | Level 3 - Staff | `mae-handoff-check` active per roster | `agents/mae-communications/agent-profile.md`; role `Autonomy.md` exists | Communications/channel-governance operator. Can coordinate within assigned channels. External communication and channel override remain blocked without approval. |
 | Reid | Mindshare | Operator | Level 3 - Staff | `reid-handoff-check` active per roster | `agents/reid-release/agent-profile.md`; role `Autonomy.md` exists | Release-management coordinator/operator. Strong gate owner for release/Git routing, but no Git/GitHub write authority until explicit approval. No autonomous runtime. |
-| Tess | Mindshare | Operator | Level 3 - Staff | None observed in roster | `agents/tess-autonomy/agent-profile.md`; role `Autonomy.md` exists | Autonomy engineer for review, draft gates, requirements, backlog, and approval routing. No unilateral gate edits, autonomous runtime, Git/release, production, external comms, spending, secrets, or authority expansion. |
+| Tess | Mindshare | Operator | Level 3 - Staff | `tess-autonomy-evaluation` active 4-hour heartbeat; narrow evaluation/Liz-handoff scope only | `agents/tess-autonomy/agent-profile.md`; role `Autonomy.md` exists | Autonomy engineer for review, draft gates, requirements, backlog, and approval routing. Approved narrow heartbeat may refresh this evaluation and notify Liz only for website-relevant standing changes. No broad autonomous runtime, unilateral gate edits, Git/release, production, external comms, spending, secrets, or authority expansion. |
 | Cole | Mindshare | Operator | Level 3 Staff probable by operating stage; missing `Autonomy.md` | `hr-director-handoff-check` active per roster | No agent profile observed; no role `Autonomy.md` observed | Activated HR Director / team-member-file operator. Needs canonical `Autonomy.md` and optional profile if promoted toward agent readiness. No autonomous runtime. |
 | June | Mindshare | Operator | Level 2 Trainee to Level 3 Staff candidate; missing `Autonomy.md` | None observed in roster | No agent profile observed; no role `Autonomy.md` observed | Activated Staff Writer. Can draft/research inside Marketing/book scope. Needs `Autonomy.md` before autonomy promotion. No public publishing, external communication, production, Git/release, or autonomous runtime authority. |
 | Paige | Mindshare | Operator | Level 3 Staff probable by operating stage; missing `Autonomy.md` | None observed in roster | No agent profile observed; no role `Autonomy.md` observed | Activated Executive Assistant under Executive Operations. Notes-only scope. No email, Slack, calendar, private-channel, connector, external communication, autonomous runtime, production, Git/release, spending, secrets, or authority-expansion authority. |
@@ -110,7 +111,7 @@ Most active teammates sit between Level 2 Trainee and Level 3 Staff, meaning the
 - Tess
 - Jay
 
-These roles have current operating authorization plus canonical autonomy/profile artifacts, but no autonomous runtime.
+These roles have current operating authorization plus canonical autonomy/profile artifacts, but no broad autonomous runtime. Tess has an approved narrow evaluation heartbeat, and several roles have handoff/monitoring automations; those mechanisms are evidence and workflow support, not stage promotion by themselves.
 
 ### Band C: Most advanced Principal candidate, still not promoted
 
@@ -162,3 +163,5 @@ These roles are active operators by roster/contract, but missing `Autonomy.md`. 
 | 2026-06-22 | 0.1.6 | Distinguished workflow-triggered research automation from scoped autonomy as a contracted goal loop. | Tess |
 | 2026-06-22 | 0.1.7 | Updated Vik current standing to Level 4 Senior Staff scoped autonomy. | Tess |
 | 2026-06-22 | 0.1.8 | Removed stale Lab Operator draft entry and added active Paige and Lane operator standings from the roster. | Tess |
+| 2026-06-22 | 0.1.9 | Recorded active `tess-autonomy-evaluation` 4-hour heartbeat as narrow approved evidence while keeping Tess at Level 3 Staff per canonical contract; refreshed Vik automation evidence to active visible backlog heartbeat, daily memory cron, and paused queue/file-watch sidecar. | Tess |
+| 2026-06-22 | 0.1.10 | Recorded Ana Level 4 scoped-autonomy path as prepared but not approved; added role-lifecycle queue trigger evidence and remaining Vik/Scott approval gates. | Tess |

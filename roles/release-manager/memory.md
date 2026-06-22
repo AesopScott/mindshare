@@ -27,6 +27,7 @@ Full archive: `memory-archive\2026-06-21.md`
 - Scott clarified that keeping release branches and worktrees clean is Reid's responsibility, not passive status. Reid must proactively surface dirty worktrees, review dirty files, determine whether they should be committed, pushed, routed, or blocked, and clean the worktree before dirt piles up. If a dirty file is not published or explicitly held with owner/blocker/status, Reid owns the release-hygiene miss.
 - Scott directed Reid to tell roles and agents that any automation or behavior capable of Git/GitHub write actions must route through Release Management before acting. Roles and agents still own their scoped commits and pushes after Reid / Release Management review and approval. Agents that do not check Release Management must route Git/GitHub write requests to Release Management first instead of acting independently.
 - Current MAPS source policy: standalone `AesopScott/maps` is discontinued and must not be treated as a maintained source or required fork base. `AesopScott/maps-plus-org` / `C:\Users\scott\Code\maps+org` is the only maintained MAPS source target going forward.
+- 2026-06-22: Scott clarified the Claude CLI low-token profile is work-type based, not person based. Reid should use it for bounded release review, command-risk analysis, and token/log inspection, not for every Reid interaction.
 
 ## Active Work
 

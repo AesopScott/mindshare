@@ -1,11 +1,13 @@
-# MAPS: Multi-Agent Pipeline Skills
+# MAPS: Agentic And Multi-Agent Pipeline Skills
 
-MAPS is a skill-based framework for building multi-agent systems.
+MAPS is a public skill-based framework for building agentic and multi-agent systems.
+
+This repository is the public MAPS skill package. It contains the agentic skill set and multi-agent skill set only. Mindshare/Mojo organization files, private automations, channels, role memories, runtime state, and internal operating records belong outside this public package.
 
 It turns the agent development lifecycle into reusable phase skills:
 
 ```text
-phase alignment -> define -> design -> build -> equip -> evaluate -> deploy -> observe -> improve
+phase alignment -> foundation -> shape -> define -> design -> equip -> build -> evaluate -> deploy -> observe -> improve
 ```
 
 Each phase has two artifacts:
@@ -59,19 +61,43 @@ Run the validator before publishing skill changes:
 python scripts/validate_maps_skills.py
 ```
 
-### Non-Phase Builder Skills
+## Public Skill Sets
 
-MAPS can also include reusable builder skills that support the system but are not lifecycle phases.
+Agentic pipeline skills:
 
-- `/role` creates role-agent contracts for a root organization or multi-agent corporation. Use it to build advisory, workflow, skill-backed, loop-backed, or agentic organizational roles.
+- `phase-alignment`
+- `foundation`
+- `shape`
+- `define-agent`
+- `design-agent`
+- `design-experience`
+- `design-experience-plus-plus`
+- `equip-agent`
+- `build-agent`
+- `build-agent-plus-plus`
+- `evaluate-agent`
+- `evaluate-agent-plus-plus`
+- `deploy-agent`
+- `deploy-agent-plus-plus`
+- `observe-agent`
+- `observe-agent-fuse`
+- `observe-agent-phoenix`
+- `observe-agent-smith`
+- `improve-agent`
 
-## Scaffold A New MAPS Repo
+Multi-agent pipeline skills:
 
-Use `skills/scaffold` when invoking `/scaffold` or creating a new MAPS-compatible repository structure.
+- `multi-agent-roster`
+- `multi-agent-contracts`
+- `multi-agent-coordination`
+- `multi-agent-buildout`
+- `multi-agent-capabilities`
+- `multi-agent-orchestration`
+- `multi-agent-evaluate`
+- `multi-agent-deploy-observe`
+- `multi-agent-improve`
 
-```bash
-python skills/scaffold/scripts/create_maps_scaffold.py /path/to/new-maps-repo
-```
+Not public package scope: organization scaffolding, role hiring/onboarding, private automations, channels, handoff queues, role memories, runtime state, secrets, and internal release-control files.
 
 ## Project Site
 

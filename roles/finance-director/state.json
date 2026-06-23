@@ -1,0 +1,56 @@
+{
+  "role_slug": "finance-director",
+  "proper_role_name": "Finn",
+  "role_title": "Finance Director",
+  "organization": "Mindshare",
+  "org_chart": {
+    "division": "Finance and Administration",
+    "function": "Finance",
+    "executive_oversight": "Rae / Chief Executive Officer until Scott assigns a Chief Financial Officer or Finance and Administration leader"
+  },
+  "professional_maturity_level": "L7 Director",
+  "role_lifecycle_status": "Authorized Mindshare role; activated operator",
+  "operating_taxonomy_stage": "Operator",
+  "role_automation_status": "None",
+  "room_binding_status": "role-home thread created and bound",
+  "role_home_thread": {
+    "title": "Finn - Finance Director",
+    "thread_id": "019ef46f-ac78-7932-bcb3-5426c5259a62"
+  },
+  "agent_build_readiness": "role-only",
+  "activation_approved": true,
+  "activation_approved_by": "Scott",
+  "activation_approved_on": "2026-06-23",
+  "source_backlog_item": "REC-010",
+  "source_packet": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\level-4-work\\REC-010.md",
+  "automation": {
+    "name": null,
+    "status": "NONE",
+    "kind": null,
+    "target_thread_id": null
+  },
+  "primary_voice": "Analyst",
+  "secondary_voice_blend": "Steward 30%, Reviewer 20%, Diplomat 10%",
+  "assigned_handoff_files": [],
+  "source_files": {
+    "name": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\name.md",
+    "personality": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\personality.md",
+    "whoami": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\WhoAmI.md",
+    "gate_blocks": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\gate-blocks.md",
+    "role_agent": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\role-agent.md",
+    "workflow": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\workflow.md",
+    "loop": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\loop.md",
+    "memory": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\memory.md",
+    "session": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\session.md"
+  },
+  "mirror_files": {
+    "memory": "G:\\My Drive\\Mindshare\\finn.md",
+    "name": "G:\\My Drive\\Mindshare\\role\\finance-director\\name.md",
+    "personality": "G:\\My Drive\\Mindshare\\role\\finance-director\\personality.md",
+    "whoami": "G:\\My Drive\\Mindshare\\role\\finance-director\\WhoAmI.md",
+    "role_agent": "G:\\My Drive\\Mindshare\\role\\finance-director\\role-agent.md",
+    "room_card": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\finn.md"
+  },
+  "boundaries": "No spending approval, bank/payroll/tax/accounting-system access, secrets, external communication, production, Git/release, automation, autonomous runtime, or authority expansion.",
+  "last_updated": "2026-06-23T06:26:31-06:00"
+}

@@ -237,7 +237,7 @@
       }
     ]
   },
-  "last_updated": "2026-06-23T06:47:00.917Z",
+  "last_updated": "2026-06-23T10:49:10.498Z",
   "candidate_roles": [
     {
       "name": "Liz",
@@ -263,7 +263,7 @@
   ],
   "next_recommended_skill": "/build-agent",
   "last_l4_lifecycle_check": {
-    "timestamp": "2026-06-23T06:47:00.917Z",
+    "timestamp": "2026-06-23T10:49:10.498Z",
     "automation_id": "ana-l4-recruiting-backlog-processing",
     "eligible_backlog_items": 0,
     "eligible_level_1_promotions": 0,

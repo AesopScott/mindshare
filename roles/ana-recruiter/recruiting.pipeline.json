@@ -4,7 +4,7 @@
   "owner": "Ana / Recruiter",
   "authority": "Level 4 scoped autonomy only",
   "created_at": "2026-06-22T12:39:43-06:00",
-  "updated_at": "2026-06-22T12:39:43-06:00",
+  "updated_at": "2026-06-23T06:26:31-06:00",
   "source_backlog": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\recruiting.backlog.md",
   "promotion_rules": {
     "backlog_to_level_1": "immediate when valid approved backlog item is processed",
@@ -183,15 +183,19 @@
       "organization": "Mindshare",
       "owner_route": "Rae / Chief Executive Officer",
       "priority": "Medium",
-      "current_stage": "level_1_new_hire",
+      "current_stage": "activated_operator",
       "stage_entered_at": "2026-06-22T12:39:43-06:00",
-      "next_eligible_stage": "level_2_trainee",
-      "next_eligible_at": "2026-06-23T12:39:43-06:00",
-      "status": "active",
+      "next_eligible_stage": null,
+      "next_eligible_at": null,
+      "status": "activated",
       "level_1_packet": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\level-4-work\\REC-010.md",
       "level_2_packet": null,
       "level_3_packet": null,
-      "notes": "Seeded from completed Level 1 New Hire packet proof run; promotion timers governed by Ana Level 4 scoped autonomy."
+      "notes": "Activated by Scott as Finn / Finance Director on 2026-06-23. Removed from timed Level 1/2/3 packet promotion queue; future changes require role-owner approval and finance authority gates.",
+      "activated_role": "Finn",
+      "activated_at": "2026-06-23T06:26:31-06:00",
+      "activated_thread_id": "019ef46f-ac78-7932-bcb3-5426c5259a62",
+      "activated_role_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\role-agent.md"
     },
     {
       "id": "REC-011",

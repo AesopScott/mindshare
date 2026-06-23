@@ -39,6 +39,7 @@ Full archive: `memory-archive\2026-06-22.md`
 - Decide whether Ana should become an installable `/ana` or `/recruiter` skill.
 
 ## Today
+- 2026-06-23: Hired and activated Finn / Finance Director from REC-010 in role-home thread Finn - Finance Director (019ef46f-ac78-7932-bcb3-5426c5259a62); created required role files, state/session binding, Drive mirrors, roster update, Liz website handoff, Cole welcome handoff, and Communications announcement. Boundaries held: no spending approval, bank/payroll/tax/accounting-system access, secrets, external communication, production, Git/release, automation, broad runtime, or authority expansion.
 - 2026-06-23: Archived the pre-rollover memory ledger and compacted this active file for prompt injection.
 
 ## Archive Pointers

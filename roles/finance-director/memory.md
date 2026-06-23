@@ -40,5 +40,3 @@ Full archive: none
 ## Archive Pointers
 
 - None yet.
-
-

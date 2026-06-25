@@ -95,17 +95,8 @@ webview, iframe {
 <span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Open Purelymail webmail for approved assistant email workflows.</span>
 </button>
 </div>
-<div class="mt-8">
-<label class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant" for="tool-operator">Operator</label>
-<select class="mt-3 w-full rounded-lg border border-white/10 bg-black/45 px-4 py-3 text-sm text-on-surface focus:border-primary focus:ring-0" id="tool-operator">
-<option value="cole">Cole · HR Director</option>
-<option value="liz">Liz · Website Manager</option>
-<option value="paige">Paige · Executive Assistant</option>
-</select>
-<p class="mt-3 text-xs leading-relaxed text-on-surface-variant" id="operator-scope">Cole may use approved connected tools for roster/file-completeness work.</p>
-</div>
 <div class="mt-auto rounded-lg border border-white/10 bg-black/35 p-4 text-xs leading-relaxed text-on-surface-variant">
-External tools keep their own login and billing. MindShare only provides the local frame and workflow surface.
+External tools keep their own login, billing, and action controls. MindShare only provides the local frame; role intent comes from the office session that sends you here.
 </div>
 </aside>
 <section class="glass-panel-heavy flex min-w-0 flex-1 flex-col overflow-hidden rounded-xl">
@@ -145,12 +136,6 @@ const tools = {
 
 let activeTool = 'openai-images';
 
-const operatorScopes = {
-  cole: 'Cole may use approved connected tools for roster/file-completeness work.',
-  liz: 'Liz may use approved connected tools for MindShare interface work.',
-  paige: 'Paige may use the visible Purelymail Inbox surface for Scott-approved assistant email work.'
-};
-
 function toolWebview() {
   return document.getElementById('tool-webview');
 }
@@ -188,10 +173,6 @@ document.getElementById('reload-tool').addEventListener('click', () => {
     return;
   }
   renderTool(activeTool);
-});
-
-document.getElementById('tool-operator').addEventListener('change', (event) => {
-  document.getElementById('operator-scope').textContent = operatorScopes[event.target.value] || operatorScopes.cole;
 });
 
 renderTool(activeTool);

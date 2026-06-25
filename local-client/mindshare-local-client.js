@@ -5,8 +5,40 @@ const os = require('node:os');
 const path = require('node:path');
 
 const repoRoot = path.resolve(__dirname, '..');
-const appContentRoot = process.env.MINDSHARE_APP_CONTENT || path.join(__dirname, 'app-content');
 const sessions = new Map();
+
+function uniquePaths(paths) {
+  return [...new Set(paths.filter(Boolean).map((candidate) => path.resolve(candidate)))];
+}
+
+async function pathExists(candidatePath) {
+  try {
+    await fs.access(candidatePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function resolveAppContentRoot() {
+  const candidates = uniquePaths([
+    process.env.MINDSHARE_APP_CONTENT,
+    path.join(__dirname, 'app-content'),
+    path.join(repoRoot, 'local-client', 'app-content'),
+    path.join(process.cwd(), 'app-content'),
+    process.resourcesPath && path.join(process.resourcesPath, 'app-content'),
+    process.resourcesPath && path.join(process.resourcesPath, 'app', 'app-content'),
+    process.resourcesPath && path.join(process.resourcesPath, 'app.asar.unpacked', 'app-content')
+  ]);
+
+  for (const candidate of candidates) {
+    if (await pathExists(path.join(candidate, 'manifest.json')) || await pathExists(path.join(candidate, 'mindshare', 'public', 'index.html'))) {
+      return candidate;
+    }
+  }
+
+  return candidates[0] || path.join(__dirname, 'app-content');
+}
 
 const ROLE_CATALOG = {
   bea: {
@@ -14,7 +46,7 @@ const ROLE_CATALOG = {
     title: 'Mojo MAPS Engineer',
     level: 'Level 3 Staff',
     office: "Bea's office",
-    roleRoot: path.join(appContentRoot, 'mojo', 'roles', 'mojo-maps-engineer'),
+    rolePath: ['mojo', 'roles', 'mojo-maps-engineer'],
     files: [
       'WhoAmI.md',
       'name.md',
@@ -31,7 +63,7 @@ const ROLE_CATALOG = {
     title: 'Autonomy Engineer',
     level: 'Level 4 Scoped Autonomy',
     office: "Tess's office",
-    roleRoot: path.join(appContentRoot, 'mindshare', 'roles', 'autonomy-engineer'),
+    rolePath: ['mindshare', 'roles', 'autonomy-engineer'],
     files: [
       'WhoAmI.md',
       'name.md',
@@ -402,7 +434,9 @@ async function loadRoleContext(payload = {}) {
     };
   }
 
-  const files = await Promise.all(role.files.map((fileName) => readRoleFile(role.roleRoot, fileName)));
+  const appContentRoot = await resolveAppContentRoot();
+  const roleRoot = path.join(appContentRoot, ...role.rolePath);
+  const files = await Promise.all(role.files.map((fileName) => readRoleFile(roleRoot, fileName)));
   const whoAmI = synthesizeWhoAmI(role, files);
   const roleContext = {
     slug: roleSlug,
@@ -410,7 +444,8 @@ async function loadRoleContext(payload = {}) {
     title: role.title,
     level: role.level,
     office: role.office,
-    roleRoot: role.roleRoot,
+    roleRoot,
+    contentRoot: appContentRoot,
     whoAmI,
     files
   };
@@ -418,7 +453,7 @@ async function loadRoleContext(payload = {}) {
   return {
     ok: true,
     roleContext,
-    summary: `${role.name} context loaded from ${role.roleRoot}. ${files.filter((file) => file.exists).length} files loaded, ${files.filter((file) => !file.exists).length} expected files missing.`
+    summary: `${role.name} context loaded from ${roleRoot}. ${files.filter((file) => file.exists).length} files loaded, ${files.filter((file) => !file.exists).length} expected files missing.`
   };
 }
 

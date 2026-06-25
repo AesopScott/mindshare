@@ -703,7 +703,7 @@ Configuration is loaded from the local MindShare workspace.
                 const icon = departmentIcons[index] || "business_center";
                 const entries = selected.entries?.[department] || [];
                 const entryMarkup = entries.length ? entries.map(entry => `
-                    <div class="relative rounded-lg border border-white/10 bg-surface-container-lowest hover:border-primary/40 hover:bg-white/5 transition-all cursor-pointer" role="button" tabindex="0" onclick="selectRole('${entry.slug}', '${entry.name}', '${entry.title}', '${entry.level}', '${department}')" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectRole('${entry.slug}', '${entry.name}', '${entry.title}', '${entry.level}', '${department}'); }">
+                    <div class="relative rounded-lg border border-white/10 bg-surface-container-lowest hover:border-primary/40 hover:bg-white/5 transition-all cursor-pointer" role="button" tabindex="0" data-role-selector data-role-slug="${escapeHtml(entry.slug)}" data-role-name="${escapeHtml(entry.name)}" data-role-title="${escapeHtml(entry.title)}" data-role-level="${escapeHtml(entry.level)}" data-role-department="${escapeHtml(department)}">
                         <div class="w-full text-left flex items-center justify-between gap-3 p-3">
                             <span class="min-w-0 flex flex-col gap-1">
                                 <span class="text-sm font-medium text-primary">${entry.name}</span>
@@ -738,6 +738,21 @@ Configuration is loaded from the local MindShare workspace.
                     </div>
                 `;
             }).join('');
+        }
+
+        function handleRoleSelectorEvent(event) {
+            const card = event.target.closest('[data-role-selector]');
+            if (!card) return;
+            if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            event.stopPropagation();
+            selectRole(
+                card.dataset.roleSlug,
+                card.dataset.roleName,
+                card.dataset.roleTitle,
+                card.dataset.roleLevel,
+                card.dataset.roleDepartment
+            );
         }
 
         function openDepartmentSection(divisionSlug, department) {
@@ -779,7 +794,7 @@ Configuration is loaded from the local MindShare workspace.
         let configurationFileIndex = [];
         let automationRuns = [];
         const NOTIFICATION_TTL_MS = 120000;
-        const OFFICE_STATE_STORAGE_KEY = 'mindshare.officeSessions.v1';
+        const OFFICE_STATE_STORAGE_KEY = 'mindshare.officeSessions.v2';
         const AUTOMATION_RUNS_STORAGE_KEY = 'mindshare.automationRuns.v1';
         const TESS_AUTOMATION_LAST_RUN_KEY = 'mindshare.tessLevel4Automation.lastRun.v1';
         const VIK_AUTOMATION_LAST_RUN_KEY = 'mindshare.vikAutomation.lastRun.v1';
@@ -1933,10 +1948,17 @@ Configuration is loaded from the local MindShare workspace.
             addChatMessage('system', text);
         }
 
+        function isActiveRoleSession(roleSession) {
+            if (!roleSession) return false;
+            if (activeRoleSlug === roleSession.slug) return true;
+            const title = document.getElementById('main-window-title')?.textContent || '';
+            return Boolean(roleSession.name && title.toLowerCase().startsWith(`${roleSession.name.toLowerCase()} `));
+        }
+
         function addChatMessageToRole(roleSession, role, text) {
             const entry = { role, text };
             roleSession.messages.push(entry);
-            if (activeRoleSlug === roleSession.slug) {
+            if (isActiveRoleSession(roleSession)) {
                 clearChatPlaceholder();
                 appendChatMessage(role, text);
             }
@@ -1955,7 +1977,11 @@ Configuration is loaded from the local MindShare workspace.
             }
             roleSession.officeInjected = true;
             if (!hasOfficeEntry) {
-                addChatMessageToRole(roleSession, 'user', officeText);
+                roleSession.messages.unshift({ role: 'user', text: officeText });
+                if (isActiveRoleSession(roleSession)) {
+                    renderTranscript(roleSession.messages);
+                }
+                persistOfficeState();
             } else {
                 persistOfficeState();
             }
@@ -2176,7 +2202,7 @@ Configuration is loaded from the local MindShare workspace.
 
         function addSessionCompletionNotification(roleSession) {
             if (!roleSession) return;
-            if (activeRoleSlug === roleSession.slug) return;
+            if (isActiveRoleSession(roleSession)) return;
             const id = `${roleSession.slug}-${Date.now()}`;
             sessionNotifications.unshift({
                 id,
@@ -2710,6 +2736,9 @@ Configuration is loaded from the local MindShare workspace.
                     setActiveDivision(button.dataset.divisionButton);
                 });
             });
+            const departmentSections = document.getElementById('department-sections');
+            departmentSections.addEventListener('click', handleRoleSelectorEvent);
+            departmentSections.addEventListener('keydown', handleRoleSelectorEvent);
 
             document.getElementById('connect-codex-button').addEventListener('click', connectCodex);
             document.getElementById('connect-claude-button').addEventListener('click', connectClaude);

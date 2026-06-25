@@ -1,0 +1,250 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Contact | Mind Share Media</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(190, 198, 224, 0.1);
+        }
+        .silver-gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #bec6e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .metallic-button {
+            background: linear-gradient(135deg, #dae2fd 0%, #bec6e0 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .metallic-button:hover {
+            box-shadow: 0 0 20px rgba(190, 198, 224, 0.4);
+            transform: translateY(-2px);
+        }
+        .architectural-grid {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#45464d",
+                        "on-surface-variant": "#c6c6cd",
+                        "background": "#0c1324",
+                        "tertiary-fixed": "#dde3eb",
+                        "outline": "#909097",
+                        "on-tertiary-fixed": "#161c22",
+                        "on-tertiary-container": "#7b8189",
+                        "surface-container-highest": "#2e3447",
+                        "primary-fixed-dim": "#bec6e0",
+                        "inverse-surface": "#dce1fb",
+                        "surface-container-low": "#151b2d",
+                        "on-primary-fixed": "#131b2e",
+                        "on-background": "#dce1fb",
+                        "surface-variant": "#2e3447",
+                        "tertiary": "#c1c7cf",
+                        "tertiary-container": "#12181e",
+                        "primary": "#bec6e0",
+                        "on-secondary-fixed-variant": "#39485a",
+                        "error-container": "#93000a",
+                        "on-primary-container": "#798098",
+                        "secondary": "#b9c8de",
+                        "primary-fixed": "#dae2fd",
+                        "on-error": "#690005",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed": "#0d1c2d",
+                        "error": "#ffb4ab",
+                        "on-primary": "#283044",
+                        "secondary-fixed": "#d4e4fa",
+                        "surface-container": "#191f31",
+                        "inverse-on-surface": "#2a3043",
+                        "surface-container-high": "#23293c",
+                        "on-secondary": "#233143",
+                        "on-secondary-container": "#a7b6cc",
+                        "surface-container-lowest": "#070d1f",
+                        "surface-bright": "#33394c",
+                        "primary-container": "#0f172a",
+                        "on-tertiary": "#2b3137",
+                        "surface-tint": "#bec6e0",
+                        "secondary-fixed-dim": "#b9c8de",
+                        "surface": "#0c1324",
+                        "on-tertiary-fixed-variant": "#41474e",
+                        "surface-dim": "#0c1324",
+                        "inverse-primary": "#565e74",
+                        "on-surface": "#dce1fb",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "secondary-container": "#39485a",
+                        "tertiary-fixed-dim": "#c1c7cf"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Montserrat"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/30 selection:text-white">
+<!-- Top Navigation Anchor -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-background/50">
+<div class="flex items-center justify-between px-margin-desktop py-4 max-w-container-max mx-auto">
+<a class="font-display-lg text-headline-md tracking-tighter text-on-surface uppercase" href="../index.html">Mind Share Media</a>
+<div class="hidden md:flex items-center gap-10">
+<a class="font-body-md text-body-md tracking-tight text-on-surface-variant hover:text-on-surface transition-colors" href="../index.html">Home</a>
+<a class="font-body-md text-body-md tracking-tight text-on-surface-variant hover:text-on-surface transition-colors" href="../our-team/index.html">Our Team</a>
+<a class="font-body-md text-body-md tracking-tight text-on-surface-variant hover:text-on-surface transition-colors" href="../services/index.html">Services</a>
+<a class="font-body-md text-body-md tracking-tight text-primary font-bold border-b-2 border-primary pb-1" href="index.html">Contact</a>
+</div>
+<div class="flex items-center gap-6">
+<a class="hidden md:block metallic-button px-6 py-2 rounded-full text-on-primary font-bold font-body-md text-sm uppercase tracking-wider" href="#contact-form">Start Local</a>
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 overflow-hidden relative">
+<!-- Ambient Background -->
+
+<div class="absolute inset-0 architectural-grid opacity-20 pointer-events-none"></div>
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-desktop mb-32 relative z-10">
+<div class="max-w-4xl">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg silver-gradient-text mb-8">
+                    Start with the local office.
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-12 leading-relaxed">
+                    Tell us what you want to build: a public AI office interface, a local bridge, installable role packages, or a private operating system for your team.
+                </p>
+<div class="flex flex-wrap gap-6">
+<button class="metallic-button px-10 py-5 rounded-lg text-on-primary font-bold font-body-md text-lg uppercase tracking-widest flex items-center gap-3" onclick="document.getElementById('contact-form').scrollIntoView({behavior: 'smooth'})">
+                        Send message
+                        <span class="material-symbols-outlined">arrow_downward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Main Interaction Area -->
+<section class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-16 items-start relative z-10" id="contact-form">
+<!-- Executive Form Column -->
+<div class="lg:col-span-7 glass-panel p-8 md:p-12 rounded-2xl shadow-2xl relative">
+<div class="absolute -top-1 px-4 py-1 bg-primary text-on-primary text-[10px] font-bold uppercase tracking-[0.3em] rounded-b-sm left-12">
+                    Direct Channel
+                </div>
+<form action="mailto:scott@mojoaistudio.com" class="space-y-8" enctype="text/plain" method="post">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="group">
+<label class="font-label-sm text-label-sm uppercase text-on-tertiary-container mb-2 block group-focus-within:text-primary transition-colors">Name</label>
+<input class="w-full border-outline-variant/30 text-on-surface focus:border-primary focus:ring-0 transition-all py-4 px-0 border-x-0 border-t-0 border-b-2 placeholder:text-outline/50 font-body-md bg-surface-container-high" name="name" placeholder="Executive Name" required="" type="text">
+</div>
+<div class="group">
+<label class="font-label-sm text-label-sm uppercase text-on-tertiary-container mb-2 block group-focus-within:text-primary transition-colors">Organization</label>
+<input class="w-full border-outline-variant/30 text-on-surface focus:border-primary focus:ring-0 transition-all py-4 px-0 border-x-0 border-t-0 border-b-2 placeholder:text-outline/50 font-body-md bg-surface-container-high" name="org" placeholder="Entity Name" required="" type="text">
+</div>
+</div>
+<div class="group">
+<label class="font-label-sm text-label-sm uppercase text-on-tertiary-container mb-2 block group-focus-within:text-primary transition-colors">Email</label>
+<input class="w-full border-outline-variant/30 text-on-surface focus:border-primary focus:ring-0 transition-all py-4 px-0 border-x-0 border-t-0 border-b-2 placeholder:text-outline/50 font-body-md bg-surface-container-high" name="email" placeholder="professional@domain.com" required="" type="email">
+</div>
+<div class="group">
+<label class="font-label-sm text-label-sm uppercase text-on-tertiary-container mb-2 block group-focus-within:text-primary transition-colors">HOW CAN WE HELP YOU?</label>
+<select class="w-full border-outline-variant/30 text-on-surface focus:border-primary focus:ring-0 transition-all py-4 px-0 border-x-0 border-t-0 border-b-2 font-body-md bg-surface-container-high" name="objective"><option>Ask a question</option><option>Submit an idea</option><option>Interested in Agent AI</option><option>Learn more about MAPS Framework</option><option>Other</option></select>
+</div>
+<div class="group">
+<label class="font-label-sm text-label-sm uppercase text-on-tertiary-container mb-2 block group-focus-within:text-primary transition-colors">Project Brief</label>
+<textarea class="w-full border-outline-variant/30 text-on-surface focus:border-primary focus:ring-0 transition-all py-4 px-0 border-x-0 border-t-0 border-b-2 placeholder:text-outline/50 font-body-md resize-none bg-surface-container-high" name="message" placeholder="Describe the desired outcome..." rows="4"></textarea>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between gap-6 pt-4">
+<p class="font-label-sm text-label-sm text-on-tertiary-container italic">
+                            Your message goes directly to Scott at Mind Share Media.
+                        </p>
+<button class="metallic-button px-12 py-4 rounded-lg text-on-primary font-bold font-body-md uppercase tracking-widest whitespace-nowrap" type="submit">
+                            Send message
+                        </button>
+</div>
+</form>
+</div>
+<!-- Context Column -->
+<div class="lg:col-span-5 space-y-16">
+<div>
+<h3 class="font-headline-md text-headline-md silver-gradient-text mb-8">What happens next</h3>
+<div class="space-y-8"><p class="text-on-surface-variant text-body-md leading-relaxed">If you're interested in Agent AI, have questions about the MAPS framework, or simply want to learn more, please submit the form below.</p></div>
+</div>
+<div class="p-8 border-l-2 border-primary/30 bg-primary/5">
+<div class="flex items-center gap-3 mb-4 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">security</span>
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest">Privacy Protocol</h4>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed italic">
+                        "The website can open the conversation. Your private files, role memory, local bridge, queues, and automation stay on your machine unless you choose otherwise."
+                    </p>
+</div>
+</div>
+</section>
+<!-- Final Call Section -->
+
+</main>
+<!-- Footer Anchor -->
+<footer class="w-full relative bottom-0 bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/30">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-gutter max-w-container-max mx-auto gap-8">
+<div class="font-display-lg text-headline-md text-on-surface">Mind Share Media</div>
+<div class="flex flex-wrap justify-center gap-8 font-label-sm text-label-sm uppercase tracking-widest">
+<a class="text-on-tertiary-container hover:text-primary hover:tracking-[0.2em] transition-all duration-500" href="../index.html">Home</a>
+<a class="text-on-tertiary-container hover:text-primary hover:tracking-[0.2em] transition-all duration-500" href="../our-team/index.html">Our Team</a>
+<a class="text-on-tertiary-container hover:text-primary hover:tracking-[0.2em] transition-all duration-500" href="../services/index.html">Services</a>
+<a class="text-primary" href="index.html">Contact</a>
+<a class="text-on-tertiary-container hover:text-primary hover:tracking-[0.2em] transition-all duration-500" href="#">Privacy Policy</a><a class="text-on-tertiary-container hover:text-primary hover:tracking-[0.2em] transition-all duration-500" href="#">Terms of Service</a></div>
+<div class="text-on-tertiary-container font-label-sm text-[10px] text-center md:text-right max-w-xs leading-tight">
+                © 2024 Mind Share Media. All rights reserved. <br> Built for the New Intelligence.
+            </div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for form focus
+        document.querySelectorAll('input, select, textarea').forEach(el => {
+            el.addEventListener('focus', () => {
+                el.parentElement.style.transform = 'translateX(10px)';
+                el.parentElement.style.transition = 'transform 0.3s ease';
+            });
+            el.addEventListener('blur', () => {
+                el.parentElement.style.transform = 'translateX(0px)';
+            });
+        });
+    </script>
+
+
+</body></html>

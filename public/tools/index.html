@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Mind Share Media | Tools</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        background: '#020204',
+        surface: '#0c1324',
+        'surface-container': '#151b2d',
+        'surface-container-lowest': '#070d1f',
+        primary: '#bec6e0',
+        'primary-fixed': '#dae2fd',
+        'primary-fixed-dim': '#bec6e0',
+        'on-surface': '#dce1fb',
+        'on-surface-variant': '#aeb6cf',
+        outline: '#454b61'
+      },
+      fontFamily: {
+        'display-lg': ['Montserrat', 'sans-serif'],
+        'label-sm': ['Inter', 'sans-serif'],
+        'body-md': ['Inter', 'sans-serif']
+      }
+    }
+  }
+};
+</script>
+<style>
+body {
+  background: #020204;
+  color: #dce1fb;
+  overflow: hidden;
+  font-family: Inter, sans-serif;
+}
+.glass-panel {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(190, 198, 224, 0.13);
+  backdrop-filter: blur(22px);
+}
+.glass-panel-heavy {
+  background: rgba(12, 19, 36, 0.74);
+  border: 1px solid rgba(190, 198, 224, 0.18);
+  backdrop-filter: blur(36px);
+}
+.tool-button.is-active {
+  border-color: rgba(218, 226, 253, 0.75);
+  background: rgba(190, 198, 224, 0.14);
+  color: #dae2fd;
+}
+.tool-frame {
+  background: #050812;
+}
+webview, iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #050812;
+}
+</style>
+</head>
+<body class="h-screen">
+<header class="fixed top-0 z-50 h-20 w-full border-b border-white/10 bg-surface/80 backdrop-blur-xl">
+<div class="mx-auto flex h-full max-w-[1440px] items-center justify-between px-6 md:px-16">
+<a class="font-display-lg text-2xl font-semibold tracking-wider text-primary-fixed" href="../index.html">MIND SHARE MEDIA</a>
+<nav class="hidden items-center gap-8 md:flex">
+<a class="text-sm text-on-surface-variant transition-colors hover:text-primary" href="../index.html">Home</a>
+<a class="text-sm text-on-surface-variant transition-colors hover:text-primary" href="../our-team/index.html">Our Team</a>
+<a class="text-sm text-on-surface-variant transition-colors hover:text-primary" href="../services/index.html">Services</a>
+<a class="text-sm text-on-surface-variant transition-colors hover:text-primary" href="../contact/index.html">Contact</a>
+<a class="border-b-2 border-primary pb-1 text-sm font-semibold text-primary" href="index.html">Tools</a>
+</nav>
+</div>
+</header>
+<main class="flex h-screen gap-6 overflow-hidden p-6 pt-24">
+<aside class="glass-panel-heavy flex w-80 shrink-0 flex-col rounded-xl p-6">
+<div>
+<p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Connected Tools</p>
+<h1 class="mt-3 font-display-lg text-3xl font-semibold text-primary-fixed">Tools</h1>
+</div>
+<div class="mt-8 space-y-3" id="tool-list">
+<button class="tool-button is-active w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="openai-images">
+<span class="block text-sm font-semibold text-primary-fixed">OpenAI Images</span>
+<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Generate employee portraits and other image assets in the OpenAI Playground.</span>
+</button>
+</div>
+<div class="mt-auto rounded-lg border border-white/10 bg-black/35 p-4 text-xs leading-relaxed text-on-surface-variant">
+External tools keep their own login and billing. MindShare only provides the local frame and workflow surface.
+</div>
+</aside>
+<section class="glass-panel-heavy flex min-w-0 flex-1 flex-col overflow-hidden rounded-xl">
+<div class="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-4">
+<div class="min-w-0">
+<p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant" id="tool-eyebrow">Image Generation</p>
+<h2 class="truncate font-display-lg text-xl font-semibold text-primary-fixed" id="tool-title">OpenAI Images Playground</h2>
+</div>
+<div class="flex shrink-0 items-center gap-3">
+<button class="rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-on-surface-variant transition hover:border-primary/50 hover:text-primary" id="reload-tool" type="button">Reload</button>
+<a class="rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-primary transition hover:bg-primary/20" id="open-external" href="https://platform.openai.com/playground/images" target="_blank" rel="noreferrer">Open</a>
+</div>
+</div>
+<div class="tool-frame relative min-h-0 flex-1">
+<webview id="tool-webview" src="https://platform.openai.com/playground/images" partition="persist:mindshare-tools" allowpopups></webview>
+<iframe class="hidden" id="tool-iframe" src="https://platform.openai.com/playground/images" title="OpenAI Images Playground"></iframe>
+<div class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+<div class="pointer-events-auto inline-flex max-w-3xl rounded-lg border border-white/10 bg-black/70 px-4 py-3 text-xs text-on-surface-variant">
+If the embedded site blocks loading, use Open. The page still belongs to OpenAI and uses your OpenAI login.
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+const tools = {
+  'openai-images': {
+    title: 'OpenAI Images Playground',
+    eyebrow: 'Image Generation',
+    url: 'https://platform.openai.com/playground/images'
+  }
+};
+
+let activeTool = 'openai-images';
+
+function toolWebview() {
+  return document.getElementById('tool-webview');
+}
+
+function renderTool(toolId) {
+  const tool = tools[toolId] || tools['openai-images'];
+  activeTool = toolId;
+  document.getElementById('tool-title').textContent = tool.title;
+  document.getElementById('tool-eyebrow').textContent = tool.eyebrow;
+  document.getElementById('open-external').href = tool.url;
+  document.querySelectorAll('[data-tool-id]').forEach((button) => {
+    button.classList.toggle('is-active', button.dataset.toolId === toolId);
+  });
+  const webview = toolWebview();
+  const iframe = document.getElementById('tool-iframe');
+  if ('src' in webview) {
+    webview.src = tool.url;
+    webview.classList.remove('hidden');
+    iframe.classList.add('hidden');
+  } else {
+    iframe.src = tool.url;
+    iframe.classList.remove('hidden');
+  }
+}
+
+document.getElementById('tool-list').addEventListener('click', (event) => {
+  const button = event.target.closest('[data-tool-id]');
+  if (button) renderTool(button.dataset.toolId);
+});
+
+document.getElementById('reload-tool').addEventListener('click', () => {
+  const webview = toolWebview();
+  if (webview && typeof webview.reload === 'function') {
+    webview.reload();
+    return;
+  }
+  renderTool(activeTool);
+});
+
+renderTool(activeTool);
+</script>
+</body>
+</html>

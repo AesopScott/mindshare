@@ -29,6 +29,13 @@
             backdrop-filter: none;
             box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
         }
+        .workspace-shell {
+            background: #020204;
+        }
+        .floating-sidebar {
+            background: #030407;
+            box-shadow: 0 28px 90px rgba(0, 0, 0, 0.72);
+        }
         .provider-ready-dot {
             background: rgba(121, 128, 152, 0.28);
             border: 1px solid rgba(190, 198, 224, 0.24);
@@ -154,7 +161,7 @@
         }
     </script>
 </head>
-<body class="bg-background text-on-surface flex flex-col h-screen overflow-hidden">
+<body class="bg-black text-on-surface flex flex-col h-screen overflow-hidden">
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm dark:shadow-none h-20">
 <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-full max-w-container-max mx-auto">
@@ -181,9 +188,9 @@
 </div>
 </header>
 <!-- Main Workspace Container -->
-<main class="flex flex-1 pt-20 overflow-hidden">
+<main class="workspace-shell flex flex-1 gap-6 overflow-hidden p-6 pt-24">
 <!-- SideNavBar (Strategy & Operations) -->
-<aside class="w-1/4 h-full bg-surface-container-low dark:bg-surface-container-lowest backdrop-blur-2xl border-r border-white/10 shadow-2xl flex flex-col p-6 space-y-6 overflow-y-auto custom-scrollbar">
+<aside class="floating-sidebar w-80 shrink-0 h-full rounded-xl border border-primary-fixed-dim/25 flex flex-col p-6 space-y-6 overflow-y-auto custom-scrollbar">
 <div class="mb-4">
 <div class="flex items-center gap-3 mb-2"><div class="p-2 bg-secondary-container rounded-lg">
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">insights</span>
@@ -225,11 +232,11 @@
 
 </aside>
 <!-- Main Content (Neural Suite Interface) -->
-<section class="w-3/4 p-0 bg-surface relative overflow-hidden flex flex-col">
+<section class="min-w-0 flex-1 p-0 bg-transparent relative overflow-hidden flex flex-col">
 <!-- Background Decoration -->
 <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
 <!-- Interface Frame -->
-<div class="relative flex-1 flex flex-col glass-panel rounded-none border-2 border-primary-fixed-dim/70 overflow-hidden shadow-none">
+<div class="relative flex-1 flex flex-col glass-panel rounded-xl border-2 border-primary-fixed-dim/70 overflow-hidden shadow-2xl">
 <!-- Frame Header -->
 <div class="h-16 px-8 flex items-center justify-between border-b border-white/10 glass-panel-heavy z-10">
 <div class="flex items-center gap-4">

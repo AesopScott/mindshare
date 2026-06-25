@@ -240,9 +240,10 @@
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary font-body-md transition-colors duration-300" href="../contact/index.html">Contact</a>
 </nav>
 <div class="flex items-center space-x-6">
-<div class="hidden md:flex items-center bg-surface-container-high/50 px-4 py-1.5 rounded-full border border-white/5">
+<div class="relative hidden md:flex items-center bg-surface-container-high/50 px-4 py-1.5 rounded-full border border-white/5" id="global-search-shell">
 <span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
-<input class="bg-transparent border-none focus:ring-0 text-sm w-32 placeholder-on-surface-variant" placeholder="Global Search..." type="text">
+<input class="bg-transparent border-none focus:ring-0 text-sm w-40 placeholder-on-surface-variant" id="global-agent-search" placeholder="Global Search..." type="text" autocomplete="off">
+<div class="hidden absolute right-0 top-full mt-3 w-80 opaque-dropdown silver-edge rounded-lg p-2 z-[90]" id="global-search-results"></div>
 </div>
 <div class="flex items-center gap-4">
 <div class="relative">
@@ -420,6 +421,9 @@
                 entries: {
                     "PMO": [
                         { slug: "cal", name: "Cal", title: "MAPS ASPM", level: "Level 3 Staff", image: "../assets/team/cal.webp" }
+                    ],
+                    "Human Resources": [
+                        { slug: "cole", name: "Cole", title: "HR Director", level: "Level 4 Scoped Autonomy", image: "../assets/team/cole.webp" }
                     ]
                 }
             },
@@ -604,6 +608,20 @@
             }).join('');
         }
 
+        function openDepartmentSection(divisionSlug, department) {
+            const selected = divisionDepartments[divisionSlug] || divisionDepartments["strategy-and-operations"];
+            const index = selected.departments.indexOf(department);
+            if (index < 0) return;
+            const listId = `${divisionSlug}-dept-${index}-list`;
+            const iconId = `${divisionSlug}-dept-${index}-icon`;
+            const section = document.getElementById(listId);
+            const icon = document.getElementById(iconId);
+            if (!section || !icon) return;
+            section.style.maxHeight = '500px';
+            section.style.opacity = '1';
+            icon.style.transform = 'rotate(180deg)';
+        }
+
         function setActiveDivision(divisionSlug) {
             const selectedSlug = divisionDepartments[divisionSlug] ? divisionSlug : 'strategy-and-operations';
             document.querySelectorAll('[data-division-button]').forEach((button) => {
@@ -645,6 +663,91 @@
                 }
             }
             return null;
+        }
+
+        function allSearchableAgents() {
+            const agents = [];
+            Object.entries(divisionDepartments).forEach(([divisionSlug, division]) => {
+                Object.entries(division.entries || {}).forEach(([department, entries]) => {
+                    entries.forEach((entry) => agents.push({ ...entry, divisionSlug, department, divisionLabel: division.label }));
+                });
+            });
+            return agents;
+        }
+
+        function matchingAgents(query) {
+            const normalized = String(query || '').trim().toLowerCase();
+            if (!normalized) return [];
+            return allSearchableAgents()
+                .map((agent) => {
+                    const name = agent.name.toLowerCase();
+                    const title = agent.title.toLowerCase();
+                    const haystack = `${name} ${title} ${agent.department.toLowerCase()} ${agent.divisionLabel.toLowerCase()}`;
+                    const score = name.startsWith(normalized) ? 0
+                        : title.startsWith(normalized) ? 1
+                        : haystack.includes(normalized) ? 2
+                        : 99;
+                    return { ...agent, score };
+                })
+                .filter((agent) => agent.score < 99)
+                .sort((a, b) => a.score - b.score || a.name.localeCompare(b.name));
+        }
+
+        function renderGlobalSearchResults(matches, query) {
+            const results = document.getElementById('global-search-results');
+            if (!results) return;
+            if (!query.trim()) {
+                results.classList.add('hidden');
+                results.innerHTML = '';
+                return;
+            }
+            if (!matches.length) {
+                results.classList.remove('hidden');
+                results.innerHTML = '<div class="px-3 py-3 text-sm text-on-surface-variant">No matching agents</div>';
+                return;
+            }
+            results.classList.remove('hidden');
+            results.innerHTML = matches.slice(0, 8).map((agent) => `
+                <button class="w-full rounded-md px-3 py-3 text-left hover:bg-white/5 transition-colors" type="button" data-search-agent="${agent.slug}">
+                    <span class="block text-sm font-medium text-primary">${escapeHtml(agent.name)}</span>
+                    <span class="block text-xs text-on-surface">${escapeHtml(agent.title)}</span>
+                    <span class="block mt-1 text-[10px] uppercase tracking-widest text-on-surface-variant">${escapeHtml(agent.divisionLabel)} · ${escapeHtml(agent.department)}</span>
+                </button>
+            `).join('');
+            results.querySelectorAll('[data-search-agent]').forEach((button) => {
+                button.addEventListener('click', () => {
+                    const agent = matches.find((candidate) => candidate.slug === button.dataset.searchAgent);
+                    if (agent) loadAgentFromSearch(agent);
+                });
+            });
+        }
+
+        function loadAgentFromSearch(agent) {
+            const searchInput = document.getElementById('global-agent-search');
+            const results = document.getElementById('global-search-results');
+            if (searchInput) searchInput.value = agent.name;
+            results?.classList.add('hidden');
+            setActiveDivision(agent.divisionSlug);
+            openDepartmentSection(agent.divisionSlug, agent.department);
+            selectRole(agent.slug, agent.name, agent.title, agent.level, agent.department);
+        }
+
+        function handleGlobalSearchInput(event) {
+            const query = event.target.value;
+            const matches = matchingAgents(query);
+            renderGlobalSearchResults(matches, query);
+            if (query.trim().length >= 2 && matches.length === 1) {
+                loadAgentFromSearch(matches[0]);
+            }
+        }
+
+        function handleGlobalSearchKeydown(event) {
+            if (event.key !== 'Enter') return;
+            const matches = matchingAgents(event.target.value);
+            if (matches.length) {
+                event.preventDefault();
+                loadAgentFromSearch(matches[0]);
+            }
         }
 
         function persistOfficeState() {
@@ -1817,6 +1920,9 @@
             document.getElementById('connect-claude-button').addEventListener('click', connectClaude);
             document.getElementById('notification-bell-button').addEventListener('click', toggleNotificationMenu);
             document.getElementById('notification-menu').addEventListener('click', (event) => event.stopPropagation());
+            document.getElementById('global-agent-search').addEventListener('input', handleGlobalSearchInput);
+            document.getElementById('global-agent-search').addEventListener('keydown', handleGlobalSearchKeydown);
+            document.getElementById('global-search-results').addEventListener('click', (event) => event.stopPropagation());
             document.getElementById('send-message-button').addEventListener('click', sendCodexMessage);
             document.getElementById('attach-file-button').addEventListener('click', chooseAttachments);
             document.getElementById('office-context-title').addEventListener('click', toggleOfficeTitleDropdown);
@@ -1829,6 +1935,7 @@
             document.getElementById('office-files-dropdown').addEventListener('click', (event) => event.stopPropagation());
             document.addEventListener('click', () => {
                 closeContextDropdowns();
+                document.getElementById('global-search-results')?.classList.add('hidden');
                 closeNotificationMenu();
             });
             document.getElementById('chat-input').addEventListener('keydown', (event) => {

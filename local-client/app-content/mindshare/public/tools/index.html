@@ -58,14 +58,6 @@ body {
 .tool-frame {
   background: #050812;
 }
-.workflow-panel {
-  background: rgba(2, 2, 4, 0.76);
-  border-left: 1px solid rgba(190, 198, 224, 0.14);
-}
-.source-image-row {
-  border: 1px solid rgba(190, 198, 224, 0.12);
-  background: rgba(255, 255, 255, 0.035);
-}
 webview, iframe {
   width: 100%;
   height: 100%;
@@ -110,7 +102,7 @@ webview, iframe {
 <option value="liz">Liz · Website Manager</option>
 <option value="paige">Paige · Executive Assistant</option>
 </select>
-<p class="mt-3 text-xs leading-relaxed text-on-surface-variant" id="operator-scope">Cole may prepare employee image prompts and source-image uploads for approved roster/file-completeness work.</p>
+<p class="mt-3 text-xs leading-relaxed text-on-surface-variant" id="operator-scope">Cole may use approved connected tools for roster/file-completeness work.</p>
 </div>
 <div class="mt-auto rounded-lg border border-white/10 bg-black/35 p-4 text-xs leading-relaxed text-on-surface-variant">
 External tools keep their own login and billing. MindShare only provides the local frame and workflow surface.
@@ -127,37 +119,11 @@ External tools keep their own login and billing. MindShare only provides the loc
 <a class="rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-primary transition hover:bg-primary/20" id="open-external" href="https://platform.openai.com/playground/images" target="_blank" rel="noreferrer">Open</a>
 </div>
 </div>
-<div class="grid min-h-0 flex-1 grid-cols-[1fr_360px]">
-<div class="tool-frame relative min-h-0">
+<div class="min-h-0 flex-1">
+<div class="tool-frame relative h-full min-h-0">
 <webview id="tool-webview" src="https://platform.openai.com/playground/images" partition="persist:mindshare-tools" allowpopups></webview>
 <iframe class="hidden" id="tool-iframe" src="https://platform.openai.com/playground/images" title="OpenAI Images Playground"></iframe>
 </div>
-<aside class="workflow-panel flex min-h-0 flex-col p-5">
-<div>
-<p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant" id="workflow-kicker">Image Workflow</p>
-<h3 class="mt-2 text-lg font-semibold text-primary-fixed" id="workflow-title">Source + Prompt</h3>
-<p class="mt-2 text-xs leading-relaxed text-on-surface-variant" id="workflow-description">Use this panel to prepare image references and prompt text, then upload the selected files into the OpenAI Images Playground.</p>
-</div>
-<div id="image-workflow-controls">
-<div class="mt-5 flex gap-2">
-<button class="rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-primary transition hover:bg-primary/20" id="choose-source-images" type="button">Choose Images</button>
-<button class="rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-on-surface-variant transition hover:border-primary/50 hover:text-primary" id="clear-source-images" type="button">Clear</button>
-</div>
-<div class="mt-4 max-h-40 space-y-2 overflow-y-auto pr-1" id="source-image-list">
-<div class="rounded-lg border border-dashed border-white/10 p-4 text-xs text-on-surface-variant">No source images selected.</div>
-</div>
-<label class="mt-5 font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant" for="image-prompt">Prompt</label>
-<textarea class="mt-3 min-h-36 resize-none rounded-lg border border-white/10 bg-black/45 px-4 py-3 text-sm leading-relaxed text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-0" id="image-prompt" placeholder="Describe the employee image to generate from the selected source image(s)."></textarea>
-<div class="mt-4 grid grid-cols-2 gap-2">
-<button class="rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-primary transition hover:bg-primary/20" id="copy-image-prompt" type="button">Copy Prompt</button>
-<button class="rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-on-surface-variant transition hover:border-primary/50 hover:text-primary" id="open-source-folder" type="button">Show Files</button>
-</div>
-</div>
-<div class="mt-4 rounded-lg border border-white/10 bg-black/35 p-3 text-xs leading-relaxed text-on-surface-variant" id="image-workflow-status">Ready. Choose source images from C:\Users\scott\Pictures, write the prompt, copy it, then upload the selected files in OpenAI Images.</div>
-<div class="mt-auto rounded-lg border border-white/10 bg-black/35 p-3 text-xs leading-relaxed text-on-surface-variant" id="workflow-boundary">
-This grants Cole and Liz use of the visible tool workflow only. It does not grant API keys, spending authority, external publishing, or autonomous browser control.
-</div>
-</aside>
 </div>
 </section>
 </main>
@@ -178,11 +144,10 @@ const tools = {
 };
 
 let activeTool = 'openai-images';
-let sourceImages = [];
 
 const operatorScopes = {
-  cole: 'Cole may prepare employee image prompts and source-image uploads for approved roster/file-completeness work.',
-  liz: 'Liz may prepare website/team image prompts and source-image uploads for approved MindShare interface work.',
+  cole: 'Cole may use approved connected tools for roster/file-completeness work.',
+  liz: 'Liz may use approved connected tools for MindShare interface work.',
   paige: 'Paige may use the visible Purelymail Inbox surface for Scott-approved assistant email work.'
 };
 
@@ -209,125 +174,6 @@ function renderTool(toolId) {
     iframe.src = tool.url;
     iframe.classList.remove('hidden');
   }
-  renderWorkflow(tool);
-}
-
-function renderWorkflow(tool) {
-  const isEmail = tool.workflow === 'email';
-  document.getElementById('workflow-kicker').textContent = isEmail ? 'Email Workflow' : 'Image Workflow';
-  document.getElementById('workflow-title').textContent = isEmail ? 'Inbox Access' : 'Source + Prompt';
-  document.getElementById('workflow-description').textContent = isEmail
-    ? 'Use this surface to open Purelymail webmail for Paige assistant workflows. Email actions still require explicit Scott approval for the task being performed.'
-    : 'Use this panel to prepare image references and prompt text, then upload the selected files into the OpenAI Images Playground.';
-  document.getElementById('image-workflow-controls').classList.toggle('hidden', isEmail);
-  document.getElementById('workflow-boundary').textContent = isEmail
-    ? 'This grants Paige a visible inbox tool surface only. It does not grant silent email authority, autonomous sending, deleting, forwarding, archiving, spending, secrets access, or external communication without explicit Scott approval.'
-    : 'This grants Cole and Liz use of the visible tool workflow only. It does not grant API keys, spending authority, external publishing, or autonomous browser control.';
-  setWorkflowStatus(isEmail
-    ? 'Purelymail is loaded in the tool frame. Sign in with the existing Purelymail session or credentials, then keep email actions inside the approved Paige task.'
-    : 'Ready. Choose source images from C:\\Users\\scott\\Pictures, write the prompt, copy it, then upload the selected files in OpenAI Images.');
-}
-
-function localClient() {
-  return window.MindShareLocalClient || null;
-}
-
-function renderSourceImages() {
-  const list = document.getElementById('source-image-list');
-  if (!sourceImages.length) {
-    list.innerHTML = '<div class="rounded-lg border border-dashed border-white/10 p-4 text-xs text-on-surface-variant">No source images selected.</div>';
-    return;
-  }
-  list.innerHTML = sourceImages.map((file, index) => `
-    <div class="source-image-row rounded-lg p-3">
-      <div class="truncate text-sm font-medium text-primary-fixed">${file.name}</div>
-      <div class="mt-1 truncate text-[11px] text-on-surface-variant">${file.path}</div>
-      <button class="mt-2 text-[10px] uppercase tracking-widest text-primary hover:text-primary-fixed" type="button" data-show-source="${index}">Show</button>
-    </div>
-  `).join('');
-  list.querySelectorAll('[data-show-source]').forEach((button) => {
-    button.addEventListener('click', () => showSourceImage(Number(button.dataset.showSource)));
-  });
-}
-
-function setWorkflowStatus(text) {
-  document.getElementById('image-workflow-status').textContent = text;
-}
-
-function buildPreparedPrompt() {
-  const operator = document.getElementById('tool-operator').value;
-  const roleLabels = {
-    cole: 'Cole / HR Director',
-    liz: 'Liz / Website Manager',
-    paige: 'Paige / Executive Assistant'
-  };
-  const roleLabel = roleLabels[operator] || roleLabels.cole;
-  if (tools[activeTool]?.workflow === 'email') {
-    const prompt = document.getElementById('image-prompt').value.trim();
-    return [
-      `Operator: ${roleLabel}`,
-      '',
-      'Purelymail email task:',
-      prompt || '(Write the approved email task here.)',
-      '',
-      'Boundary:',
-      'Do not send, delete, forward, archive, or externally communicate unless Scott explicitly approved that action for this task.'
-    ].join('\n');
-  }
-  const prompt = document.getElementById('image-prompt').value.trim();
-  const sources = sourceImages.map((file) => `- ${file.name}: ${file.path}`).join('\n') || '- No source images selected.';
-  return [
-    `Operator: ${roleLabel}`,
-    '',
-    'Use the uploaded source image(s) as visual reference.',
-    '',
-    'Source images selected in MindShare:',
-    sources,
-    '',
-    'Generation prompt:',
-    prompt || '(Write the image prompt here.)'
-  ].join('\n');
-}
-
-async function chooseSourceImages() {
-  const client = localClient();
-  if (!client?.chooseImageFiles) {
-    setWorkflowStatus('Image picking is available inside the MindShare Electron app.');
-    return;
-  }
-  const result = await client.chooseImageFiles();
-  if (!result?.ok) {
-    setWorkflowStatus(result?.error || 'Could not choose images.');
-    return;
-  }
-  sourceImages = result.files || [];
-  renderSourceImages();
-  setWorkflowStatus(sourceImages.length ? `${sourceImages.length} source image${sourceImages.length === 1 ? '' : 's'} selected. Upload them in the OpenAI Images tool.` : 'No images selected.');
-}
-
-async function copyPreparedPrompt() {
-  const text = buildPreparedPrompt();
-  const client = localClient();
-  if (client?.copyText) {
-    await client.copyText({ text });
-  } else if (navigator.clipboard) {
-    await navigator.clipboard.writeText(text);
-  } else {
-    setWorkflowStatus('Clipboard is not available in this context.');
-    return;
-  }
-  setWorkflowStatus('Prompt copied. Paste it into OpenAI Images after uploading the selected source image(s).');
-}
-
-async function showSourceImage(index = 0) {
-  const file = sourceImages[index];
-  const client = localClient();
-  if (!file || !client?.showFile) {
-    setWorkflowStatus('File reveal is available inside the MindShare Electron app after choosing images.');
-    return;
-  }
-  const result = await client.showFile({ path: file.path });
-  setWorkflowStatus(result?.ok ? `Opened ${file.name} in its folder.` : (result?.error || 'Could not show file.'));
 }
 
 document.getElementById('tool-list').addEventListener('click', (event) => {
@@ -347,17 +193,8 @@ document.getElementById('reload-tool').addEventListener('click', () => {
 document.getElementById('tool-operator').addEventListener('change', (event) => {
   document.getElementById('operator-scope').textContent = operatorScopes[event.target.value] || operatorScopes.cole;
 });
-document.getElementById('choose-source-images').addEventListener('click', chooseSourceImages);
-document.getElementById('clear-source-images').addEventListener('click', () => {
-  sourceImages = [];
-  renderSourceImages();
-  setWorkflowStatus('Source images cleared.');
-});
-document.getElementById('copy-image-prompt').addEventListener('click', copyPreparedPrompt);
-document.getElementById('open-source-folder').addEventListener('click', () => showSourceImage(0));
 
 renderTool(activeTool);
-renderSourceImages();
 </script>
 </body>
 </html>

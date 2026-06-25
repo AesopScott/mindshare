@@ -13,5 +13,8 @@ contextBridge.exposeInMainWorld('MindShareLocalClient', {
   listConfigurationFiles: () => ipcRenderer.invoke('mindshare:configuration-files'),
   openConfigurationFile: (payload) => ipcRenderer.invoke('mindshare:open-configuration-file', payload),
   triggerMicrophoneShortcut: () => ipcRenderer.invoke('mindshare:microphone-shortcut'),
-  chooseFiles: () => ipcRenderer.invoke('mindshare:choose-files')
+  chooseFiles: () => ipcRenderer.invoke('mindshare:choose-files'),
+  chooseImageFiles: () => ipcRenderer.invoke('mindshare:choose-image-files'),
+  copyText: (payload) => ipcRenderer.invoke('mindshare:copy-text', payload),
+  showFile: (payload) => ipcRenderer.invoke('mindshare:show-file', payload)
 });

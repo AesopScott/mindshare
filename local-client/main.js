@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog, ipcMain, Menu } = require('electron');
+const { app, BrowserWindow, dialog, ipcMain, Menu, clipboard, shell } = require('electron');
 const { spawn } = require('node:child_process');
 const path = require('node:path');
 const {
@@ -235,6 +235,37 @@ ipcMain.handle('mindshare:choose-files', async () => {
       name: path.basename(filePath)
     }))
   };
+});
+ipcMain.handle('mindshare:choose-image-files', async () => {
+  const result = await dialog.showOpenDialog({
+    title: 'Choose source images',
+    defaultPath: path.join(process.env.USERPROFILE || process.env.HOME || '', 'Pictures'),
+    properties: ['openFile', 'multiSelections'],
+    filters: [
+      { name: 'Images', extensions: ['png', 'jpg', 'jpeg', 'webp', 'gif'] },
+      { name: 'All Files', extensions: ['*'] }
+    ]
+  });
+  if (result.canceled) {
+    return { ok: true, files: [] };
+  }
+  return {
+    ok: true,
+    files: result.filePaths.map((filePath) => ({
+      path: filePath,
+      name: path.basename(filePath)
+    }))
+  };
+});
+ipcMain.handle('mindshare:copy-text', async (_event, payload = {}) => {
+  clipboard.writeText(String(payload.text || ''));
+  return { ok: true };
+});
+ipcMain.handle('mindshare:show-file', async (_event, payload = {}) => {
+  const filePath = String(payload.path || '');
+  if (!filePath) return { ok: false, error: 'No file path provided.' };
+  shell.showItemInFolder(filePath);
+  return { ok: true };
 });
 
 app.whenReady().then(() => {

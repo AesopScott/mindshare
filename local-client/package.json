@@ -1,0 +1,13 @@
+{
+  "name": "mindshare-local-client",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local MindShare client shell for Codex/Claude CLI access.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^37.0.0"
+  }
+}

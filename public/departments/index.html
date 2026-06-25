@@ -1056,6 +1056,7 @@
 
         function addSessionCompletionNotification(roleSession) {
             if (!roleSession) return;
+            if (activeRoleSlug === roleSession.slug) return;
             const id = `${roleSession.slug}-${Date.now()}`;
             sessionNotifications.unshift({
                 id,

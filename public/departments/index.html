@@ -598,6 +598,7 @@
                     claudeSessionId: null,
                     roleContext: null,
                     messages: [],
+                    promptQueue: [],
                     officeInjected: false,
                     connectionIssue: false,
                     processing: false,
@@ -1009,11 +1010,13 @@
         }
 
         function addChatMessageToRole(roleSession, role, text) {
-            roleSession.messages.push({ role, text });
+            const entry = { role, text };
+            roleSession.messages.push(entry);
             if (activeRoleSlug === roleSession.slug) {
                 clearChatPlaceholder();
                 appendChatMessage(role, text);
             }
+            return entry;
         }
 
         function injectOfficeEntry(roleSession, text) {
@@ -1036,7 +1039,7 @@
 
         function renderActiveSessions() {
             const container = document.getElementById('active-sessions-list');
-            const activeSessions = Object.values(roleSessions).filter((session) => session.processing);
+            const activeSessions = Object.values(roleSessions).filter((session) => session.processing || session.promptQueue?.length);
             if (!activeSessions.length) {
                 container.innerHTML = `
                     <div class="h-16 glass-panel-heavy rounded-xl silver-edge flex items-center justify-center border-dashed border-white/10">
@@ -1054,7 +1057,8 @@
                     </span>
                     <span class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-on-surface-variant">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        ${session.processingEngine === 'claude' ? 'Claude' : 'Codex'}
+                        ${session.processing ? (session.processingEngine === 'claude' ? 'Claude' : 'Codex') : 'Queued'}
+                        ${session.promptQueue?.length ? ` · ${session.promptQueue.length}` : ''}
                     </span>
                 </button>
             `).join('');
@@ -1381,7 +1385,7 @@
             }
         }
 
-        async function sendCodexMessage() {
+        function enqueuePromptFromInput() {
             const input = document.getElementById('chat-input');
             const message = input.value.trim();
             const attachments = pendingAttachments.map((file) => ({ ...file }));
@@ -1396,37 +1400,72 @@
                 addChatError(`Connect ${activeEngine === 'claude' ? 'Claude' : 'Codex'} once before sending a message.`);
                 return;
             }
-            const sessionPayload = await ensureProviderSession(roleSession, activeEngine);
+
+            input.value = '';
+            clearPendingAttachments();
+            const displayMessage = [message, attachmentLabel(attachments)].filter(Boolean).join('\n');
+            const messageRecord = addChatMessageToRole(roleSession, 'user', displayMessage);
+            roleSession.promptQueue.push({
+                message,
+                attachments,
+                engine: activeEngine,
+                messageRecord
+            });
+            renderActiveSessions();
+            if (roleSession.processing) {
+                setChatStatus(`${roleSession.name} queued ${roleSession.promptQueue.length} prompt${roleSession.promptQueue.length === 1 ? '' : 's'}.`);
+                return;
+            }
+            processPromptQueue(roleSession);
+        }
+
+        async function processPromptQueue(roleSession) {
+            if (!roleSession || roleSession.processing || !roleSession.promptQueue.length) {
+                return;
+            }
+
+            const queuedPrompt = roleSession.promptQueue.shift();
+            const engine = queuedPrompt.engine || 'codex';
+            const available = engine === 'claude' ? claudeAvailable : codexAvailable;
+            if (!available) {
+                addChatMessageToRole(roleSession, 'system', `Connect ${engine === 'claude' ? 'Claude' : 'Codex'} before this queued prompt can run.`);
+                renderActiveSessions();
+                if (roleSession.promptQueue.length) {
+                    processPromptQueue(roleSession);
+                }
+                return;
+            }
+
+            const sessionPayload = await ensureProviderSession(roleSession, engine);
             if (!sessionPayload.ok) {
                 if (hasConnectedOfficeSession(roleSession)) {
                     markOfficeSessionIssue(roleSession);
                 }
-                addChatError(sessionPayload.message || sessionPayload.error || `Could not connect ${roleSession.name}'s ${activeEngine === 'claude' ? 'Claude' : 'Codex'} office session.`);
+                addChatError(sessionPayload.message || sessionPayload.error || `Could not connect ${roleSession.name}'s ${engine === 'claude' ? 'Claude' : 'Codex'} office session.`);
+                renderActiveSessions();
                 return;
             }
 
-            const transcript = roleSession.messages.slice(-12);
-            input.value = '';
-            clearPendingAttachments();
-            const displayMessage = [message, attachmentLabel(attachments)].filter(Boolean).join('\n');
-            addChatMessageToRole(roleSession, 'user', displayMessage);
+            const messageIndex = roleSession.messages.indexOf(queuedPrompt.messageRecord);
+            const transcriptEnd = messageIndex >= 0 ? messageIndex : roleSession.messages.length;
+            const transcript = roleSession.messages.slice(Math.max(0, transcriptEnd - 12), transcriptEnd);
             roleSession.processing = true;
-            roleSession.processingEngine = activeEngine;
+            roleSession.processingEngine = engine;
             renderActiveSessions();
             if (activeRoleSlug === roleSession.slug) {
-                setChatStatus(`${roleSession.name} is working in ${activeEngine === 'claude' ? 'Claude' : 'Codex'}...`);
+                setChatStatus(`${roleSession.name} is working in ${engine === 'claude' ? 'Claude' : 'Codex'}${roleSession.promptQueue.length ? ` · ${roleSession.promptQueue.length} queued` : ''}...`);
             }
 
             try {
                 const client = mindShareLocalClient();
-                const send = activeEngine === 'claude' ? client?.sendClaudeMessage : client?.sendCodexMessage;
+                const send = engine === 'claude' ? client?.sendClaudeMessage : client?.sendCodexMessage;
                 if (!send) {
                     markOfficeSessionIssue(roleSession);
-                    addChatMessageToRole(roleSession, 'system', `MindShare Local Client is not connected. Start the local client, reconnect ${activeEngine === 'claude' ? 'Claude' : 'Codex'}, then send again.`);
+                    addChatMessageToRole(roleSession, 'system', `MindShare Local Client is not connected. Start the local client, reconnect ${engine === 'claude' ? 'Claude' : 'Codex'}, then send again.`);
                     if (activeRoleSlug === roleSession.slug) clearChatStatus();
                     return;
                 }
-                const payload = await send({ sessionId: sessionPayload.sessionId, message, roleContext: roleSession.roleContext, transcript, attachments });
+                const payload = await send({ sessionId: sessionPayload.sessionId, message: queuedPrompt.message, roleContext: roleSession.roleContext, transcript, attachments: queuedPrompt.attachments });
                 if (!payload.ok) {
                     markOfficeSessionIssue(roleSession);
                     addChatMessageToRole(roleSession, 'system', payload.error || payload.reply || 'Codex returned an error.');
@@ -1445,7 +1484,14 @@
                 roleSession.processing = false;
                 roleSession.processingEngine = null;
                 renderActiveSessions();
+                if (roleSession.promptQueue.length) {
+                    processPromptQueue(roleSession);
+                }
             }
+        }
+
+        function sendCodexMessage() {
+            enqueuePromptFromInput();
         }
 
         document.addEventListener('DOMContentLoaded', () => {

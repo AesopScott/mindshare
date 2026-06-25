@@ -927,6 +927,7 @@ Configuration is loaded from the local MindShare workspace.
                         claudeSessionId: session.claudeSessionId,
                         roleContext: session.roleContext,
                         messages: conversationMessages(session.messages),
+                        draftText: session.draftText || '',
                         tokenUsage: session.tokenUsage || null,
                         officeInjected: session.officeInjected,
                         connectionIssue: session.connectionIssue
@@ -963,6 +964,7 @@ Configuration is loaded from the local MindShare workspace.
                         claudeSessionId: session.claudeSessionId || null,
                         roleContext: session.roleContext || null,
                         messages: conversationMessages(session.messages),
+                        draftText: session.draftText || '',
                         tokenUsage: session.tokenUsage || null,
                         promptQueue: [],
                         officeInjected: Boolean(session.officeInjected),
@@ -1090,6 +1092,7 @@ Configuration is loaded from the local MindShare workspace.
                     claudeSessionId: null,
                     roleContext: null,
                     messages: [],
+                    draftText: '',
                     tokenUsage: null,
                     promptQueue: [],
                     officeInjected: false,
@@ -1235,7 +1238,16 @@ Configuration is loaded from the local MindShare workspace.
                 : '';
         }
 
+        function syncActiveDraftFromInput() {
+            if (!activeRoleSlug || !roleSessions[activeRoleSlug]) return;
+            const input = document.getElementById('chat-input');
+            if (!input) return;
+            roleSessions[activeRoleSlug].draftText = input.value;
+            persistOfficeState();
+        }
+
         function browseDepartment(department) {
+            syncActiveDraftFromInput();
             const activeSession = activeRoleSlug ? roleSessions[activeRoleSlug] : null;
             setChatDepartmentBackdrop(department);
             if (activeSession?.department === department) {
@@ -1265,11 +1277,14 @@ Configuration is loaded from the local MindShare workspace.
         }
 
         async function selectRole(slug, name, title, level, department = '') {
+            syncActiveDraftFromInput();
             const roleSession = ensureRoleSession(slug, name, title, level, department);
+            const input = document.getElementById('chat-input');
             const mainWindowTitle = document.getElementById('main-window-title');
             mainWindowTitle.textContent = `${name} · ${title} · ${level}`;
             activeRoleSlug = slug;
             activeRoleContext = roleSession.roleContext;
+            if (input) input.value = roleSession.draftText || '';
             persistOfficeState();
             setChatDepartmentBackdrop(roleSession.department);
             renderTranscript(roleSession.messages);
@@ -2597,6 +2612,7 @@ Configuration is loaded from the local MindShare workspace.
             }
             const roleSession = roleSessions[activeRoleSlug];
             if (input) input.value = '';
+            roleSession.draftText = '';
             const displayMessage = [cleanMessage, attachmentLabel(attachments)].filter(Boolean).join('\n');
             const messageRecord = addChatMessageToRole(roleSession, 'user', displayMessage);
             setChatStatus(`Sending ${roleSession.name}'s prompt...`);
@@ -2751,6 +2767,8 @@ Configuration is loaded from the local MindShare workspace.
             renderOfficeAutonomyControl(findRoleEntry(roleSession.slug));
             renderOfficeRunsControl(findRoleEntry(roleSession.slug));
             renderTokenUsage(roleSession);
+            const input = document.getElementById('chat-input');
+            if (input) input.value = roleSession.draftText || '';
             showOfficeContext({
                 name: roleSession.name,
                 title: roleSession.title,
@@ -2833,6 +2851,7 @@ Configuration is loaded from the local MindShare workspace.
                     sendCodexMessage();
                 }
             });
+            document.getElementById('chat-input').addEventListener('input', syncActiveDraftFromInput);
             document.getElementById('chat-input').addEventListener('paste', handlePromptPaste);
         });
     </script>

@@ -6,6 +6,9 @@ const path = require('node:path');
 
 const repoRoot = path.resolve(__dirname, '..');
 const sessions = new Map();
+const officeWorkspaceInstruction = `This office is an active local workspace session.
+
+You may inspect and modify files in the local workspace when the user's request and the active role's authority allow it. Do not treat filesystem access as permission by itself. Respect role boundaries, approval gates, production/release limits, external communication limits, spending limits, and secrets boundaries. If a requested edit is outside role authority or needs approval, explain the blocker and request the needed approval.`;
 
 function uniquePaths(paths) {
   return [...new Set(paths.filter(Boolean).map((candidate) => path.resolve(candidate)))];
@@ -490,7 +493,9 @@ async function sendCodexMessage(payload) {
   const attachmentText = formatAttachments(payload?.attachments);
   const prompt = `You are connected to the MindShare local office chat.
 
-Respond from inside the active role context when one is selected. Use first person as that role. Do not modify files from this chat surface.
+Respond from inside the active role context when one is selected. Use first person as that role.
+
+${officeWorkspaceInstruction}
 
 ${buildRolePromptContext(session.roleContext)}
 
@@ -516,8 +521,7 @@ USER: ${message}
   }
   const result = await run(launch.command, [...launch.argsPrefix,
     'exec',
-    '--sandbox',
-    'read-only',
+    '--dangerously-bypass-approvals-and-sandbox',
     '-C',
     repoRoot,
     '--output-last-message',
@@ -572,7 +576,9 @@ async function sendClaudeMessage(payload) {
   const attachmentText = formatAttachments(payload?.attachments);
   const prompt = `You are connected to the MindShare local office chat.
 
-Respond from inside the active role context when one is selected. Use first person as that role. Do not modify files from this chat surface.
+Respond from inside the active role context when one is selected. Use first person as that role.
+
+${officeWorkspaceInstruction}
 
 ${buildRolePromptContext(session.roleContext)}
 
@@ -598,7 +604,8 @@ USER: ${message}
   const result = await run(launch.command, [...launch.argsPrefix,
     '--print',
     '--permission-mode',
-    'plan',
+    'bypassPermissions',
+    '--dangerously-skip-permissions',
     '--model',
     'sonnet'
   ], { timeout: 300000, input: prompt });

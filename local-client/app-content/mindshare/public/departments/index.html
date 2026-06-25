@@ -438,73 +438,138 @@ Configuration is loaded from the local MindShare workspace.
         const divisionDepartments = {
             "strategy-and-operations": {
                 label: "Strategy & Operations",
-                departments: ["Executive Leadership", "PMO", "Human Resources", "Recruiting", "Risk Management"],
+                departments: ["Executive Leadership","PMO","Human Resources","Recruiting","Risk Management"],
                 entries: {
+                    "Executive Leadership": [
+                        { slug: "scott", name: "Scott", title: "Human Owner / Final Authority", level: "Human Authority", image: "../assets/team/scott.webp" },
+                        { slug: "rae", name: "Rae", title: "Chief Executive Officer", level: "Level 3 Staff", image: "../assets/team/rae.png" },
+                        { slug: "paige", name: "Paige", title: "Executive Assistant", level: "Level 3 Staff", image: "../assets/team/paige.webp" },
+                        { slug: "mara", name: "Mara", title: "Front Desk Administrator", level: "Level 3 Staff" },
+                        { slug: "morgan-vale", name: "Morgan Vale", title: "Operations Director", level: "Level 2 Trainee" },
+                        { slug: "june-park", name: "June Park", title: "Staff Operations Director", level: "Level 2 Trainee" },
+                        { slug: "leon-archer", name: "Leon Archer", title: "Executive Operations Director", level: "Level 2 Trainee" }
+                    ],
                     "PMO": [
-                        { slug: "cal", name: "Cal", title: "MAPS ASPM", level: "Level 3 Staff", image: "../assets/team/cal.webp" }
+                        { slug: "cal", name: "Cal", title: "MAPS ASPM", level: "Level 3 Staff", image: "../assets/team/cal.webp" },
+                        { slug: "matt", name: "Matt", title: "Released MAPS ASPM", level: "Released", image: "../assets/team/matt.webp" },
+                        { slug: "mira-patel", name: "Mira Patel", title: "PMO Director", level: "Level 2 Trainee" }
                     ],
                     "Human Resources": [
-                        { slug: "cole", name: "Cole", title: "HR Director", level: "Level 4 Scoped Autonomy", image: "../assets/team/cole.webp" }
+                        { slug: "cole", name: "Cole", title: "HR Director", level: "Level 4 Scoped Autonomy", image: "../assets/team/cole.webp", autonomy: {"level4":"Approved scoped autonomy: validate required role files for each current automation/autonomy level and confirm WhoAmI Autonomy Context injection on welcome/account creation and hourly checks.","level5":"Not active. Would require a written HR policy packet, gate enforcement, eval proof, audit, rollback, and revocation path.","level6":"Not defined for Cole."} }
+                    ],
+                    "Recruiting": [
+                        { slug: "ana", name: "Ana", title: "Recruiter", level: "Level 4 Scoped Autonomy", image: "../assets/team/ana.webp", autonomy: {"level4":"Active scoped autonomy: process the internal recruiting backlog through approved lifecycle steps, creating Level 1 packets, promoting Level 1 to Level 2 after 24 hours, and Level 2 to Level 3 after five days when gates pass.","level5":"Defined, not active: research missing company positions and consult approved senior leaders about hiring demand under a written policy, runtime gate, eval proof, audit, rollback, and revocation path.","level6":"Deferred. No full native recruiting autonomy is currently approved."} }
+                    ],
+                    "Risk Management": [
                     ]
                 }
             },
             "product-and-design": {
                 label: "Product & Design",
-                departments: ["Product Management", "Service Design", "Experience Design", "User Research"]
+                departments: ["Product Management","Service Design","Experience Design","User Research"],
+                entries: {
+                    "Product Management": [
+                        { slug: "priya-sen", name: "Priya Sen", title: "Product Director", level: "Level 2 Trainee" },
+                        { slug: "gabe-rowan", name: "Gabe Rowan", title: "Product Management Director", level: "Level 2 Trainee" },
+                        { slug: "elise-hart", name: "Elise Hart", title: "Product Operations Director", level: "Level 2 Trainee" }
+                    ],
+                    "Service Design": [
+                        { slug: "nora-voss", name: "Nora Voss", title: "Service Design Director", level: "Level 2 Trainee" }
+                    ],
+                    "Experience Design": [
+                        { slug: "kai-bennett", name: "Kai Bennett", title: "Experience Design Director", level: "Level 2 Trainee" }
+                    ],
+                    "User Research": [
+                        { slug: "amara-hayes", name: "Amara Hayes", title: "User Research Director", level: "Level 2 Trainee" }
+                    ]
+                }
             },
             "technology-and-data": {
                 label: "Technology & Data",
-                departments: ["Engineering", "Platform Engineering", "Data Engineering", "AI Engineering", "Security"],
+                departments: ["Engineering","Platform Engineering","Data Engineering","AI Engineering","Security"],
                 entries: {
                     "Engineering": [
-                        { slug: "lane", name: "Lane", title: "Mojo Lab Operator", level: "Level 3 Staff" }
+                        { slug: "owen-kline", name: "Owen Kline", title: "Technology Director", level: "Level 2 Trainee" },
+                        { slug: "nia-calder", name: "Nia Calder", title: "Engineering Director", level: "Level 2 Trainee" },
+                        { slug: "lane", name: "Lane", title: "Mojo Lab Operator", level: "Level 3 Staff", image: "../assets/team/lab-operator.webp" }
                     ],
                     "Platform Engineering": [
+                        { slug: "mateo-ruiz", name: "Mateo Ruiz", title: "Platform Engineering Director", level: "Level 2 Trainee" },
                         { slug: "reid", name: "Reid", title: "Release Manager", level: "Level 3 Staff", image: "../assets/team/reid.webp" }
                     ],
                     "Data Engineering": [
                         { slug: "imani", name: "Imani", title: "Data Engineering Director", level: "Level 3 Staff", image: "../assets/team/imani.webp" }
                     ],
                     "AI Engineering": [
+                        { slug: "theo-nakamura", name: "Theo Nakamura", title: "AI Systems Engineering Director", level: "Level 2 Trainee" },
                         { slug: "bea", name: "Bea", title: "Mojo MAPS Engineer", level: "Level 3 Staff", image: "../assets/team/bea.webp" },
-                        {
-                            slug: "tess",
-                            name: "Tess",
-                            title: "Autonomy Engineer",
-                            level: "Level 4 Scoped Autonomy",
-                            image: "../assets/team/tess.webp",
-                            autonomy: {
-                                level4: "Operational inside approved scope: build Level 3 role automation baselines, draft Level 4 promotion packets, define Level 4/5/6 capability reviews, and route Scott review.",
-                                level5: "Defined, not active: policy-backed promotion-readiness loop, recurring automation-baseline discovery, autonomy health observation, and policy/eval/runtime recommendations.",
-                                level6: "Not defined for Tess. Any future Level 6 requires Scott-defined capability, Vik control-plane review, eval proof, observation, audit, rollback, revocation, and human override."
-                            }
-                        },
-                        {
-                            slug: "vik",
-                            name: "Vik",
-                            title: "ASPA",
-                            level: "Level 5 Policy Autonomy",
-                            image: "../assets/team/vik.webp",
-                            autonomy: {
-                                level4: "Active scoped autonomy: process the approved research backlog, keep queue/state/proof aligned, produce research output, and route implementation or authority decisions to the right owner.",
-                                level5: "Active policy autonomy: review completed research against product-development policy and recommend make, implement, adopt, integrate, further review, no recommendation, or blocked.",
-                                level6: "Defined, not active: discover AI/security topics from the internet, add new items to the research backlog, complete deep analysis, and apply Level 5 policy criteria in a full loop."
-                            }
-                        }
+                        { slug: "tess", name: "Tess", title: "Autonomy Engineer", level: "Level 4 Scoped Autonomy", image: "../assets/team/tess.webp", autonomy: {"level4":"Operational inside approved scope: build Level 3 role automation baselines, draft Level 4 promotion packets, define Level 4/5/6 capability reviews, monitor standing drift, validate Level 4+ roles, and route Scott/Reid review.","level5":"Defined, not active: policy-backed promotion-readiness and autonomy-development loop after Level 4 structure and packet workflow are proven and approved.","level6":"Not defined for Tess. Any future Level 6 requires Scott-defined capability, Vik control-plane review, eval proof, observation, audit, rollback, revocation, and human override."} },
+                        { slug: "vik", name: "Vik", title: "ASPA", level: "Level 5 Policy Autonomy", image: "../assets/team/vik.webp", autonomy: {"level4":"Active lower-level scoped autonomy: process the approved research backlog, keep queue/state/proof aligned, produce research output, and route implementation or authority decisions to the right owner.","level5":"Active policy autonomy: review completed research against product-development policy and recommend make, implement, adopt, integrate, further review, no recommendation, or blocked.","level6":"Defined, not active: discover AI/security topics from the internet, add new items to the research backlog, complete deep analysis, and apply Level 5 policy criteria in a full loop."} }
+                    ],
+                    "Security": [
+                        { slug: "harper-quinn", name: "Harper Quinn", title: "Security Engineering Director", level: "Level 2 Trainee" }
                     ]
                 }
             },
             "revenue-and-market": {
                 label: "Revenue & Market",
-                departments: ["Sales", "Marketing", "Partnerships", "Customer Success", "Support"]
+                departments: ["Sales","Marketing","Partnerships","Customer Success","Support"],
+                entries: {
+                    "Sales": [
+                        { slug: "sloane-mercer", name: "Sloane Mercer", title: "Revenue Director", level: "Level 2 Trainee" },
+                        { slug: "drew-collins", name: "Drew Collins", title: "Sales Director", level: "Level 2 Trainee" }
+                    ],
+                    "Marketing": [
+                        { slug: "liz", name: "Liz", title: "Mojo Website Manager", level: "Level 3 Staff", image: "../assets/team/liz.webp" },
+                        { slug: "mae", name: "Mae", title: "Communications Director", level: "Level 4 Scoped Autonomy", image: "../assets/team/mae.webp", autonomy: {"level4":"Operational scoped autonomy: watch file-watch/process health across active sessions and channels, perform bounded safe mechanical repair/routing, and escalate owner issues with proof.","level5":"Not active. Would require a written communications/process-health policy for recurring classes of incidents, with gates, evals, audit, rollback, and revocation.","level6":"Not defined for Mae."} },
+                        { slug: "june", name: "June", title: "Staff Writer", level: "Level 3 Staff", image: "../assets/team/june.webp" }
+                    ],
+                    "Partnerships": [
+                        { slug: "celia-grant", name: "Celia Grant", title: "Partnerships Director", level: "Level 2 Trainee" }
+                    ],
+                    "Customer Success": [
+                        { slug: "jordan-hale", name: "Jordan Hale", title: "Customer Success Director", level: "Level 2 Trainee" },
+                        { slug: "jay", name: "Jay", title: "Meetup Coordinator / Operator", level: "Level 3 Staff", image: "../assets/team/jay.png" }
+                    ],
+                    "Support": [
+                        { slug: "samira-knox", name: "Samira Knox", title: "Support Director", level: "Level 2 Trainee" }
+                    ]
+                }
             },
             "finance": {
                 label: "Finance",
-                departments: ["Accounting", "Accounts Payable", "Accounts Receivable", "Purchasing", "Tax"]
+                departments: ["Accounting","Accounts Payable","Accounts Receivable","Purchasing","Tax"],
+                entries: {
+                    "Accounting": [
+                        { slug: "finn", name: "Finn", title: "Finance Director", level: "Level 3 Staff" }
+                    ],
+                    "Accounts Payable": [
+                    ],
+                    "Accounts Receivable": [
+                    ],
+                    "Purchasing": [
+                    ],
+                    "Tax": [
+                    ]
+                }
             },
             "administration": {
                 label: "Administration",
-                departments: ["People Operations", "Legal", "Compliance", "Vendor Management"]
+                departments: ["People Operations","Legal","Compliance","Vendor Management"],
+                entries: {
+                    "People Operations": [
+                        { slug: "mila-chen", name: "Mila Chen", title: "People Operations Director", level: "Level 2 Trainee" }
+                    ],
+                    "Legal": [
+                        { slug: "adrian-moss", name: "Adrian Moss", title: "Legal Director", level: "Level 2 Trainee" }
+                    ],
+                    "Compliance": [
+                        { slug: "isla-monroe", name: "Isla Monroe", title: "Compliance Director", level: "Level 2 Trainee" }
+                    ],
+                    "Vendor Management": [
+                        { slug: "victor-lane", name: "Victor Lane", title: "Vendor Management Director", level: "Level 2 Trainee" }
+                    ]
+                }
             }
         };
 

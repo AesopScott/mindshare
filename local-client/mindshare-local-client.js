@@ -63,137 +63,744 @@ async function resolveAppContentRoot() {
 }
 
 const ROLE_CATALOG = {
-  bea: {
-    name: 'Bea',
-    title: 'Mojo MAPS Engineer',
-    level: 'Level 3 Staff',
-    office: "Bea's office",
-    rolePath: ['mojo', 'roles', 'mojo-maps-engineer'],
-    files: [
-      'WhoAmI.md',
-      'name.md',
-      'personality.md',
-      'role-agent.md',
-      'workflow.md',
-      'loop.md',
-      'Autonomy.md',
-      'memory.md'
+  "bea": {
+    "name": "Bea",
+    "title": "Mojo MAPS Engineer",
+    "level": "Level 3 Staff",
+    "office": "Bea's office",
+    "rolePath": [
+      "mojo",
+      "roles",
+      "mojo-maps-engineer"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "loop.md",
+      "Autonomy.md",
+      "memory.md"
     ]
   },
-  cal: {
-    name: 'Cal',
-    title: 'MAPS ASPM',
-    level: 'Level 3 Staff',
-    office: "Cal's office",
-    rolePath: ['mojo', 'roles', 'maps-agentic-systems-program-manager'],
-    files: [
-      'WhoAmI.md',
-      'name.md',
-      'role-agent.md',
-      'workflow.md',
-      'Autonomy.md',
-      'memory.md'
+  "cal": {
+    "name": "Cal",
+    "title": "MAPS ASPM",
+    "level": "Level 3 Staff",
+    "office": "Cal's office",
+    "rolePath": [
+      "mojo",
+      "roles",
+      "maps-agentic-systems-program-manager"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "Autonomy.md",
+      "memory.md"
     ]
   },
-  cole: {
-    name: 'Cole',
-    title: 'HR Director',
-    level: 'Level 4 Scoped Autonomy',
-    office: "Cole's office",
-    rolePath: ['mindshare', 'roles', 'hr-director'],
-    files: [
-      'WhoAmI.md',
-      'name.md',
-      'personality.md',
-      'role-agent.md',
-      'workflow.md',
-      'loop.md',
-      'Autonomy.md',
-      'memory.md'
+  "cole": {
+    "name": "Cole",
+    "title": "HR Director",
+    "level": "Level 4 Scoped Autonomy",
+    "office": "Cole's office",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "hr-director"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "loop.md",
+      "Autonomy.md",
+      "memory.md"
     ]
   },
-  imani: {
-    name: 'Imani',
-    title: 'Data Engineering Director',
-    level: 'Level 3 Staff',
-    office: "Imani's office",
-    rolePath: ['mojo', 'roles', 'data-engineering-director'],
-    files: [
-      'WhoAmI.md',
-      'name.md',
-      'personality.md',
-      'role-agent.md',
-      'workflow.md',
-      'loop.md',
-      'Autonomy.md',
-      'memory.md'
+  "imani": {
+    "name": "Imani",
+    "title": "Data Engineering Director",
+    "level": "Level 3 Staff",
+    "office": "Imani's office",
+    "rolePath": [
+      "mojo",
+      "roles",
+      "data-engineering-director"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "loop.md",
+      "Autonomy.md",
+      "memory.md"
     ]
   },
-  lane: {
-    name: 'Lane',
-    title: 'Mojo Lab Operator',
-    level: 'Level 3 Staff',
-    office: "Lane's office",
-    rolePath: ['mojo', 'roles', 'lab-operator'],
-    files: [
-      'WhoAmI.md',
-      'name.md',
-      'role-agent.md',
-      'workflow.md',
-      'loop.md',
-      'Autonomy.md',
-      'memory.md'
+  "lane": {
+    "name": "Lane",
+    "title": "Mojo Lab Operator",
+    "level": "Level 3 Staff",
+    "office": "Lane's office",
+    "rolePath": [
+      "mojo",
+      "roles",
+      "lab-operator"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "role-agent.md",
+      "workflow.md",
+      "loop.md",
+      "Autonomy.md",
+      "memory.md"
     ]
   },
-  reid: {
-    name: 'Reid',
-    title: 'Release Manager',
-    level: 'Level 3 Staff',
-    office: "Reid's office",
-    rolePath: ['mindshare', 'roles', 'release-manager'],
-    files: [
-      'name.md',
-      'personality.md',
-      'role-agent.md',
-      'workflow.md',
-      'loop.md',
-      'Autonomy.md',
-      'automation.md',
-      'memory.md'
+  "reid": {
+    "name": "Reid",
+    "title": "Release Manager",
+    "level": "Level 3 Staff",
+    "office": "Reid's office",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "release-manager"
+    ],
+    "files": [
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "loop.md",
+      "Autonomy.md",
+      "automation.md",
+      "memory.md"
     ]
   },
-  tess: {
-    name: 'Tess',
-    title: 'Autonomy Engineer',
-    level: 'Level 4 Scoped Autonomy',
-    office: "Tess's office",
-    rolePath: ['mindshare', 'roles', 'autonomy-engineer'],
-    files: [
-      'WhoAmI.md',
-      'name.md',
-      'personality.md',
-      'role-agent.md',
-      'workflow.md',
-      'loop.md',
-      'Autonomy.md',
-      'memory.md'
+  "tess": {
+    "name": "Tess",
+    "title": "Autonomy Engineer",
+    "level": "Level 4 Scoped Autonomy",
+    "office": "Tess's office",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "autonomy-engineer"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "loop.md",
+      "Autonomy.md",
+      "memory.md"
     ]
   },
-  vik: {
-    name: 'Vik',
-    title: 'ASPA',
-    level: 'Level 5 Policy Autonomy',
-    office: "Vik's office",
-    rolePath: ['mojo', 'roles', 'maps-agentic-systems-program-architect'],
-    files: [
-      'WhoAmI.md',
-      'name.md',
-      'personality.md',
-      'role-agent.md',
-      'workflow.md',
-      'loop.md',
-      'Autonomy.md',
-      'memory.md'
+  "vik": {
+    "name": "Vik",
+    "title": "ASPA",
+    "level": "Level 5 Policy Autonomy",
+    "office": "Vik's office",
+    "rolePath": [
+      "mojo",
+      "roles",
+      "maps-agentic-systems-program-architect"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "loop.md",
+      "Autonomy.md",
+      "memory.md"
+    ]
+  },
+  "scott": {
+    "name": "Scott",
+    "title": "Human Owner / Final Authority",
+    "level": "Human Authority",
+    "office": "Scott's office",
+    "rolePath": [
+      "mindshare"
+    ],
+    "files": [
+      "AGENTS.md",
+      "project-foundation.md"
+    ]
+  },
+  "rae": {
+    "name": "Rae",
+    "title": "Chief Executive Officer",
+    "level": "Level 3 Staff",
+    "office": "Rae's office",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "chief-executive-officer"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "Autonomy.md",
+      "memory.md"
+    ]
+  },
+  "paige": {
+    "name": "Paige",
+    "title": "Executive Assistant",
+    "level": "Level 3 Staff",
+    "office": "Paige's office",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "personal-assistant"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "loop.md",
+      "Autonomy.md",
+      "memory.md"
+    ]
+  },
+  "mara": {
+    "name": "Mara",
+    "title": "Front Desk Administrator",
+    "level": "Level 3 Staff",
+    "office": "Mara's office",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "front-desk-administrator"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "loop.md",
+      "Autonomy.md",
+      "memory.md"
+    ]
+  },
+  "finn": {
+    "name": "Finn",
+    "title": "Finance Director",
+    "level": "Level 3 Staff",
+    "office": "Finn's office",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "finance-director"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "loop.md",
+      "memory.md"
+    ]
+  },
+  "ana": {
+    "name": "Ana",
+    "title": "Recruiter",
+    "level": "Level 4 Scoped Autonomy",
+    "office": "Ana's office",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter"
+    ],
+    "files": [
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "loop.md",
+      "Autonomy.md",
+      "memory.md",
+      "recruiting.pipeline.json"
+    ]
+  },
+  "matt": {
+    "name": "Matt",
+    "title": "Released MAPS ASPM",
+    "level": "Released",
+    "office": "Matt's historical office",
+    "rolePath": [
+      "mojo",
+      "roles",
+      "released-maps-agentic-systems-program-manager"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "role-agent.md",
+      "workflow.md",
+      "Autonomy.md",
+      "memory.md"
+    ]
+  },
+  "liz": {
+    "name": "Liz",
+    "title": "Mojo Website Manager",
+    "level": "Level 3 Staff",
+    "office": "Liz's office",
+    "rolePath": [
+      "mojo",
+      "roles",
+      "mojo-website-manager"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "Autonomy.md",
+      "memory.md"
+    ]
+  },
+  "mae": {
+    "name": "Mae",
+    "title": "Communications Director",
+    "level": "Level 4 Scoped Autonomy",
+    "office": "Mae's office",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "communications-director"
+    ],
+    "files": [
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "loop.md",
+      "Autonomy.md",
+      "memory.md",
+      "level4-proof.md"
+    ]
+  },
+  "june": {
+    "name": "June",
+    "title": "Staff Writer",
+    "level": "Level 3 Staff",
+    "office": "June's office",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "staff-writer"
+    ],
+    "files": [
+      "WhoAmI.md",
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "Autonomy.md",
+      "memory.md"
+    ]
+  },
+  "jay": {
+    "name": "Jay",
+    "title": "Meetup Coordinator / Operator",
+    "level": "Level 3 Staff",
+    "office": "Jay's office",
+    "rolePath": [
+      "watch",
+      "roles",
+      "meetup-coordinator"
+    ],
+    "files": [
+      "name.md",
+      "personality.md",
+      "role-agent.md",
+      "workflow.md",
+      "Autonomy.md",
+      "memory.md"
+    ]
+  },
+  "morgan-vale": {
+    "name": "Morgan Vale",
+    "title": "Operations Director",
+    "level": "Level 2 Trainee",
+    "office": "Morgan Vale's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-001-level2.md"
+    ]
+  },
+  "priya-sen": {
+    "name": "Priya Sen",
+    "title": "Product Director",
+    "level": "Level 2 Trainee",
+    "office": "Priya Sen's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-002-level2.md"
+    ]
+  },
+  "owen-kline": {
+    "name": "Owen Kline",
+    "title": "Technology Director",
+    "level": "Level 2 Trainee",
+    "office": "Owen Kline's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-003-level2.md"
+    ]
+  },
+  "nia-calder": {
+    "name": "Nia Calder",
+    "title": "Engineering Director",
+    "level": "Level 2 Trainee",
+    "office": "Nia Calder's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-004-level2.md"
+    ]
+  },
+  "mateo-ruiz": {
+    "name": "Mateo Ruiz",
+    "title": "Platform Engineering Director",
+    "level": "Level 2 Trainee",
+    "office": "Mateo Ruiz's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-005-level2.md"
+    ]
+  },
+  "theo-nakamura": {
+    "name": "Theo Nakamura",
+    "title": "AI Systems Engineering Director",
+    "level": "Level 2 Trainee",
+    "office": "Theo Nakamura's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-007-level2.md"
+    ]
+  },
+  "harper-quinn": {
+    "name": "Harper Quinn",
+    "title": "Security Engineering Director",
+    "level": "Level 2 Trainee",
+    "office": "Harper Quinn's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-008-level2.md"
+    ]
+  },
+  "sloane-mercer": {
+    "name": "Sloane Mercer",
+    "title": "Revenue Director",
+    "level": "Level 2 Trainee",
+    "office": "Sloane Mercer's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-009-level2.md"
+    ]
+  },
+  "june-park": {
+    "name": "June Park",
+    "title": "Staff Operations Director",
+    "level": "Level 2 Trainee",
+    "office": "June Park's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-011-level2.md"
+    ]
+  },
+  "leon-archer": {
+    "name": "Leon Archer",
+    "title": "Executive Operations Director",
+    "level": "Level 2 Trainee",
+    "office": "Leon Archer's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-012-level2.md"
+    ]
+  },
+  "mira-patel": {
+    "name": "Mira Patel",
+    "title": "PMO Director",
+    "level": "Level 2 Trainee",
+    "office": "Mira Patel's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-013-level2.md"
+    ]
+  },
+  "gabe-rowan": {
+    "name": "Gabe Rowan",
+    "title": "Product Management Director",
+    "level": "Level 2 Trainee",
+    "office": "Gabe Rowan's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-014-level2.md"
+    ]
+  },
+  "elise-hart": {
+    "name": "Elise Hart",
+    "title": "Product Operations Director",
+    "level": "Level 2 Trainee",
+    "office": "Elise Hart's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-015-level2.md"
+    ]
+  },
+  "nora-voss": {
+    "name": "Nora Voss",
+    "title": "Service Design Director",
+    "level": "Level 2 Trainee",
+    "office": "Nora Voss's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-016-level2.md"
+    ]
+  },
+  "kai-bennett": {
+    "name": "Kai Bennett",
+    "title": "Experience Design Director",
+    "level": "Level 2 Trainee",
+    "office": "Kai Bennett's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-017-level2.md"
+    ]
+  },
+  "amara-hayes": {
+    "name": "Amara Hayes",
+    "title": "User Research Director",
+    "level": "Level 2 Trainee",
+    "office": "Amara Hayes's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-018-level2.md"
+    ]
+  },
+  "drew-collins": {
+    "name": "Drew Collins",
+    "title": "Sales Director",
+    "level": "Level 2 Trainee",
+    "office": "Drew Collins's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-019-level2.md"
+    ]
+  },
+  "celia-grant": {
+    "name": "Celia Grant",
+    "title": "Partnerships Director",
+    "level": "Level 2 Trainee",
+    "office": "Celia Grant's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-020-level2.md"
+    ]
+  },
+  "jordan-hale": {
+    "name": "Jordan Hale",
+    "title": "Customer Success Director",
+    "level": "Level 2 Trainee",
+    "office": "Jordan Hale's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-021-level2.md"
+    ]
+  },
+  "samira-knox": {
+    "name": "Samira Knox",
+    "title": "Support Director",
+    "level": "Level 2 Trainee",
+    "office": "Samira Knox's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-022-level2.md"
+    ]
+  },
+  "mila-chen": {
+    "name": "Mila Chen",
+    "title": "People Operations Director",
+    "level": "Level 2 Trainee",
+    "office": "Mila Chen's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-023-level2.md"
+    ]
+  },
+  "adrian-moss": {
+    "name": "Adrian Moss",
+    "title": "Legal Director",
+    "level": "Level 2 Trainee",
+    "office": "Adrian Moss's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-024-level2.md"
+    ]
+  },
+  "isla-monroe": {
+    "name": "Isla Monroe",
+    "title": "Compliance Director",
+    "level": "Level 2 Trainee",
+    "office": "Isla Monroe's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-025-level2.md"
+    ]
+  },
+  "victor-lane": {
+    "name": "Victor Lane",
+    "title": "Vendor Management Director",
+    "level": "Level 2 Trainee",
+    "office": "Victor Lane's candidate packet",
+    "rolePath": [
+      "mindshare",
+      "roles",
+      "recruiter",
+      "level-4-work"
+    ],
+    "files": [
+      "REC-026-level2.md"
     ]
   }
 };

@@ -5,6 +5,7 @@
   "description": "Local MindShare client shell for Codex/Claude CLI access.",
   "main": "main.js",
   "scripts": {
+    "sync-content": "powershell -ExecutionPolicy Bypass -File scripts/sync-app-content.ps1",
     "start": "electron ."
   },
   "devDependencies": {

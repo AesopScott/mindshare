@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "role": "Tess / Autonomy Engineer",
+  "automation_id": "tess-autonomy-evaluation",
+  "logic_owner": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\scripts\\autonomy_level_monitor.py",
+  "mode": "scheduled",
+  "checked_at": "2026-06-25T07:21:49-06:00",
+  "result": "no_change",
+  "counts": {
+    "canonical_files": 13,
+    "repairs": 0,
+    "conflicts": 0
+  },
+  "repairs": [],
+  "conflicts": [],
+  "canonical_roles": {
+    "Tess": {
+      "role": "Tess",
+      "level": 4,
+      "label": "Level 4 Senior Staff (Scoped Autonomy)",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\Autonomy.md"
+    },
+    "Mae": {
+      "role": "Mae",
+      "level": 4,
+      "label": "Level 4 Senior Staff (Scoped Autonomy)",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\Autonomy.md"
+    },
+    "Paige": {
+      "role": "Paige",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-assistant\\Autonomy.md"
+    },
+    "Cole": {
+      "role": "Cole",
+      "level": 4,
+      "label": "Level 4 Senior Staff (Scoped Autonomy)",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\Autonomy.md"
+    },
+    "Ana": {
+      "role": "Ana",
+      "level": 4,
+      "label": "Level 4 Senior Staff (Scoped Autonomy)",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\Autonomy.md"
+    },
+    "Reid": {
+      "role": "Reid",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\release-manager\\Autonomy.md"
+    },
+    "June": {
+      "role": "June",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-writer\\Autonomy.md"
+    },
+    "Imani": {
+      "role": "Imani",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mojo\\roles\\data-engineering-director\\Autonomy.md"
+    },
+    "Lane": {
+      "role": "Lane",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\Autonomy.md"
+    },
+    "Vik": {
+      "role": "Vik",
+      "level": 5,
+      "label": "Level 5 Principal (Policy Autonomy)",
+      "path": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\Autonomy.md"
+    },
+    "Cal": {
+      "role": "Cal",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\Autonomy.md"
+    },
+    "Liz": {
+      "role": "Liz",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\Autonomy.md"
+    },
+    "Jay": {
+      "role": "Jay",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\Autonomy.md"
+    }
+  },
+  "denied_actions_held": [
+    "no demotion",
+    "no promotion beyond canonical source",
+    "no runtime activation",
+    "no gate edit",
+    "no git/github/release action",
+    "no production",
+    "no external communication",
+    "no spending",
+    "no secrets",
+    "no authority expansion"
+  ]
+}

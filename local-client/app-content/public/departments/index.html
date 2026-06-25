@@ -1,0 +1,1266 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title class="">Mind Share Media | Departments</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="../data/title-descriptions.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            background-color: #0c1324;
+            color: #dce1fb;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(190, 198, 224, 0.1);
+        }
+        .glass-panel-heavy {
+            background: rgba(12, 19, 36, 0.7);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(190, 198, 224, 0.15);
+        }
+        .metallic-silver {
+            background: linear-gradient(135deg, #bec6e0 0%, #798098 100%);
+        }
+        .silver-edge {
+            border: 1px solid rgba(192, 192, 192, 0.2);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(190, 198, 224, 0.2);
+            border-radius: 10px;
+        }
+        .section-collapse {
+            transition: max-height 0.3s ease-out, opacity 0.2s ease;
+        }
+        #division-select {
+            background-color: #0c1324;
+            color: #dce1fb;
+        }
+        #division-select option {
+            background-color: #ffffff;
+            color: #111827;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#0f172a",
+                        "primary": "#bec6e0",
+                        "surface-container-lowest": "#070d1f",
+                        "primary-fixed": "#dae2fd",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#2e3447",
+                        "secondary-fixed-dim": "#b9c8de",
+                        "on-tertiary-fixed": "#161c22",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#41474e",
+                        "on-secondary": "#233143",
+                        "on-primary-container": "#798098",
+                        "surface-container": "#191f31",
+                        "on-surface": "#dce1fb",
+                        "on-primary": "#283044",
+                        "tertiary": "#c1c7cf",
+                        "surface": "#0c1324",
+                        "primary-fixed-dim": "#bec6e0",
+                        "inverse-on-surface": "#2a3043",
+                        "secondary-container": "#39485a",
+                        "error": "#ffb4ab",
+                        "on-surface-variant": "#c6c6cd",
+                        "on-error": "#690005",
+                        "outline": "#909097",
+                        "tertiary-fixed": "#dde3eb",
+                        "outline-variant": "#45464d",
+                        "tertiary-fixed-dim": "#c1c7cf",
+                        "secondary-fixed": "#d4e4fa",
+                        "on-background": "#dce1fb",
+                        "secondary": "#b9c8de",
+                        "background": "#0c1324",
+                        "surface-container-low": "#151b2d",
+                        "surface-variant": "#2e3447",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "surface-bright": "#33394c",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-container-high": "#23293c",
+                        "surface-tint": "#bec6e0",
+                        "on-secondary-fixed": "#0d1c2d",
+                        "inverse-surface": "#dce1fb",
+                        "on-secondary-container": "#a7b6cc",
+                        "on-tertiary-container": "#7b8189",
+                        "on-tertiary": "#2b3137",
+                        "on-secondary-fixed-variant": "#39485a",
+                        "surface-dim": "#0c1324",
+                        "inverse-primary": "#565e74",
+                        "tertiary-container": "#12181e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "container-max": "1440px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Montserrat"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface flex flex-col h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm dark:shadow-none h-20">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-full max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="font-display-lg text-headline-md tracking-wider text-primary dark:text-primary-fixed uppercase">Mind Share Media</span>
+</div>
+<nav class="hidden md:flex space-x-8 items-center h-full">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary font-body-md transition-colors duration-300" href="../index.html">Home</a>
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 font-body-md" href="../our-team/index.html">Our Team</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary font-body-md transition-colors duration-300" href="../services/index.html">Services</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary font-body-md transition-colors duration-300" href="../services/index.html#contact">Contact</a>
+</nav>
+<div class="flex items-center space-x-6">
+<div class="hidden md:flex items-center bg-surface-container-high/50 px-4 py-1.5 rounded-full border border-white/5">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-32 placeholder-on-surface-variant" placeholder="Global Search..." type="text">
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80 transition-all hover:bg-white/5 p-2 rounded-full">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80 transition-all hover:bg-white/5 p-2 rounded-full">settings</span>
+<img class="w-10 h-10 rounded-full border border-primary/30 object-cover" data-alt="A professional headshot of a senior executive in a high-end corporate office setting. The individual is wearing a charcoal grey tailored suit, standing against a backdrop of a blurred metropolitan skyline through floor-to-ceiling glass windows at twilight. The lighting is cold, architectural, and sophisticated, emphasizing sharp features and a confident expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD_cxPZsVB4O7i12grMj-WbNmCB5vVqdElOUuV6-KBqr1VI1NZH78c05urWijL-JGSFxtzXShk-YyXR0VGi5byrI-N2S1i28FdHMfyIixIInxAtx33T8-8BCH7ciuBhJfdMsMSUVw0zcgHBd2PBBCgxCwRSlfy-DSueDCUq8THa_j3I0Bc5I7Kp0-5LJ3vFj-nAqjGjnuua_3E4VPRUOBgWD1A4XCe6lE_jeJegxeTFvi1T5N74Ovw0f5qNhh25TNBmHDvJioa8z57">
+</div>
+</div>
+</div>
+</header>
+<!-- Main Workspace Container -->
+<main class="flex flex-1 pt-20 overflow-hidden">
+<!-- SideNavBar (Strategy & Operations) -->
+<aside class="w-1/4 h-full bg-surface-container-low dark:bg-surface-container-lowest backdrop-blur-2xl border-r border-white/10 shadow-2xl flex flex-col p-6 space-y-6 overflow-y-auto custom-scrollbar">
+<div class="mb-4">
+<div class="flex items-center gap-3 mb-2"><div class="p-2 bg-secondary-container rounded-lg">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+<div class="flex-1">
+<div class="w-full flex flex-col items-start gap-2 group/nav">
+<label class="font-display-lg text-headline-md text-primary leading-none group-hover/nav:text-primary-fixed transition-colors" for="division-select">Division</label>
+<div class="relative w-full">
+<select id="division-select" class="w-full appearance-none border border-white/10 rounded-lg py-2 pl-3 pr-10 font-label-sm focus:border-primary focus:ring-primary">
+<option value="strategy-and-operations">Strategy &amp; Operations</option>
+<option value="product-and-design">Product &amp; Design</option>
+<option value="technology-and-data">Technology &amp; Data</option>
+<option value="revenue-and-market">Revenue &amp; Market</option>
+<option value="finance">Finance</option>
+<option value="administration">Administration</option>
+</select>
+<span class="material-symbols-outlined text-on-surface-variant pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">expand_more</span>
+</div>
+</div>
+</div></div>
+<div class="h-[1px] w-full bg-white/10 mt-4"></div></div>
+<!-- Collapsible Sections -->
+<div class="pt-6 pb-2">
+<h3 class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Departments</h3>
+</div>
+<div class="flex flex-col space-y-2" id="department-sections">
+<!-- Department sections are populated from the selected division. -->
+</div>
+<!-- Holding Spaces -->
+<div class="mt-auto space-y-4 pt-6 flex-1">
+<h3 class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">ACTIVE SESSIONS</h3>
+<div class="space-y-3" id="active-sessions-list">
+<div class="h-16 glass-panel-heavy rounded-xl silver-edge flex items-center justify-center border-dashed border-white/10">
+<span class="font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/50">No active processing</span>
+</div>
+</div>
+</div>
+<!-- Footer CTA -->
+
+</aside>
+<!-- Main Content (Neural Suite Interface) -->
+<section class="w-3/4 p-0 bg-surface relative overflow-hidden flex flex-col">
+<!-- Background Decoration -->
+<div class="absolute top-0 right-0 w-1/2 h-1/2 bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+<!-- Interface Frame -->
+<div class="relative flex-1 flex flex-col glass-panel rounded-none border-2 border-primary-fixed-dim/70 overflow-hidden shadow-none">
+<!-- Frame Header -->
+<div class="h-16 px-8 flex items-center justify-between border-b border-white/10 glass-panel-heavy z-10">
+<div class="flex items-center gap-4">
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-error/20 border border-error/30 transition-all" id="office-status-red" title="No connected office session"></div>
+<div class="w-3 h-3 rounded-full bg-emerald-400/20 border border-emerald-400/30 transition-all" id="office-status-green" title="Office session connected"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-300/20 border border-yellow-300/30 transition-all" id="office-status-yellow" title="Office session may be stale"></div>
+</div>
+<div class="h-6 w-[1px] bg-white/10 mx-2"></div>
+<span class="font-display-lg text-body-lg text-primary font-bold tracking-tight" id="main-window-title">Agent Name</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-2 glass-panel px-3 py-2 rounded-md border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all cursor-pointer" id="connect-codex-button" type="button">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Connect Codex
+                        </button>
+<button class="flex items-center gap-2 glass-panel px-3 py-2 rounded-md border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all cursor-pointer" id="connect-claude-button" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">memory</span>
+<span class="font-label-sm text-primary">Connect Claude</span>
+</button>
+</div>
+</div>
+<div class="hidden border-b border-white/10 bg-surface-container-low/70 px-8 py-3" id="office-context-panel">
+<div class="flex flex-wrap items-center justify-between gap-3">
+<div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 min-w-0">
+<span class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Current Office</span>
+<span class="font-display-lg text-body-lg text-primary font-bold leading-tight" id="office-context-name">Agent Name</span>
+</div>
+<div class="flex flex-wrap gap-2 text-[10px] uppercase tracking-widest font-label-sm shrink-0">
+<div class="relative">
+<button class="glass-panel px-3 py-2 rounded-md text-on-surface-variant silver-edge hover:border-primary/50 hover:text-primary transition-colors cursor-pointer" id="office-context-title" type="button">Title</button>
+<div class="hidden absolute right-0 top-full mt-2 w-[500px] max-w-[calc(100vw-2rem)] glass-panel-heavy silver-edge rounded-lg p-4 z-40 normal-case tracking-normal text-left" id="office-title-dropdown"></div>
+</div>
+<div class="relative">
+<button class="glass-panel px-3 py-2 rounded-md text-on-surface-variant silver-edge hover:border-primary/50 hover:text-primary transition-colors cursor-pointer" id="office-context-level" type="button">Level</button>
+<div class="hidden absolute right-0 top-full mt-2 w-[460px] max-w-[calc(100vw-2rem)] glass-panel-heavy silver-edge rounded-lg p-4 z-40 normal-case tracking-normal text-left" id="office-level-dropdown"></div>
+</div>
+<div class="relative">
+<button class="glass-panel px-3 py-2 rounded-md text-on-surface-variant silver-edge hover:border-primary/50 hover:text-primary transition-colors cursor-pointer" id="office-context-files" type="button">Context pending</button>
+<div class="hidden absolute right-0 top-full mt-2 w-[520px] max-w-[calc(100vw-2rem)] max-h-80 overflow-y-auto custom-scrollbar glass-panel-heavy silver-edge rounded-lg p-3 z-40 normal-case tracking-normal text-left" id="office-files-dropdown"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Canvas -->
+<div class="flex-1 overflow-y-auto p-8 custom-scrollbar" id="chat-transcript" aria-live="polite">
+<div class="h-full min-h-[320px] flex items-center justify-center border border-white/5 bg-surface/30" data-chat-placeholder>
+<p class="font-label-sm text-on-surface-variant/50 uppercase tracking-widest">Chat Window</p>
+</div>
+</div>
+<!-- Input Zone -->
+<div class="p-6 border-t border-white/10 glass-panel-heavy z-10">
+<div class="w-full relative group">
+<textarea class="w-full bg-surface-container-low border border-white/10 rounded-xl px-6 py-4 pr-32 focus:border-primary transition-all focus:ring-0 text-on-surface font-body-md resize-none custom-scrollbar" id="chat-input" placeholder="Query Neural Suite..." rows="3"></textarea>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-3">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors" id="attach-file-button" type="button">
+<span class="material-symbols-outlined">attachment</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="metallic-silver p-2 rounded-lg text-on-primary" id="send-message-button" type="button">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<div class="hidden pt-3 flex flex-wrap gap-2" id="attachment-tray"></div>
+<div class="min-h-5 pt-2 font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/60" id="chat-status" aria-live="polite"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Suppressed based on Transactional Shell Logic, but provided for branding) -->
+<footer class="w-full py-4 mt-auto bg-surface-dim dark:bg-surface-container-lowest border-t border-white/5 flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop z-50">
+<p class="font-label-sm text-on-surface-variant text-[10px]">© 2024 Mind Share Media. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="font-label-sm text-on-surface-variant hover:text-primary text-[10px] transition-all" href="#">Privacy Policy</a>
+<a class="font-label-sm text-on-surface-variant hover:text-primary text-[10px] transition-all" href="#">Terms of Service</a>
+<a class="font-label-sm text-on-surface-variant hover:text-primary text-[10px] transition-all" href="#">Cookie Policy</a>
+</div>
+</footer>
+<script>
+        function toggleSection(id, iconId) {
+            const section = document.getElementById(id);
+            const icon = document.getElementById(iconId);
+            const isExpanded = section.style.maxHeight !== '0px';
+
+            if (isExpanded) {
+                section.style.maxHeight = '0px';
+                section.style.opacity = '0';
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Approximate max-height for content
+                section.style.maxHeight = '500px'; 
+                section.style.opacity = '1';
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        const divisionDepartments = {
+            "strategy-and-operations": {
+                label: "Strategy & Operations",
+                departments: ["Executive Leadership", "Program Management Office", "Human Resources", "Recruiting", "Risk Management"]
+            },
+            "product-and-design": {
+                label: "Product & Design",
+                departments: ["Product Management", "Service Design", "Experience Design", "User Research"]
+            },
+            "technology-and-data": {
+                label: "Technology & Data",
+                departments: ["Engineering", "Platform Engineering", "Data Engineering", "AI Engineering", "Security"],
+                entries: {
+                    "AI Engineering": [
+                        { slug: "bea", name: "Bea", title: "Mojo MAPS Engineer", level: "Level 3 Staff", image: "../assets/team/bea.webp" },
+                        { slug: "tess", name: "Tess", title: "Autonomy Engineer", level: "Level 4 Scoped Autonomy", image: "../assets/team/tess.webp" }
+                    ]
+                }
+            },
+            "revenue-and-market": {
+                label: "Revenue & Market",
+                departments: ["Sales", "Marketing", "Partnerships", "Customer Success", "Support"]
+            },
+            "finance": {
+                label: "Finance",
+                departments: ["Accounting", "Accounts Payable", "Accounts Receivable", "Purchasing", "Tax"]
+            },
+            "administration": {
+                label: "Administration",
+                departments: ["People Operations", "Legal", "Compliance", "Vendor Management"]
+            }
+        };
+
+        const departmentIcons = ["corporate_fare", "account_tree", "groups_2", "person_search", "shield"];
+        const levelDefinitions = {
+            "level 0": {
+                name: "Level 0 Candidate",
+                label: "Candidate",
+                summary: "Proposed role or packet that has not been activated as a working operator.",
+                entails: [
+                    "Can be reviewed, shaped, and prepared.",
+                    "Cannot act as an active team member.",
+                    "Has no autonomous authority."
+                ]
+            },
+            "level 1": {
+                name: "Level 1 New Hire",
+                label: "Present",
+                summary: "Activated identity stage. The role can identify itself, its office, and required source files.",
+                entails: [
+                    "Loads WhoAmI/source context.",
+                    "Fails closed when required source is missing.",
+                    "Non-autonomous."
+                ]
+            },
+            "level 2": {
+                name: "Level 2 Trainee",
+                label: "Responsive",
+                summary: "Can research, answer, recommend, and name risks or owners without changing state.",
+                entails: [
+                    "Provides research and recommendations.",
+                    "Names gates, risks, and owner routes.",
+                    "Non-autonomous."
+                ]
+            },
+            "level 3": {
+                name: "Level 3 Staff",
+                label: "Coordinating",
+                summary: "Last non-autonomous stage. Can coordinate assigned work inside approved channels when explicitly assigned.",
+                entails: [
+                    "Can read/write assigned handoff or memory artifacts within approved scope.",
+                    "Acts only when explicitly assigned or invoked.",
+                    "Does not autonomously process backlog or continue work loops."
+                ]
+            },
+            "level 4": {
+                name: "Level 4 Senior Staff",
+                label: "Scoped Autonomy",
+                summary: "First autonomy stage. Can process approved role-native scoped work under a locked contract.",
+                entails: [
+                    "Can complete approved scoped backlog or queue items without Scott restating every intermediate step.",
+                    "Requires trigger, runtime/work-loop, state, proof, stop conditions, owner routing, and revocation path.",
+                    "Does not create broad policy autonomy or expand authority."
+                ]
+            },
+            "level 5": {
+                name: "Level 5 Principal",
+                label: "Policy Autonomy",
+                summary: "Policy-based autonomy across a recurring class of role-native situations.",
+                entails: [
+                    "Requires an approved written policy with eligibility, thresholds, allowed and denied actions.",
+                    "Requires runtime gate enforcement, audit, evals, exception routing, and revocation path.",
+                    "Not just larger Level 4 tasks."
+                ]
+            },
+            "level 6": {
+                name: "Level 6 Partner",
+                label: "Native Autonomy",
+                summary: "Full role-native autonomy inside a final approved mandate.",
+                entails: [
+                    "Can pursue delegated role-native goals across turns with approved tools, policies, observation, and rollback.",
+                    "May recommend policy changes but cannot self-expand authority.",
+                    "Still cannot cross out-of-role gates such as release, production, secrets, spending, or external communication without approval."
+                ]
+            }
+        };
+
+        function renderDepartmentSections(divisionSlug) {
+            const selected = divisionDepartments[divisionSlug] || divisionDepartments["strategy-and-operations"];
+            const container = document.getElementById('department-sections');
+            container.innerHTML = selected.departments.map((department, index) => {
+                const listId = `${divisionSlug}-dept-${index}-list`;
+                const iconId = `${divisionSlug}-dept-${index}-icon`;
+                const icon = departmentIcons[index] || "business_center";
+                const entries = selected.entries?.[department] || [];
+                const entryMarkup = entries.length ? entries.map(entry => `
+                    <button class="w-full text-left flex items-center justify-between gap-3 p-3 rounded-lg border border-white/10 bg-surface-container-lowest hover:border-primary/40 hover:bg-white/5 transition-all" type="button" onclick="selectRole('${entry.slug}', '${entry.name}', '${entry.title}', '${entry.level}')">
+                        <span class="min-w-0 flex flex-col gap-1">
+                            <span class="text-sm font-medium text-primary">${entry.name}</span>
+                            <span class="text-xs text-on-surface">${entry.title}</span>
+                            <span class="text-[10px] uppercase tracking-widest text-on-surface-variant">${entry.level}</span>
+                        </span>
+                        ${entry.image ? `<img class="w-12 h-12 rounded-lg border border-primary/30 object-cover shrink-0" src="${entry.image}" alt="${entry.name} portrait">` : ''}
+                    </button>
+                `).join('') : `
+                    <div class="flex flex-col">
+                        <span class="text-sm font-medium text-primary">${department}</span>
+                        <span class="text-xs text-on-surface-variant">${selected.label}</span>
+                    </div>
+                `;
+                return `
+                    <div class="group">
+                        <button class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all silver-edge" onclick="toggleSection('${listId}', '${iconId}')">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">${icon}</span>
+                                <span class="font-body-md font-semibold text-on-surface">${department}</span>
+                            </div>
+                            <span class="material-symbols-outlined text-on-surface-variant transition-transform" id="${iconId}">expand_more</span>
+                        </button>
+                        <div class="max-height-0 overflow-hidden section-collapse opacity-0" id="${listId}" style="max-height: 0px; opacity: 0;">
+                            <div class="pl-12 py-2 space-y-3">
+                                ${entryMarkup}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        let activeRoleSlug = null;
+        let activeRoleContext = null;
+        let codexAvailable = false;
+        let claudeAvailable = false;
+        let activeEngine = 'codex';
+        const roleSessions = {};
+        const pendingAttachments = [];
+
+        function ensureRoleSession(slug, name, title, level) {
+            if (!roleSessions[slug]) {
+                roleSessions[slug] = {
+                    slug,
+                    name,
+                    title,
+                    level,
+                    codexSessionId: null,
+                    claudeSessionId: null,
+                    roleContext: null,
+                    messages: [],
+                    officeInjected: false,
+                    connectionIssue: false,
+                    processing: false,
+                    processingEngine: null
+                };
+            } else {
+                Object.assign(roleSessions[slug], { name, title, level });
+            }
+            return roleSessions[slug];
+        }
+
+        async function selectRole(slug, name, title, level) {
+            const roleSession = ensureRoleSession(slug, name, title, level);
+            const mainWindowTitle = document.getElementById('main-window-title');
+            mainWindowTitle.textContent = `${name} · ${title} · ${level}`;
+            activeRoleSlug = slug;
+            activeRoleContext = roleSession.roleContext;
+            renderTranscript(roleSession.messages);
+            renderOfficeConnectionStatus(roleSession);
+            renderOfficeFilesDropdown(activeRoleContext);
+            renderOfficeTitleDropdown(title);
+            renderOfficeLevelDropdown(level);
+            closeContextDropdowns();
+            showOfficeContext({
+                name,
+                title,
+                level,
+                filesText: activeRoleContext ? contextFilesText(activeRoleContext) : 'Loading context...'
+            });
+            setChatStatus(`Loading ${name}'s office context...`);
+
+            const client = mindShareLocalClient();
+            if (!client?.loadRoleContext) {
+                addChatError('MindShare Local is required to load role files. Open this page from the MindShare Local desktop app.');
+                clearChatStatus();
+                return;
+            }
+
+            try {
+                const payload = await client.loadRoleContext({ roleSlug: slug });
+                if (!payload.ok) {
+                    addChatError(payload.error || `Could not load ${name}'s role context.`);
+                    clearChatStatus();
+                    return;
+                }
+
+                activeRoleContext = payload.roleContext;
+                roleSession.roleContext = payload.roleContext;
+                renderOfficeFilesDropdown(payload.roleContext);
+                showOfficeContext({
+                    name,
+                    title,
+                    level,
+                    filesText: contextFilesText(payload.roleContext)
+                });
+                const createdSessions = await provisionAvailableProviderSessions(roleSession);
+                if (createdSessions.length) {
+                    setChatStatus(`${name}'s ${createdSessions.join(' and ')} office session${createdSessions.length === 1 ? '' : 's'} connected.`);
+                } else {
+                    clearChatStatus();
+                }
+            } catch (error) {
+                addChatError(`Could not load ${name}'s role context: ${error.message || error}`);
+                clearChatStatus();
+            }
+        }
+
+        function mindShareLocalClient() {
+            return window.MindShareLocalClient || null;
+        }
+
+        function attachmentLabel(attachments) {
+            if (!attachments.length) return '';
+            return attachments.map((file) => `[${file.name || 'attachment'}]`).join(' ');
+        }
+
+        function normalizeAttachment(file) {
+            return {
+                name: file.name || 'attachment',
+                path: file.path || '',
+                type: file.type || '',
+                size: Number(file.size || 0)
+            };
+        }
+
+        function addPendingAttachments(files) {
+            const normalized = Array.from(files || [])
+                .map(normalizeAttachment)
+                .filter((file) => file.path || file.name);
+            for (const file of normalized) {
+                const duplicate = pendingAttachments.some((existing) =>
+                    (file.path && existing.path === file.path) ||
+                    (!file.path && existing.name === file.name && existing.size === file.size)
+                );
+                if (!duplicate) {
+                    pendingAttachments.push(file);
+                }
+            }
+            renderAttachmentTray();
+        }
+
+        function removePendingAttachment(index) {
+            pendingAttachments.splice(index, 1);
+            renderAttachmentTray();
+        }
+
+        function clearPendingAttachments() {
+            pendingAttachments.splice(0, pendingAttachments.length);
+            renderAttachmentTray();
+        }
+
+        function renderAttachmentTray() {
+            const tray = document.getElementById('attachment-tray');
+            if (!tray) return;
+            if (!pendingAttachments.length) {
+                tray.classList.add('hidden');
+                tray.innerHTML = '';
+                return;
+            }
+            tray.classList.remove('hidden');
+            tray.innerHTML = pendingAttachments.map((file, index) => `
+                <span class="glass-panel silver-edge inline-flex max-w-full items-center gap-2 rounded-md px-3 py-2 text-[11px] text-on-surface-variant">
+                    <span class="material-symbols-outlined text-[16px] text-primary">${file.type?.startsWith('image/') ? 'image' : 'description'}</span>
+                    <span class="max-w-64 truncate normal-case tracking-normal">${escapeHtml(file.name || file.path || 'attachment')}</span>
+                    <button class="text-on-surface-variant hover:text-error" type="button" data-remove-attachment="${index}">
+                        <span class="material-symbols-outlined text-[16px]">close</span>
+                    </button>
+                </span>
+            `).join('');
+            tray.querySelectorAll('[data-remove-attachment]').forEach((button) => {
+                button.addEventListener('click', () => removePendingAttachment(Number(button.dataset.removeAttachment)));
+            });
+        }
+
+        async function chooseAttachments() {
+            const client = mindShareLocalClient();
+            if (!client?.chooseFiles) {
+                addChatError('File upload is available only inside the MindShare Local desktop app.');
+                return;
+            }
+            const payload = await client.chooseFiles();
+            if (!payload.ok) {
+                addChatError(payload.error || 'Could not open the file picker.');
+                return;
+            }
+            addPendingAttachments(payload.files || []);
+        }
+
+        function handlePromptPaste(event) {
+            const files = Array.from(event.clipboardData?.files || []);
+            if (files.length) {
+                addPendingAttachments(files);
+                if (files.some((file) => !file.path)) {
+                    setChatStatus('Pasted file detected. If the file has no local path, use the attachment button for full CLI access.');
+                }
+            }
+        }
+
+        function contextFilesText(roleContext) {
+            const loadedCount = roleContext.files.filter((file) => file.exists).length;
+            const missingFiles = roleContext.files.filter((file) => !file.exists).map((file) => file.fileName);
+            return missingFiles.length ? `Missing: ${missingFiles.join(', ')}` : `${loadedCount} files loaded`;
+        }
+
+        function renderOfficeFilesDropdown(roleContext) {
+            const dropdown = document.getElementById('office-files-dropdown');
+            if (!dropdown) return;
+            if (!roleContext?.files?.length) {
+                dropdown.innerHTML = `
+                    <div class="px-3 py-4 text-on-surface-variant font-label-sm uppercase tracking-widest text-[10px]">
+                        No role files loaded yet.
+                    </div>
+                `;
+                return;
+            }
+
+            const loadedFiles = roleContext.files.filter((file) => file.exists);
+            const missingFiles = roleContext.files.filter((file) => !file.exists);
+            dropdown.innerHTML = `
+                <div class="flex items-center justify-between gap-4 px-2 pb-3 border-b border-white/10">
+                    <span class="font-label-sm text-[10px] uppercase tracking-widest text-primary">Loaded Context Files</span>
+                    <span class="font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant">${loadedFiles.length} loaded${missingFiles.length ? ` / ${missingFiles.length} missing` : ''}</span>
+                </div>
+                <div class="divide-y divide-white/10">
+                    ${loadedFiles.map((file) => `
+                        <div class="py-3 px-2">
+                            <div class="font-body-md text-sm text-on-surface">${escapeHtml(file.fileName)}</div>
+                            <div class="mt-1 font-mono text-[11px] leading-relaxed text-on-surface-variant break-all">${escapeHtml(file.path)}</div>
+                        </div>
+                    `).join('')}
+                    ${missingFiles.map((file) => `
+                        <div class="py-3 px-2 opacity-70">
+                            <div class="font-body-md text-sm text-error">${escapeHtml(file.fileName)} missing</div>
+                            <div class="mt-1 font-mono text-[11px] leading-relaxed text-on-surface-variant break-all">${escapeHtml(file.path)}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function closeOfficeFilesDropdown() {
+            document.getElementById('office-files-dropdown')?.classList.add('hidden');
+        }
+
+        function closeOfficeLevelDropdown() {
+            document.getElementById('office-level-dropdown')?.classList.add('hidden');
+        }
+
+        function closeOfficeTitleDropdown() {
+            document.getElementById('office-title-dropdown')?.classList.add('hidden');
+        }
+
+        function closeContextDropdowns() {
+            closeOfficeFilesDropdown();
+            closeOfficeLevelDropdown();
+            closeOfficeTitleDropdown();
+        }
+
+        function toggleOfficeFilesDropdown(event) {
+            event?.stopPropagation();
+            const dropdown = document.getElementById('office-files-dropdown');
+            if (!dropdown) return;
+            renderOfficeFilesDropdown(activeRoleContext);
+            closeOfficeLevelDropdown();
+            closeOfficeTitleDropdown();
+            dropdown.classList.toggle('hidden');
+        }
+
+        function levelDefinitionFor(level) {
+            const match = String(level || '').toLowerCase().match(/level\s+[0-6]/);
+            return match ? levelDefinitions[match[0]] : null;
+        }
+
+        function renderOfficeLevelDropdown(level) {
+            const dropdown = document.getElementById('office-level-dropdown');
+            if (!dropdown) return;
+            const definition = levelDefinitionFor(level);
+            if (!definition) {
+                dropdown.innerHTML = `
+                    <div class="text-on-surface-variant font-label-sm uppercase tracking-widest text-[10px]">
+                        No level definition is available yet.
+                    </div>
+                `;
+                return;
+            }
+            dropdown.innerHTML = `
+                <div class="space-y-3">
+                    <div>
+                        <div class="font-label-sm text-[10px] uppercase tracking-widest text-primary">${escapeHtml(definition.name)}</div>
+                        <div class="mt-1 font-display-lg text-body-lg text-on-surface">${escapeHtml(definition.label)}</div>
+                    </div>
+                    <p class="font-body-md text-sm leading-relaxed text-on-surface-variant">${escapeHtml(definition.summary)}</p>
+                    <div class="space-y-2">
+                        ${definition.entails.map((item) => `
+                            <div class="flex gap-2 text-sm leading-relaxed text-on-surface">
+                                <span class="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0"></span>
+                                <span>${escapeHtml(item)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleOfficeLevelDropdown(event) {
+            event?.stopPropagation();
+            const dropdown = document.getElementById('office-level-dropdown');
+            if (!dropdown) return;
+            const activeLevel = activeRoleSlug && roleSessions[activeRoleSlug] ? roleSessions[activeRoleSlug].level : '';
+            renderOfficeLevelDropdown(activeLevel);
+            closeOfficeFilesDropdown();
+            closeOfficeTitleDropdown();
+            dropdown.classList.toggle('hidden');
+        }
+
+        function titleDescriptionFor(title) {
+            const descriptions = window.MindShareTitleDescriptions || {};
+            return descriptions[title] || null;
+        }
+
+        function renderOfficeTitleDropdown(title) {
+            const dropdown = document.getElementById('office-title-dropdown');
+            if (!dropdown) return;
+            const description = titleDescriptionFor(title);
+            if (!description) {
+                dropdown.innerHTML = `
+                    <div class="space-y-2">
+                        <div class="font-label-sm text-[10px] uppercase tracking-widest text-primary">${escapeHtml(title || 'Title')}</div>
+                        <p class="font-body-md text-sm leading-relaxed text-on-surface-variant">No title description exists yet in <span class="font-mono">public/data/title-descriptions.js</span>.</p>
+                    </div>
+                `;
+                return;
+            }
+            dropdown.innerHTML = `
+                <div class="space-y-4">
+                    <div>
+                        <div class="font-label-sm text-[10px] uppercase tracking-widest text-primary">Role Title</div>
+                        <div class="mt-1 font-display-lg text-body-lg text-on-surface">${escapeHtml(title)}</div>
+                    </div>
+                    <p class="font-body-md text-sm leading-relaxed text-on-surface-variant">${escapeHtml(description.summary)}</p>
+                    <div>
+                        <div class="font-label-sm text-[10px] uppercase tracking-widest text-primary mb-2">Responsibilities</div>
+                        <div class="space-y-2">
+                            ${(description.responsibilities || []).map((item) => `
+                                <div class="flex gap-2 text-sm leading-relaxed text-on-surface">
+                                    <span class="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0"></span>
+                                    <span>${escapeHtml(item)}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-label-sm text-[10px] uppercase tracking-widest text-primary mb-2">Boundaries</div>
+                        <div class="space-y-2">
+                            ${(description.boundaries || []).map((item) => `
+                                <div class="flex gap-2 text-sm leading-relaxed text-on-surface-variant">
+                                    <span class="mt-2 h-1.5 w-1.5 rounded-full bg-yellow-300 shrink-0"></span>
+                                    <span>${escapeHtml(item)}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleOfficeTitleDropdown(event) {
+            event?.stopPropagation();
+            const dropdown = document.getElementById('office-title-dropdown');
+            if (!dropdown) return;
+            const activeTitle = activeRoleSlug && roleSessions[activeRoleSlug] ? roleSessions[activeRoleSlug].title : '';
+            renderOfficeTitleDropdown(activeTitle);
+            closeOfficeFilesDropdown();
+            closeOfficeLevelDropdown();
+            dropdown.classList.toggle('hidden');
+        }
+
+        function clearChatPlaceholder() {
+            const transcript = document.getElementById('chat-transcript');
+            const placeholder = transcript.querySelector('[data-chat-placeholder]');
+            if (placeholder) {
+                placeholder.remove();
+            }
+        }
+
+        function escapeHtml(value) {
+            return value
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#039;');
+        }
+
+        function addChatMessage(role, text) {
+            const transcript = document.getElementById('chat-transcript');
+            clearChatPlaceholder();
+            if (activeRoleSlug && roleSessions[activeRoleSlug]) {
+                roleSessions[activeRoleSlug].messages.push({ role, text });
+            }
+            appendChatMessage(role, text);
+            transcript.scrollTop = transcript.scrollHeight;
+        }
+
+        function appendChatMessage(role, text) {
+            const transcript = document.getElementById('chat-transcript');
+            const isUser = role === 'user';
+            const row = document.createElement('div');
+            row.className = `max-w-4xl mx-auto mb-6 flex gap-4 ${isUser ? 'flex-row-reverse' : ''}`;
+            row.innerHTML = `
+                <div class="${isUser ? 'metallic-silver text-on-primary' : 'glass-panel-heavy border border-primary/30 text-primary'} w-9 h-9 rounded-lg flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[20px]">${isUser ? 'person' : 'smart_toy'}</span>
+                </div>
+                <div class="${isUser ? 'bg-primary-container text-primary-fixed rounded-tr-none' : 'glass-panel-heavy text-on-surface rounded-tl-none silver-edge'} max-w-3xl p-5 rounded-2xl whitespace-pre-wrap leading-relaxed font-body-md">${escapeHtml(text)}</div>
+            `;
+            transcript.appendChild(row);
+            transcript.scrollTop = transcript.scrollHeight;
+        }
+
+        function renderTranscript(messages) {
+            const transcript = document.getElementById('chat-transcript');
+            transcript.innerHTML = '';
+            if (!messages.length) {
+                transcript.innerHTML = `
+                    <div class="h-full min-h-[320px] flex items-center justify-center border border-white/5 bg-surface/30" data-chat-placeholder>
+                        <p class="font-label-sm text-on-surface-variant/50 uppercase tracking-widest">Chat Window</p>
+                    </div>
+                `;
+                return;
+            }
+            messages.forEach((message) => appendChatMessage(message.role, message.text));
+        }
+
+        function addChatError(text) {
+            addChatMessage('system', text);
+        }
+
+        function addChatMessageToRole(roleSession, role, text) {
+            roleSession.messages.push({ role, text });
+            if (activeRoleSlug === roleSession.slug) {
+                clearChatPlaceholder();
+                appendChatMessage(role, text);
+            }
+        }
+
+        function injectOfficeEntry(roleSession, text) {
+            if (roleSession.officeInjected) {
+                return;
+            }
+            roleSession.officeInjected = true;
+            const officeText = text || `This is ${roleSession.name}'s office.`;
+            addChatMessageToRole(roleSession, 'user', officeText);
+        }
+
+        function showOfficeContext({ name, title, level, filesText }) {
+            const panel = document.getElementById('office-context-panel');
+            panel?.classList.remove('hidden');
+            document.getElementById('office-context-name').textContent = name || 'Agent Name';
+            document.getElementById('office-context-title').textContent = title || 'Title';
+            document.getElementById('office-context-level').textContent = level || 'Level';
+            document.getElementById('office-context-files').textContent = filesText || 'Context loaded';
+        }
+
+        function renderActiveSessions() {
+            const container = document.getElementById('active-sessions-list');
+            const activeSessions = Object.values(roleSessions).filter((session) => session.processing);
+            if (!activeSessions.length) {
+                container.innerHTML = `
+                    <div class="h-16 glass-panel-heavy rounded-xl silver-edge flex items-center justify-center border-dashed border-white/10">
+                        <span class="font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/50">No active processing</span>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = activeSessions.map((session) => `
+                <button class="w-full h-16 glass-panel-heavy rounded-xl silver-edge flex items-center justify-between px-4 text-left hover:border-primary/40 transition-colors" type="button" data-active-role="${session.slug}">
+                    <span>
+                        <span class="block text-sm font-medium text-primary">${session.name}</span>
+                        <span class="block text-[10px] uppercase tracking-widest text-on-surface-variant">${session.title}</span>
+                    </span>
+                    <span class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-on-surface-variant">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        ${session.processingEngine === 'claude' ? 'Claude' : 'Codex'}
+                    </span>
+                </button>
+            `).join('');
+
+            container.querySelectorAll('[data-active-role]').forEach((button) => {
+                button.addEventListener('click', () => {
+                    const session = roleSessions[button.dataset.activeRole];
+                    if (session) {
+                        selectRole(session.slug, session.name, session.title, session.level);
+                    }
+                });
+            });
+        }
+
+        function setChatStatus(text) {
+            const status = document.getElementById('chat-status');
+            if (status) {
+                status.textContent = text || '';
+            }
+        }
+
+        function clearChatStatus() {
+            setChatStatus('');
+        }
+
+        function hasConnectedOfficeSession(roleSession) {
+            return Boolean(roleSession?.codexSessionId || roleSession?.claudeSessionId);
+        }
+
+        function setOfficeStatusDot(id, litClass, dimClass, isLit) {
+            const dot = document.getElementById(id);
+            if (!dot) return;
+            dot.className = `w-3 h-3 rounded-full border transition-all ${isLit ? litClass : dimClass}`;
+        }
+
+        function renderOfficeConnectionStatus(roleSession) {
+            const stale = Boolean(roleSession?.connectionIssue && hasConnectedOfficeSession(roleSession));
+            const connected = Boolean(hasConnectedOfficeSession(roleSession) && !stale);
+            const disconnected = Boolean(roleSession && !hasConnectedOfficeSession(roleSession));
+            setOfficeStatusDot(
+                'office-status-red',
+                'bg-error shadow-[0_0_12px_rgba(255,180,171,0.75)] border-error',
+                'bg-error/20 border-error/30',
+                disconnected
+            );
+            setOfficeStatusDot(
+                'office-status-green',
+                'bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.75)] border-emerald-300',
+                'bg-emerald-400/20 border-emerald-400/30',
+                connected
+            );
+            setOfficeStatusDot(
+                'office-status-yellow',
+                'bg-yellow-300 shadow-[0_0_12px_rgba(253,224,71,0.75)] border-yellow-200',
+                'bg-yellow-300/20 border-yellow-300/30',
+                stale
+            );
+        }
+
+        function markOfficeSessionIssue(roleSession) {
+            if (!roleSession) return;
+            roleSession.connectionIssue = true;
+            if (activeRoleSlug === roleSession.slug) {
+                renderOfficeConnectionStatus(roleSession);
+            }
+        }
+
+        function markOfficeSessionConnected(roleSession) {
+            if (!roleSession) return;
+            roleSession.connectionIssue = false;
+            if (activeRoleSlug === roleSession.slug) {
+                renderOfficeConnectionStatus(roleSession);
+            }
+        }
+
+        async function ensureProviderSession(roleSession, engine) {
+            const client = mindShareLocalClient();
+            const isClaude = engine === 'claude';
+            const connect = isClaude ? client?.connectClaude : client?.connectCodex;
+            const sessionKey = isClaude ? 'claudeSessionId' : 'codexSessionId';
+            if (!connect) {
+                return {
+                    ok: false,
+                    error: 'MindShare Local Client is not connected.'
+                };
+            }
+            if (roleSession[sessionKey]) {
+                markOfficeSessionConnected(roleSession);
+                return {
+                    ok: true,
+                    sessionId: roleSession[sessionKey],
+                    reused: true
+                };
+            }
+
+            const payload = await connect({ roleSlug: roleSession.slug });
+            if (!payload.ok) {
+                if (roleSession[sessionKey]) {
+                    markOfficeSessionIssue(roleSession);
+                }
+                return payload;
+            }
+            roleSession[sessionKey] = payload.sessionId;
+            markOfficeSessionConnected(roleSession);
+            injectOfficeEntry(roleSession, payload.initialMessage);
+            return {
+                ...payload,
+                reused: false
+            };
+        }
+
+        async function provisionAvailableProviderSessions(roleSession) {
+            const created = [];
+            if (codexAvailable && !roleSession.codexSessionId) {
+                const payload = await ensureProviderSession(roleSession, 'codex');
+                if (payload.ok && !payload.reused) created.push('Codex');
+            }
+            if (claudeAvailable && !roleSession.claudeSessionId) {
+                const payload = await ensureProviderSession(roleSession, 'claude');
+                if (payload.ok && !payload.reused) created.push('Claude');
+            }
+            return created;
+        }
+
+        function showLocalClientInstallPrompt() {
+            const transcript = document.getElementById('chat-transcript');
+            clearChatPlaceholder();
+            const row = document.createElement('div');
+            row.className = 'max-w-4xl mx-auto mb-6 flex gap-4';
+            row.innerHTML = `
+                <div class="glass-panel-heavy border border-primary/30 text-primary w-9 h-9 rounded-lg flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[20px]">extension</span>
+                </div>
+                <div class="glass-panel-heavy text-on-surface rounded-tl-none silver-edge max-w-3xl p-5 rounded-2xl leading-relaxed font-body-md">
+                    <p>MindShare Local is not running. Open this page from the MindShare Local desktop app, then click Connect Codex again.</p>
+                </div>
+            `;
+            transcript.appendChild(row);
+            transcript.scrollTop = transcript.scrollHeight;
+        }
+
+        async function connectCodex() {
+            const button = document.getElementById('connect-codex-button');
+            button.disabled = true;
+            button.classList.add('opacity-60');
+            setChatStatus('Connecting to local Codex...');
+
+            try {
+                const client = mindShareLocalClient();
+                if (!client?.connectCodex) {
+                    showLocalClientInstallPrompt();
+                    return;
+                }
+                let payload;
+                if (activeRoleSlug && roleSessions[activeRoleSlug]) {
+                    payload = await ensureProviderSession(roleSessions[activeRoleSlug], 'codex');
+                } else {
+                    payload = await client.connectCodex({ checkOnly: true });
+                }
+                if (!payload.ok) {
+                    if (payload.action === 'install') {
+                        addChatError('Codex CLI was not found on this machine. Install Codex locally, restart the MindShare Local Client, then reconnect.');
+                    } else if (payload.action === 'login') {
+                        addChatError('Codex CLI is installed but not logged in. Run `codex login` locally, then reconnect.');
+                    } else {
+                        addChatError(payload.message || payload.error || 'Codex connection failed.');
+                    }
+                    return;
+                }
+                codexAvailable = true;
+                activeEngine = 'codex';
+                button.classList.remove('text-on-surface-variant');
+                button.classList.add('text-primary');
+                document.getElementById('connect-claude-button').classList.remove('text-primary');
+                setChatStatus(activeRoleSlug
+                    ? `${roleSessions[activeRoleSlug].name}'s Codex office session ${payload.reused ? 'is already connected' : 'connected'}.`
+                    : (payload.message || 'Codex CLI is ready. Select a role to create that office session.'));
+            } catch (error) {
+                addChatError(`Codex connection failed: ${error.message || error}`);
+                clearChatStatus();
+            } finally {
+                button.disabled = false;
+                button.classList.remove('opacity-60');
+            }
+        }
+
+        function connectClaude() {
+            return connectClaudeCli();
+        }
+
+        async function connectClaudeCli() {
+            const button = document.getElementById('connect-claude-button');
+            button.disabled = true;
+            button.classList.add('opacity-60');
+            setChatStatus('Connecting to local Claude...');
+
+            try {
+                const client = mindShareLocalClient();
+                if (!client?.connectClaude) {
+                    showLocalClientInstallPrompt();
+                    return;
+                }
+                let payload;
+                if (activeRoleSlug && roleSessions[activeRoleSlug]) {
+                    payload = await ensureProviderSession(roleSessions[activeRoleSlug], 'claude');
+                } else {
+                    payload = await client.connectClaude({ checkOnly: true });
+                }
+                if (!payload.ok) {
+                    if (payload.action === 'install') {
+                        addChatError('Claude CLI was not found on this machine. Install Claude locally, restart the MindShare Local Client, then reconnect.');
+                    } else if (payload.action === 'login') {
+                        addChatError('Claude CLI is installed but not logged in. Run `claude auth login` locally, then reconnect.');
+                    } else {
+                        addChatError(payload.message || payload.error || 'Claude connection failed.');
+                    }
+                    return;
+                }
+                claudeAvailable = true;
+                activeEngine = 'claude';
+                button.classList.add('text-primary');
+                document.getElementById('connect-codex-button').classList.remove('text-primary');
+                setChatStatus(activeRoleSlug
+                    ? `${roleSessions[activeRoleSlug].name}'s Claude office session ${payload.reused ? 'is already connected' : 'connected'}.`
+                    : (payload.message || 'Claude CLI is ready. Select a role to create that office session.'));
+            } catch (error) {
+                addChatError(`Claude connection failed: ${error.message || error}`);
+                clearChatStatus();
+            } finally {
+                button.disabled = false;
+                button.classList.remove('opacity-60');
+            }
+        }
+
+        async function sendCodexMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            const attachments = pendingAttachments.map((file) => ({ ...file }));
+            if (!message && !attachments.length) return;
+            if (!activeRoleSlug || !roleSessions[activeRoleSlug]) {
+                addChatError('Select a role before sending a message.');
+                return;
+            }
+            const roleSession = roleSessions[activeRoleSlug];
+            const available = activeEngine === 'claude' ? claudeAvailable : codexAvailable;
+            if (!available) {
+                addChatError(`Connect ${activeEngine === 'claude' ? 'Claude' : 'Codex'} once before sending a message.`);
+                return;
+            }
+            const sessionPayload = await ensureProviderSession(roleSession, activeEngine);
+            if (!sessionPayload.ok) {
+                if (hasConnectedOfficeSession(roleSession)) {
+                    markOfficeSessionIssue(roleSession);
+                }
+                addChatError(sessionPayload.message || sessionPayload.error || `Could not connect ${roleSession.name}'s ${activeEngine === 'claude' ? 'Claude' : 'Codex'} office session.`);
+                return;
+            }
+
+            const transcript = roleSession.messages.slice(-12);
+            input.value = '';
+            clearPendingAttachments();
+            const displayMessage = [message, attachmentLabel(attachments)].filter(Boolean).join('\n');
+            addChatMessageToRole(roleSession, 'user', displayMessage);
+            roleSession.processing = true;
+            roleSession.processingEngine = activeEngine;
+            renderActiveSessions();
+            if (activeRoleSlug === roleSession.slug) {
+                setChatStatus(`${roleSession.name} is working in ${activeEngine === 'claude' ? 'Claude' : 'Codex'}...`);
+            }
+
+            try {
+                const client = mindShareLocalClient();
+                const send = activeEngine === 'claude' ? client?.sendClaudeMessage : client?.sendCodexMessage;
+                if (!send) {
+                    markOfficeSessionIssue(roleSession);
+                    addChatMessageToRole(roleSession, 'system', `MindShare Local Client is not connected. Start the local client, reconnect ${activeEngine === 'claude' ? 'Claude' : 'Codex'}, then send again.`);
+                    if (activeRoleSlug === roleSession.slug) clearChatStatus();
+                    return;
+                }
+                const payload = await send({ sessionId: sessionPayload.sessionId, message, roleContext: roleSession.roleContext, transcript, attachments });
+                if (!payload.ok) {
+                    markOfficeSessionIssue(roleSession);
+                    addChatMessageToRole(roleSession, 'system', payload.error || payload.reply || 'Codex returned an error.');
+                    if (activeRoleSlug === roleSession.slug) clearChatStatus();
+                    return;
+                }
+                markOfficeSessionConnected(roleSession);
+                addChatMessageToRole(roleSession, 'assistant', payload.reply || '(No response)');
+                if (activeRoleSlug === roleSession.slug) clearChatStatus();
+            } catch (error) {
+                markOfficeSessionIssue(roleSession);
+                addChatMessageToRole(roleSession, 'system', `Lost connection to the MindShare Local Client: ${error.message || error}`);
+                if (activeRoleSlug === roleSession.slug) clearChatStatus();
+            } finally {
+                roleSession.processing = false;
+                roleSession.processingEngine = null;
+                renderActiveSessions();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const divisionSelect = document.getElementById('division-select');
+            const requestedDivision = new URLSearchParams(window.location.search).get('division') || 'strategy-and-operations';
+            const selectedSlug = divisionDepartments[requestedDivision] ? requestedDivision : 'strategy-and-operations';
+            divisionSelect.value = selectedSlug;
+            renderDepartmentSections(selectedSlug);
+
+            divisionSelect.addEventListener('change', () => {
+                const slug = divisionSelect.value;
+                renderDepartmentSections(slug);
+                const url = new URL(window.location.href);
+                url.searchParams.set('division', slug);
+                history.replaceState(null, '', url.toString());
+            });
+
+            document.getElementById('connect-codex-button').addEventListener('click', connectCodex);
+            document.getElementById('connect-claude-button').addEventListener('click', connectClaude);
+            document.getElementById('send-message-button').addEventListener('click', sendCodexMessage);
+            document.getElementById('attach-file-button').addEventListener('click', chooseAttachments);
+            document.getElementById('office-context-title').addEventListener('click', toggleOfficeTitleDropdown);
+            document.getElementById('office-title-dropdown').addEventListener('click', (event) => event.stopPropagation());
+            document.getElementById('office-context-level').addEventListener('click', toggleOfficeLevelDropdown);
+            document.getElementById('office-level-dropdown').addEventListener('click', (event) => event.stopPropagation());
+            document.getElementById('office-context-files').addEventListener('click', toggleOfficeFilesDropdown);
+            document.getElementById('office-files-dropdown').addEventListener('click', (event) => event.stopPropagation());
+            document.addEventListener('click', closeContextDropdowns);
+            document.getElementById('chat-input').addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    sendCodexMessage();
+                }
+            });
+            document.getElementById('chat-input').addEventListener('paste', handlePromptPaste);
+        });
+    </script>
+
+
+</body></html>

@@ -2,6 +2,9 @@ const { app, BrowserWindow, dialog, ipcMain, Menu } = require('electron');
 const path = require('node:path');
 const { connectCodex, connectClaude, loadRoleContext, sendCodexMessage, sendClaudeMessage } = require('./mindshare-local-client');
 
+const bundledPublicRoot = path.join(__dirname, 'app-content', 'public');
+const devPublicRoot = path.join(__dirname, '..', 'public');
+
 function createWindow() {
   const window = new BrowserWindow({
     width: 1440,
@@ -14,7 +17,10 @@ function createWindow() {
   });
 
   window.maximize();
-  window.loadFile(path.join(__dirname, '..', 'public', 'index.html'));
+  const publicRoot = require('node:fs').existsSync(path.join(bundledPublicRoot, 'index.html'))
+    ? bundledPublicRoot
+    : devPublicRoot;
+  window.loadFile(path.join(publicRoot, 'index.html'));
 }
 
 function installApplicationMenu() {

@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "status": "routing-map-not-authority",
+  "canonical_source": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\owner-routing.json",
+  "authority_boundary": "This routing map names owners for review and approval paths. It does not grant approval authority, activate runtime, edit gates, deploy production, authorize Git/GitHub, send external communication, spend money, or access secrets.",
+  "owners": {
+    "final_authority": {
+      "owner": "Scott",
+      "domains": [
+        "final activation",
+        "authority expansion",
+        "production authority",
+        "spending",
+        "secrets",
+        "external communication final approval",
+        "disputed boundaries"
+      ]
+    },
+    "executive_governance": {
+      "owner": "Rae",
+      "domains": [
+        "executive visibility",
+        "organization-level governance when explicitly delegated"
+      ]
+    },
+    "architecture_control_plane": {
+      "owner": "Vik",
+      "domains": [
+        "architecture",
+        "control-plane fit",
+        "runtime topology",
+        "hooks",
+        "loops",
+        "memory/RAG architecture",
+        "role-vs-agent boundaries"
+      ]
+    },
+    "communications_channels": {
+      "owner": "Mae",
+      "domains": [
+        "channel governance",
+        "heartbeat scope",
+        "handoff hygiene",
+        "external communication routing"
+      ]
+    },
+    "release_git": {
+      "owner": "Reid",
+      "domains": [
+        "Git",
+        "GitHub",
+        "branch",
+        "PR",
+        "merge",
+        "release",
+        "promotion",
+        "production publication",
+        "branch cleanup"
+      ]
+    },
+    "role_lifecycle": {
+      "owner": "Ana",
+      "domains": [
+        "role creation",
+        "role activation records",
+        "role lifecycle",
+        "staffing",
+        "roster hygiene"
+      ]
+    },
+    "autonomy_review": {
+      "owner": "Tess",
+      "domains": [
+        "autonomy requirements",
+        "inventory",
+        "backlog",
+        "gate review",
+        "recommendations",
+        "gate drafts"
+      ],
+      "limits": [
+        "no unilateral gate edits",
+        "no self-granted authority",
+        "no runtime activation"
+      ]
+    }
+  },
+  "default_rule": "If owner is unclear, stop and ask Scott. If action touches multiple domains, require every relevant owner or an explicit Scott/Rae waiver where allowed.",
+  "release_gate_rule": "Git/GitHub/release/branch/PR/promotion authority routes to Reid unless Scott or Rae explicitly waives Reid.",
+  "changelog": [
+    {
+      "date": "2026-06-21",
+      "version": "1.0",
+      "change": "Created cross-role owner routing map for AUTO-031",
+      "owner": "Tess"
+    }
+  ]
+}

@@ -10,22 +10,34 @@ Run the Departments office inside Electron:
 
 ```powershell
 npm install
+npm run sync-content
 npm start
 ```
+
+`npm run sync-content` copies runtime content into `local-client/app-content` so the packaged app does not depend on Scott's local repo paths.
+
+The bundled content currently includes:
+
+- MindShare public pages from `public/`
+- Tess role context from `roles/autonomy-engineer/`
+- Bea role context from `C:\Users\scott\Code\mojo\roles\mojo-maps-engineer\`
+- Mojo MAPS content from `C:\Users\scott\Code\mojo\assets\maps\`
+- Mojo agent files from `C:\Users\scott\Code\mojo\agents\`
 
 The Electron preload exposes:
 
 - The page calls `window.MindShareLocalClient.connectCodex()`.
+- The page calls `window.MindShareLocalClient.connectClaude()`.
 - The local client checks whether Codex CLI is installed.
 - The local client checks `codex login status`.
 - The local client asks the user to install or log in when needed.
-- The local client sends chat messages through the locally authenticated Codex CLI.
+- The local client sends chat messages through the locally authenticated Codex or Claude CLI.
 
-This keeps ChatGPT subscription authentication local. No API key or token belongs in the page.
+This keeps ChatGPT and Claude subscription authentication local. No API key or token belongs in the page.
 
 ## Verified Locally
 
-The Node adapter can connect to local Codex CLI and receive a response through `codex exec` using local ChatGPT authentication.
+The Node adapter can connect to local Codex CLI and Claude CLI and receive responses using local subscription authentication.
 
 ## Not The Product Path
 

@@ -1,0 +1,683 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mindshare.local/schemas/autonomy-inventory.schema.json",
+  "title": "Autonomy Inventory Schema",
+  "description": "Machine-readable inventory of role autonomy status, required files, agent artifacts, approved authority, and promotion progress. Records capability and approval separately; does not grant authority.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Schema version (e.g., 0.1.0)"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of inventory generation"
+    },
+    "authority_boundary": {
+      "type": "string",
+      "description": "Explicit note that this inventory records status and gaps only; does not grant authority, approve activations, or override approval gates"
+    },
+    "roles": {
+      "type": "array",
+      "description": "Array of role autonomy records",
+      "items": {
+        "$ref": "#/$defs/RoleAutonomyRecord"
+      }
+    }
+  },
+  "required": [
+    "version",
+    "generated_at",
+    "authority_boundary",
+    "roles"
+  ],
+  "$defs": {
+    "RoleAutonomyRecord": {
+      "type": "object",
+      "description": "Autonomy status and metadata for a single role",
+      "properties": {
+        "role_id": {
+          "type": "string",
+          "description": "Unique role identifier (e.g., 'tess', 'vik', 'ana')",
+          "pattern": "^[a-z-]+$"
+        },
+        "role_name": {
+          "type": "string",
+          "description": "Full role name (e.g., 'Autonomy Engineer', 'ASPA')"
+        },
+        "organization": {
+          "type": "string",
+          "description": "Organization context (e.g., 'Mindshare', 'Mojo', 'Watch')",
+          "enum": ["Mindshare", "Mojo", "Watch", "Corporate"]
+        },
+        "current_status": {
+          "type": "string",
+          "description": "Current operational status",
+          "enum": [
+            "draft",
+            "review",
+            "approved",
+            "active",
+            "paused",
+            "revoked",
+            "released-legacy"
+          ]
+        },
+        "reporting_line": {
+          "type": "object",
+          "description": "Role hierarchy and approval chain",
+          "properties": {
+            "manager": {
+              "type": "string",
+              "description": "Immediate manager or role owner"
+            },
+            "final_approval_authority": {
+              "type": "string",
+              "description": "Final authority for promotion and activation (typically 'Scott')"
+            },
+            "domain_owners": {
+              "type": "array",
+              "description": "Owners by domain (e.g., Reid for Git/release)",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "domain": {
+                    "type": "string",
+                    "description": "Authority domain (git, release, architecture, communications, role-lifecycle, spending, secrets, external)"
+                  },
+                  "owner": {
+                    "type": "string",
+                    "description": "Responsible owner for this domain"
+                  }
+                },
+                "required": ["domain", "owner"]
+              }
+            }
+          },
+          "required": ["final_approval_authority"]
+        },
+        "autonomy_level": {
+          "type": "object",
+          "description": "Current and target autonomy levels",
+          "properties": {
+            "current": {
+              "type": "integer",
+              "description": "Current autonomy level (0=Role, 1=Present, 2=Responsive, 3=Coordinating, 4=Execute With Approval, 5=Execute Within Policy, 6=Autonomous Executor)",
+              "minimum": 0,
+              "maximum": 6
+            },
+            "target": {
+              "type": "integer",
+              "description": "Target autonomy level",
+              "minimum": 0,
+              "maximum": 6
+            },
+            "last_reviewed": {
+              "type": "string",
+              "format": "date-time",
+              "description": "ISO 8601 timestamp of last autonomy review"
+            }
+          },
+          "required": ["current", "target"]
+        },
+        "source_files": {
+          "type": "object",
+          "description": "Pointer to canonical source files defining role behavior and authority",
+          "properties": {
+            "role_agent_md": {
+              "type": "string",
+              "description": "Path to role-agent.md (identity, title, maturity, status, responsibilities, authority, approval gates, stop conditions)"
+            },
+            "autonomy_md": {
+              "type": "string",
+              "description": "Path to canonical Autonomy.md (activation status, levels, gates, stop conditions, evals, rollback)"
+            },
+            "workflow_md": {
+              "type": "string",
+              "description": "Path to workflow.md (intake, action flow, owner routing, stop conditions)"
+            },
+            "loop_md": {
+              "type": "string",
+              "description": "Path to loop.md (trigger, cadence, state, stop conditions, not-approved list)"
+            },
+            "memory_md": {
+              "type": "string",
+              "description": "Path to memory.md (durable role memory, decisions, active work, approved channels)"
+            },
+            "personality_md": {
+              "type": "string",
+              "description": "Path to personality.md (voice and expression only, must not imply authority)"
+            },
+            "whoami_card": {
+              "type": "string",
+              "description": "Path to name.md or WhoAmI card (role identity, aliases, room/thread identity)"
+            }
+          },
+          "required": ["role_agent_md", "autonomy_md"]
+        },
+        "agent_artifacts": {
+          "type": "object",
+          "description": "Agent implementation artifacts",
+          "properties": {
+            "agent_profile_md": {
+              "type": "string",
+              "description": "Path to agent-profile.md (agent category, activation status, runtime status, authority domains, tool access, stop conditions)"
+            },
+            "agent_design_md": {
+              "type": "string",
+              "description": "Path to agent-design.md (runtime-neutral or runtime-specific design, tool/state/memory models, approval gates, failure behavior)"
+            },
+            "agent_backlog_md": {
+              "type": "string",
+              "description": "Path to agent-backlog.md (implementation slices with approval gates)"
+            },
+            "agent_build_plan_md": {
+              "type": "string",
+              "description": "Path to agent-build-plan.md (build scope, non-goals, runtime decision, validation, safety constraints)"
+            }
+          }
+        },
+        "automation_ids": {
+          "type": "array",
+          "description": "Machine-readable automation identifiers (hook names, loop names, scheduler identifiers)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Automation type (hook, loop, scheduler, file-watch, cron)",
+                "enum": ["hook", "loop", "scheduler", "file-watch", "cron"]
+              },
+              "id": {
+                "type": "string",
+                "description": "Automation identifier (e.g., 'vik-handoff-check')"
+              },
+              "activation_status": {
+                "type": "string",
+                "description": "Whether automation is active or blocked",
+                "enum": ["active", "paused", "blocked", "planned"]
+              },
+              "approval_gate": {
+                "type": "string",
+                "description": "Reference to approval gate enabling this automation"
+              }
+            },
+            "required": ["type", "id", "activation_status"]
+          }
+        },
+        "channels": {
+          "type": "array",
+          "description": "Approved communication channels for role operation and output",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Channel name or identifier"
+              },
+              "type": {
+                "type": "string",
+                "description": "Channel type (slack, thread, room, file, api)",
+                "enum": ["slack", "thread", "room", "file", "api", "observation"]
+              },
+              "access_level": {
+                "type": "string",
+                "description": "Read or write access",
+                "enum": ["read", "write", "read-write"]
+              },
+              "scope": {
+                "type": "string",
+                "description": "Scope of access (role-specific or general description)"
+              }
+            },
+            "required": ["name", "type", "access_level"]
+          }
+        },
+        "memory_and_mirrors": {
+          "type": "object",
+          "description": "Paths to role memory, mirrors, and state",
+          "properties": {
+            "durable_memory_path": {
+              "type": "string",
+              "description": "Path to durable role memory (e.g., 'roles/tess/memory.md')"
+            },
+            "runtime_state_path": {
+              "type": "string",
+              "description": "Path to machine-readable state file (e.g., 'roles/tess/state.json')"
+            },
+            "audit_log_path": {
+              "type": "string",
+              "description": "Path to append-only audit log (e.g., 'roles/tess/audit.jsonl')"
+            },
+            "mirror_paths": {
+              "type": "array",
+              "description": "Paths to role mirrors or distributed copies",
+              "items": {
+                "type": "string"
+              }
+            },
+            "obsidian_vault_path": {
+              "type": "string",
+              "description": "Path to Obsidian vault if used (e.g., 'G:\\My Drive\\ObsidianMind')"
+            }
+          }
+        },
+        "authority_boundaries": {
+          "type": "object",
+          "description": "Explicit authority limits and approved actions",
+          "properties": {
+            "allowed_actions": {
+              "type": "array",
+              "description": "Actions explicitly approved for this role",
+              "items": {
+                "type": "string"
+              }
+            },
+            "denied_actions": {
+              "type": "array",
+              "description": "Actions explicitly denied regardless of capability (examples: git-write, release, production-deploy, external-communication, spending, secrets-access, authority-expansion, hook-activation, scheduler-activation, unilateral-gate-edit, or role-specific denied actions)",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "tool_capabilities_vs_approved_authority": {
+              "type": "array",
+              "description": "Map of tools available vs approved for use at current level",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "tool": {
+                    "type": "string",
+                    "description": "Tool name (e.g., 'bash', 'git', 'github-api')"
+                  },
+                  "capability": {
+                    "type": "string",
+                    "description": "What the tool can do technically"
+                  },
+                  "approved_use": {
+                    "type": "string",
+                    "description": "What this role is approved to do with the tool at current level"
+                  },
+                  "approval_gate": {
+                    "type": "string",
+                    "description": "Reference to gate enabling higher use"
+                  }
+                },
+                "required": ["tool", "capability", "approved_use"]
+              }
+            }
+          }
+        },
+        "approval_gates": {
+          "type": "array",
+          "description": "Specific operations requiring advance approval",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gate_id": {
+                "type": "string",
+                "description": "Unique gate identifier"
+              },
+              "operation": {
+                "type": "string",
+                "description": "Specific operation requiring approval"
+              },
+              "approval_required_from": {
+                "type": "array",
+                "description": "List of persons/roles whose approval is required",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "scope": {
+                "type": "string",
+                "description": "Scope of approval (exact operation, file path, command pattern)"
+              },
+              "expiry": {
+                "type": "string",
+                "format": "date",
+                "description": "Date when approval expires (if time-bound)"
+              },
+              "proof_requirement": {
+                "type": "string",
+                "description": "What evidence is required to prove approval (e.g., 'Scott approval in state.json')"
+              }
+            },
+            "required": ["gate_id", "operation", "approval_required_from"]
+          }
+        },
+        "stop_conditions": {
+          "type": "array",
+          "description": "Conditions that must stop role action or autonomy",
+          "items": {
+            "type": "string",
+            "description": "Stop condition (e.g., 'Authority paused by Scott', 'Source files missing', 'Malformed gate detected')"
+          }
+        },
+        "runtime_state": {
+          "type": "object",
+          "description": "Current runtime operational state (not authority source)",
+          "properties": {
+            "is_running": {
+              "type": "boolean",
+              "description": "Whether automation is currently running"
+            },
+            "last_execution": {
+              "type": "string",
+              "format": "date-time",
+              "description": "ISO 8601 timestamp of last execution"
+            },
+            "last_action": {
+              "type": "string",
+              "description": "Description of last action taken"
+            },
+            "pending_approvals": {
+              "type": "array",
+              "description": "In-progress actions awaiting approval",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "action_id": {
+                    "type": "string",
+                    "description": "Unique action identifier"
+                  },
+                  "action_type": {
+                    "type": "string",
+                    "description": "Type of action pending approval"
+                  },
+                  "awaiting_approval_from": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "since": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "When approval was requested"
+                  }
+                }
+              }
+            },
+            "active_goals": {
+              "type": "array",
+              "description": "Current delegated goals being pursued (without authority-granting semantics)",
+              "items": {
+                "type": "string"
+              }
+            },
+            "status_note": {
+              "type": "string",
+              "description": "Human-readable operational note"
+            }
+          }
+        },
+        "audit_state": {
+          "type": "object",
+          "description": "Audit trail and traceability",
+          "properties": {
+            "audit_log_entries": {
+              "type": "integer",
+              "description": "Count of audit log entries recorded"
+            },
+            "last_audit_entry": {
+              "type": "string",
+              "format": "date-time",
+              "description": "ISO 8601 timestamp of most recent audit entry"
+            },
+            "audit_coverage": {
+              "type": "string",
+              "description": "Audit coverage status (e.g., 'complete', 'gaps', 'none')",
+              "enum": ["complete", "gaps", "partial", "none"]
+            },
+            "denied_actions_logged": {
+              "type": "boolean",
+              "description": "Whether denied actions are captured in audit"
+            },
+            "approval_chain_logged": {
+              "type": "boolean",
+              "description": "Whether approvals and approvers are logged"
+            }
+          }
+        },
+        "eval_status": {
+          "type": "object",
+          "description": "Evaluation readiness and results",
+          "properties": {
+            "eval_plan_path": {
+              "type": "string",
+              "description": "Path to eval-suite.md or autonomy-promotion-eval-suite.json"
+            },
+            "eval_report_path": {
+              "type": "string",
+              "description": "Path to eval-report.md with executed vs planned tests"
+            },
+            "eval_classes_covered": {
+              "type": "array",
+              "description": "Eval classes this role has been tested against",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "research-before-action",
+                  "one-question-at-a-time",
+                  "no-action-compliance",
+                  "exact-scope-control",
+                  "latest-instruction-priority",
+                  "owner-routing",
+                  "release-gate-behavior",
+                  "memory-safety",
+                  "channel-safety",
+                  "tool-access-not-authority",
+                  "production-refusal",
+                  "external-communication-refusal",
+                  "spending-refusal",
+                  "secrets-refusal",
+                  "authority-expansion-refusal",
+                  "runtime-activation-blocking",
+                  "fail-closed-missing-source",
+                  "fail-closed-malformed-gate",
+                  "fail-closed-stale-contract",
+                  "audit-integrity",
+                  "rollback-revocation-behavior",
+                  "heartbeat-quieting"
+                ]
+              }
+            },
+            "eval_classes_passed": {
+              "type": "integer",
+              "description": "Number of eval classes passed"
+            },
+            "eval_classes_failed": {
+              "type": "integer",
+              "description": "Number of eval classes failed"
+            },
+            "eval_classes_pending": {
+              "type": "integer",
+              "description": "Number of eval classes not yet executed"
+            },
+            "eval_readiness": {
+              "type": "string",
+              "description": "Overall eval readiness status",
+              "enum": ["not-started", "in-progress", "planned", "complete", "ready-for-promotion"]
+            }
+          }
+        },
+        "promotion_gaps": {
+          "type": "array",
+          "description": "Known gaps blocking promotion to next level",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gap_id": {
+                "type": "string",
+                "description": "Unique gap identifier"
+              },
+              "gap_category": {
+                "type": "string",
+                "description": "Category of gap",
+                "enum": [
+                  "missing-source-file",
+                  "stale-source-file",
+                  "missing-canonical-contract",
+                  "runtime-target-not-selected",
+                  "adapter-not-built",
+                  "eval-not-executed",
+                  "eval-failed",
+                  "strict-intent-gate-missing",
+                  "deploy-plan-missing",
+                  "observe-plan-missing",
+                  "rollback-plan-missing",
+                  "promotion-review-missing",
+                  "approval-not-obtained",
+                  "conflicting-authority",
+                  "channel-safety-gap",
+                  "audit-gap"
+                ]
+              },
+              "description": {
+                "type": "string",
+                "description": "Human-readable description of gap"
+              },
+              "risk": {
+                "type": "string",
+                "description": "Risk if gap remains (e.g., 'Authority inferred from role artifacts')",
+                "enum": [
+                  "critical",
+                  "high",
+                  "medium",
+                  "low"
+                ]
+              },
+              "required_repair": {
+                "type": "string",
+                "description": "What work is required to close gap"
+              },
+              "approver": {
+                "type": "string",
+                "description": "Person/role who must approve gap closure"
+              },
+              "target_closure_date": {
+                "type": "string",
+                "format": "date",
+                "description": "Target date for gap closure"
+              }
+            },
+            "required": ["gap_id", "gap_category", "description", "risk", "approver"]
+          }
+        },
+        "owner_routing": {
+          "type": "object",
+          "description": "How work is routed when outside role's lane",
+          "properties": {
+            "scott_domains": {
+              "type": "array",
+              "description": "Domains routed to Scott",
+              "items": {
+                "type": "string"
+              }
+            },
+            "reid_domains": {
+              "type": "array",
+              "description": "Domains routed to Reid (git, release, branch, PR, source publication)",
+              "items": {
+                "type": "string"
+              }
+            },
+            "vik_domains": {
+              "type": "array",
+              "description": "Domains routed to Vik (architecture, control-plane)",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mae_domains": {
+              "type": "array",
+              "description": "Domains routed to Mae (communications, channels)",
+              "items": {
+                "type": "string"
+              }
+            },
+            "ana_domains": {
+              "type": "array",
+              "description": "Domains routed to Ana (role lifecycle, roster, recruiting)",
+              "items": {
+                "type": "string"
+              }
+            },
+            "role_specific_owners": {
+              "type": "array",
+              "description": "Additional role-specific owner routings",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "domain": {
+                    "type": "string",
+                    "description": "Domain or action type"
+                  },
+                  "owner": {
+                    "type": "string",
+                    "description": "Owner name"
+                  },
+                  "routing_rule": {
+                    "type": "string",
+                    "description": "Explicit routing rule"
+                  }
+                },
+                "required": ["domain", "owner"]
+              }
+            }
+          }
+        },
+        "last_review_metadata": {
+          "type": "object",
+          "description": "Metadata about last autonomy review",
+          "properties": {
+            "reviewed_at": {
+              "type": "string",
+              "format": "date-time",
+              "description": "ISO 8601 timestamp of last review"
+            },
+            "reviewed_by": {
+              "type": "string",
+              "description": "Person who performed the review"
+            },
+            "review_findings": {
+              "type": "string",
+              "description": "Summary of review findings"
+            },
+            "promotion_recommendation": {
+              "type": "string",
+              "description": "Recommendation status",
+              "enum": [
+                "ready-for-promotion",
+                "defer-pending-gaps",
+                "block-unresolved-issues",
+                "blocked-awaiting-approval"
+              ]
+            },
+            "next_review_date": {
+              "type": "string",
+              "format": "date",
+              "description": "Recommended date for next review"
+            },
+            "review_notes": {
+              "type": "string",
+              "description": "Additional context from reviewer"
+            }
+          }
+        }
+      },
+      "required": [
+        "role_id",
+        "role_name",
+        "organization",
+        "current_status",
+        "autonomy_level",
+        "source_files",
+        "stop_conditions"
+      ]
+    }
+  }
+}

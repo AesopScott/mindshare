@@ -5,6 +5,7 @@ const os = require('node:os');
 const path = require('node:path');
 
 const repoRoot = path.resolve(__dirname, '..');
+const appContentRoot = process.env.MINDSHARE_APP_CONTENT || path.join(__dirname, 'app-content');
 const sessions = new Map();
 
 const ROLE_CATALOG = {
@@ -13,7 +14,7 @@ const ROLE_CATALOG = {
     title: 'Mojo MAPS Engineer',
     level: 'Level 3 Staff',
     office: "Bea's office",
-    roleRoot: path.join(repoRoot, '..', 'mojo', 'roles', 'mojo-maps-engineer'),
+    roleRoot: path.join(appContentRoot, 'mojo', 'roles', 'mojo-maps-engineer'),
     files: [
       'WhoAmI.md',
       'name.md',
@@ -30,7 +31,7 @@ const ROLE_CATALOG = {
     title: 'Autonomy Engineer',
     level: 'Level 4 Scoped Autonomy',
     office: "Tess's office",
-    roleRoot: path.join(repoRoot, 'roles', 'autonomy-engineer'),
+    roleRoot: path.join(appContentRoot, 'mindshare', 'roles', 'autonomy-engineer'),
     files: [
       'WhoAmI.md',
       'name.md',

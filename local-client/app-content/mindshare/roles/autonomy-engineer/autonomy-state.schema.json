@@ -1,0 +1,571 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mindshare.local/schemas/autonomy-state.schema.json",
+  "title": "Autonomy State Schema",
+  "description": "Machine-readable state for autonomous agents. This schema defines RUNTIME STATE ONLY and is NOT an authority source. Actual authority comes from role contracts, autonomy.md files, and approval gates. State reflects current operational status and pending decisions.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema version"
+    },
+    "version": {
+      "type": "string",
+      "description": "State schema version (e.g., 0.1.0)",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "authority_boundary": {
+      "type": "string",
+      "description": "Explicit disclaimer that this state file is NOT an authority source. Authority comes from role contracts, autonomy.md, and approval gates. State reflects operational status only."
+    },
+    "role_id": {
+      "type": "string",
+      "description": "Unique role identifier (e.g., 'tess', 'vik', 'ana')",
+      "pattern": "^[a-z-]+$"
+    },
+    "role_name": {
+      "type": "string",
+      "description": "Human-readable role name"
+    },
+    "organization": {
+      "type": "string",
+      "description": "Organization context (Mindshare, Mojo, Watch, Corporate)",
+      "enum": ["Mindshare", "Mojo", "Watch", "Corporate"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when state file was created"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of last state update"
+    },
+    "activation_status": {
+      "type": "object",
+      "description": "Current activation status (informational, not authoritative)",
+      "properties": {
+        "level": {
+          "type": "integer",
+          "description": "Current autonomy level (0-6)",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "status": {
+          "type": "string",
+          "description": "Activation status (e.g., active, paused, revoked, blocked)",
+          "enum": ["active", "paused", "revoked", "blocked", "deploying", "monitoring"]
+        },
+        "last_activated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when activation status last changed"
+        },
+        "last_activated_by": {
+          "type": "string",
+          "description": "Person who approved/changed activation status"
+        },
+        "canonical_source": {
+          "type": "string",
+          "description": "Pointer to canonical authority source (e.g., 'roles/tess/Autonomy.md')"
+        }
+      },
+      "required": ["level", "status", "canonical_source"]
+    },
+    "autonomy_level": {
+      "type": "object",
+      "description": "Autonomy level progression and readiness",
+      "properties": {
+        "current": {
+          "type": "integer",
+          "description": "Current level (0=Role, 1=Present, 2=Responsive, 3=Coordinating, 4=Execute With Approval, 5=Execute Within Policy, 6=Autonomous Executor)",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "target": {
+          "type": "integer",
+          "description": "Target level when all gaps close",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "last_review": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of last level assessment"
+        }
+      },
+      "required": ["current"]
+    },
+    "current_goal": {
+      "type": "object",
+      "description": "Current delegated goal (informational, not authority)",
+      "properties": {
+        "goal_id": {
+          "type": "string",
+          "description": "Unique goal identifier"
+        },
+        "description": {
+          "type": "string",
+          "description": "Goal description"
+        },
+        "delegated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When goal was delegated"
+        },
+        "delegated_by": {
+          "type": "string",
+          "description": "Who delegated the goal (approver)"
+        },
+        "expected_completion": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expected completion timestamp"
+        },
+        "status": {
+          "type": "string",
+          "description": "Goal status",
+          "enum": ["queued", "in-progress", "blocked", "paused", "completed", "deferred"]
+        },
+        "progress": {
+          "type": "object",
+          "description": "Progress tracking",
+          "properties": {
+            "percent_complete": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "last_update": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "blockers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Current blockers or dependencies"
+            }
+          }
+        }
+      }
+    },
+    "approvals": {
+      "type": "object",
+      "description": "Current and pending approvals (not authority source)",
+      "properties": {
+        "active_approvals": {
+          "type": "array",
+          "description": "Currently valid approvals",
+          "items": {
+            "type": "object",
+            "properties": {
+              "approval_id": {
+                "type": "string",
+                "description": "Unique approval identifier"
+              },
+              "granted_by": {
+                "type": "string",
+                "description": "Person who granted approval"
+              },
+              "granted_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Approval timestamp"
+              },
+              "scope": {
+                "type": "string",
+                "description": "Scope of approval (e.g., 'build eval suite', 'update role contract')"
+              },
+              "expires_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "When approval expires"
+              },
+              "ttl_seconds": {
+                "type": "integer",
+                "description": "Time-to-live in seconds"
+              }
+            },
+            "required": ["approval_id", "granted_by", "scope"]
+          }
+        },
+        "pending_approvals": {
+          "type": "array",
+          "description": "Approvals being awaited",
+          "items": {
+            "type": "object",
+            "properties": {
+              "request_id": {
+                "type": "string",
+                "description": "Unique approval request ID"
+              },
+              "requested_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "When approval was requested"
+              },
+              "requested_from": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "People from whom approval is requested"
+              },
+              "scope": {
+                "type": "string",
+                "description": "Requested scope"
+              },
+              "reason": {
+                "type": "string",
+                "description": "Why approval is needed"
+              }
+            },
+            "required": ["request_id", "requested_from"]
+          }
+        }
+      }
+    },
+    "pending_actions": {
+      "type": "array",
+      "description": "Actions awaiting execution (submitted but not yet acted)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action_id": {
+            "type": "string",
+            "description": "Unique action ID"
+          },
+          "action_type": {
+            "type": "string",
+            "description": "Type of action (e.g., 'file_edit', 'git_commit', 'state_update')"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable action description"
+          },
+          "submitted_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When action was submitted"
+          },
+          "awaiting_approval_from": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Approvers this action is waiting for"
+          },
+          "target_files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Files that will be affected"
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Linked approval request ID"
+          }
+        },
+        "required": ["action_id", "action_type"]
+      }
+    },
+    "denied_actions": {
+      "type": "array",
+      "description": "Recently denied actions and reasons",
+      "items": {
+        "type": "object",
+        "properties": {
+          "denied_action_id": {
+            "type": "string",
+            "description": "ID of denied action"
+          },
+          "action_type": {
+            "type": "string",
+            "description": "Type of denied action"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why action was denied (e.g., 'no-action compliance', 'missing approval', 'gate validation failed')"
+          },
+          "denied_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Denial timestamp"
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Linked request/approval ID"
+          },
+          "audit_entry_id": {
+            "type": "string",
+            "description": "Pointer to audit.jsonl entry"
+          }
+        },
+        "required": ["denied_action_id", "reason"]
+      }
+    },
+    "source_hashes": {
+      "type": "object",
+      "description": "Cryptographic hashes of authoritative source files for integrity verification",
+      "properties": {
+        "autonomy_md_sha256": {
+          "type": "string",
+          "description": "SHA256 hash of canonical Autonomy.md"
+        },
+        "role_agent_md_sha256": {
+          "type": "string",
+          "description": "SHA256 hash of role-agent.md"
+        },
+        "agent_profile_md_sha256": {
+          "type": "string",
+          "description": "SHA256 hash of agent-profile.md"
+        },
+        "gate_policy_sha256": {
+          "type": "string",
+          "description": "SHA256 hash of gate policy file"
+        },
+        "hashes_computed_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When hashes were last computed"
+        }
+      }
+    },
+    "tool_calls_summary": {
+      "type": "object",
+      "description": "Summary of tool use (NOT raw logs, just counters and recent activity)",
+      "properties": {
+        "total_calls": {
+          "type": "integer",
+          "description": "Total tool calls in current session"
+        },
+        "calls_by_type": {
+          "type": "object",
+          "description": "Call count by tool type",
+          "properties": {
+            "file_read": {
+              "type": "integer"
+            },
+            "file_write": {
+              "type": "integer"
+            },
+            "file_edit": {
+              "type": "integer"
+            },
+            "git": {
+              "type": "integer"
+            },
+            "shell": {
+              "type": "integer"
+            },
+            "api_call": {
+              "type": "integer"
+            }
+          }
+        },
+        "last_tool_use": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of last tool invocation"
+        }
+      }
+    },
+    "eval_status": {
+      "type": "object",
+      "description": "Current eval execution status",
+      "properties": {
+        "eval_classes_planned": {
+          "type": "array",
+          "description": "Eval classes planned for this role",
+          "items": {
+            "type": "string"
+          }
+        },
+        "eval_classes_passed": {
+          "type": "integer",
+          "description": "Count of eval classes passed"
+        },
+        "eval_classes_failed": {
+          "type": "integer",
+          "description": "Count of eval classes failed"
+        },
+        "eval_classes_pending": {
+          "type": "integer",
+          "description": "Count of eval classes not yet executed"
+        },
+        "latest_eval_results": {
+          "type": "array",
+          "description": "Results of most recent eval runs",
+          "items": {
+            "type": "object",
+            "properties": {
+              "eval_class_id": {
+                "type": "string",
+                "description": "EVAL-001, EVAL-002, etc."
+              },
+              "passed": {
+                "type": "boolean"
+              },
+              "executed_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "evidence_pointer": {
+                "type": "string",
+                "description": "Pointer to eval evidence artifact"
+              }
+            }
+          }
+        },
+        "readiness": {
+          "type": "string",
+          "description": "Overall eval readiness",
+          "enum": ["not-started", "in-progress", "complete", "ready-for-promotion"]
+        }
+      }
+    },
+    "audit_pointers": {
+      "type": "object",
+      "description": "Pointers to audit trail locations",
+      "properties": {
+        "audit_log_path": {
+          "type": "string",
+          "description": "Path to audit.jsonl file"
+        },
+        "audit_entry_count": {
+          "type": "integer",
+          "description": "Total audit entries recorded"
+        },
+        "last_audit_entry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of most recent audit entry"
+        },
+        "audit_hash": {
+          "type": "string",
+          "description": "Hash of audit.jsonl for integrity check"
+        }
+      }
+    },
+    "rollback_revocation_state": {
+      "type": "object",
+      "description": "Current rollback and revocation status",
+      "properties": {
+        "can_rollback": {
+          "type": "boolean",
+          "description": "Whether prior actions can be rolled back"
+        },
+        "last_rollback": {
+          "type": "object",
+          "description": "Most recent rollback action",
+          "properties": {
+            "rollback_id": {
+              "type": "string"
+            },
+            "original_action_id": {
+              "type": "string",
+              "description": "Action that was rolled back"
+            },
+            "rolled_back_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "rolled_back_by": {
+              "type": "string",
+              "description": "Who initiated rollback"
+            },
+            "reason": {
+              "type": "string"
+            }
+          }
+        },
+        "revocation_history": {
+          "type": "array",
+          "description": "History of revocations/pauses",
+          "items": {
+            "type": "object",
+            "properties": {
+              "revocation_id": {
+                "type": "string"
+              },
+              "revoked_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "revoked_by": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "scope": {
+                "type": "string",
+                "description": "What was revoked (full authority, specific level, specific actions)"
+              }
+            }
+          }
+        },
+        "current_revocation_status": {
+          "type": "string",
+          "description": "Is authority currently revoked?",
+          "enum": ["active", "paused", "revoked", "narrowed"]
+        }
+      }
+    },
+    "last_review": {
+      "type": "object",
+      "description": "Last autonomy review metadata",
+      "properties": {
+        "reviewed_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of last review"
+        },
+        "reviewed_by": {
+          "type": "string",
+          "description": "Person who performed review"
+        },
+        "review_type": {
+          "type": "string",
+          "description": "Type of review (promotion-readiness, post-deployment, incident-response, etc.)",
+          "enum": ["promotion-readiness", "post-deployment", "incident-response", "periodic", "compliance"]
+        },
+        "review_findings": {
+          "type": "string",
+          "description": "Summary of findings"
+        },
+        "next_review_recommended_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When next review should occur"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata",
+      "properties": {
+        "state_version_schema": {
+          "type": "string",
+          "description": "Version of this schema used to create this state file"
+        },
+        "state_notes": {
+          "type": "string",
+          "description": "Human-readable notes about current state"
+        }
+      }
+    }
+  },
+  "required": [
+    "version",
+    "authority_boundary",
+    "role_id",
+    "activation_status",
+    "last_updated"
+  ],
+  "additionalProperties": false
+}

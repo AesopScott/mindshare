@@ -1,0 +1,397 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mindshare.local/schemas/autonomy-audit.schema.json",
+  "title": "Autonomy Audit Schema",
+  "description": "Append-only audit log schema for autonomous agents. Records non-trivial decisions, approvals, denials, proof, rollbacks, revocations, and validation results. Each entry is immutable after creation. No secrets or private raw logs are stored.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Audit schema version",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "audit_log_format": {
+      "type": "string",
+      "description": "Format description (jsonl = JSON Lines, one record per line)",
+      "enum": ["jsonl"]
+    },
+    "append_only_requirement": {
+      "type": "string",
+      "description": "Critical requirement: audit.jsonl MUST be append-only. No modifications, deletions, or retroactive edits. Each entry is timestamped and immutable."
+    },
+    "privacy_boundary": {
+      "type": "string",
+      "description": "Privacy requirement: Audit log MUST NOT store secrets, passwords, API keys, private raw logs, or sensitive personal data. Store only non-secret decision context and proof references."
+    },
+    "entries": {
+      "type": "array",
+      "description": "Array of audit entries (each entry in a separate JSON Line in production)",
+      "items": {
+        "$ref": "#/$defs/AuditEntry"
+      }
+    }
+  },
+  "required": ["schema_version", "audit_log_format"],
+  "$defs": {
+    "AuditEntry": {
+      "type": "object",
+      "description": "Single immutable audit entry",
+      "properties": {
+        "entry_id": {
+          "type": "string",
+          "description": "Unique entry identifier (timestamp-based or UUID)"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when event occurred"
+        },
+        "event_type": {
+          "type": "string",
+          "description": "Type of audit event",
+          "enum": [
+            "approval_granted",
+            "approval_denied",
+            "action_executed",
+            "action_denied",
+            "action_blocked",
+            "state_updated",
+            "goal_delegated",
+            "goal_completed",
+            "goal_paused",
+            "rollback_initiated",
+            "rollback_completed",
+            "revocation_initiated",
+            "revocation_completed",
+            "pause_initiated",
+            "pause_completed",
+            "resume_initiated",
+            "resume_completed",
+            "source_validation",
+            "contract_validation",
+            "gate_validation",
+            "scope_validation",
+            "tool_use_approved",
+            "tool_use_blocked",
+            "audit_integrity_check"
+          ]
+        },
+        "request_id": {
+          "type": "string",
+          "description": "Linked request or approval ID (UUID or identifier)"
+        },
+        "actor": {
+          "type": "string",
+          "description": "Who initiated or approved this event (person name or role)"
+        },
+        "subject": {
+          "type": "string",
+          "description": "Role or agent this entry is about (e.g., 'autonomy-engineer')"
+        },
+        "action_description": {
+          "type": "string",
+          "description": "Human-readable description of action (not verbose; include intent)"
+        },
+        "authority_basis": {
+          "type": "object",
+          "description": "Authority under which action was taken",
+          "properties": {
+            "source": {
+              "type": "string",
+              "description": "Source of authority (e.g., 'roles/tess/Autonomy.md', 'approval_gate_xyz')"
+            },
+            "approval_id": {
+              "type": "string",
+              "description": "Reference to approval record enabling this action"
+            },
+            "level": {
+              "type": "integer",
+              "description": "Autonomy level at time of action",
+              "minimum": 0,
+              "maximum": 6
+            },
+            "explicit_approval": {
+              "type": "boolean",
+              "description": "Was explicit approval required and obtained?"
+            }
+          }
+        },
+        "files_touched": {
+          "type": "array",
+          "description": "Files affected by this action (full paths, no content)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "File path"
+              },
+              "operation": {
+                "type": "string",
+                "description": "What operation (read, write, edit, delete)",
+                "enum": ["read", "write", "edit", "delete", "validate"]
+              },
+              "hash_before": {
+                "type": "string",
+                "description": "SHA256 of file content before (if modified)"
+              },
+              "hash_after": {
+                "type": "string",
+                "description": "SHA256 of file content after (if modified)"
+              }
+            },
+            "required": ["path", "operation"]
+          }
+        },
+        "tools_used": {
+          "type": "array",
+          "description": "Tools invoked during this action",
+          "items": {
+            "type": "object",
+            "properties": {
+              "tool_name": {
+                "type": "string",
+                "description": "Tool name (e.g., 'Read', 'Edit', 'Bash', 'git')"
+              },
+              "operation": {
+                "type": "string",
+                "description": "High-level operation (no sensitive details)"
+              },
+              "result": {
+                "type": "string",
+                "description": "Outcome (success, blocked, error)"
+              }
+            },
+            "required": ["tool_name"]
+          }
+        },
+        "decision_outcome": {
+          "type": "object",
+          "description": "Result of decision or action",
+          "properties": {
+            "approved": {
+              "type": "boolean",
+              "description": "Was action approved or denied?"
+            },
+            "approval_status": {
+              "type": "string",
+              "description": "Status of decision",
+              "enum": ["approved", "denied", "blocked", "requires_escalation", "pending"]
+            },
+            "reason": {
+              "type": "string",
+              "description": "Rationale for decision (if denied, explicit reason required)"
+            }
+          },
+          "required": ["approval_status"]
+        },
+        "proof": {
+          "type": "object",
+          "description": "Evidence and validation that decision was correct",
+          "properties": {
+            "source_validator_ok": {
+              "type": "boolean",
+              "description": "Did source validation pass?"
+            },
+            "source_validator_errors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Source validation errors (if any)"
+            },
+            "contract_validator_ok": {
+              "type": "boolean",
+              "description": "Did contract validation pass?"
+            },
+            "contract_validator_errors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "gate_validation_ok": {
+              "type": "boolean",
+              "description": "Did gate policy validation pass?"
+            },
+            "gate_validation_errors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "scope_validation_ok": {
+              "type": "boolean",
+              "description": "Did scope/intent validation pass?"
+            },
+            "scope_details": {
+              "type": "object",
+              "description": "Scope approval details",
+              "properties": {
+                "approved_hunks": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "IDs of approved diff hunks"
+                },
+                "unapproved_hunks_detected": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "IDs of unapproved hunks (if any)"
+                },
+                "no_adjacent_changes": {
+                  "type": "boolean",
+                  "description": "Were unapproved adjacent changes blocked?"
+                }
+              }
+            },
+            "source_hashes": {
+              "type": "object",
+              "description": "Cryptographic proof of source integrity",
+              "properties": {
+                "autonomy_md_sha256": {
+                  "type": "string",
+                  "description": "Hash of Autonomy.md at time of decision"
+                },
+                "role_agent_md_sha256": {
+                  "type": "string"
+                },
+                "gate_policy_sha256": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "rollback_revocation": {
+          "type": "object",
+          "description": "Information if this entry is a rollback or revocation",
+          "properties": {
+            "is_rollback": {
+              "type": "boolean",
+              "description": "Is this entry rolling back a prior action?"
+            },
+            "rolled_back_entry_id": {
+              "type": "string",
+              "description": "Entry ID of original action being rolled back"
+            },
+            "rollback_reason": {
+              "type": "string",
+              "description": "Why was rollback initiated?"
+            },
+            "is_revocation": {
+              "type": "boolean",
+              "description": "Is this a revocation of authority?"
+            },
+            "revocation_scope": {
+              "type": "string",
+              "description": "What authority was revoked (full, level, actions)"
+            },
+            "revocation_reason": {
+              "type": "string",
+              "description": "Why was authority revoked?"
+            }
+          }
+        },
+        "validation_results": {
+          "type": "object",
+          "description": "All validation checks performed",
+          "properties": {
+            "whoami_ok": {
+              "type": "boolean",
+              "description": "Did WhoAmI validation pass (role identity confirmed)?"
+            },
+            "source_load_ok": {
+              "type": "boolean",
+              "description": "Did source loader succeed?"
+            },
+            "contract_ok": {
+              "type": "boolean",
+              "description": "Did contract validation pass?"
+            },
+            "activation_status_ok": {
+              "type": "boolean",
+              "description": "Is activation status valid and not stale?"
+            },
+            "latest_instruction_ok": {
+              "type": "boolean",
+              "description": "Is instruction latest and not superseded?"
+            },
+            "owner_routing_ok": {
+              "type": "boolean",
+              "description": "Was work routed to correct owner?"
+            },
+            "tool_authorization_ok": {
+              "type": "boolean",
+              "description": "Is tool use authorized?"
+            },
+            "gate_ok": {
+              "type": "boolean",
+              "description": "Did approval gate validation pass?"
+            },
+            "all_checks_passed": {
+              "type": "boolean",
+              "description": "Did all validation checks pass?"
+            }
+          }
+        },
+        "remaining_risk": {
+          "type": "object",
+          "description": "Known risk or uncertainty at time of decision",
+          "properties": {
+            "risk_level": {
+              "type": "string",
+              "description": "Risk assessment",
+              "enum": ["none", "low", "medium", "high", "critical"]
+            },
+            "risk_description": {
+              "type": "string",
+              "description": "What risk remains after all validations"
+            },
+            "mitigation": {
+              "type": "string",
+              "description": "How is risk mitigated or monitored?"
+            },
+            "requires_review": {
+              "type": "boolean",
+              "description": "Does this entry require human review?"
+            }
+          }
+        },
+        "context": {
+          "type": "object",
+          "description": "Additional context (not secrets or raw logs)",
+          "properties": {
+            "session_id": {
+              "type": "string",
+              "description": "Session or turn ID"
+            },
+            "related_entries": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "IDs of related audit entries"
+            },
+            "notes": {
+              "type": "string",
+              "description": "Additional context notes (no secrets, no sensitive data)"
+            }
+          }
+        }
+      },
+      "required": [
+        "entry_id",
+        "timestamp",
+        "event_type",
+        "actor",
+        "action_description",
+        "decision_outcome"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

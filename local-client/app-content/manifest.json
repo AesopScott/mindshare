@@ -1,0 +1,11 @@
+﻿{
+    "generatedAt":  "2026-06-25T14:27:24.3588207Z",
+    "contentRoot":  "C:\\Users\\scott\\Code\\mindshare\\local-client\\app-content",
+    "sources":  {
+                    "public":  "C:\\Users\\scott\\Code\\mindshare\\public",
+                    "tessRole":  "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer",
+                    "beaRole":  "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer",
+                    "mojoMaps":  "C:\\Users\\scott\\Code\\mojo\\assets\\maps",
+                    "mojoAgents":  "C:\\Users\\scott\\Code\\mojo\\agents"
+                }
+}

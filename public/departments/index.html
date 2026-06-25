@@ -1945,12 +1945,20 @@ Configuration is loaded from the local MindShare workspace.
         }
 
         function injectOfficeEntry(roleSession, text) {
-            if (roleSession.officeInjected) {
+            const officeText = text || `This is ${roleSession.name}'s office.`;
+            const officeNeedle = `${roleSession.name.toLowerCase()}'s office`;
+            const hasOfficeEntry = roleSession.messages.some((message) =>
+                String(message.text || message.content || '').toLowerCase().includes(officeNeedle)
+            );
+            if (roleSession.officeInjected && hasOfficeEntry) {
                 return;
             }
             roleSession.officeInjected = true;
-            const officeText = text || `This is ${roleSession.name}'s office.`;
-            addChatMessageToRole(roleSession, 'user', officeText);
+            if (!hasOfficeEntry) {
+                addChatMessageToRole(roleSession, 'user', officeText);
+            } else {
+                persistOfficeState();
+            }
         }
 
         function showOfficeContext({ name, title, level, filesText }) {

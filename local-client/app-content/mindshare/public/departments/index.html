@@ -45,6 +45,20 @@
             border-color: rgba(52, 211, 153, 0.85);
             box-shadow: 0 0 16px rgba(52, 211, 153, 0.62);
         }
+        .prompt-engine-button {
+            border: 1px solid rgba(190, 198, 224, 0.12);
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(220, 225, 251, 0.58);
+        }
+        .prompt-engine-button.is-active {
+            border-color: rgba(190, 198, 224, 0.72);
+            background: rgba(190, 198, 224, 0.14);
+            color: #dce1fb;
+            box-shadow: 0 0 18px rgba(190, 198, 224, 0.18);
+        }
+        .prompt-engine-button.is-unavailable {
+            opacity: 0.55;
+        }
         .notification-badge {
             min-width: 1rem;
             height: 1rem;
@@ -401,7 +415,15 @@ Configuration is loaded from the local MindShare workspace.
 <!-- Input Zone -->
 <div class="p-6 border-t border-white/10 glass-panel-heavy z-10">
 <div class="w-full relative group">
-<textarea class="w-full bg-surface-container-low border border-white/10 rounded-xl px-6 py-4 pr-32 focus:border-primary transition-all focus:ring-0 text-on-surface font-body-md resize-none custom-scrollbar" id="chat-input" placeholder="Query Neural Suite..." rows="3"></textarea>
+<textarea class="w-full bg-surface-container-low border border-white/10 rounded-xl px-6 py-4 pb-14 pr-32 focus:border-primary transition-all focus:ring-0 text-on-surface font-body-md resize-none custom-scrollbar" id="chat-input" placeholder="Query Neural Suite..." rows="3"></textarea>
+<div class="absolute left-4 bottom-3 flex items-center gap-2" aria-label="Prompt engine selector">
+<button class="prompt-engine-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="prompt-engine-codex" type="button" data-prompt-engine="codex">
+<span class="inline-block h-1.5 w-1.5 rounded-full align-middle mr-2 bg-current opacity-70"></span>Codex
+</button>
+<button class="prompt-engine-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="prompt-engine-claude" type="button" data-prompt-engine="claude">
+<span class="inline-block h-1.5 w-1.5 rounded-full align-middle mr-2 bg-current opacity-70"></span>Claude
+</button>
+</div>
 <div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-3">
 <button class="p-2 text-on-surface-variant hover:text-primary transition-colors" id="attach-file-button" type="button">
 <span class="material-symbols-outlined">attachment</span>
@@ -2180,6 +2202,39 @@ Configuration is loaded from the local MindShare workspace.
             if (!dot) return;
             dot.classList.toggle('is-ready', Boolean(ready));
             dot.classList.toggle('animate-pulse', Boolean(ready));
+            renderPromptEngineSelector();
+        }
+
+        function renderPromptEngineSelector() {
+            const codexButton = document.getElementById('prompt-engine-codex');
+            const claudeButton = document.getElementById('prompt-engine-claude');
+            if (!codexButton || !claudeButton) return;
+            const buttons = [
+                { button: codexButton, engine: 'codex', available: codexAvailable },
+                { button: claudeButton, engine: 'claude', available: claudeAvailable }
+            ];
+            buttons.forEach(({ button, engine, available }) => {
+                const isActive = activeEngine === engine;
+                button.classList.toggle('is-active', isActive);
+                button.classList.toggle('is-unavailable', !available);
+                button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                button.title = available
+                    ? `Send next prompt to ${engine === 'claude' ? 'Claude' : 'Codex'}`
+                    : `${engine === 'claude' ? 'Claude' : 'Codex'} is not connected yet`;
+            });
+        }
+
+        function setPromptEngine(engine) {
+            if (!['codex', 'claude'].includes(engine)) return;
+            activeEngine = engine;
+            renderPromptEngineSelector();
+            persistOfficeState();
+            const available = engine === 'claude' ? claudeAvailable : codexAvailable;
+            if (!available) {
+                setChatStatus(`${engine === 'claude' ? 'Claude' : 'Codex'} selected. Connect ${engine === 'claude' ? 'Claude' : 'Codex'} before sending.`);
+            } else {
+                setChatStatus(`Next prompt will use ${engine === 'claude' ? 'Claude' : 'Codex'}.`);
+            }
         }
 
         function hasConnectedOfficeSession(roleSession) {
@@ -2365,6 +2420,7 @@ Configuration is loaded from the local MindShare workspace.
                 codexAvailable = true;
                 setProviderReady('codex', true);
                 activeEngine = 'codex';
+                renderPromptEngineSelector();
                 persistOfficeState();
                 button.classList.remove('text-on-surface-variant');
                 button.classList.add('text-primary');
@@ -2440,6 +2496,7 @@ Configuration is loaded from the local MindShare workspace.
                 claudeAvailable = true;
                 setProviderReady('claude', true);
                 activeEngine = 'claude';
+                renderPromptEngineSelector();
                 persistOfficeState();
                 button.classList.add('text-primary');
                 setChatStatus(activeRoleSlug
@@ -2599,6 +2656,7 @@ Configuration is loaded from the local MindShare workspace.
             setActiveDivision(selectedSlug);
             await refreshProviderReadiness();
             await reconcileOfficeSessionsFromClient();
+            renderPromptEngineSelector();
             renderRestoredActiveOffice();
             renderActiveSessions();
             renderAutomationRuns();
@@ -2611,6 +2669,8 @@ Configuration is loaded from the local MindShare workspace.
 
             document.getElementById('connect-codex-button').addEventListener('click', connectCodex);
             document.getElementById('connect-claude-button').addEventListener('click', connectClaude);
+            document.getElementById('prompt-engine-codex').addEventListener('click', () => setPromptEngine('codex'));
+            document.getElementById('prompt-engine-claude').addEventListener('click', () => setPromptEngine('claude'));
             document.getElementById('configuration-button').addEventListener('click', (event) => {
                 event.stopPropagation();
                 showConfigurationPanel();

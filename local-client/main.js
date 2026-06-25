@@ -1,9 +1,11 @@
 const { app, BrowserWindow, dialog, ipcMain, Menu } = require('electron');
 const path = require('node:path');
-const { connectCodex, connectClaude, loadRoleContext, sendCodexMessage, sendClaudeMessage } = require('./mindshare-local-client');
+const { connectCodex, connectClaude, loadRoleContext, runTessLevel4Automation, sendCodexMessage, sendClaudeMessage } = require('./mindshare-local-client');
 
 const bundledPublicRoot = path.join(__dirname, 'app-content', 'mindshare', 'public');
 const devPublicRoot = path.join(__dirname, '..', 'public');
+const TESS_LEVEL4_INTERVAL_MS = 30 * 60 * 1000;
+let tessLevel4Timer = null;
 
 function createWindow() {
   const window = new BrowserWindow({
@@ -45,6 +47,7 @@ function installApplicationMenu() {
 ipcMain.handle('mindshare:codex-connect', async (_event, payload) => connectCodex(payload));
 ipcMain.handle('mindshare:claude-connect', async (_event, payload) => connectClaude(payload));
 ipcMain.handle('mindshare:role-context', async (_event, payload) => loadRoleContext(payload));
+ipcMain.handle('mindshare:tess-level4-automation', async (_event, payload) => runTessLevel4Automation(payload));
 ipcMain.handle('mindshare:codex-message', async (_event, payload) => sendCodexMessage(payload));
 ipcMain.handle('mindshare:claude-message', async (_event, payload) => sendClaudeMessage(payload));
 ipcMain.handle('mindshare:choose-files', async () => {
@@ -67,10 +70,21 @@ ipcMain.handle('mindshare:choose-files', async () => {
 app.whenReady().then(() => {
   installApplicationMenu();
   createWindow();
+  runTessLevel4Automation({ mode: 'scheduled' }).catch((error) => {
+    console.warn('Tess Level 4 automation startup run failed.', error);
+  });
+  tessLevel4Timer = setInterval(() => {
+    runTessLevel4Automation({ mode: 'scheduled' }).catch((error) => {
+      console.warn('Tess Level 4 automation scheduled run failed.', error);
+    });
+  }, TESS_LEVEL4_INTERVAL_MS);
 });
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    if (tessLevel4Timer) {
+      clearInterval(tessLevel4Timer);
+    }
     app.quit();
   }
 });

@@ -295,7 +295,7 @@ Work performed:
 
 - Created `C:\Users\scott\Code\mindshare\roles\hr-director\Autonomy.md`.
 - Created `C:\Users\scott\Code\mindshare\roles\staff-writer\Autonomy.md`.
-- Created `C:\Users\scott\Code\mindshare\roles\personal-assistant\Autonomy.md`.
+- Created `C:\Users\scott\Code\mindshare\roles\executive-assistant\Autonomy.md`.
 - Created `C:\Users\scott\Code\mojo\roles\lab-operator\Autonomy.md`.
 - Created `roles/autonomy-engineer/cole-level4-promotion-packet.md`.
 - Created `roles/autonomy-engineer/june-level4-promotion-packet.md`.
@@ -1262,3 +1262,364 @@ Boundary:
 - 2026-06-23 - Recorded no-eligible-work check at 11:04:55Z; state updated, no visible-log/Heartbeat entry required because no backlog item was processed.
 - 2026-06-23 - Recorded no-eligible-work check at 11:35:10Z; state updated, no visible-log/Heartbeat entry required because no backlog item was processed.
 - 2026-06-23 - Recorded no-eligible-work check at 12:05:02Z; state updated, no visible-log/Heartbeat entry required because no backlog item was processed.
+
+## 2026-06-24T17:08:07-06:00 - Tess Level 4 Script Run (manual)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\scripts\tess_level4_backlog_processor.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 0, "complete": 14, "total": 14}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T17:11:22-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\scripts\tess_level4_backlog_processor.py`
+Backlog counts: `{"backlog": 6, "blocked_or_errored": 0, "complete": 17, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T17:14:20-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\scripts\tess_level4_backlog_processor.py`
+Backlog counts: `{"backlog": 5, "blocked_or_errored": 0, "complete": 18, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T17:15:07-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\scripts\tess_level4_backlog_processor.py`
+Backlog counts: `{"backlog": 5, "blocked_or_errored": 0, "complete": 18, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T17:22:33-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 5, "blocked_or_errored": 0, "complete": 18, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T17:28:53-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 5, "blocked_or_errored": 0, "complete": 18, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T17:29:43-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 5, "blocked_or_errored": 0, "complete": 18, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T17:41:28-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 5, "blocked_or_errored": 0, "complete": 18, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T17:51:55-06:00 - METH-005 Vik Script/Timer Conversion
+
+Result: blocked.
+
+Work performed:
+
+- Resolved Vik's canonical Mojo role path as `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect` rather than stale `roles\vik`.
+- Added C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\scripts\level4automation.py for deterministic Level 4 backlog counts, queue/backlog alignment, eligible-item detection, source-conflict detection, state, and proof.
+- Updated vik-visible-backlog-research to call the Level 4 script before live research work.
+- Updated Vik Autonomy.md and utomation.md to name the Level 4 script/timer boundary.
+- Ran the Level 4 script in scheduled mode. It wrote state/proof and blocked on source conflict: queue state contains VA-049, VA-050, VA-051, VA-052, VA-053, and VA-054, but the canonical architecture backlog currently contains VA-001 through VA-048 only.
+- Ran the Level 5 script in scheduled mode. It found Level 5 active from the canonical contract, 48 completed Level 4 reports, 48 Level 5 reports, and zero unreviewed completed reports.
+- Updated utomation.backlog.md item METH-005 to blocked.
+
+Validation:
+
+- check-vik-automation-separation.ps1 still fails because ik-daily-role-memory-maintenance uses the current daily-equivalent RRULE form instead of the validator's expected FREQ=DAILY;INTERVAL=1 string.
+- check-vik-backlog-integrity.ps1 still fails for the same preserved source conflict: VA-049 through VA-054 exist in queue state but not in the backlog.
+
+Denied actions held: no backlog/queue mutation to hide the conflict, no Claude research execution by the script, no implementation, no runtime activation, no promotion, no Git/GitHub/release action, no production, no external communication, no spending, no secrets, no authority expansion, and no Level 6 activation.
+
+Owner route: Reid review requested for changed source/config/state/proof files; Scott/Tess/Vik review needed to decide whether VA-049 through VA-054 should be added to the backlog or removed from queue state.
+
+## 2026-06-24T17:52:12-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 4, "blocked_or_errored": 1, "complete": 18, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T17:57:03-06:00 - METH-006 Lane Script/Timer Conversion
+
+Result: complete.
+
+Work performed:
+
+- Added C:\Users\scott\Code\mojo\roles\lab-operator\scripts\level4automation.py for deterministic token-log schema validation, previous-complete-hour coverage detection, HTML rebuild via build-token-usage.ps1, state, proof, and boundary bookkeeping.
+- Updated lane-hourly-token-usage-update to call the Lane script first and use script state before live measurement/append work.
+- Updated Lane Autonomy.md to document the script/timer boundary without promoting Lane or expanding authority.
+- Ran python C:\Users\scott\Code\mojo\roles\lab-operator\scripts\level4automation.py --write --mode scheduled --rebuild-html.
+- Script result: no_eligible_work_previous_hour_logged; window 2026-06-24 16:00:00 to 2026-06-24 17:00:00; 193 token rows parsed; 8 previous-hour rows found; HTML rebuild passed.
+- Updated automation.backlog.md item METH-006 to complete.
+
+Denied actions held: no Git/GitHub/release action, no production, no external service contact, no spending, no secrets, no deletes/moves, no authority expansion, no runtime activation, and no Level 4 promotion.
+
+Owner route: Reid review requested for changed source/config/state/proof and rebuilt token HTML.
+
+## 2026-06-24T17:57:07-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 3, "blocked_or_errored": 1, "complete": 19, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T17:57:49-06:00 - METH-007 June Writing Nudge Review
+
+Result: complete.
+
+Work performed:
+
+- Reviewed June Autonomy.md, role files, and june-writing-nudge automation prompt.
+- Determined the active writing nudge is prompt-only: it sends a brief check-in to Scott in June's voice and does not create or update durable writing files, source artifacts, state/proof records, website mirrors, Git/release artifacts, or runtime source.
+- Confirmed the prompt already includes Reid durability routing if any future run creates or changes durable files/source/proof/mirrors.
+- No Level 4 script was added because there is no deterministic durable-write loop to extract at this time.
+- Updated utomation.backlog.md item METH-007 to complete.
+
+Denied actions held: no script added unnecessarily, no publication, no external communication, no Git/GitHub/release action, no production, no spending, no secrets, no runtime activation, no promotion, and no authority expansion.
+
+Owner route: if June's nudge later starts writing durable artifacts, reopen conversion and route changed source/config/state/proof files to Reid.
+
+## 2026-06-24T17:57:52-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 2, "blocked_or_errored": 1, "complete": 20, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T17:59:43-06:00 - METH-008 Reid Release Guard Review
+
+Result: complete.
+
+Work performed:
+
+- Reviewed Reid Autonomy.md, reid-handoff-check file-watch config, and check-release-queue.ps1.
+- Confirmed Reid's active release-management monitor is already script/timer separated: file-watch wakes Reid and calls check-release-queue.ps1; the script owns deterministic Release Management queue scan, queue guard state, and MAPS+Org skill dirty checks.
+- Found a deterministic gap: the script only parsed ### sections and bulleted - Next owner: / - Requested response: fields, while current Release Management entries use ## headings and unbulleted fields.
+- Patched check-release-queue.ps1 to parse current ##/### sections and optional-bullet Next owner, Requested response, and closed fields.
+- Ran the guard with CODEX_FILE_WATCH_NO_STATE_WRITE=1; result: OPEN_REID_QUEUE, including current Lane and June Tess request addenda. This proves the guard no longer falsely reports no queue for the current channel format.
+- Updated utomation.backlog.md item METH-008 to complete.
+
+Denied actions held: no Git/GitHub/release action, no commit/push, no branch cleanup, no production, no external communication, no spending, no secrets, no runtime activation, no promotion, and no authority expansion.
+
+Owner route: Reid review requested for the queue guard script change and Tess backlog/proof updates.
+
+## 2026-06-24T17:59:48-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 1, "blocked_or_errored": 1, "complete": 21, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T18:01:15-06:00 - METH-009 FileWatch Script/Timer Review
+
+Result: complete.
+
+Work performed:
+
+- Reviewed shared FileWatch runner C:\Users\scott\Code\mojo\scripts\codex_file_watch_runner.py.
+- Confirmed deterministic FileWatch logic is centralized in the runner: config parsing, watched-path hashes, queue guard invocation, state writes, packet construction, resume process handoff, status output, and quiet/no-work handling.
+- Reviewed handoff ile-watch.toml configs under C:\Users\scott\.codex\automations.
+- Verified all 9 handoff configs have queue guards.
+- Verified all 9 handoff configs have Reid/release routing after adding missing Reid durability language to paused ik-handoff-check fallback prompt.
+- Ran python C:\Users\scott\Code\mojo\scripts\codex_file_watch_runner.py --dry-run; it exited successfully.
+- Updated utomation.backlog.md item METH-009 to complete.
+
+Denied actions held: no FileWatch runtime activation, no automation status/cadence/target-thread change, no Git/GitHub/release action, no production, no external communication, no spending, no secrets, no role promotion, and no authority expansion.
+
+Owner route: Reid review requested for the ik-handoff-check fallback config routing update and Tess backlog/proof updates.
+
+## 2026-06-24T18:01:20-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T18:04:13-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T18:06:07-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T18:11:39-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T18:41:46-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T19:11:35-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T19:41:48-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T20:11:43-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T20:41:22-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: blocked
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `1`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T21:41:41-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: blocked
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `1`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T22:12:06-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: blocked
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `1`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-24T22:13:32-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-25T00:22:53-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-25T09:20:36-06:00 - Tess Level 4 Script Run (scheduled)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-25T09:26:34-06:00 - Tess Level 4 Script Run (manual)
+
+Result: no_eligible_work
+Logic owner: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py`
+Backlog counts: `{"backlog": 0, "blocked_or_errored": 1, "complete": 22, "total": 23}`
+Reid request present: `True`
+Reid route gaps: `0`
+
+Denied actions held: no promotion approval, role promotion, runtime activation, gate edit, Git/GitHub/release, production, external communication, spending, secrets, or authority expansion.

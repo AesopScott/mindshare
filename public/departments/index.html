@@ -412,7 +412,12 @@
         const divisionDepartments = {
             "strategy-and-operations": {
                 label: "Strategy & Operations",
-                departments: ["Executive Leadership", "PMO", "Human Resources", "Recruiting", "Risk Management"]
+                departments: ["Executive Leadership", "PMO", "Human Resources", "Recruiting", "Risk Management"],
+                entries: {
+                    "PMO": [
+                        { slug: "cal", name: "Cal", title: "MAPS ASPM", level: "Level 3 Staff", image: "../assets/team/cal.webp" }
+                    ]
+                }
             },
             "product-and-design": {
                 label: "Product & Design",
@@ -422,6 +427,9 @@
                 label: "Technology & Data",
                 departments: ["Engineering", "Platform Engineering", "Data Engineering", "AI Engineering", "Security"],
                 entries: {
+                    "Engineering": [
+                        { slug: "lane", name: "Lane", title: "Mojo Lab Operator", level: "Level 3 Staff" }
+                    ],
                     "Platform Engineering": [
                         { slug: "reid", name: "Reid", title: "Release Manager", level: "Level 3 Staff", image: "../assets/team/reid.webp" }
                     ],
@@ -635,6 +643,8 @@
         const notificationTimers = {};
         const NOTIFICATION_TTL_MS = 120000;
         const OFFICE_STATE_STORAGE_KEY = 'mindshare.officeSessions.v1';
+        const TESS_AUTOMATION_LAST_RUN_KEY = 'mindshare.tessLevel4Automation.lastRun.v1';
+        const TESS_AUTOMATION_MIN_INTERVAL_MS = 5 * 60 * 1000;
         const pendingAttachments = [];
         const departmentBackdrops = {
             "AI Engineering": "../assets/departments/ai-engineering-wiring.png"
@@ -789,6 +799,7 @@
                     filesText: contextFilesText(payload.roleContext)
                 });
                 const createdSessions = await provisionAvailableProviderSessions(roleSession);
+                await runTessAutomationIfNeeded(roleSession);
                 if (createdSessions.length) {
                     setChatStatus(`${name}'s ${createdSessions.join(' and ')} office session${createdSessions.length === 1 ? '' : 's'} connected.`);
                 } else {
@@ -802,6 +813,28 @@
 
         function mindShareLocalClient() {
             return window.MindShareLocalClient || null;
+        }
+
+        async function runTessAutomationIfNeeded(roleSession) {
+            if (!roleSession || roleSession.slug !== 'tess') return;
+            const client = mindShareLocalClient();
+            if (!client?.runTessLevel4Automation) return;
+            const lastRun = Number(localStorage.getItem(TESS_AUTOMATION_LAST_RUN_KEY) || 0);
+            if (Date.now() - lastRun < TESS_AUTOMATION_MIN_INTERVAL_MS) return;
+            localStorage.setItem(TESS_AUTOMATION_LAST_RUN_KEY, String(Date.now()));
+            setChatStatus('Running Tess Level 4 automation from bundled Electron files...');
+            try {
+                const result = await client.runTessLevel4Automation({ mode: 'scheduled' });
+                const state = result.state;
+                const summary = state
+                    ? `Tess Level 4 automation ran from Electron bundle: ${state.result}; backlog=${state.backlog_counts?.backlog ?? 'unknown'}; Reid route gaps=${state.reid_durability?.active_automation_route_gaps?.length ?? 'unknown'}.`
+                    : `Tess Level 4 automation ${result.ok ? 'ran' : 'failed'} from Electron bundle.${result.error ? ` ${result.error}` : ''}`;
+                addChatMessageToRole(roleSession, result.ok ? 'system' : 'system', summary);
+            } catch (error) {
+                addChatMessageToRole(roleSession, 'system', `Tess Level 4 automation failed in Electron: ${error.message || error}`);
+            } finally {
+                if (activeRoleSlug === roleSession.slug) clearChatStatus();
+            }
         }
 
         function attachmentLabel(attachments) {

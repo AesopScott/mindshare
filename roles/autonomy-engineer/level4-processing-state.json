@@ -1,79 +1,56 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "role": "Tess / Autonomy Engineer",
-  "status": "level4_operational",
   "automation_id": "tess-level-4-autonomy-backlog-processing",
-  "automation_kind": "cron",
-  "cadence": "30 minutes",
-  "level4_scope": [
-    "automation_baseline_review",
-    "promotion_packet_construction",
-    "level_4_5_6_capability_definition",
-    "scott_review_routing"
+  "logic_owner": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\scripts\\level4automation.py",
+  "mode": "manual",
+  "checked_at": "2026-06-25T09:26:34-06:00",
+  "result": "no_eligible_work",
+  "current_level": "Level 4 Senior Staff (Scoped Autonomy)",
+  "backlog_counts": {
+    "total": 23,
+    "backlog": 0,
+    "blocked_or_errored": 1,
+    "complete": 22
+  },
+  "eligible_items": [],
+  "blocked_items": [
+    {
+      "id": "METH-005",
+      "role": "Vik",
+      "org": "Mojo",
+      "work": "Convert Vik Level 4/5 research and recommendation loops to script/timer methodology",
+      "priority": "High",
+      "status": "blocked",
+      "proof": "Level 4 script added at `C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\scripts\\level4automation.py` and heartbeat now calls it before research; scheduled proof at 2026-06-24T17:50:50-06:00 blocked on source conflict: queue state contains `VA-049`-`VA-054` not present in canonical architecture backlog; Level 5 script at canonical role path reports active Level 5 with 48 completed reports, 48 Level 5 reports, and zero unreviewed reports"
+    }
   ],
-  "denied_actions": [
-    "approve_promotions",
-    "promote_roles",
-    "activate_broad_runtime",
-    "edit_gates_unilaterally",
-    "git_github_release",
-    "production",
-    "external_communication",
-    "spending",
-    "secrets",
-    "authority_expansion"
-  ],
-  "visibility": {
-    "required_for_non_noop_runs": true,
-    "local_log": "roles/autonomy-engineer/level4-visible-log.md",
-    "heartbeat_channel": "G:\\My Drive\\Mindshare\\channels\\heartbeat.md"
+  "reid_durability": {
+    "release_management_request_present": true,
+    "active_automation_route_gaps": [],
+    "rule": "Any durable autonomy/runtime/source change must append or update a Release Management request for Reid."
   },
-  "work_loop_rule": {
-    "continue_until_empty": true,
-    "after_each_item": "re-read automation.backlog.md before selecting next eligible item",
-    "stop_when": [
-      "no_eligible_item_remains",
-      "remaining_items_blocked_errored_or_cancelled",
-      "stop_condition_risk_or_time_limit_requires_stop"
-    ]
-  },
-  "last_check_utc": "2026-06-23T12:05:02Z",
-  "last_result": "no_eligible_work",
-  "current_item": null,
-  "last_item": {
-    "id": "AUTO-REV-013",
-    "role": "Lane",
-    "org": "Mojo",
-    "result": "complete",
-    "output": "roles/autonomy-engineer/lane-level4-promotion-packet.md",
-    "review_request": "Scott review requested in packet and proof file",
-    "blocked_actions": [
-      "promotion_approval",
-      "role_promotion",
-      "runtime_activation",
-      "gate_edit",
-      "git_github_release",
-      "production",
-      "external_communication",
-      "spending",
-      "secrets",
-      "authority_expansion"
-    ]
-  },
-  "next_action": "Scott review ready packets; all 14 review rows remain complete and no backlog-status rows remain in automation.backlog.md",
   "gate_status": {
     "authority": "pass",
     "contract": "pass",
     "trigger": "pass",
-    "runtime": "pass",
+    "runtime": "pass_runtime_timer_calls_script_when_automation_active",
     "work_loop": "pass",
     "state": "pass",
-    "evidence": "pass",
-    "boundary": "pass_by_contract",
-    "review": "pass_by_contract",
-    "revocation": "pass_pause_resume_drill",
-    "display": "pass"
+    "evidence": "pass_after_write",
+    "boundary": "pass_denied_actions_held",
+    "reid_durability": "pass"
   },
-  "created_utc": "2026-06-22T19:50:13Z",
-  "updated_utc": "2026-06-23T12:05:02Z"
+  "denied_actions_held": [
+    "no promotion approval",
+    "no role promotion",
+    "no runtime activation",
+    "no gate edit",
+    "no git/github/release action",
+    "no production",
+    "no external communication",
+    "no spending",
+    "no secrets",
+    "no authority expansion"
+  ]
 }

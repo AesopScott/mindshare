@@ -61,6 +61,21 @@ const ROLE_CATALOG = {
       'memory.md'
     ]
   },
+  cal: {
+    name: 'Cal',
+    title: 'MAPS ASPM',
+    level: 'Level 3 Staff',
+    office: "Cal's office",
+    rolePath: ['mojo', 'roles', 'maps-agentic-systems-program-manager'],
+    files: [
+      'WhoAmI.md',
+      'name.md',
+      'role-agent.md',
+      'workflow.md',
+      'Autonomy.md',
+      'memory.md'
+    ]
+  },
   imani: {
     name: 'Imani',
     title: 'Data Engineering Director',
@@ -71,6 +86,22 @@ const ROLE_CATALOG = {
       'WhoAmI.md',
       'name.md',
       'personality.md',
+      'role-agent.md',
+      'workflow.md',
+      'loop.md',
+      'Autonomy.md',
+      'memory.md'
+    ]
+  },
+  lane: {
+    name: 'Lane',
+    title: 'Mojo Lab Operator',
+    level: 'Level 3 Staff',
+    office: "Lane's office",
+    rolePath: ['mojo', 'roles', 'lab-operator'],
+    files: [
+      'WhoAmI.md',
+      'name.md',
       'role-agent.md',
       'workflow.md',
       'loop.md',
@@ -118,6 +149,7 @@ function run(command, args, options = {}) {
   return new Promise((resolve) => {
     const child = spawn(command, args, {
       cwd: repoRoot,
+      env: { ...process.env, ...(options.env || {}) },
       shell: false,
       windowsHide: true
     });
@@ -461,6 +493,58 @@ function formatAttachments(attachments) {
   }).join('\n');
 }
 
+async function pythonLaunch() {
+  const configured = process.env.PYTHON || process.env.PYTHON_EXE;
+  if (configured && await pathExists(configured)) {
+    return configured;
+  }
+  const python = await firstCommand(process.platform === 'win32' ? 'python.exe' : 'python');
+  if (python) {
+    return python;
+  }
+  return firstCommand(process.platform === 'win32' ? 'py.exe' : 'python3');
+}
+
+async function runTessLevel4Automation(payload = {}) {
+  const appContentRoot = await resolveAppContentRoot();
+  const mindshareRoot = path.join(appContentRoot, 'mindshare');
+  const scriptPath = path.join(mindshareRoot, 'roles', 'autonomy-engineer', 'scripts', 'level4automation.py');
+  const python = await pythonLaunch();
+  if (!python) {
+    return { ok: false, error: 'Python is not installed or not on PATH.' };
+  }
+  if (!await pathExists(scriptPath)) {
+    return { ok: false, error: `Tess Level 4 automation script was not found at ${scriptPath}.` };
+  }
+
+  const mode = payload.mode === 'scheduled' ? 'scheduled' : 'manual';
+  const args = python.toLowerCase().endsWith('py.exe')
+    ? ['-3', scriptPath, '--write', '--mode', mode]
+    : [scriptPath, '--write', '--mode', mode];
+  const result = await run(python, args, {
+    timeout: 120000,
+    env: {
+      MINDSHARE_REPO_ROOT: mindshareRoot,
+      MINDSHARE_AUTOMATIONS_ROOT: path.join(mindshareRoot, 'automations'),
+      MINDSHARE_RELEASE_QUEUE: path.join(mindshareRoot, 'roles', 'autonomy-engineer', 'level4-release-management-queue.md')
+    }
+  });
+  const output = (result.stdout || result.stderr || '').trim();
+  let state = null;
+  try {
+    state = output ? JSON.parse(output) : null;
+  } catch {
+    state = null;
+  }
+  return {
+    ok: result.ok,
+    code: result.code,
+    state,
+    output,
+    error: result.ok ? null : (result.stderr || result.stdout || 'Tess Level 4 automation failed.').trim()
+  };
+}
+
 async function loadRoleContext(payload = {}) {
   const roleSlug = String(payload?.roleSlug || payload?.name || '').trim().toLowerCase();
   const role = ROLE_CATALOG[roleSlug];
@@ -661,6 +745,7 @@ module.exports = {
   connectCodex,
   connectClaude,
   loadRoleContext,
+  runTessLevel4Automation,
   sendCodexMessage,
   sendClaudeMessage
 };

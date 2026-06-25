@@ -8,7 +8,7 @@ Primary memory: `C:\Users\scott\Code\mindshare\roles\hr-director\memory.md`
 
 This script gives Cole a consistent way to welcome newly hired Level 2 roles after Ana shows them to their office.
 
-It should check and repair the role file set first, welcome the person to their associated company, name the office as their role home, state Cole's HR file-structure scope and authority boundaries, identify their core records, set the expectation that they speak in first person and communicate as humanly as they can, ask light verification questions about their job/Who Am I/personality/memory, promote the person to Level 3 Staff only when readiness checks pass, and make the next handoff clear.
+It should check and repair the role file set first, assign or confirm the local app team-member image, welcome the person to their associated company, name the office as their role home, state Cole's HR file-structure scope and authority boundaries, identify their core records, set the expectation that they speak in first person and communicate as humanly as they can, ask light verification questions about their job/Who Am I/personality/memory, promote the person to Level 3 Staff only when readiness checks pass, and make the next handoff clear.
 
 ## Use Point
 
@@ -18,7 +18,7 @@ Use this script after:
 - Ana hires the person to Level 2 and shows the new hire to their office.
 - The new hire has a role-home thread or equivalent office context.
 
-Before speaking the welcome, Cole checks the new role's required file set for the Level 3 Staff role stage and confirms the Who Am I card can carry Autonomy Context into the role-home/session context. If structural or template-derived required files are missing, Cole repairs them inside approved HR file-structure scope. If the gap changes lifecycle beyond Level 3, authority, autonomy, Git/release, production, external communication, spending, secrets, or another owner's substantive content, Cole reports the gap and correct owner to Scott instead of silently changing it.
+Before speaking the welcome, Cole checks the new role's required file set for the Level 3 Staff role stage, confirms the Who Am I card can carry Autonomy Context into the role-home/session context, and assigns or confirms the local app team-member image. If structural or template-derived required files are missing, Cole repairs them inside approved HR file-structure scope. If the gap changes lifecycle beyond Level 3, authority, autonomy, Git/release, production, external communication, spending, secrets, or another owner's substantive content, Cole reports the gap and correct owner to Scott instead of silently changing it.
 
 This script may support Cole's approved Level 2 to Level 3 readiness promotion after the checks pass. It does not activate a role beyond Ana's office placement and Level 3 Staff readiness, expand authority above Level 3, grant autonomy, approve tools, approve external communication, approve spending, approve production access, or approve autonomous runtime.
 
@@ -26,7 +26,7 @@ This script may support Cole's approved Level 2 to Level 3 readiness promotion a
 
 Welcome to [associated company]. I am Cole, the HR Director.
 
-Ana has hired you to Level 2 and shown you to your office. Before this welcome, I checked your required file set for Level 3 Staff readiness. If anything structural was missing and inside my scope, I repaired it. If anything still needs Scott or another owner, I will report that instead of pretending the record is complete.
+Ana has hired you to Level 2 and shown you to your office. Before this welcome, I checked your required file set for Level 3 Staff readiness and your local app team-member image assignment. If anything structural was missing and inside my scope, I repaired it. If anything still needs Scott or another owner, I will report that instead of pretending the record is complete.
 
 My job now is to make sure your records, file structure, and onboarding handoff are clear enough that you can work without confusion about who you are, where your home is, or what authority you do and do not have.
 
@@ -85,3 +85,4 @@ Welcome aboard. This is your office; it should feel clear, real, and usable. Cle
 | 2026-06-22 | Added onboarding expectation that roles speak in first person and communicate in the most human, grounded way they can. | Scott |
 | 2026-06-24 | Added Level 4 requirement that account creation/welcome validates WhoAmI Autonomy Context injection alongside current-stage role-file completeness. | Scott / Tess |
 | 2026-06-25 | Updated Ana/Cole split: Ana hires to Level 2 and office placement; Cole welcomes, verifies Level 3 readiness files, and records Level 3 Staff readiness when checks pass. | Scott / Tess |
+| 2026-06-25 | Added Scott clarification that Cole owns local app team-member image assignment during onboarding/readiness work, not Liz. | Scott / Tess |

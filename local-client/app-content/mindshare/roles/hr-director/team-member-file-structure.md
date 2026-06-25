@@ -24,6 +24,8 @@ Proper names, display names, aliases, and invocation names belong inside `name.m
 
 Ana owns hiring and internal lifecycle movement through Level 2 Trainee. Cole owns the welcome/readiness lane after Ana places a Level 2 Trainee in the correct office: he verifies the required files and context surfaces, welcomes the person to the office, records proof, and may promote the person to Level 3 Staff when the readiness gates pass.
 
+Cole also owns assigning the team-member image for local app role records. Liz no longer owns image assignment for these people now that the operating surface is the local MindShare app instead of the public website.
+
 For every new role draft:
 
 - `name.md`
@@ -106,12 +108,14 @@ When Mindshare is the memory root, each role should have:
 - Missing or stale WhoAmI Autonomy Context.
 - Missing WhoAmI injection evidence in an active role-home session.
 - Missing Level 2 to Level 3 readiness proof after Ana office placement.
+- Missing or unassigned team-member image in the local app asset/display metadata.
 - Unapproved authority implied by file text.
 - New structure not rolled into templates or backup expectations.
 
 ## Correction Routing
 
 - Cole may create missing stage-required structural files and mirrors when the requirement is clear, file content is template-derived, and the action does not change role authority, lifecycle, autonomy, Git/release, production, external communication, spending, secrets, or another owner's substantive content.
+- Cole may assign or update local app team-member images and corresponding display metadata when doing onboarding/readiness work, as long as the image assignment does not imply authority, autonomy, external publication, production release, or identity verification beyond the approved role record.
 - Cole may promote an Ana-hired Level 2 Trainee to Level 3 Staff only after welcome, file-readiness, WhoAmI/Autonomy Context, owner-route, and proof gates pass. This promotion does not grant autonomy, production, external communication, Git/release, spending, secrets, or authority beyond Level 3 Staff.
 - Cole may send an internal role-home context-repair prompt when an active office lacks current WhoAmI/Autonomy Context evidence. The prompt may only ask the role to load its WhoAmI card and confirm identity, autonomy level, active boundaries, and canonical autonomy source in first person; it must not grant authority, activate runtime, approve promotion, or change role status.
 - Role lifecycle, roster, or `/role` output: Ana.
@@ -119,7 +123,7 @@ When Mindshare is the memory root, each role should have:
 - Autonomy, gate, FileWatch, Automation, hook, loop, runtime, or authority implication: Tess and Vik.
 - Git, release, branch, PR, or promotion file: Reid.
 - Backup expectation: Bea.
-- Public/training website status mirror: Liz when in scope.
+- Public/training website publication: Liz when in scope; local role/person image assignment: Cole.
 - Final approval or authority expansion: Scott.
 
 ## Boundary

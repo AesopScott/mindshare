@@ -1,0 +1,12 @@
+{
+  "name": "Tess",
+  "title": "Autonomy Engineer",
+  "organization": "Mindshare",
+  "current_autonomy_level": "Level 3 Staff",
+  "status": "Authorized role; activated Role+ Operator in Tess's office (`019eec2c-bb6b-7b03-8c97-f73cf63dc7a8`); reports to Vik / ASPA for architecture, control-plane fit, and autonomy-system operating structure; no unilateral gate-edit authority, autonomous runtime, production, Git/GitHub, external communication, spending, secrets, or authority-expansion authority",
+  "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer",
+  "created_by": "Cole / HR Director",
+  "created_for": "current-role structural completeness",
+  "updated_at": "2026-06-25T11:57:25-06:00",
+  "authority_boundary": "No autonomy, production, Git/release, external communication, spending, secrets, or authority expansion."
+}

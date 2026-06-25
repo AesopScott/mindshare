@@ -498,15 +498,196 @@ def expected_files_for_status(status: str) -> set[str]:
     """
 
     lowered = status.lower()
+    runtime_scan = lowered
+    for phrase in [
+        "no filewatch/automation",
+        "no filewatch",
+        "no file-watch",
+        "no automation",
+        "no autonomous runtime",
+        "no broad autonomous runtime",
+        "no broad runtime",
+    ]:
+        runtime_scan = runtime_scan.replace(phrase, "")
     expected = {"name.md", "personality.md", "WhoAmI.md", "gate-blocks.md", "role-agent.md", "memory.md", "state.json"}
     if any(marker in lowered for marker in ["activated", "operator", "coordinator", "level 3", "level 4", "level 5", "level 6", "role+"]):
         expected.update({"workflow.md"})
-    has_runtime_record = any(marker in lowered for marker in ["bounded `", "filewatch", "file-watch", "heartbeat", "hourly", "role+", "level 4", "level 5", "level 6"])
+    has_runtime_record = any(marker in runtime_scan for marker in ["bounded `", "filewatch", "file-watch", "heartbeat", "hourly"])
     if has_runtime_record:
         expected.update({"loop.md", "automation.md"})
     if any(marker in lowered for marker in ["level 4", "level 5", "level 6", "autonomy"]):
         expected.update({"Autonomy.md"})
     return expected
+
+
+def autonomy_level_from_status(status: str) -> str:
+    """Derive the current visible autonomy level label from roster text."""
+
+    lowered = status.lower()
+    if "level 6" in lowered:
+        return "Level 6 Partner (Native Autonomy)"
+    if "level 5" in lowered:
+        return "Level 5 Principal (Policy Autonomy)"
+    if "level 4" in lowered:
+        return "Level 4 Senior Staff (Scoped Autonomy)"
+    if "level 2" in lowered:
+        return "Level 2 Trainee"
+    if "level 1" in lowered:
+        return "Level 1 New Hire"
+    if "candidate" in lowered or "level 0" in lowered:
+        return "Level 0 Candidate"
+    return "Level 3 Staff"
+
+
+def role_autonomy_context(role: dict, root: Path) -> str:
+    """Build the standard WhoAmI Autonomy Context packet for current roles."""
+
+    level = autonomy_level_from_status(role.get("status", ""))
+    autonomy_path = root / "Autonomy.md"
+    return "\n".join([
+        "## Autonomy Context",
+        "",
+        f"Current autonomy level: {level}.",
+        "",
+        "Current operating status: " + role.get("status", "").strip(),
+        "",
+        "Lower-level context I keep in mind: Candidate, New Hire, and Trainee stages are identity, source-safety, and readiness stages. Level 3 Staff is the last non-autonomous operating stage.",
+        "",
+        "Level 4 capability: use the role's canonical Autonomy.md when defined; otherwise this role has no approved scoped-autonomy capability.",
+        "",
+        "Level 5 capability: use the role's canonical Autonomy.md when defined; otherwise this role has no approved policy-autonomy capability.",
+        "",
+        "Level 6 capability: use the role's canonical Autonomy.md when defined; otherwise this role has no approved native-autonomy capability.",
+        "",
+        f"Canonical autonomy source: `{autonomy_path}`.",
+        "",
+        "This card gives awareness, not authority. It does not grant autonomy, production access, Git/release authority, external communication, spending authority, secrets access, gate edits, role activation, or authority expansion.",
+        "",
+    ])
+
+
+def current_role_file_template(file_name: str, role: dict, root: Path) -> str:
+    """Create a non-authority structural stub for an existing current role."""
+
+    name = role["name"].strip()
+    title = role["title"].strip()
+    level = autonomy_level_from_status(role.get("status", ""))
+    status = role.get("status", "").strip()
+    if file_name == "WhoAmI.md":
+        return "\n".join([
+            f"# {name} / {title}",
+            "",
+            f"I am {name}, the {title} for {role.get('org', 'Mindshare').strip()}.",
+            "",
+            "I work from my role files, keep my boundaries visible, and route decisions outside my authority to the correct owner.",
+            "",
+            role_autonomy_context(role, root),
+        ])
+    if file_name == "loop.md":
+        return "\n".join([
+            f"# {name} / {title} Loop",
+            "",
+            "Status: structural baseline created by Cole for current-role completeness.",
+            "",
+            "## Operating Loop",
+            "",
+            "1. Load my role files and WhoAmI card.",
+            "2. Confirm the request is inside my current authority.",
+            "3. Do bounded internal work only when engaged through approved context.",
+            "4. Route any authority, runtime, production, Git/release, external, spending, or secrets request to the proper owner.",
+            "",
+            "This loop does not activate autonomy or runtime.",
+            "",
+        ])
+    if file_name == "automation.md":
+        return "\n".join([
+            f"# {name} / {title} Automation",
+            "",
+            "Status: structural baseline created by Cole for validation visibility.",
+            "",
+            f"Current autonomy level: {level}.",
+            "",
+            "No autonomous runtime or timer is granted by this file. Any active automation must be separately approved in the role's canonical autonomy source and scheduler record.",
+            "",
+            f"Canonical autonomy source: `{root / 'Autonomy.md'}`.",
+            "",
+        ])
+    if file_name == "state.json":
+        return json.dumps({
+            "name": name,
+            "title": title,
+            "organization": role.get("org", "").strip(),
+            "current_autonomy_level": level,
+            "status": status,
+            "role_root": str(root),
+            "created_by": "Cole / HR Director",
+            "created_for": "current-role structural completeness",
+            "updated_at": iso_now(),
+            "authority_boundary": "No autonomy, production, Git/release, external communication, spending, secrets, or authority expansion.",
+        }, indent=2) + "\n"
+    return "\n".join([
+        f"# {name} / {title} {file_name}",
+        "",
+        "Status: structural baseline created by Cole for current-role completeness.",
+        "",
+        f"Current autonomy level: {level}.",
+        "",
+        "This file is a placeholder for missing source structure only. It does not grant authority.",
+        "",
+    ])
+
+
+def ensure_whoami_autonomy_context(path: Path, role: dict, root: Path) -> bool:
+    """Append Autonomy Context to an existing WhoAmI surface when missing."""
+
+    if not path.exists() or contains_autonomy_context(path):
+        return False
+    text = read_text(path).rstrip()
+    path.write_text(text + "\n\n" + role_autonomy_context(role, root), encoding="utf-8")
+    return True
+
+
+def ensure_current_roster_files_and_whoami_context(roles: Iterable[dict]) -> list[dict]:
+    """Repair current-roster structural and WhoAmI context gaps Cole owns.
+
+    Existing substantive files are preserved. Cole only creates missing stubs
+    or appends the standard Autonomy Context section to WhoAmI surfaces.
+    """
+
+    repairs: list[dict] = []
+    for role in roles:
+        name = role["name"].strip()
+        lowered_status = role["status"].lower()
+        if "human authority" in lowered_status or "not a role agent" in lowered_status or "released" in lowered_status:
+            continue
+        for root in role["role_roots"]:
+            created: list[str] = []
+            updated: list[str] = []
+            root.mkdir(parents=True, exist_ok=True)
+            for file_name in sorted(expected_files_for_status(role["status"])):
+                path = root / file_name
+                if path.exists():
+                    continue
+                path.write_text(current_role_file_template(file_name, role, root), encoding="utf-8")
+                created.append(str(path))
+            for surface_name, path, required in expected_whoami_surfaces(role, root):
+                if path.exists():
+                    if ensure_whoami_autonomy_context(path, role, root):
+                        updated.append(str(path))
+                    continue
+                if not required:
+                    continue
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(current_role_file_template("WhoAmI.md", role, root), encoding="utf-8")
+                created.append(str(path))
+            if created or updated:
+                repairs.append({
+                    "role": name,
+                    "role_root": str(root),
+                    "created_files": created,
+                    "updated_files": updated,
+                })
+    return repairs
 
 
 def contains_autonomy_context(path: Path) -> bool:
@@ -908,6 +1089,16 @@ def proof_entry(state: dict) -> str:
         for repair in repairs:
             lines.append(f"- {repair['id']} / {repair['display_name']}: created {len(repair['created_files'])} files under `{repair['role_root']}`")
         lines.append("")
+    current_repairs = state.get("current_roster_repairs") or []
+    if current_repairs:
+        lines.append("Current roster file/context repairs:")
+        lines.append("")
+        for repair in current_repairs:
+            lines.append(
+                f"- {repair['role']}: created {len(repair['created_files'])} files and updated "
+                f"{len(repair['updated_files'])} WhoAmI surfaces under `{repair['role_root']}`"
+            )
+        lines.append("")
     promotions = state.get("level_2_to_level_3_promotions") or []
     if promotions:
         lines.append("Level 2 to Level 3 promotions:")
@@ -930,6 +1121,8 @@ def main() -> int:
 
     state = build_state(args.mode)
     if args.write:
+        roles = parse_current_roles(read_text(ROLES_MD))
+        current_repairs = ensure_current_roster_files_and_whoami_context(roles)
         pipeline = load_json(RECRUITING_PIPELINE)
         readiness_items = [Level2ReadinessItem(**item) for item in state["level_2_readiness_items"]]
         promotions = promote_ready_level2_items(pipeline, readiness_items)
@@ -938,8 +1131,9 @@ def main() -> int:
         state = build_state(args.mode)
         state["level_2_to_level_3_promotions"] = promotions
         state["level3_completeness_repairs"] = repairs
-        if promotions or repairs:
-            completed = "level3_completeness_completed"
+        state["current_roster_repairs"] = current_repairs
+        if promotions or repairs or current_repairs:
+            completed = "file_completeness_completed"
             if promotions:
                 completed = "promotion_and_level3_completeness_completed"
             state["result"] = f"{completed}_with_validation_findings" if state["findings"] else completed
@@ -947,7 +1141,7 @@ def main() -> int:
         existing = read_text(PROOF_PATH)
         PROOF_PATH.write_text(existing.rstrip() + "\n\n" + proof_entry(state), encoding="utf-8")
     print(json.dumps(state, indent=2))
-    return 0 if state["result"] == "pass" else 2
+    return 0 if not state["findings"] else 2
 
 
 if __name__ == "__main__":

@@ -1993,6 +1993,15 @@ Configuration is loaded from the local MindShare workspace.
             }).join('');
         }
 
+        async function configurationRequestWithTimeout(client) {
+            return Promise.race([
+                client.listConfigurationFiles(),
+                new Promise((_, reject) => {
+                    setTimeout(() => reject(new Error('Configuration file loading timed out. Close and reopen this panel after MindShare Central finishes starting.')), 8000);
+                })
+            ]);
+        }
+
         async function showConfigurationPanel() {
             const panel = document.getElementById('configuration-panel');
             const button = document.getElementById('configuration-button');
@@ -2008,7 +2017,7 @@ Configuration is loaded from the local MindShare workspace.
                 return;
             }
             try {
-                renderConfigurationGroups(await client.listConfigurationFiles());
+                renderConfigurationGroups(await configurationRequestWithTimeout(client));
             } catch (error) {
                 renderConfigurationGroups({ ok: false, error: error.message || String(error) });
             }

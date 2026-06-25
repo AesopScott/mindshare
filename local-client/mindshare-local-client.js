@@ -172,6 +172,28 @@ async function safeReadDir(candidatePath, options = {}) {
   }
 }
 
+async function withTimeout(promise, timeoutMs, fallback) {
+  let timeout;
+  try {
+    return await Promise.race([
+      promise,
+      new Promise((resolve) => {
+        timeout = setTimeout(() => resolve(fallback), timeoutMs);
+      })
+    ]);
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function pathExistsForConfiguration(candidatePath) {
+  return withTimeout(pathExists(candidatePath), 750, false);
+}
+
+async function readDirForConfiguration(candidatePath, options = {}) {
+  return withTimeout(safeReadDir(candidatePath, options), 1500, []);
+}
+
 function sourceRoots() {
   const codeRoot = path.dirname(repoRoot);
   return {
@@ -1492,19 +1514,19 @@ async function runVikAutomation(payload = {}) {
 async function collectFiles(rootPath) {
   const ignoredNames = new Set(['.git', '.claude', '.codex', '.obsidian', 'node_modules', '__pycache__', '.pytest_cache']);
   const files = [];
-  const entries = await safeReadDir(rootPath, { withFileTypes: true });
+  const entries = await readDirForConfiguration(rootPath, { withFileTypes: true });
   for (const entry of entries) {
     if (ignoredNames.has(entry.name)) continue;
     const entryPath = path.join(rootPath, entry.name);
     if (entry.isFile()) {
-      files.push({ name: entry.name, path: entryPath });
+      files.push({ name: entry.name, path: entryPath, missing: false });
     }
   }
   return files.sort((a, b) => a.path.localeCompare(b.path));
 }
 
 async function discoverDirectoryGroups(rootPath, label, category) {
-  const entries = await safeReadDir(rootPath, { withFileTypes: true });
+  const entries = await readDirForConfiguration(rootPath, { withFileTypes: true });
   const groups = [];
   for (const entry of entries.filter((item) => item.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
     const root = path.join(rootPath, entry.name);
@@ -1536,7 +1558,7 @@ async function listConfigurationFiles() {
     globalFiles.push({
       name: path.basename(candidate),
       path: candidate,
-      missing: !await pathExists(candidate)
+      missing: !await pathExistsForConfiguration(candidate)
     });
   }
 

@@ -929,6 +929,86 @@ Configuration is loaded from the local MindShare workspace.
             }
         }
 
+        async function refreshProviderReadiness() {
+            const client = mindShareLocalClient();
+            if (!client) {
+                codexAvailable = false;
+                claudeAvailable = false;
+                return;
+            }
+            const [codexResult, claudeResult] = await Promise.allSettled([
+                client.connectCodex ? client.connectCodex({ checkOnly: true }) : Promise.resolve({ ok: false }),
+                client.connectClaude ? client.connectClaude({ checkOnly: true }) : Promise.resolve({ ok: false })
+            ]);
+            codexAvailable = Boolean(codexResult.status === 'fulfilled' && codexResult.value?.ok);
+            claudeAvailable = Boolean(claudeResult.status === 'fulfilled' && claudeResult.value?.ok);
+            setProviderReady('codex', codexAvailable);
+            setProviderReady('claude', claudeAvailable);
+            persistOfficeState();
+        }
+
+        async function reconcileOfficeSessionsFromClient() {
+            const client = mindShareLocalClient();
+            if (!client?.listSessions) {
+                Object.values(roleSessions).forEach((session) => {
+                    if (session.codexSessionId || session.claudeSessionId) {
+                        session.connectionIssue = true;
+                    }
+                });
+                return;
+            }
+            const payload = await client.listSessions();
+            if (!payload?.ok) return;
+
+            const liveCodex = new Set();
+            const liveClaude = new Set();
+            (payload.sessions || []).forEach((snapshot) => {
+                const slug = snapshot.roleSlug;
+                if (!slug) return;
+                const entry = findRoleEntry(slug) || roleSessions[slug] || {
+                    slug,
+                    name: snapshot.roleContext?.name || slug,
+                    title: snapshot.roleContext?.title || '',
+                    level: snapshot.roleContext?.level || '',
+                    department: ''
+                };
+                const roleSession = ensureRoleSession(slug, entry.name, entry.title, entry.level, entry.department);
+                if (snapshot.provider === 'claude') {
+                    roleSession.claudeSessionId = snapshot.sessionId;
+                    liveClaude.add(snapshot.sessionId);
+                } else if (snapshot.provider === 'codex') {
+                    roleSession.codexSessionId = snapshot.sessionId;
+                    liveCodex.add(snapshot.sessionId);
+                }
+                if (snapshot.roleContext) {
+                    roleSession.roleContext = snapshot.roleContext;
+                }
+                if (Array.isArray(snapshot.messages) && snapshot.messages.length > roleSession.messages.length) {
+                    roleSession.messages = conversationMessages(snapshot.messages);
+                    roleSession.officeInjected = roleSession.messages.some((message) =>
+                        String(message.text || '').toLowerCase().includes(`${roleSession.name.toLowerCase()}'s office`)
+                    );
+                }
+                roleSession.connectionIssue = false;
+            });
+
+            Object.values(roleSessions).forEach((session) => {
+                let removed = false;
+                if (session.codexSessionId && !liveCodex.has(session.codexSessionId)) {
+                    session.codexSessionId = null;
+                    removed = true;
+                }
+                if (session.claudeSessionId && !liveClaude.has(session.claudeSessionId)) {
+                    session.claudeSessionId = null;
+                    removed = true;
+                }
+                if (removed && !hasConnectedOfficeSession(session)) {
+                    session.connectionIssue = false;
+                }
+            });
+            persistOfficeState();
+        }
+
         function persistAutomationRuns() {
             try {
                 localStorage.setItem(AUTOMATION_RUNS_STORAGE_KEY, JSON.stringify(automationRuns.slice(0, 50)));
@@ -2118,6 +2198,19 @@ Configuration is loaded from the local MindShare workspace.
                 return payload;
             }
             roleSession[sessionKey] = payload.sessionId;
+            if (payload.roleContext) {
+                roleSession.roleContext = payload.roleContext;
+                activeRoleContext = activeRoleSlug === roleSession.slug ? payload.roleContext : activeRoleContext;
+            }
+            if (Array.isArray(payload.messages) && payload.messages.length > roleSession.messages.length) {
+                roleSession.messages = conversationMessages(payload.messages);
+                roleSession.officeInjected = roleSession.messages.some((message) =>
+                    String(message.text || '').toLowerCase().includes(`${roleSession.name.toLowerCase()}'s office`)
+                );
+                if (activeRoleSlug === roleSession.slug) {
+                    renderTranscript(roleSession.messages);
+                }
+            }
             markOfficeSessionConnected(roleSession);
             injectOfficeEntry(roleSession, payload.initialMessage);
             persistOfficeState();
@@ -2414,14 +2507,14 @@ Configuration is loaded from the local MindShare workspace.
             });
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             restoreOfficeState();
             restoreAutomationRuns();
             const requestedDivision = new URLSearchParams(window.location.search).get('division') || 'strategy-and-operations';
             const selectedSlug = divisionDepartments[requestedDivision] ? requestedDivision : 'strategy-and-operations';
             setActiveDivision(selectedSlug);
-            setProviderReady('codex', codexAvailable);
-            setProviderReady('claude', claudeAvailable);
+            await refreshProviderReadiness();
+            await reconcileOfficeSessionsFromClient();
             renderRestoredActiveOffice();
             renderActiveSessions();
             renderAutomationRuns();

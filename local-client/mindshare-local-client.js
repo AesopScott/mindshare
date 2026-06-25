@@ -6,12 +6,84 @@ const path = require('node:path');
 
 const repoRoot = path.resolve(__dirname, '..');
 const sessions = new Map();
+const sessionIndex = new Map();
 const officeWorkspaceInstruction = `This office is an active local workspace session.
 
 You may inspect and modify files in the local workspace when the user's request and the active role's authority allow it. Do not treat filesystem access as permission by itself. Respect role boundaries, approval gates, production/release limits, external communication limits, spending limits, and secrets boundaries. If a requested edit is outside role authority or needs approval, explain the blocker and request the needed approval.`;
 
 function uniquePaths(paths) {
   return [...new Set(paths.filter(Boolean).map((candidate) => path.resolve(candidate)))];
+}
+
+function providerSessionKey(provider, roleSlug) {
+  const normalizedProvider = String(provider || '').trim().toLowerCase();
+  const normalizedRole = String(roleSlug || '').trim().toLowerCase();
+  return normalizedRole ? `${normalizedProvider}:${normalizedRole}` : '';
+}
+
+function publicSessionSnapshot(sessionId, session) {
+  return {
+    sessionId,
+    provider: session.provider || 'unknown',
+    roleSlug: session.roleSlug || '',
+    roleContext: session.roleContext || null,
+    messages: Array.isArray(session.messages)
+      ? session.messages.map((item) => ({
+        role: item.role,
+        text: item.text || item.content || ''
+      }))
+      : [],
+    createdAt: session.createdAt || null,
+    updatedAt: session.updatedAt || null
+  };
+}
+
+function listSessions() {
+  return {
+    ok: true,
+    sessions: [...sessions.entries()].map(([sessionId, session]) => publicSessionSnapshot(sessionId, session))
+  };
+}
+
+async function createOrReuseProviderSession(provider, payload = {}) {
+  const requestedRoleSlug = String(payload?.roleSlug || '').trim().toLowerCase();
+  const indexedKey = providerSessionKey(provider, requestedRoleSlug);
+  if (indexedKey) {
+    const existingId = sessionIndex.get(indexedKey);
+    const existingSession = existingId ? sessions.get(existingId) : null;
+    if (existingSession) {
+      return {
+        ...publicSessionSnapshot(existingId, existingSession),
+        ok: true,
+        reused: true,
+        initialMessage: null
+      };
+    }
+  }
+
+  const roleContext = requestedRoleSlug
+    ? await loadRoleContext({ roleSlug: requestedRoleSlug }).catch(() => null)
+    : null;
+  const initialMessage = roleContext?.ok ? `This is ${roleContext.roleContext.name}'s office.` : null;
+  const sessionId = crypto.randomUUID();
+  const now = new Date().toISOString();
+  sessions.set(sessionId, {
+    provider,
+    roleSlug: requestedRoleSlug,
+    messages: initialMessage ? [{ role: 'user', content: initialMessage }] : [],
+    roleContext: roleContext?.ok ? roleContext.roleContext : null,
+    createdAt: now,
+    updatedAt: now
+  });
+  if (indexedKey) {
+    sessionIndex.set(indexedKey, sessionId);
+  }
+  return {
+    ...publicSessionSnapshot(sessionId, sessions.get(sessionId)),
+    ok: true,
+    reused: false,
+    initialMessage
+  };
 }
 
 async function pathExists(candidatePath) {
@@ -986,22 +1058,16 @@ async function connectCodex(payload = {}) {
     };
   }
 
-  const sessionId = crypto.randomUUID();
-  const requestedRoleSlug = String(payload?.roleSlug || '').trim();
-  const roleContext = requestedRoleSlug
-    ? await loadRoleContext({ roleSlug: requestedRoleSlug }).catch(() => null)
-    : null;
-  const initialMessage = roleContext?.ok ? `This is ${roleContext.roleContext.name}'s office.` : null;
-  sessions.set(sessionId, {
-    messages: initialMessage ? [{ role: 'user', content: initialMessage }] : [],
-    roleContext: roleContext?.ok ? roleContext.roleContext : null
-  });
+  const sessionPayload = await createOrReuseProviderSession('codex', payload);
   return {
     ok: true,
-    sessionId,
-    initialMessage,
+    sessionId: sessionPayload.sessionId,
+    initialMessage: sessionPayload.initialMessage,
+    reused: sessionPayload.reused,
     message: 'Connected to local Codex CLI using local ChatGPT authentication.',
-    codexStatus: status.status
+    codexStatus: status.status,
+    roleContext: sessionPayload.roleContext,
+    messages: sessionPayload.messages
   };
 }
 
@@ -1033,22 +1099,16 @@ async function connectClaude(payload = {}) {
     };
   }
 
-  const sessionId = crypto.randomUUID();
-  const requestedRoleSlug = String(payload?.roleSlug || '').trim();
-  const roleContext = requestedRoleSlug
-    ? await loadRoleContext({ roleSlug: requestedRoleSlug }).catch(() => null)
-    : null;
-  const initialMessage = roleContext?.ok ? `This is ${roleContext.roleContext.name}'s office.` : null;
-  sessions.set(sessionId, {
-    messages: initialMessage ? [{ role: 'user', content: initialMessage }] : [],
-    roleContext: roleContext?.ok ? roleContext.roleContext : null
-  });
+  const sessionPayload = await createOrReuseProviderSession('claude', payload);
   return {
     ok: true,
-    sessionId,
-    initialMessage,
+    sessionId: sessionPayload.sessionId,
+    initialMessage: sessionPayload.initialMessage,
+    reused: sessionPayload.reused,
     message: 'Connected to local Claude CLI using local Claude authentication.',
-    claudeStatus: status.status
+    claudeStatus: status.status,
+    roleContext: sessionPayload.roleContext,
+    messages: sessionPayload.messages
   };
 }
 
@@ -1417,6 +1477,7 @@ async function sendCodexMessage(payload) {
   if (payload?.roleContext) {
     session.roleContext = payload.roleContext;
   }
+  session.provider = session.provider || 'codex';
   const transcriptItems = Array.isArray(payload?.transcript) ? payload.transcript : session.messages.slice(-12);
   const transcript = transcriptItems
     .map((item) => `${String(item.role || 'message').toUpperCase()}: ${item.content || item.text || ''}`)
@@ -1471,6 +1532,7 @@ USER: ${message}
   await fs.rm(outputPath, { force: true });
   session.messages.push({ role: 'user', content: message });
   session.messages.push({ role: 'assistant', content: reply });
+  session.updatedAt = new Date().toISOString();
   return { ok: true, reply };
 }
 
@@ -1500,6 +1562,7 @@ async function sendClaudeMessage(payload) {
   if (payload?.roleContext) {
     session.roleContext = payload.roleContext;
   }
+  session.provider = session.provider || 'claude';
   const transcriptItems = Array.isArray(payload?.transcript) ? payload.transcript : session.messages.slice(-12);
   const transcript = transcriptItems
     .map((item) => `${String(item.role || 'message').toUpperCase()}: ${item.content || item.text || ''}`)
@@ -1551,12 +1614,14 @@ USER: ${message}
   const reply = result.stdout.trim();
   session.messages.push({ role: 'user', content: message });
   session.messages.push({ role: 'assistant', content: reply });
+  session.updatedAt = new Date().toISOString();
   return { ok: true, reply };
 }
 
 module.exports = {
   connectCodex,
   connectClaude,
+  listSessions,
   loadRoleContext,
   listConfigurationFiles,
   openConfigurationFile,

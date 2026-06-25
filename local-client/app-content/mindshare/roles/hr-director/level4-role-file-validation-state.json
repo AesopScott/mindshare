@@ -1,0 +1,559 @@
+{
+  "role": "Cole / HR Director",
+  "automation_id": "cole-hourly-role-file-and-whoami-validation",
+  "logic_owner": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\scripts\\level4automation.py",
+  "current_level": "Level 4 Senior Staff (Scoped Autonomy)",
+  "status": "runtime-installed-scheduler-proof-pending",
+  "last_run": "2026-06-25T08:27:46-06:00",
+  "last_run_mode": "scheduled",
+  "checked_roles": 17,
+  "whoami_surfaces_checked": 33,
+  "whoami_surfaces_missing_autonomy_context": [
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\rae.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\paige.md",
+    "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\WhoAmI.md",
+    "G:\\My Drive\\Mindshare\\role\\front-desk-administrator\\WhoAmI.md",
+    "G:\\My Drive\\Mindshare\\role\\finance-director\\WhoAmI.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\finn.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\ana.md",
+    "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\WhoAmI.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\cal.md",
+    "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\WhoAmI.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\vik.md",
+    "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\WhoAmI.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\liz.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\mae.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\reid.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\tess.md",
+    "G:\\My Drive\\Mindshare\\role\\staff-writer\\WhoAmI.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\june.md",
+    "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer\\WhoAmI.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\bea.md",
+    "C:\\Users\\scott\\Code\\mojo\\roles\\data-engineering-director\\WhoAmI.md",
+    "C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\WhoAmI.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\lane.md",
+    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\lab-operator.md"
+  ],
+  "session_injection_targets": [
+    {
+      "role": "Paige",
+      "title": "Executive Assistant",
+      "organization": "Mindshare",
+      "thread_id": "019eedc1-b201-7fb2-a5bd-9e1c6957fa39",
+      "whoami_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\personal-assistant\\WhoAmI.md",
+      "autonomy_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\personal-assistant\\Autonomy.md",
+      "status": "Authorized Mindshare role; activated Operator in `Paige - Executive Assistant` (`019eedc1-b201-7fb2-a5bd-9e1c6957fa39`); notes-only scope; no email, Slack, calendar, private-channel, connector, external communication, autonomous runtime, production, Git/release, spending, secrets, or authority-expansion authority",
+      "suggested_prompt": "This is Paige's office. Please load your Who Am I card from `C:\\Users\\scott\\Code\\mindshare\\roles\\personal-assistant\\WhoAmI.md` and confirm your current identity, autonomy level, active boundaries, and canonical autonomy source in first person. This is a context repair/check only; it does not grant new authority, activate runtime, approve promotion, or change your role."
+    },
+    {
+      "role": "Finn",
+      "title": "Finance Director",
+      "organization": "Mindshare",
+      "thread_id": "019ef46f-ac78-7932-bcb3-5426c5259a62",
+      "whoami_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\WhoAmI.md",
+      "autonomy_path": "No canonical Autonomy.md found; use current role status and route missing source to Tess/Cole.",
+      "status": "Authorized Mindshare role; Level 3 Staff / activated Operator in `Finn - Finance Director` (`019ef46f-ac78-7932-bcb3-5426c5259a62`); no FileWatch/Automation, spending authority, bank/payroll/tax/accounting-system access, secrets, external communication, production, Git/release, autonomous runtime, or authority expansion",
+      "suggested_prompt": "This is Finn's office. Please load your Who Am I card from `C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\WhoAmI.md` and confirm your current identity, autonomy level, active boundaries, and canonical autonomy source in first person. This is a context repair/check only; it does not grant new authority, activate runtime, approve promotion, or change your role."
+    },
+    {
+      "role": "Tess",
+      "title": "Autonomy Engineer",
+      "organization": "Mindshare",
+      "thread_id": "019eec2c-bb6b-7b03-8c97-f73cf63dc7a8",
+      "whoami_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\WhoAmI.md",
+      "autonomy_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\Autonomy.md",
+      "status": "Authorized role; activated Role+ Operator in Tess's office (`019eec2c-bb6b-7b03-8c97-f73cf63dc7a8`); reports to Vik / MAPS ASPA for architecture, control-plane fit, and autonomy-system operating structure; no unilateral gate-edit authority, autonomous runtime, production, Git/GitHub, external communication, spending, secrets, or authority-expansion authority",
+      "suggested_prompt": "This is Tess's office. Please load your Who Am I card from `C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\WhoAmI.md` and confirm your current identity, autonomy level, active boundaries, and canonical autonomy source in first person. This is a context repair/check only; it does not grant new authority, activate runtime, approve promotion, or change your role."
+    },
+    {
+      "role": "Cole",
+      "title": "HR Director",
+      "organization": "Mindshare",
+      "thread_id": "019efbcf-4894-7413-9975-cad9594794f8",
+      "whoami_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\WhoAmI.md",
+      "autonomy_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\Autonomy.md",
+      "status": "Authorized Mindshare role; activated Role+ Operator in Cole's Office `Cole - HR` (`019efbcf-4894-7413-9975-cad9594794f8`); Level 4 Senior Staff scoped autonomy runtime-installed-scheduler-proof-pending for role-file and WhoAmI Autonomy Context validation; bounded `hr-director-handoff-check` and hourly `cole-hourly-role-file-and-whoami-validation`; no broad personnel authority, activation authority for other roles, Git/release authority, production authority, external communication authority, spending authority, Level 5+, or broad autonomous runtime",
+      "suggested_prompt": "This is Cole's office. Please load your Who Am I card from `C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\WhoAmI.md` and confirm your current identity, autonomy level, active boundaries, and canonical autonomy source in first person. This is a context repair/check only; it does not grant new authority, activate runtime, approve promotion, or change your role."
+    },
+    {
+      "role": "June",
+      "title": "Staff Writer",
+      "organization": "Mindshare",
+      "thread_id": "019eed17-7348-7593-b2ae-661027ba9cb2",
+      "whoami_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-writer\\WhoAmI.md",
+      "autonomy_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-writer\\Autonomy.md",
+      "status": "Authorized Mindshare role; activated Operator in June's role-home thread `June - Staff Writer` (`019eed17-7348-7593-b2ae-661027ba9cb2`); no FileWatch/Automation, autonomous runtime, external publishing/sending authority, production authority, Git/release authority, spending authority, secrets access, or authority expansion",
+      "suggested_prompt": "This is June's office. Please load your Who Am I card from `C:\\Users\\scott\\Code\\mindshare\\roles\\staff-writer\\WhoAmI.md` and confirm your current identity, autonomy level, active boundaries, and canonical autonomy source in first person. This is a context repair/check only; it does not grant new authority, activate runtime, approve promotion, or change your role."
+    }
+  ],
+  "session_injection_instruction": "The heartbeat must inspect each target office thread. If the recent thread context does not show the role's WhoAmI/Autonomy Context was loaded or confirmed, send the target's suggested_prompt to that thread. Do not send when the thread already shows current identity/autonomy context, and do not change authority.",
+  "source_hashes": {
+    "roles_md": "5c66de97bd712317ec9be08bd3a4c01e0bb62e89a75b7a89f653c756fe222e14",
+    "conference_room": "689c76421f27fa1f9a3519ad349f5981a3314e481156220a58fa7fd81d7f69f4",
+    "conference_room_prompt_protocol": "e402e438ed582ef3b94a57b7a1db273468ebbb76f3681da0ecbb2713bfb6c28c",
+    "welcome_script": "f730cc051520cbe97012ef19c6219603ffe401630d22f5edef66aa6f799168b8"
+  },
+  "result": "fail",
+  "finding_counts_by_severity": {
+    "medium": 56
+  },
+  "findings": [
+    {
+      "severity": "medium",
+      "role": "Rae",
+      "check": "required-file:WhoAmI.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Rae",
+      "check": "required-file:loop.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\loop.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Rae",
+      "check": "required-file:state.json",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\state.json",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Mara",
+      "check": "required-file:automation.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\automation.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Finn",
+      "check": "required-file:automation.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\automation.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Ana",
+      "check": "required-file:WhoAmI.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Cal",
+      "check": "required-file:automation.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\automation.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Cal",
+      "check": "required-file:loop.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\loop.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Cal",
+      "check": "required-file:state.json",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\state.json",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Liz",
+      "check": "required-file:loop.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\loop.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Mae",
+      "check": "required-file:WhoAmI.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Reid",
+      "check": "required-file:WhoAmI.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\release-manager\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Tess",
+      "check": "required-file:automation.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\automation.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Tess",
+      "check": "required-file:state.json",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\state.json",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "June",
+      "check": "required-file:automation.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-writer\\automation.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Imani Brooks",
+      "check": "required-file:automation.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\data-engineering-director\\automation.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Jay",
+      "check": "required-file:WhoAmI.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Jay",
+      "check": "required-file:loop.md",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\loop.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Jay",
+      "check": "required-file:state.json",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\state.json",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Rae",
+      "check": "whoami-surface:local-role-file",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Rae",
+      "check": "whoami-surface:gdrive-role-mirror",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\chief-executive-officer\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Rae",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\rae.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Paige",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\paige.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Mara",
+      "check": "whoami-autonomy-context:local-role-file",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\WhoAmI.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Mara",
+      "check": "whoami-autonomy-context:gdrive-role-mirror",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\front-desk-administrator\\WhoAmI.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Mara",
+      "check": "whoami-surface:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\mara.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Finn",
+      "check": "whoami-autonomy-context:gdrive-role-mirror",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\finance-director\\WhoAmI.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Finn",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\finn.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Ana",
+      "check": "whoami-surface:local-role-file",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Ana",
+      "check": "whoami-surface:gdrive-role-mirror",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\recruiter\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Ana",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\ana.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Cal",
+      "check": "whoami-autonomy-context:local-role-file",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\WhoAmI.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Cal",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\cal.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Vik",
+      "check": "whoami-autonomy-context:local-role-file",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\WhoAmI.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Vik",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\vik.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Liz",
+      "check": "whoami-autonomy-context:local-role-file",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\WhoAmI.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Liz",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\liz.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Mae",
+      "check": "whoami-surface:local-role-file",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Mae",
+      "check": "whoami-surface:gdrive-role-mirror",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\communications-director\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Mae",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\mae.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Reid",
+      "check": "whoami-surface:local-role-file",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\release-manager\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Reid",
+      "check": "whoami-surface:gdrive-role-mirror",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\release-manager\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Reid",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\reid.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Tess",
+      "check": "whoami-surface:gdrive-role-mirror",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\autonomy-engineer\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Tess",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\tess.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "June",
+      "check": "whoami-autonomy-context:gdrive-role-mirror",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\staff-writer\\WhoAmI.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "June",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\june.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Bea",
+      "check": "whoami-autonomy-context:local-role-file",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer\\WhoAmI.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Bea",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\bea.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Imani Brooks",
+      "check": "whoami-autonomy-context:local-role-file",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\data-engineering-director\\WhoAmI.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Imani Brooks",
+      "check": "whoami-surface:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\imani-brooks.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Lane",
+      "check": "whoami-autonomy-context:local-role-file",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\WhoAmI.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Lane",
+      "check": "whoami-autonomy-context:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\lane.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Lane",
+      "check": "whoami-autonomy-context:gdrive-room-card-alias",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\lab-operator.md",
+      "owner_route": "Cole/Tess"
+    },
+    {
+      "severity": "medium",
+      "role": "Jay",
+      "check": "whoami-surface:local-role-file",
+      "status": "missing",
+      "evidence": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\WhoAmI.md",
+      "owner_route": "Cole/Ana"
+    },
+    {
+      "severity": "medium",
+      "role": "Jay",
+      "check": "whoami-surface:gdrive-room-card",
+      "status": "missing",
+      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\jay.md",
+      "owner_route": "Cole/Ana"
+    }
+  ],
+  "denied_actions_held": [
+    "No role promotion approval",
+    "No role activation",
+    "No other-role authority edits",
+    "No Git/release",
+    "No production",
+    "No external communication",
+    "No spending or secrets"
+  ]
+}

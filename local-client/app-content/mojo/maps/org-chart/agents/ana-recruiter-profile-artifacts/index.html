@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ana Profile And Artifacts | Mojo AI Studio</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #171717;
+        --muted: #5f6670;
+        --line: #d9dde3;
+        --paper: #f8f7f2;
+        --panel: #ffffff;
+        --accent: #0f766e;
+        --accent-2: #8b5cf6;
+        --warn: #b45309;
+        --bad: #b42318;
+        --good: #047857;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+
+      a { color: inherit; }
+
+      .shell {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 28px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 10px 0 26px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-decoration: none;
+      }
+
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        color: white;
+        background: var(--ink);
+        border-radius: 7px;
+        font-weight: 900;
+      }
+
+      .toplinks {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .toplinks a {
+        padding: 8px 10px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: rgba(255,255,255,.65);
+        text-decoration: none;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 230px;
+        gap: 30px;
+        padding: 42px 0 28px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(38px, 7vw, 72px);
+        line-height: .92;
+        letter-spacing: 0;
+      }
+
+      .lede {
+        max-width: 780px;
+        margin: 18px 0 0;
+        color: #343a40;
+        font-size: 19px;
+        line-height: 1.55;
+      }
+
+      .portrait {
+        width: 210px;
+        aspect-ratio: 1;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 1px solid var(--line);
+        background: #eee;
+      }
+
+      .tabs {
+        margin-top: 8px;
+      }
+
+      .tab-input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .tab-buttons {
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        display: flex;
+        gap: 8px;
+        padding: 12px 0;
+        background: color-mix(in srgb, var(--paper) 92%, transparent);
+        backdrop-filter: blur(8px);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .tab-buttons label {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 118px;
+        min-height: 42px;
+        padding: 10px 16px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: var(--panel);
+        color: var(--muted);
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      #tab-profile:checked ~ .tab-buttons label[for="tab-profile"],
+      #tab-artifacts:checked ~ .tab-buttons label[for="tab-artifacts"] {
+        color: white;
+        border-color: var(--ink);
+        background: var(--ink);
+      }
+
+      .view { display: none; padding-top: 28px; }
+      #tab-profile:checked ~ .views .profile-view { display: block; }
+      #tab-artifacts:checked ~ .views .artifacts-view { display: block; }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 16px;
+      }
+
+      .panel {
+        grid-column: span 6;
+        padding: 20px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .panel.wide { grid-column: span 12; }
+      .panel.third { grid-column: span 4; }
+
+      h2 {
+        margin: 0 0 14px;
+        font-size: 28px;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 10px;
+        font-size: 18px;
+      }
+
+      p {
+        margin: 0 0 12px;
+        color: #353b44;
+        line-height: 1.55;
+      }
+
+      p:last-child { margin-bottom: 0; }
+
+      .meta {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .meta div {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: #fbfcfc;
+      }
+
+      .meta span {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+      }
+
+      .meta strong {
+        display: block;
+        margin-top: 7px;
+        font-size: 17px;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #f9fafb;
+        color: #303640;
+        font-weight: 750;
+        font-size: 13px;
+      }
+
+      .chip.good { color: var(--good); border-color: #a7f3d0; background: #ecfdf5; }
+      .chip.warn { color: var(--warn); border-color: #fed7aa; background: #fff7ed; }
+      .chip.bad { color: var(--bad); border-color: #fecaca; background: #fef2f2; }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow-wrap: anywhere;
+      }
+
+      th, td {
+        padding: 12px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--line);
+      }
+
+      th {
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+      }
+
+      code {
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: .92em;
+        color: #24313f;
+        background: #eef1f4;
+        border-radius: 5px;
+        padding: 2px 5px;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+        color: #353b44;
+        line-height: 1.55;
+      }
+
+      li + li { margin-top: 6px; }
+
+      .source-note {
+        margin-top: 22px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 820px) {
+        .shell { padding: 18px; }
+        .topbar, .hero { display: block; }
+        .toplinks { justify-content: flex-start; margin-top: 14px; }
+        .portrait { margin-top: 24px; width: 160px; }
+        .tab-buttons { overflow-x: auto; }
+        .panel, .panel.third { grid-column: span 12; }
+        .meta { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="../../../../maps/index.html">
+          <span class="mark">M</span>
+          <span>MAPS Role Status</span>
+        </a>
+        <nav class="toplinks" aria-label="Page links">
+          <a href="../ana-recruiter/index.html">Current Ana Page</a>
+          <a href="../../index.html">Org Chart</a>
+          <a href="../../roles-versus-agents/index.html">Roles vs Agents</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Ana / Recruiter</p>
+          <h1>Profile And Artifacts</h1>
+          <p class="lede">Two views for the same role: a friendly personnel profile for humans, and a technical artifact map for source, automation, gaps, and gates. This page is a draft mirror; authority still comes from canonical role files and Scott's approvals.</p>
+        </div>
+        <img class="portrait" src="../../../../assets/maps/team/ana.webp" alt="Ana portrait">
+      </section>
+
+      <section class="tabs" aria-label="Ana role views">
+        <input class="tab-input" type="radio" name="view" id="tab-profile" checked>
+        <input class="tab-input" type="radio" name="view" id="tab-artifacts">
+
+        <div class="tab-buttons" role="tablist" aria-label="View selector">
+          <label for="tab-profile" role="tab">Profile</label>
+          <label for="tab-artifacts" role="tab">Artifacts</label>
+        </div>
+
+        <div class="views">
+          <section class="view profile-view" aria-labelledby="profile-heading">
+            <div class="grid">
+              <article class="panel wide">
+                <h2 id="profile-heading">Personnel Profile</h2>
+                <div class="meta">
+                  <div><span>Role</span><strong>Recruiter</strong></div>
+                  <div><span>Organization</span><strong>Mindshare</strong></div>
+                  <div><span>Stage</span><strong>Operator</strong></div>
+                  <div><span>Autonomy</span><strong>Level 4 scoped</strong></div>
+                </div>
+              </article>
+
+              <article class="panel">
+                <h3>What Ana Does</h3>
+                <p>Ana owns Mindshare's role-building system. She helps turn role ideas into clear responsibilities, authority boundaries, source files, onboarding packets, and next build paths.</p>
+                <p>Her lane includes role intake, role quality, role taxonomy, role drafting, onboarding, role-to-agent readiness, and recruiting handoffs.</p>
+              </article>
+
+              <article class="panel">
+                <h3>How Ana Shows Up</h3>
+                <p>Ana's primary voice is Diplomat, with Strategist, Teacher, and Reviewer in the blend. She is clear, practical, people-aware, systems-aware, and gently rigorous.</p>
+                <p>She notices unclear jobs-to-be-done, duplicated responsibility, missing owners, weak proof, and roles being treated as agents too early.</p>
+              </article>
+
+              <article class="panel third">
+                <h3>Experience Level</h3>
+                <p><strong>L5 Lead.</strong> Ana coordinates repeatable role-building across Mindshare but does not hold executive authority or broad autonomous hiring authority.</p>
+              </article>
+
+              <article class="panel third">
+                <h3>Works With</h3>
+                <div class="chips">
+                  <span class="chip">Scott</span>
+                  <span class="chip">Cole</span>
+                  <span class="chip">Tess</span>
+                  <span class="chip">Vik</span>
+                  <span class="chip">Mae</span>
+                  <span class="chip">Reid</span>
+                </div>
+              </article>
+
+              <article class="panel third">
+                <h3>Current Boundary</h3>
+                <p>Ana may process approved internal recruiting backlog items. She may not activate roles into offices, grant authority, contact external candidates, publish production, or perform broad autonomous work.</p>
+              </article>
+
+              <article class="panel wide">
+                <h3>Current Work Mode</h3>
+                <p>Ana has approved Level 4 Senior Staff scoped autonomy for internal recruiting backlog processing only. Level 5 and Level 6 remain blocked until evidence review and explicit Scott approval.</p>
+                <div class="chips">
+                  <span class="chip good">Role intake</span>
+                  <span class="chip good">Draft role artifacts</span>
+                  <span class="chip good">Onboarding packets</span>
+                  <span class="chip warn">Agent candidate overlay</span>
+                  <span class="chip bad">No broad Executor</span>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="view artifacts-view" aria-labelledby="artifacts-heading">
+            <div class="grid">
+              <article class="panel wide">
+                <h2 id="artifacts-heading">Technical Artifacts</h2>
+                <div class="meta">
+                  <div><span>Files Found</span><strong>29</strong></div>
+                  <div><span>Missing Pointers</span><strong>2</strong></div>
+                  <div><span>Stage Gaps</span><strong>1</strong></div>
+                  <div><span>Inventory Owner</span><strong>Cole</strong></div>
+                </div>
+              </article>
+
+              <article class="panel wide">
+                <h3>Canonical Sources</h3>
+                <table>
+                  <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+                  <tbody>
+                    <tr><td><code>C:\Users\scott\Code\mindshare\roles\recruiter\role-agent.md</code></td><td>Role contract, responsibilities, authority, voice, boundaries.</td></tr>
+                    <tr><td><code>C:\Users\scott\Code\mindshare\roles\recruiter\Autonomy.md</code></td><td>Level 4/5/6 autonomy contract and promotion boundary.</td></tr>
+                    <tr><td><code>C:\Users\scott\Code\mindshare\roles\recruiter\memory.md</code></td><td>Active durable role memory.</td></tr>
+                    <tr><td><code>C:\Users\scott\Code\mindshare\roles\recruiter\state.json</code></td><td>Machine-readable role state.</td></tr>
+                    <tr><td><code>C:\Users\scott\Code\mindshare\agents\ana-recruiter\agent-profile.md</code></td><td>Agent profile and build status.</td></tr>
+                    <tr><td><code>C:\Users\scott\Code\mindshare\roles\recruiter\recruiting.backlog.md</code></td><td>Approved Level 4 backlog trigger.</td></tr>
+                    <tr><td><code>G:\My Drive\Mindshare\role-artifacts.md</code></td><td>Artifact inventory, expected files, pointer gaps, stage gaps.</td></tr>
+                  </tbody>
+                </table>
+              </article>
+
+              <article class="panel">
+                <h3>Automation</h3>
+                <table>
+                  <thead><tr><th>Name</th><th>Status</th></tr></thead>
+                  <tbody>
+                    <tr><td><code>ana-handoff-check</code></td><td>File-watch active, pre-model on watched hash changes.</td></tr>
+                    <tr><td><code>ana-l4-recruiting-backlog-processing</code></td><td>Active, every 3 minutes during proof testing.</td></tr>
+                  </tbody>
+                </table>
+              </article>
+
+              <article class="panel">
+                <h3>Open Gaps</h3>
+                <ul>
+                  <li>Missing <code>WhoAmI.md</code> under current Operator expected files.</li>
+                  <li>Missing alias cards for <code>ana-recruiter</code>.</li>
+                  <li>Website profile needs sync from current Level 4 autonomy source.</li>
+                </ul>
+              </article>
+
+              <article class="panel wide">
+                <h3>Gates</h3>
+                <table>
+                  <thead><tr><th>Gate</th><th>Owner</th><th>State</th><th>Next Action</th></tr></thead>
+                  <tbody>
+                    <tr><td>Role completeness</td><td>Ana + Cole</td><td>Open gap</td><td>Create or verify missing profile/card artifacts.</td></tr>
+                    <tr><td>Artifact inventory</td><td>Cole</td><td>Active</td><td>Keep Ana row current in <code>role-artifacts.md</code>.</td></tr>
+                    <tr><td>Level 4 proof</td><td>Ana + Tess</td><td>Active cadence</td><td>Track three proof runs, then move cadence to 4 hours.</td></tr>
+                    <tr><td>Level 5/6 promotion</td><td>Scott + Tess + Vik</td><td>Not approved</td><td>Require evidence, evals, state/audit/rollback, and Scott approval.</td></tr>
+                    <tr><td>Website rollout</td><td>Liz</td><td>Draft</td><td>Productionize this two-view pattern for every role in <code>role-artifacts.md</code>.</td></tr>
+                  </tbody>
+                </table>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <p class="source-note">Draft page for structure review. Last built from local role sources on 2026-06-22. Website mirror does not grant authority.</p>
+    </div>
+  </body>
+</html>

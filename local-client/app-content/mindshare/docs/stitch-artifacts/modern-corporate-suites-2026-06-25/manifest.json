@@ -1,0 +1,198 @@
+{
+  "source": "Google Stitch MCP",
+  "projectId": "13447083140142831533",
+  "projectName": "projects/13447083140142831533",
+  "projectTitle": "Modern Corporate Suites",
+  "downloadedAt": "2026-06-25T04:16:59.6451701Z",
+  "note": "Original Stitch artifacts. Lumina-branded screens are layout/object references and require Mindshare rebranding before use.",
+  "screens": [
+    {
+      "title": "Strategy & Operations - Mind Share Media Hub",
+      "screenId": "aad3b2d9d85f49538ff4111a14c5653a",
+      "name": "projects/13447083140142831533/screens/aad3b2d9d85f49538ff4111a14c5653a",
+      "width": "2560",
+      "height": "2048",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": false,
+      "htmlFile": "strategy-and-operations-mind-share-media-hub.html",
+      "screenshotFile": "strategy-and-operations-mind-share-media-hub.png",
+      "publicPath": "public/departments/strategy-and-operations/index.html"
+    },
+    {
+      "title": "Services - Mind Share Media (Final)",
+      "screenId": "cd21df4313a749109e9cb3c6557cec13",
+      "name": "projects/13447083140142831533/screens/cd21df4313a749109e9cb3c6557cec13",
+      "width": "2560",
+      "height": "11042",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": false,
+      "htmlFile": "services-mind-share-media-final.html",
+      "screenshotFile": "services-mind-share-media-final.png"
+    },
+    {
+      "title": "Services - Mind Share Media (Refined)",
+      "screenId": "6544998cddb0411b998ce6f10c6b1cd5",
+      "name": "projects/13447083140142831533/screens/6544998cddb0411b998ce6f10c6b1cd5",
+      "width": "2560",
+      "height": "11026",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": false,
+      "htmlFile": "services-mind-share-media-refined.html",
+      "screenshotFile": "services-mind-share-media-refined.png"
+    },
+    {
+      "title": "Services - Mind Share Media",
+      "screenId": "b944ee6ea10e433c8a66ba83db60a027",
+      "name": "projects/13447083140142831533/screens/b944ee6ea10e433c8a66ba83db60a027",
+      "width": "2560",
+      "height": "12616",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": false,
+      "htmlFile": "services-mind-share-media-long.html",
+      "screenshotFile": "services-mind-share-media-long.png"
+    },
+    {
+      "title": "Our Team - Mind Share Media Hub",
+      "screenId": "8e64e56e07024b349d01027300e70385",
+      "name": "projects/13447083140142831533/screens/8e64e56e07024b349d01027300e70385",
+      "width": "2560",
+      "height": "4136",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": false,
+      "htmlFile": "our-team-mind-share-media-hub.html",
+      "screenshotFile": "our-team-mind-share-media-hub.png"
+    },
+    {
+      "title": "Services - Mind Share Media",
+      "screenId": "9ecd13ddea60420baf3774d1b63ec2e9",
+      "name": "projects/13447083140142831533/screens/9ecd13ddea60420baf3774d1b63ec2e9",
+      "width": "2560",
+      "height": "8538",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": false,
+      "htmlFile": "services-mind-share-media.html",
+      "screenshotFile": "services-mind-share-media.png"
+    },
+    {
+      "title": "Agent Interaction - Scott (Executive)",
+      "screenId": "c999c3b2d97b46b7a7219b2a6f1190c7",
+      "name": "projects/13447083140142831533/screens/c999c3b2d97b46b7a7219b2a6f1190c7",
+      "width": "2560",
+      "height": "2732",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": false,
+      "htmlFile": "agent-interaction-scott-executive.html",
+      "screenshotFile": "agent-interaction-scott-executive.png"
+    },
+    {
+      "title": "Home - Mind Share Media",
+      "screenId": "42c091e514a14d49831861ed3fbb937f",
+      "name": "projects/13447083140142831533/screens/42c091e514a14d49831861ed3fbb937f",
+      "width": "2560",
+      "height": "8004",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": false,
+      "htmlFile": "home-mind-share-media.html",
+      "screenshotFile": "home-mind-share-media.png"
+    },
+    {
+      "title": "Agent Workspace Template",
+      "screenId": "d03a6fee1e7346ed883ad88c0eca1163",
+      "name": "projects/13447083140142831533/screens/d03a6fee1e7346ed883ad88c0eca1163",
+      "width": "2560",
+      "height": "6460",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": false,
+      "htmlFile": "agent-workspace-template.html",
+      "screenshotFile": "agent-workspace-template.png"
+    },
+    {
+      "title": "Home - Lumina Offices",
+      "screenId": "fcbdb863991e48adad264c28322a436b",
+      "name": "projects/13447083140142831533/screens/fcbdb863991e48adad264c28322a436b",
+      "width": "2560",
+      "height": "8004",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": true,
+      "htmlFile": "home-lumina-offices.html",
+      "screenshotFile": "home-lumina-offices.png"
+    },
+    {
+      "title": "Agent Directory by Department - Mind Share Media",
+      "screenId": "6cc1a53924e34d12944da681438a4fb9",
+      "name": "projects/13447083140142831533/screens/6cc1a53924e34d12944da681438a4fb9",
+      "width": "2560",
+      "height": "17630",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": false,
+      "htmlFile": "agent-directory-by-department-mind-share-media.html",
+      "screenshotFile": "agent-directory-by-department-mind-share-media.png"
+    },
+    {
+      "title": "image.png",
+      "screenId": "16779197745243416232",
+      "name": "projects/13447083140142831533/screens/16779197745243416232",
+      "width": "740",
+      "height": "415",
+      "deviceType": null,
+      "needsMindshareRebrand": false,
+      "htmlFile": null,
+      "screenshotFile": "image-png.png"
+    },
+    {
+      "title": "Services - Lumina Offices",
+      "screenId": "08b8abdc9d284e1283337fa45117bce1",
+      "name": "projects/13447083140142831533/screens/08b8abdc9d284e1283337fa45117bce1",
+      "width": "2560",
+      "height": "8396",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": true,
+      "htmlFile": "services-lumina-offices.html",
+      "screenshotFile": "services-lumina-offices.png"
+    },
+    {
+      "title": "Our Team - Lumina Offices",
+      "screenId": "c96136d385b94249b8bcb4db03bd1868",
+      "name": "projects/13447083140142831533/screens/c96136d385b94249b8bcb4db03bd1868",
+      "width": "2560",
+      "height": "9570",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": true,
+      "htmlFile": "our-team-lumina-offices.html",
+      "screenshotFile": "our-team-lumina-offices.png"
+    },
+    {
+      "title": "Employee Office Template",
+      "screenId": "7d177c5dc63846edbf0330f0716ac7e8",
+      "name": "projects/13447083140142831533/screens/7d177c5dc63846edbf0330f0716ac7e8",
+      "width": "2560",
+      "height": "6490",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": false,
+      "htmlFile": "employee-office-template.html",
+      "screenshotFile": "employee-office-template.png"
+    },
+    {
+      "title": "Our Team - Mind Share Media",
+      "screenId": "8bcdb0441ba342e0a6b3cb63b2b58e92",
+      "name": "projects/13447083140142831533/screens/8bcdb0441ba342e0a6b3cb63b2b58e92",
+      "width": "2560",
+      "height": "12658",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": false,
+      "htmlFile": "our-team-mind-share-media.html",
+      "screenshotFile": "our-team-mind-share-media.png"
+    },
+    {
+      "title": "Lumina & Mind Share Corporate Ecosystem",
+      "screenId": "780b440d169a4281ad85fb1bc7e1539c",
+      "name": "projects/13447083140142831533/screens/780b440d169a4281ad85fb1bc7e1539c",
+      "width": "1280",
+      "height": "1024",
+      "deviceType": "DESKTOP",
+      "needsMindshareRebrand": true,
+      "htmlFile": "lumina-mind-share-corporate-ecosystem.html",
+      "screenshotFile": null
+    }
+  ]
+}

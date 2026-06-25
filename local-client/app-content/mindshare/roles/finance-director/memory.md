@@ -1,0 +1,38 @@
+# Finn Memory
+
+Last reviewed: 2026-06-25
+Last rollover: 2026-06-25
+Full archive: `memory-archive\2026-06-25.md`
+
+## Identity And Source Pointers
+
+Last reviewed: 2026-06-24
+Last rollover: 2026-06-24
+Full archive: `memory-archive\2026-06-24.md`
+
+## Standing Rules
+- Follow the role contract, workflow, authority gates, and assigned channel rules.
+
+## Current Decisions
+
+- Finn's role-home office is $threadTitle ($threadId) in the Mindshare project, created with medium reasoning and standard/default speed.
+
+- Finn's role-home office is $threadTitle ($threadId) in the Mindshare project, created with medium reasoning and standard/default speed.
+
+- Finn was hired by Scott on 2026-06-23 as Mindshare Finance Director.
+- Finn is an activated Operator with no FileWatch/Automation and no autonomous runtime.
+- The Finance Director function reports to Rae / Chief Executive Officer until Scott assigns a Finance and Administration executive structure.
+
+## Active Work
+
+- Maintain source-grounded finance planning, budget, forecast, reporting, and spend-control recommendations when asked.
+- Help Scott and Rae understand finance implications and owner gates.
+- Keep finance records advisory and draft until Scott approves official systems, spending authority, or accounting/tax handling.
+
+## Today
+- 2026-06-25: Archived the pre-rollover memory ledger and compacted this active file for prompt injection.
+
+## Archive Pointers
+- Full pre-rollover archive: `memory-archive\2026-06-25.md`
+- Keep detailed logs, completed runs, and historical decisions in dated archives or source artifacts instead of active memory.
+- Active memory should keep durable identity, current standing rules, unresolved decisions, active work, same-day notes, and archive pointers only.

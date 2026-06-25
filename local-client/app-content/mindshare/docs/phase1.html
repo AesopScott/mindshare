@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAPS: Define</title>
+    <meta name="description" content="MAPS Phase 1 defines the agent job, users, authorization level, scope, boundaries, success criteria, failure criteria, escalation points, risks, and assumptions.">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./maps-manifest.js" defer></script>
+    <script src="./maps-render.js" defer></script>
+  </head>
+  <body data-maps-phase="1">
+    <div class="shell">
+      <header class="topbar">
+        <nav class="nav" aria-label="Primary">
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true">M</span>
+            <span>MAPS</span>
+          </div>
+          <div class="nav-links">
+            <a href="./phase0.html">Phase 00</a>
+            <a href="#define">Phase 01</a>
+            <a href="#brief">Brief</a>
+            <a href="#multi-agent">M Scaffold</a>
+            <a href="#pipeline">Pipeline</a>
+            <a href="#resources">Resources</a>
+            <a href="https://github.com/AesopScott/maps">GitHub</a>
+          </div>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Phase 01</p>
+          <h1>Define the agent before building it.</h1>
+          <p class="hero-copy">
+            Define converts an agent idea into a brief that can be designed, built, evaluated,
+            and improved. It also states the agent's authorization level: what it can do alone,
+            what needs approval, and what is forbidden.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#brief">Build the agent brief</a>
+            <a class="button" href="./phase0.html">Back to Phase 00</a>
+          </div>
+        </div>
+
+        <div class="map-visual" aria-label="MAPS define phase visual">
+          <div class="pipeline-card">
+            <div class="pipeline-title">
+              <span>Define output</span>
+              <small>agent brief</small>
+            </div>
+            <div class="phase-rail">
+              <div class="phase-chip alignment">
+                <span class="phase-number">01</span>
+                <span><strong>Agent Job</strong><span>The specific outcome this agent owns</span></span>
+              </div>
+              <div class="phase-chip">
+                <span class="phase-number">A</span>
+                <span><strong>Scope</strong><span>What is in, out, and unclear</span></span>
+              </div>
+              <div class="phase-chip">
+                <span class="phase-number">B</span>
+                <span><strong>Success</strong><span>Observable criteria for done</span></span>
+              </div>
+              <div class="phase-chip">
+                <span class="phase-number">C</span>
+                <span><strong>Controls</strong><span>Failure criteria and escalation points</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="visual-caption">
+            <span><strong>Phase 1 output:</strong> a brief that can survive design scrutiny.</span>
+            <a class="button" href="#resources">View resources</a>
+          </div>
+        </div>
+      </section>
+
+      <main>
+        <section id="define" class="section">
+          <div class="section-header">
+            <h2>Definition is the contract.</h2>
+            <p>
+              A useful agent brief says what the agent is responsible for, who it serves,
+              how success is judged, what it is authorized to do, where it must stop,
+              and what assumptions need proof.
+            </p>
+          </div>
+
+          <div class="alignment-grid">
+            <article class="tile">
+              <div class="tile-icon">01</div>
+              <h3>User or operator</h3>
+              <p>Name who will use, supervise, or receive output from the agent.</p>
+            </article>
+            <article class="tile">
+              <div class="tile-icon">02</div>
+              <h3>Job to be done</h3>
+              <p>State the specific work the agent performs in one direct sentence.</p>
+            </article>
+            <article class="tile">
+              <div class="tile-icon">03</div>
+              <h3>Authorization</h3>
+              <p>Set what the agent may do alone, what needs approval, and what is forbidden.</p>
+            </article>
+            <article class="tile">
+              <div class="tile-icon">04</div>
+              <h3>Boundaries</h3>
+              <p>Separate in-scope work, out-of-scope work, and uncertain territory.</p>
+            </article>
+            <article class="tile">
+              <div class="tile-icon">05</div>
+              <h3>Proof</h3>
+              <p>Set success criteria, failure criteria, escalation points, risks, and assumptions.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="brief" class="section">
+          <div class="section-header">
+            <h2>The agent brief</h2>
+            <p>
+              The brief is the artifact that moves forward into Design. If it is vague,
+              every later phase inherits that vagueness.
+            </p>
+          </div>
+
+          <div class="structure">
+            <pre class="file-tree" aria-label="Agent definition template"><code># Agent Brief
+
+## Name
+## Agent Handle
+## Role Or Mandate
+## User Or Operator
+## Job To Be Done
+## Desired Outcome
+## Persona And Tone
+## Authorization Level
+## Allowed Without Approval
+## Approval Required For
+## Forbidden Actions
+## Tool Access Requested
+## In Scope
+## Out Of Scope
+## Success Criteria
+## Failure Criteria
+## Human Escalation Points
+## Risks And Assumptions</code></pre>
+
+            <div class="artifact-list">
+              <div class="artifact">
+                <code>Input</code>
+                <p>An idea, request, workflow need, or agent candidate.</p>
+              </div>
+              <div class="artifact">
+                <code>Method</code>
+                <p>Use `/define-agent` to clarify the job, boundaries, metrics, and risks.</p>
+              </div>
+              <div class="artifact">
+                <code>Output</code>
+                <p>`agents/{agent-handle}/agent-brief.md`, created from `templates/agent-definition-template.md` and ready for Design.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="pipeline" class="section">
+          <div id="multi-agent" class="layer-board" aria-label="MAPS layer scope">
+            <div class="layer-card outer">
+              <div>
+                <p class="layer-kicker">M layer</p>
+                <h3>Multi-agent project scaffold</h3>
+                <p>
+                  The M layer starts by defining the overall outcome, agent roster,
+                  responsibilities, coordination, integration, and system-level proof.
+                </p>
+              </div>
+              <span class="scope-badge">Out of scope this week</span>
+            </div>
+            <div class="layer-card active">
+              <div>
+                <p class="layer-kicker">APS layer</p>
+                <h3>Agent Pipeline Skills</h3>
+                <p>
+                  APS defines and develops one agent role or capability at a time.
+                  Phase 1 produces the agent brief used by the rest of the APS sequence.
+                </p>
+              </div>
+              <span class="scope-badge active">This week's focus</span>
+            </div>
+          </div>
+
+          <div class="section-header">
+            <h2>The APS sequence</h2>
+            <p>
+              Phase 0 and Phase 1 are available now. Phases 2 through 8 are under construction.
+              The M phases are scaffolded separately and are out of scope for this week.
+            </p>
+          </div>
+
+          <div class="sequence" aria-label="MAPS phases">
+            <a class="phase-link" href="./phase0.html">
+              <strong>00 Alignment</strong>
+              <span>Scaffold and agree</span>
+            </a>
+            <a class="phase-link current" href="./phase1.html">
+              <strong>01 Define</strong>
+              <span>Agent brief</span>
+            </a>
+            <span class="phase-link future">
+              <strong>02 Design</strong>
+              <span>System design · Under construction</span>
+            </span>
+            <span class="phase-link future">
+              <strong>03 Build</strong>
+              <span>Working agent · Under construction</span>
+            </span>
+            <span class="phase-link future">
+              <strong>04 Equip</strong>
+              <span>Capability map · Under construction</span>
+            </span>
+            <span class="phase-link future">
+              <strong>05 Evaluate</strong>
+              <span>Eval suite · Under construction</span>
+            </span>
+            <span class="phase-link future">
+              <strong>06 Deploy</strong>
+              <span>Release plan · Under construction</span>
+            </span>
+            <span class="phase-link future">
+              <strong>07 Observe</strong>
+              <span>Observation plan · Under construction</span>
+            </span>
+            <span class="phase-link future">
+              <strong>08 Improve</strong>
+              <span>Improvement backlog · Under construction</span>
+            </span>
+          </div>
+        </section>
+
+        <section id="resources" class="section">
+          <div class="section-header">
+            <h2>Phase 1 resources</h2>
+            <p>
+              /define-agent uses the agent definition template to produce agents/{agent-handle}/agent-brief.md.
+            </p>
+          </div>
+
+          <div class="resource-grid">
+            <article class="resource-panel">
+              <h3>Skills</h3>
+              <ul data-maps-skills>
+                <li><strong>/define-agent</strong> includes SKILL.md.</li>
+              </ul>
+            </article>
+
+            <article class="resource-panel">
+              <h3>Repos</h3>
+              <ul data-maps-repos>
+                <li><a href="https://github.com/AesopScott/maps">AesopScott/maps</a></li>
+              </ul>
+            </article>
+
+            <article class="resource-panel">
+              <h3>Tools</h3>
+              <ul data-maps-tools>
+                <li><strong>Agent Skills</strong></li>
+              </ul>
+            </article>
+
+            <article class="resource-panel">
+              <h3>Templates</h3>
+              <ul data-maps-templates>
+                <li><code>templates/agent-definition-template.md</code></li>
+              </ul>
+            </article>
+
+            <article class="resource-panel">
+              <h3>Phase output</h3>
+              <p><code>agents/{agent-handle}/agent-brief.md</code>, which Phase 2 Design uses to decide behavior, workflow, handoffs, controls, and tool needs.</p>
+            </article>
+
+            <article class="resource-panel">
+              <h3>Catalogs</h3>
+              <ul data-maps-catalogs>
+                <li><code>catalogs/skills.md</code></li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        MAPS: Multi-Agent Pipeline Skills
+      </footer>
+    </div>
+  </body>
+</html>

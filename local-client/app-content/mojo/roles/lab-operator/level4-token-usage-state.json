@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "role": "Lane / Mojo Lab Operator",
+  "automation_id": "lane-hourly-token-usage-update",
+  "logic_owner": "C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\scripts\\level4automation.py",
+  "mode": "scheduled",
+  "checked_at": "2026-06-25T08:21:25-06:00",
+  "current_policy": "Level 3 token-usage reporting with proposed Level 4 script/timer separation",
+  "result": "no_eligible_work_previous_hour_logged",
+  "window": {
+    "start_mdt": "2026-06-25 07:00:00",
+    "end_mdt": "2026-06-25 08:00:00"
+  },
+  "counts": {
+    "token_rows": 260,
+    "previous_hour_rows": 1,
+    "parse_errors": 0,
+    "confidence_kinds": 6
+  },
+  "latest_row": {
+    "logged_at_mdt": "2026-06-25 08:20:09",
+    "window_start_mdt": "2026-06-25 07:00:00",
+    "window_end_mdt": "2026-06-25 08:00:00",
+    "interface": "Claude",
+    "confidence": "no-activity"
+  },
+  "confidence_counts": {
+    "estimate-visible": 14,
+    "exact": 11,
+    "exact-local-jsonl": 25,
+    "exact-local-jsonl-delta": 149,
+    "exact-local-jsonl-last-usage-sum": 45,
+    "no-activity": 16
+  },
+  "errors": [],
+  "html_rebuild": {
+    "status": "pass",
+    "returncode": 0,
+    "stdout_tail": "rebuilt:C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\token-usage.html\nrows:260 hourly:40 codex_total:382396871 claude_total:37502816\n",
+    "stderr_tail": ""
+  },
+  "html_changed": true,
+  "sources": {
+    "autonomy": "C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\Autonomy.md",
+    "token_log": "C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\token usage.md",
+    "html": "C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\token-usage.html",
+    "builder": "C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\build-token-usage.ps1"
+  },
+  "gate_status": {
+    "contract": "pass",
+    "token_log": "pass",
+    "html_builder": "pass",
+    "state": "pass_after_write",
+    "boundary": "pass_denied_actions_held"
+  },
+  "denied_actions_held": [
+    "no Git/GitHub/release action",
+    "no production",
+    "no external service contact",
+    "no spending",
+    "no secrets",
+    "no deletes or moves",
+    "no authority expansion",
+    "no runtime activation",
+    "no Level 4 promotion"
+  ]
+}

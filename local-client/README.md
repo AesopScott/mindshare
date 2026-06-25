@@ -14,15 +14,20 @@ npm run sync-content
 npm start
 ```
 
-`npm run sync-content` copies runtime content into `local-client/app-content` so the packaged app does not depend on Scott's local repo paths.
+`npm run sync-content` rebuilds runtime content into `local-client/app-content` so the packaged app does not depend on Scott's local repo paths.
 
 The bundled content currently includes:
 
-- MindShare public pages from `public/`
-- Tess role context from `roles/autonomy-engineer/`
-- Bea role context from `C:\Users\scott\Code\mojo\roles\mojo-maps-engineer\`
-- Mojo MAPS content from `C:\Users\scott\Code\mojo\assets\maps\`
-- Mojo agent files from `C:\Users\scott\Code\mojo\agents\`
+- MindShare public pages, roles, agents, catalogs, docs, phases, rooms, scripts, skills, templates, `AGENTS.md`, and `project-foundation.md`
+- MindShare global roster files copied into `app-content/mindshare/global/`
+- Mojo MAPS content from `assets/maps/`
+- Mojo MAPS web pages from `maps/`
+- Mojo role and agent files
+- Watch role and agent files
+
+The sync is exact for `app-content`: the script clears that folder, verifies the path is inside `local-client`, and then copies fresh content while excluding Git data, local CLI state, node modules, cache folders, env files, logs, and common key/certificate files.
+
+`app-content/manifest.json` records the bundled content using portable paths so the executable does not carry Scott's machine paths as runtime dependencies.
 
 The Electron preload exposes:
 

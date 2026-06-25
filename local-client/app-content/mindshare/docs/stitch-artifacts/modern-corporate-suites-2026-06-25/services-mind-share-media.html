@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Services | MIND SHARE MEDIA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&amp;family=Inter:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Montserrat:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#0c1324",
+                    "surface-tint": "#bec6e0",
+                    "on-surface-variant": "#c6c6cd",
+                    "error-container": "#93000a",
+                    "on-secondary-container": "#a7b6cc",
+                    "on-primary-fixed": "#131b2e",
+                    "on-surface": "#dce1fb",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed": "#dae2fd",
+                    "on-tertiary-fixed-variant": "#41474e",
+                    "on-secondary": "#233143",
+                    "inverse-on-surface": "#2a3043",
+                    "primary": "#bec6e0",
+                    "primary-container": "#0f172a",
+                    "secondary-fixed-dim": "#b9c8de",
+                    "on-tertiary": "#2b3137",
+                    "surface-container-highest": "#2e3447",
+                    "tertiary-fixed-dim": "#c1c7cf",
+                    "outline-variant": "#45464d",
+                    "on-background": "#dce1fb",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary": "#b9c8de",
+                    "on-tertiary-fixed": "#161c22",
+                    "tertiary-container": "#12181e",
+                    "tertiary-fixed": "#dde3eb",
+                    "inverse-surface": "#dce1fb",
+                    "inverse-primary": "#565e74",
+                    "primary-fixed-dim": "#bec6e0",
+                    "secondary-container": "#39485a",
+                    "surface-dim": "#0c1324",
+                    "surface-bright": "#33394c",
+                    "secondary-fixed": "#d4e4fa",
+                    "on-secondary-fixed-variant": "#39485a",
+                    "surface": "#0c1324",
+                    "surface-container-high": "#23293c",
+                    "surface-container-lowest": "#070d1f",
+                    "on-secondary-fixed": "#0d1c2d",
+                    "outline": "#909097",
+                    "surface-container": "#191f31",
+                    "surface-container-low": "#151b2d",
+                    "on-primary-container": "#798098",
+                    "on-primary": "#283044",
+                    "tertiary": "#c1c7cf",
+                    "on-tertiary-container": "#7b8189",
+                    "error": "#ffb4ab",
+                    "on-error": "#690005",
+                    "surface-variant": "#2e3447"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-desktop": "64px",
+                    "base": "8px",
+                    "container-max": "1440px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Montserrat"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg-mobile": ["Montserrat"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Montserrat"]
+            },
+            "fontSize": {
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(190, 198, 224, 0.15);
+        }
+        .metallic-gradient {
+            background: linear-gradient(135deg, #bec6e0 0%, #798098 100%);
+        }
+        .silver-edge {
+            border: 1px solid rgba(190, 198, 224, 0.2);
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary selection:text-background overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/10 backdrop-blur-xl border-b border-white/10 transition-all duration-500 ease-in-out h-20 shadow-2xl shadow-background/50">
+<div class="max-w-container-max mx-auto px-margin-desktop flex justify-between items-center h-full">
+<div class="font-display-lg text-headline-md tracking-tighter text-primary">
+                MIND SHARE MEDIA
+            </div>
+<div class="hidden md:flex items-center space-x-12">
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface/70 hover:text-on-surface transition-colors" href="#">Home</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface/70 hover:text-on-surface transition-colors" href="#">Our Team</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-primary font-bold border-b-2 border-primary pb-1" href="#">Services</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface/70 hover:text-on-surface transition-colors" href="#">Contact</a>
+</div>
+<button class="metallic-gradient px-8 py-3 rounded-none font-label-sm text-label-sm uppercase tracking-widest text-background font-bold hover:brightness-110 transition-all">
+                Book Tour
+            </button>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative h-[614px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-fixed bg-center opacity-40" data-alt="A wide-angle interior shot of a high-end commercial real estate lobby with towering glass walls, polished marble floors reflecting the golden hour sunlight, and minimalist architectural details. The atmosphere is sophisticated and quiet, embodying professional permanence. Deep blues and metallic silver tones dominate the color palette, punctuated by warm amber light spilling across the clean lines of the structure." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDewdKHicSbmgvbIrs7SGpw8NHmZAETSND6SFeUbpFZUYmS5LEwoOg4oorKlx7mNElFkrsPcp8CZJLlxyiq8QX6IHk9gg_RatKNTOlvoGDN4X0g4wow0C-vJ12wcEXT7q121PCjijeQVBVo7rPdRGtw3VOc2mHGtAGbgVOZUqC3xnjpAvL_wNjCeLoQVSa6kosDR6AzmvB_xkcbM-1Bb_D5Qi1thvfHi8pUdt9QoWEKnwjDYamCs8-HXucaXO_RCRu-Y1ucKgJtspWH')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-background"></div>
+</div>
+<div class="relative z-10 text-center px-margin-mobile">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg uppercase tracking-widest mb-4">Agentic Environments</h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">Precision-engineered environments for global leaders and visionaries. Explore our architectural approach to the modern workspace.</p>
+</div>
+</section>
+<!-- Service Section 1: Private Neural Suites -->
+<section class="py-32 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+<div class="scroll-reveal order-2 lg:order-1">
+<span class="text-primary font-label-sm uppercase tracking-[0.3em] mb-6 block">Tier 01</span>
+<h2 class="font-display-lg text-headline-md md:text-display-lg uppercase mb-8">Private Neural Suites</h2>
+<p class="font-body-lg text-on-surface-variant mb-12">Designed for maximum discretion and focus, our suites offer a sanctuary of productivity amidst the urban bustle. Each unit is a masterpiece of sound engineering and ergonomic luxury.</p>
+<ul class="space-y-6 mb-12">
+<li class="flex items-center gap-4 text-on-surface">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-body-md">Acoustic isolation with sound-dampening architectural glass</span>
+</li>
+<li class="flex items-center gap-4 text-on-surface">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-body-md">Personalized climate control and biometric entry systems</span>
+</li>
+<li class="flex items-center gap-4 text-on-surface">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-body-md">Bespoke Italian furnishings and panoramic city vistas</span>
+</li>
+</ul>
+<button class="group flex items-center gap-4 border border-white/20 px-8 py-4 hover:border-primary transition-all">
+<span class="font-label-sm uppercase tracking-widest">Book Tour</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-2">arrow_forward</span>
+</button>
+</div>
+<div class="order-1 lg:order-2 scroll-reveal">
+<div class="relative group">
+<div class="absolute -inset-4 border border-primary/20 transition-all group-hover:inset-0"></div>
+<img class="w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="A luxurious private executive office featuring a minimalist dark wood desk, floor-to-ceiling glass windows overlooking a sprawling metropolitan skyline at dusk, and a sleek leather designer chair. The lighting is low and moody, highlighting the sharp architectural lines and metallic finishes. The aesthetic is clean, professional, and ultra-modern, with a deep navy and slate color scheme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAihBDcQhGuhXXn0IpJIoQkN0x-8Z2TMsGrOaeSJKDMoDK0BWHYBr0SglFEWVuSy0KmjuF--e-ocrJh2TjDRO_fT1DP_33Ow59G99d7f77xabu9FYY1XUmVPG0UeqBeIX8BalVNa1iUOAT4dWcEctChcF4FBpeA_MXw2TBRTD07wR0fJE5csZy5oe4-au-MbG051CQ3JIm7egLSZKE-ii3GehznlQzCP6PCyQcncgEFVw0MNNL2SKSSDkCNOwATKWQ98Hulp0Qnn3ci"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Service Section 2: Collaborative Synapse Hubs -->
+<section class="py-32 bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<div class="lg:col-span-7 scroll-reveal">
+<div class="glass-panel p-1 border border-white/10">
+<img class="w-full aspect-video object-cover" data-alt="A spacious, high-ceilinged collaborative workspace with long communal tables made of brushed steel and light oak. Large geometric light fixtures hang from the ceiling, casting a soft glow. Modern professionals in business attire move through the space, which is framed by massive glass walls and minimalist concrete columns. The mood is energetic yet focused, using a palette of cold metals and warm wood tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2IOjFPXZoR4sFnUL1nxxtw7ZFY5_O85WP9Yos9wk0bh5ed1hFl4AeCmA9SfdlqLON9zKHRgYkNWNcOSwx7MgjZP7zHQ17Z0__btPJi8xbxUZWW2W9M1J8jA9M0XYP-Qb-Th5LN2TnM7_q3x9ZvOoF2iVpijIBHSVmz9mnL6vCQxMjR6pnKpEb0q0tVZRev6MFVINkE9R5EyGy3JQ55kFu_dPlTXLMelS-yQr_aJbEEudXAWdkIuySqJrlK9elA4W6gCbDPvxeA4i9"/>
+</div>
+</div>
+<div class="lg:col-span-5 lg:pl-12 scroll-reveal">
+<span class="text-primary font-label-sm uppercase tracking-[0.3em] mb-6 block">Tier 02</span>
+<h2 class="font-display-lg text-headline-md md:text-display-lg uppercase mb-8">Collaborative Synapse Hubs</h2>
+<p class="font-body-lg text-on-surface-variant mb-12">Dynamic spaces where ideas flow freely. Our hubs are engineered for synergy, featuring fluid layouts and integrated high-performance technology for seamless interaction.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
+<div class="p-6 silver-edge bg-white/5">
+<span class="material-symbols-outlined text-primary mb-4">hub</span>
+<h3 class="font-body-lg font-bold mb-2">Connectivity</h3>
+<p class="text-on-surface-variant text-sm">Ultra-low latency fiber and integrated AV conferencing.</p>
+</div>
+<div class="p-6 silver-edge bg-white/5">
+<span class="material-symbols-outlined text-primary mb-4">architecture</span>
+<h3 class="font-body-lg font-bold mb-2">Flexibility</h3>
+<p class="text-on-surface-variant text-sm">Modular partition systems for rapid space adaptation.</p>
+</div>
+</div>
+<button class="metallic-gradient px-12 py-4 font-label-sm text-label-sm uppercase tracking-widest text-background font-bold hover:shadow-[0_0_20px_rgba(190,198,224,0.3)] transition-all">
+                            Reserve Hub
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Service Section 3: Virtual Agent Solutions -->
+<section class="py-32 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+<div class="scroll-reveal">
+<span class="text-primary font-label-sm uppercase tracking-[0.3em] mb-6 block">Tier 03</span>
+<h2 class="font-display-lg text-headline-md md:text-display-lg uppercase mb-8">Virtual Agent Solutions</h2>
+<p class="font-body-lg text-on-surface-variant mb-12">Establish a global presence with the prestige of a MIND SHARE MEDIA address. Our virtual solutions provide institutional-grade support and identity for modern distributed firms.</p>
+<div class="space-y-4 mb-12">
+<div class="flex justify-between items-center py-4 border-b border-white/10 group cursor-default">
+<span class="font-body-md group-hover:text-primary transition-colors">Prime Business Address</span>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_outward</span>
+</div>
+<div class="flex justify-between items-center py-4 border-b border-white/10 group cursor-default">
+<span class="font-body-md group-hover:text-primary transition-colors">Digital Concierge Services</span>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_outward</span>
+</div>
+<div class="flex justify-between items-center py-4 border-b border-white/10 group cursor-default">
+<span class="font-body-md group-hover:text-primary transition-colors">Private Meeting Access</span>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_outward</span>
+</div>
+</div>
+<button class="border border-white/20 px-8 py-4 hover:bg-white/5 transition-all font-label-sm uppercase tracking-widest">
+                        View Packages
+                    </button>
+</div>
+<div class="scroll-reveal">
+<div class="relative">
+<div class="absolute -top-12 -right-12 w-48 h-48 border border-primary/10 -z-10"></div>
+<img class="w-full h-full object-cover" data-alt="A minimalist architectural detail of a glass building facade reflecting a golden sunrise. The focus is on the precision of the steel frames and the clarity of the glass. The image evokes a sense of digital presence and modern luxury, using a high-contrast palette of cool blues and glowing oranges. It represents the intersection of physical excellence and virtual prestige." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4_VX0FitfD_jRny79QWgKEgElNLLE11xtCHWmKCJyl7htFpkT4uIBAPRIRJh23i7OSuesSeRImmW5Whf_N64Ln-MnZDiPBxCS_RAqYW1M16j2U7t0TG_ADqYni-TU3bygagBCQD1mp_vtID3BstXC2vNZd_MCAaag75eN1Un5nUvXhAmBDStXZw9ue2m9Ix_wQYEUJPC-WEi7ovUhYnfZmAOg125Au2njeF26_SRJIaKGwnQcLQcM_0NlYVTKZpK2uip2wMCQbWE7"/>
+<div class="absolute bottom-8 left-8 glass-panel p-8 max-w-xs">
+<h4 class="font-body-lg font-bold mb-2">Global Presence</h4>
+<p class="text-on-surface-variant text-sm">Prestige without the physical footprint. Scale with confidence.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-32 relative overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-gradient-to-r from-background via-surface-container-low to-background opacity-50"></div>
+</div>
+<div class="relative z-10 max-w-3xl mx-auto text-center px-margin-mobile">
+<h2 class="font-display-lg text-headline-md md:text-display-lg uppercase mb-8">Architect Your Future</h2>
+<p class="font-body-lg text-on-surface-variant mb-12">Experience the precision of Mind Share Media. Our team of architectural consultants is ready to tailor a workspace solution to your exact specifications.</p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center">
+<button class="metallic-gradient px-12 py-5 font-label-sm text-label-sm uppercase tracking-widest text-background font-bold">Book a Personal Tour</button>
+<button class="border border-white/20 px-12 py-5 font-label-sm text-label-sm uppercase tracking-widest hover:bg-white/5 transition-all">Contact Sales</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-background border-t border-outline-variant">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-gutter items-center">
+<div class="font-display-lg text-headline-md text-surface-tint">
+                MIND SHARE MEDIA
+            </div>
+<div class="flex justify-center space-x-8">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Location</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Careers</a>
+</div>
+<div class="text-right font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+                © 2024 MIND SHARE MEDIA ARCHITECTURAL SPACES. ALL RIGHTS RESERVED.
+            </div>
+</div>
+</footer>
+<script>
+        // Intersection Observer for scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('h-16', 'bg-surface/80');
+                nav.classList.remove('h-20', 'bg-surface/10');
+            } else {
+                nav.classList.add('h-20', 'bg-surface/10');
+                nav.classList.remove('h-16', 'bg-surface/80');
+            }
+        });
+    </script>
+</body></html>

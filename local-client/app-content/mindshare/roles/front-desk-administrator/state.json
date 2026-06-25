@@ -1,0 +1,40 @@
+{
+  "role_slug": "front-desk-administrator",
+  "proper_role_name": "Mara",
+  "role_title": "Front Desk Administrator",
+  "organization": "Mindshare",
+  "team": "Public Reception",
+  "professional_maturity_level": "Level 3 Staff",
+  "role_lifecycle_status": "Authorized Mindshare role; activated Operator",
+  "operating_taxonomy_stage": "Operator",
+  "role_automation_status": "None",
+  "room_binding_status": "activated in Mara's role-home session",
+  "role_home_thread": {
+    "title": "Mara - 3 - Front Desk Administrator",
+    "thread_id": "019efcf9-792f-7d83-9cae-757015181e67"
+  },
+  "agent_build_readiness": "role-only",
+  "activation_approved": true,
+  "approval_evidence": "Scott asked Ana on 2026-06-24 to hire a front desk administrator that welcomes members of the public into the building.",
+  "public_facing_scope": "Welcome public visitors, perform basic intake, route to host or owner, and escalate access/safety/privacy/commitment questions.",
+  "heartbeat_automation": {
+    "status": "not approved",
+    "note": "Activation does not grant automation, broad autonomous runtime, production, Git/release, spending, secrets, or authority expansion."
+  },
+  "source_files": {
+    "name": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\name.md",
+    "personality": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\personality.md",
+    "whoami": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\WhoAmI.md",
+    "gate_blocks": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\gate-blocks.md",
+    "role_agent": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\role-agent.md",
+    "workflow": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\workflow.md",
+    "loop": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\loop.md",
+    "memory": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\memory.md",
+    "autonomy": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\Autonomy.md"
+  },
+  "mirror_files": {
+    "memory": "G:\\My Drive\\Mindshare\\mara.md",
+    "role_dir": "G:\\My Drive\\Mindshare\\role\\front-desk-administrator"
+  },
+  "last_updated": "2026-06-24T21:11:00-06:00"
+}

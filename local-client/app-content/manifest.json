@@ -1,11 +1,109 @@
 ﻿{
-    "generatedAt":  "2026-06-25T14:27:24.3588207Z",
-    "contentRoot":  "C:\\Users\\scott\\Code\\mindshare\\local-client\\app-content",
-    "sources":  {
-                    "public":  "C:\\Users\\scott\\Code\\mindshare\\public",
-                    "tessRole":  "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer",
-                    "beaRole":  "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer",
-                    "mojoMaps":  "C:\\Users\\scott\\Code\\mojo\\assets\\maps",
-                    "mojoAgents":  "C:\\Users\\scott\\Code\\mojo\\agents"
-                }
+    "generatedAt":  "2026-06-25T14:35:43.1939990Z",
+    "contentRoot":  ".",
+    "copiedSources":  [
+                          {
+                              "source":  "mindshare/public",
+                              "destination":  "mindshare/public",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mindshare/roles",
+                              "destination":  "mindshare/roles",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mindshare/agents",
+                              "destination":  "mindshare/agents",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mindshare/catalogs",
+                              "destination":  "mindshare/catalogs",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mindshare/docs",
+                              "destination":  "mindshare/docs",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mindshare/phases",
+                              "destination":  "mindshare/phases",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mindshare/rooms",
+                              "destination":  "mindshare/rooms",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mindshare/scripts",
+                              "destination":  "mindshare/scripts",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mindshare/skills",
+                              "destination":  "mindshare/skills",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mindshare/templates",
+                              "destination":  "mindshare/templates",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mindshare/AGENTS.md",
+                              "destination":  "mindshare/AGENTS.md",
+                              "type":  "file"
+                          },
+                          {
+                              "source":  "mindshare/project-foundation.md",
+                              "destination":  "mindshare/project-foundation.md",
+                              "type":  "file"
+                          },
+                          {
+                              "source":  "mindshare-drive/roles.md",
+                              "destination":  "mindshare/global/roles.md",
+                              "type":  "file"
+                          },
+                          {
+                              "source":  "mindshare-drive/role-artifacts.md",
+                              "destination":  "mindshare/global/role-artifacts.md",
+                              "type":  "file"
+                          },
+                          {
+                              "source":  "mojo/agents",
+                              "destination":  "mojo/agents",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mojo/assets/maps",
+                              "destination":  "mojo/assets/maps",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mojo/maps",
+                              "destination":  "mojo/maps",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "mojo/roles",
+                              "destination":  "mojo/roles",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "watch/agents",
+                              "destination":  "watch/agents",
+                              "type":  "directory"
+                          },
+                          {
+                              "source":  "watch/roles",
+                              "destination":  "watch/roles",
+                              "type":  "directory"
+                          }
+                      ],
+    "missingSources":  [
+
+                       ]
 }

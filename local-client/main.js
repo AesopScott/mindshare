@@ -2,7 +2,7 @@ const { app, BrowserWindow, dialog, ipcMain, Menu } = require('electron');
 const path = require('node:path');
 const { connectCodex, connectClaude, loadRoleContext, sendCodexMessage, sendClaudeMessage } = require('./mindshare-local-client');
 
-const bundledPublicRoot = path.join(__dirname, 'app-content', 'public');
+const bundledPublicRoot = path.join(__dirname, 'app-content', 'mindshare', 'public');
 const devPublicRoot = path.join(__dirname, '..', 'public');
 
 function createWindow() {

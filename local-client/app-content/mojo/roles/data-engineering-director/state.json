@@ -1,0 +1,25 @@
+{
+  "name": "Imani",
+  "title": "Data Engineering Director",
+  "organization": "Mojo",
+  "status": "activated_operator",
+  "autonomy_level": 3,
+  "autonomy_stage": "Level 3 Staff",
+  "source_recruiting_item": "REC-006",
+  "activated_at": "2026-06-24T17:58:00-06:00",
+  "activated_by": "Scott request to Ana",
+  "office_thread_id": "019efc1d-b79a-7dd2-9a62-a7ff4e901cde",
+  "role_path": "C:\\Users\\scott\\Code\\mojo\\roles\\data-engineering-director\\role-agent.md",
+  "memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\data-engineering-director\\memory.md",
+  "drive_memory_mirror": "G:\\My Drive\\Mojo\\imani.md",
+  "drive_role_mirror": "G:\\My Drive\\Mojo\\role\\data-engineering-director",
+  "boundaries": [
+    "no production changes",
+    "no Git/GitHub/release actions",
+    "no data-system credentials or secrets",
+    "no external communication",
+    "no spending or procurement",
+    "no automation, hooks, file watches, schedulers, or broad runtime",
+    "no Level 4+ promotion or authority expansion"
+  ]
+}

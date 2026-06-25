@@ -45,6 +45,24 @@
             border-color: rgba(52, 211, 153, 0.85);
             box-shadow: 0 0 16px rgba(52, 211, 153, 0.62);
         }
+        .notification-badge {
+            min-width: 1rem;
+            height: 1rem;
+            background: #bec6e0;
+            color: #131b2e;
+            box-shadow: 0 0 14px rgba(190, 198, 224, 0.45);
+        }
+        .notification-bell-active {
+            color: #dae2fd;
+            animation: notification-shake 1.35s ease-in-out infinite;
+        }
+        @keyframes notification-shake {
+            0%, 38%, 100% { transform: rotate(0deg); }
+            8% { transform: rotate(-12deg); }
+            16% { transform: rotate(10deg); }
+            24% { transform: rotate(-7deg); }
+            31% { transform: rotate(5deg); }
+        }
         .metallic-silver {
             background: linear-gradient(135deg, #bec6e0 0%, #798098 100%);
         }
@@ -183,7 +201,18 @@
 <input class="bg-transparent border-none focus:ring-0 text-sm w-32 placeholder-on-surface-variant" placeholder="Global Search..." type="text">
 </div>
 <div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80 transition-all hover:bg-white/5 p-2 rounded-full">notifications</span>
+<div class="relative">
+<button class="relative text-on-surface-variant cursor-pointer active:opacity-80 transition-all hover:bg-white/5 p-2 rounded-full" id="notification-bell-button" type="button" aria-label="Completed session notifications" aria-expanded="false">
+<span class="material-symbols-outlined">notifications</span>
+<span class="notification-badge absolute -right-1 -top-1 hidden items-center justify-center rounded-full px-1 text-[10px] font-bold leading-none" id="notification-count">0</span>
+</button>
+<div class="hidden absolute right-0 top-full mt-3 w-56 opaque-dropdown silver-edge rounded-lg p-2 z-[80]" id="notification-menu">
+<div class="px-3 py-2 font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant">Completed Sessions</div>
+<div class="space-y-1" id="notification-list">
+<div class="px-3 py-3 text-sm text-on-surface-variant">No recent completions</div>
+</div>
+</div>
+</div>
 <span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80 transition-all hover:bg-white/5 p-2 rounded-full">settings</span>
 <img class="w-10 h-10 rounded-full border border-primary/30 object-cover" data-alt="A professional headshot of a senior executive in a high-end corporate office setting. The individual is wearing a charcoal grey tailored suit, standing against a backdrop of a blurred metropolitan skyline through floor-to-ceiling glass windows at twilight. The lighting is cold, architectural, and sophisticated, emphasizing sharp features and a confident expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD_cxPZsVB4O7i12grMj-WbNmCB5vVqdElOUuV6-KBqr1VI1NZH78c05urWijL-JGSFxtzXShk-YyXR0VGi5byrI-N2S1i28FdHMfyIixIInxAtx33T8-8BCH7ciuBhJfdMsMSUVw0zcgHBd2PBBCgxCwRSlfy-DSueDCUq8THa_j3I0Bc5I7Kp0-5LJ3vFj-nAqjGjnuua_3E4VPRUOBgWD1A4XCe6lE_jeJegxeTFvi1T5N74Ovw0f5qNhh25TNBmHDvJioa8z57">
 </div>
@@ -504,6 +533,9 @@
         let claudeAvailable = false;
         let activeEngine = 'codex';
         const roleSessions = {};
+        const sessionNotifications = [];
+        const notificationTimers = {};
+        const NOTIFICATION_TTL_MS = 120000;
         const pendingAttachments = [];
 
         function ensureRoleSession(slug, name, title, level) {
@@ -975,6 +1007,82 @@
             });
         }
 
+        function removeSessionNotification(id) {
+            const index = sessionNotifications.findIndex((notification) => notification.id === id);
+            if (index >= 0) {
+                sessionNotifications.splice(index, 1);
+            }
+            if (notificationTimers[id]) {
+                clearTimeout(notificationTimers[id]);
+                delete notificationTimers[id];
+            }
+            renderSessionNotifications();
+        }
+
+        function renderSessionNotifications() {
+            const bell = document.getElementById('notification-bell-button');
+            const badge = document.getElementById('notification-count');
+            const list = document.getElementById('notification-list');
+            if (!bell || !badge || !list) return;
+
+            const count = sessionNotifications.length;
+            bell.classList.toggle('notification-bell-active', count > 0);
+            badge.textContent = String(count);
+            badge.classList.toggle('hidden', count === 0);
+            badge.classList.toggle('flex', count > 0);
+
+            if (!count) {
+                list.innerHTML = '<div class="px-3 py-3 text-sm text-on-surface-variant">No recent completions</div>';
+                return;
+            }
+
+            list.innerHTML = sessionNotifications.map((notification) => `
+                <button class="w-full rounded-md px-3 py-2 text-left text-sm font-medium text-primary hover:bg-white/5 transition-colors" type="button" data-notification-id="${notification.id}" data-notification-role="${notification.roleSlug}">
+                    ${escapeHtml(notification.name)}
+                </button>
+            `).join('');
+
+            list.querySelectorAll('[data-notification-role]').forEach((button) => {
+                button.addEventListener('click', () => {
+                    const session = roleSessions[button.dataset.notificationRole];
+                    if (session) {
+                        selectRole(session.slug, session.name, session.title, session.level);
+                    }
+                    removeSessionNotification(button.dataset.notificationId);
+                    closeNotificationMenu();
+                });
+            });
+        }
+
+        function addSessionCompletionNotification(roleSession) {
+            if (!roleSession) return;
+            const id = `${roleSession.slug}-${Date.now()}`;
+            sessionNotifications.unshift({
+                id,
+                roleSlug: roleSession.slug,
+                name: roleSession.name
+            });
+            notificationTimers[id] = setTimeout(() => removeSessionNotification(id), NOTIFICATION_TTL_MS);
+            renderSessionNotifications();
+        }
+
+        function toggleNotificationMenu(event) {
+            event?.stopPropagation();
+            const button = document.getElementById('notification-bell-button');
+            const menu = document.getElementById('notification-menu');
+            if (!button || !menu) return;
+            const willOpen = menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', !willOpen);
+            button.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        }
+
+        function closeNotificationMenu() {
+            const button = document.getElementById('notification-bell-button');
+            const menu = document.getElementById('notification-menu');
+            menu?.classList.add('hidden');
+            button?.setAttribute('aria-expanded', 'false');
+        }
+
         function setChatStatus(text) {
             const status = document.getElementById('chat-status');
             if (status) {
@@ -1264,6 +1372,7 @@
                 }
                 markOfficeSessionConnected(roleSession);
                 addChatMessageToRole(roleSession, 'assistant', payload.reply || '(No response)');
+                addSessionCompletionNotification(roleSession);
                 if (activeRoleSlug === roleSession.slug) clearChatStatus();
             } catch (error) {
                 markOfficeSessionIssue(roleSession);
@@ -1289,6 +1398,8 @@
 
             document.getElementById('connect-codex-button').addEventListener('click', connectCodex);
             document.getElementById('connect-claude-button').addEventListener('click', connectClaude);
+            document.getElementById('notification-bell-button').addEventListener('click', toggleNotificationMenu);
+            document.getElementById('notification-menu').addEventListener('click', (event) => event.stopPropagation());
             document.getElementById('send-message-button').addEventListener('click', sendCodexMessage);
             document.getElementById('attach-file-button').addEventListener('click', chooseAttachments);
             document.getElementById('office-context-title').addEventListener('click', toggleOfficeTitleDropdown);
@@ -1297,7 +1408,10 @@
             document.getElementById('office-level-dropdown').addEventListener('click', (event) => event.stopPropagation());
             document.getElementById('office-context-files').addEventListener('click', toggleOfficeFilesDropdown);
             document.getElementById('office-files-dropdown').addEventListener('click', (event) => event.stopPropagation());
-            document.addEventListener('click', closeContextDropdowns);
+            document.addEventListener('click', () => {
+                closeContextDropdowns();
+                closeNotificationMenu();
+            });
             document.getElementById('chat-input').addEventListener('keydown', (event) => {
                 if (event.key === 'Enter' && !event.shiftKey) {
                     event.preventDefault();

@@ -258,12 +258,33 @@
 </div>
 </div>
 </div>
-<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:opacity-80 transition-all hover:bg-white/5 p-2 rounded-full">settings</span>
+<button class="text-on-surface-variant cursor-pointer active:opacity-80 transition-all hover:bg-white/5 p-2 rounded-full" id="configuration-button" type="button" aria-label="Configuration files" aria-expanded="false">
+<span class="material-symbols-outlined">settings</span>
+</button>
 <img class="w-10 h-10 rounded-full border border-primary/30 object-cover" data-alt="A professional headshot of a senior executive in a high-end corporate office setting. The individual is wearing a charcoal grey tailored suit, standing against a backdrop of a blurred metropolitan skyline through floor-to-ceiling glass windows at twilight. The lighting is cold, architectural, and sophisticated, emphasizing sharp features and a confident expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD_cxPZsVB4O7i12grMj-WbNmCB5vVqdElOUuV6-KBqr1VI1NZH78c05urWijL-JGSFxtzXShk-YyXR0VGi5byrI-N2S1i28FdHMfyIixIInxAtx33T8-8BCH7ciuBhJfdMsMSUVw0zcgHBd2PBBCgxCwRSlfy-DSueDCUq8THa_j3I0Bc5I7Kp0-5LJ3vFj-nAqjGjnuua_3E4VPRUOBgWD1A4XCe6lE_jeJegxeTFvi1T5N74Ovw0f5qNhh25TNBmHDvJioa8z57">
 </div>
 </div>
 </div>
 </header>
+<div class="fixed inset-0 z-[120] hidden items-center justify-center bg-black/75 px-6 py-24" id="configuration-panel">
+<section class="w-full max-w-6xl max-h-full overflow-hidden rounded-xl border border-primary-fixed-dim/35 bg-[#060912] shadow-2xl">
+<div class="flex items-start justify-between gap-4 border-b border-white/10 px-6 py-5">
+<div>
+<h2 class="font-display-lg text-headline-sm text-primary-fixed">Configuration Files</h2>
+<p class="mt-1 text-sm text-on-surface-variant" id="configuration-summary">Loading role, agent, and global files.</p>
+</div>
+<button class="rounded-full p-2 text-on-surface-variant transition hover:bg-white/10 hover:text-primary-fixed" id="configuration-close" type="button" aria-label="Close configuration files">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="max-h-[72vh] overflow-y-auto p-6 custom-scrollbar">
+<div class="mb-4 rounded-lg border border-white/10 bg-black/60 px-4 py-3 text-sm text-on-surface-variant" id="configuration-status">
+Configuration is loaded from the local MindShare workspace.
+</div>
+<div class="space-y-3" id="configuration-groups"></div>
+</div>
+</section>
+</div>
 <!-- Main Workspace Container -->
 <main class="workspace-shell flex flex-1 gap-6 overflow-hidden p-6 pt-24">
 <!-- SideNavBar (Strategy & Operations) -->
@@ -644,6 +665,7 @@
         const roleSessions = {};
         const sessionNotifications = [];
         const notificationTimers = {};
+        let configurationFileIndex = [];
         const NOTIFICATION_TTL_MS = 120000;
         const OFFICE_STATE_STORAGE_KEY = 'mindshare.officeSessions.v1';
         const TESS_AUTOMATION_LAST_RUN_KEY = 'mindshare.tessLevel4Automation.lastRun.v1';
@@ -1344,6 +1366,99 @@
                 .replaceAll("'", '&#039;');
         }
 
+        function closeConfigurationPanel() {
+            const panel = document.getElementById('configuration-panel');
+            const button = document.getElementById('configuration-button');
+            panel.classList.add('hidden');
+            panel.classList.remove('flex');
+            button?.setAttribute('aria-expanded', 'false');
+        }
+
+        function configurationCategoryLabel(category) {
+            if (category === 'global') return 'Global';
+            if (category === 'agent') return 'Agent';
+            return 'Role';
+        }
+
+        function renderConfigurationGroups(payload) {
+            const groupsContainer = document.getElementById('configuration-groups');
+            const summary = document.getElementById('configuration-summary');
+            const status = document.getElementById('configuration-status');
+            configurationFileIndex = [];
+            if (!payload?.ok) {
+                groupsContainer.innerHTML = '';
+                summary.textContent = 'Configuration files could not be loaded.';
+                status.textContent = payload?.error || 'MindShare Local could not read the configuration source files.';
+                return;
+            }
+
+            summary.textContent = `${payload.totals.files} files across ${payload.totals.groups} collapsed groups.`;
+            status.textContent = `Source standard: ${payload.standardPath}`;
+            groupsContainer.innerHTML = payload.groups.map((group) => {
+                const filesHtml = group.files.length
+                    ? group.files.map((file) => {
+                        const index = configurationFileIndex.push(file) - 1;
+                        const isMissing = Boolean(file.missing);
+                        return `
+                            <div class="grid grid-cols-[1fr_auto_auto] items-center gap-3 border-t border-white/10 px-4 py-3">
+                                <div class="min-w-0">
+                                    <div class="truncate text-sm font-medium ${isMissing ? 'text-red-200' : 'text-primary-fixed'}">${escapeHtml(file.name)}${isMissing ? ' · Missing' : ''}</div>
+                                    <div class="truncate text-xs text-on-surface-variant">${escapeHtml(file.path)}</div>
+                                </div>
+                                <button class="rounded-md border border-white/15 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-wider text-on-surface transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40" type="button" data-config-file-index="${index}" data-config-editor="notepad" ${isMissing ? 'disabled' : ''}>Notepad</button>
+                                <button class="rounded-md border border-primary-fixed-dim/35 bg-primary-fixed-dim/10 px-3 py-2 text-xs font-bold uppercase tracking-wider text-primary-fixed transition hover:bg-primary-fixed-dim/20 disabled:cursor-not-allowed disabled:opacity-40" type="button" data-config-file-index="${index}" data-config-editor="vscode" ${isMissing ? 'disabled' : ''}>VS Code</button>
+                            </div>
+                        `;
+                    }).join('')
+                    : '<div class="border-t border-white/10 px-4 py-4 text-sm text-on-surface-variant">No direct files found.</div>';
+                return `
+                    <details class="rounded-lg border border-white/10 bg-black/70" ${group.category === 'global' ? 'open' : ''}>
+                        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 text-left">
+                            <span>
+                                <span class="block text-sm font-semibold text-primary-fixed">${escapeHtml(group.label)}</span>
+                                <span class="block text-xs text-on-surface-variant">${configurationCategoryLabel(group.category)} · ${group.files.length} files · ${escapeHtml(group.root || '')}</span>
+                            </span>
+                            <span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+                        </summary>
+                        <div>${filesHtml}</div>
+                    </details>
+                `;
+            }).join('');
+        }
+
+        async function showConfigurationPanel() {
+            const panel = document.getElementById('configuration-panel');
+            const button = document.getElementById('configuration-button');
+            panel.classList.remove('hidden');
+            panel.classList.add('flex');
+            button?.setAttribute('aria-expanded', 'true');
+            document.getElementById('configuration-summary').textContent = 'Loading role, agent, and global files.';
+            document.getElementById('configuration-status').textContent = 'Reading local source roots from MindShare Local.';
+            document.getElementById('configuration-groups').innerHTML = '';
+            const client = getLocalClient();
+            if (!client?.listConfigurationFiles) {
+                renderConfigurationGroups({ ok: false, error: 'MindShare Local configuration browsing is only available inside the Electron app.' });
+                return;
+            }
+            try {
+                renderConfigurationGroups(await client.listConfigurationFiles());
+            } catch (error) {
+                renderConfigurationGroups({ ok: false, error: error.message || String(error) });
+            }
+        }
+
+        async function openConfigurationFile(index, editor) {
+            const file = configurationFileIndex[Number(index)];
+            const client = getLocalClient();
+            if (!file || !client?.openConfigurationFile) return;
+            const result = await client.openConfigurationFile({ path: file.path, app: editor });
+            if (!result?.ok) {
+                document.getElementById('configuration-status').textContent = result?.error || `Could not open ${file.path}.`;
+                return;
+            }
+            document.getElementById('configuration-status').textContent = `Opened ${file.name} in ${editor === 'vscode' ? 'VS Code' : 'Notepad'}.`;
+        }
+
         function addChatMessage(role, text) {
             const transcript = document.getElementById('chat-transcript');
             clearChatPlaceholder();
@@ -1918,6 +2033,21 @@
 
             document.getElementById('connect-codex-button').addEventListener('click', connectCodex);
             document.getElementById('connect-claude-button').addEventListener('click', connectClaude);
+            document.getElementById('configuration-button').addEventListener('click', (event) => {
+                event.stopPropagation();
+                showConfigurationPanel();
+            });
+            document.getElementById('configuration-close').addEventListener('click', closeConfigurationPanel);
+            document.getElementById('configuration-panel').addEventListener('click', (event) => {
+                if (event.target.id === 'configuration-panel') closeConfigurationPanel();
+            });
+            document.getElementById('configuration-groups').addEventListener('click', (event) => {
+                event.stopPropagation();
+                const button = event.target.closest('[data-config-file-index][data-config-editor]');
+                if (button) {
+                    openConfigurationFile(button.dataset.configFileIndex, button.dataset.configEditor);
+                }
+            });
             document.getElementById('notification-bell-button').addEventListener('click', toggleNotificationMenu);
             document.getElementById('notification-menu').addEventListener('click', (event) => event.stopPropagation());
             document.getElementById('global-agent-search').addEventListener('input', handleGlobalSearchInput);

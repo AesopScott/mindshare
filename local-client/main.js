@@ -1,6 +1,16 @@
 const { app, BrowserWindow, dialog, ipcMain, Menu } = require('electron');
 const path = require('node:path');
-const { connectCodex, connectClaude, loadRoleContext, runTessLevel4Automation, runVikAutomation, sendCodexMessage, sendClaudeMessage } = require('./mindshare-local-client');
+const {
+  connectCodex,
+  connectClaude,
+  loadRoleContext,
+  runTessLevel4Automation,
+  runVikAutomation,
+  sendCodexMessage,
+  sendClaudeMessage,
+  listConfigurationFiles,
+  openConfigurationFile
+} = require('./mindshare-local-client');
 
 const bundledPublicRoot = path.join(__dirname, 'app-content', 'mindshare', 'public');
 const devPublicRoot = path.join(__dirname, '..', 'public');
@@ -106,6 +116,8 @@ ipcMain.handle('mindshare:automation-control', async (_event, payload = {}) => {
 });
 ipcMain.handle('mindshare:codex-message', async (_event, payload) => sendCodexMessage(payload));
 ipcMain.handle('mindshare:claude-message', async (_event, payload) => sendClaudeMessage(payload));
+ipcMain.handle('mindshare:configuration-files', async () => listConfigurationFiles());
+ipcMain.handle('mindshare:open-configuration-file', async (_event, payload) => openConfigurationFile(payload));
 ipcMain.handle('mindshare:choose-files', async () => {
   const result = await dialog.showOpenDialog({
     title: 'Attach files',

@@ -23,6 +23,25 @@ async function pathExists(candidatePath) {
   }
 }
 
+async function safeReadDir(candidatePath, options = {}) {
+  try {
+    return await fs.readdir(candidatePath, options);
+  } catch {
+    return [];
+  }
+}
+
+function sourceRoots() {
+  const codeRoot = path.dirname(repoRoot);
+  return {
+    home: os.homedir(),
+    mindshare: repoRoot,
+    mojo: path.join(codeRoot, 'mojo'),
+    watch: path.join(codeRoot, 'watch'),
+    mindshareDrive: 'G:\\My Drive\\Mindshare'
+  };
+}
+
 async function resolveAppContentRoot() {
   const candidates = uniquePaths([
     process.env.MINDSHARE_APP_CONTENT,
@@ -632,6 +651,113 @@ async function runVikAutomation(payload = {}) {
   };
 }
 
+async function collectFiles(rootPath) {
+  const ignoredNames = new Set(['.git', '.claude', '.codex', '.obsidian', 'node_modules', '__pycache__', '.pytest_cache']);
+  const files = [];
+  async function walk(currentPath) {
+    const entries = await safeReadDir(currentPath, { withFileTypes: true });
+    for (const entry of entries) {
+      if (ignoredNames.has(entry.name)) continue;
+      const entryPath = path.join(currentPath, entry.name);
+      if (entry.isDirectory()) {
+        await walk(entryPath);
+      } else if (entry.isFile()) {
+        files.push({ name: entry.name, path: entryPath });
+      }
+    }
+  }
+  if (await pathExists(rootPath)) {
+    await walk(rootPath);
+  }
+  return files.sort((a, b) => a.path.localeCompare(b.path));
+}
+
+async function discoverDirectoryGroups(rootPath, label, category) {
+  const entries = await safeReadDir(rootPath, { withFileTypes: true });
+  const groups = [];
+  for (const entry of entries.filter((item) => item.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
+    const root = path.join(rootPath, entry.name);
+    const files = await collectFiles(root);
+    groups.push({
+      category,
+      label: `${label}: ${entry.name}`,
+      root,
+      files
+    });
+  }
+  return groups;
+}
+
+async function listConfigurationFiles() {
+  const roots = sourceRoots();
+  const standardPath = path.join(roots.mindshare, 'roles', 'hr-director', 'team-member-file-structure.md');
+  const globalCandidates = [
+    path.join(roots.mindshare, 'AGENTS.md'),
+    path.join(roots.mindshare, 'project-foundation.md'),
+    path.join(roots.home, '.codex', 'tool-gate', 'gate.md'),
+    path.join(roots.home, '.codex', 'tool-gate', 'gate-exceptions.md'),
+    path.join(roots.mindshare, 'roles', 'hr-director', 'team-member-file-structure.md'),
+    path.join(roots.mindshareDrive, 'roles.md'),
+    path.join(roots.mindshareDrive, 'role-artifacts.md')
+  ];
+  const globalFiles = [];
+  for (const candidate of globalCandidates) {
+    globalFiles.push({
+      name: path.basename(candidate),
+      path: candidate,
+      missing: !await pathExists(candidate)
+    });
+  }
+
+  const groups = [{
+    category: 'global',
+    label: 'Global Files',
+    root: roots.mindshare,
+    files: globalFiles
+  }];
+
+  groups.push(
+    ...await discoverDirectoryGroups(path.join(roots.mindshare, 'roles'), 'Mindshare Role', 'role'),
+    ...await discoverDirectoryGroups(path.join(roots.mojo, 'roles'), 'Mojo Role', 'role'),
+    ...await discoverDirectoryGroups(path.join(roots.watch, 'roles'), 'Watch Role', 'role'),
+    ...await discoverDirectoryGroups(path.join(roots.mindshare, 'agents'), 'Mindshare Agent', 'agent'),
+    ...await discoverDirectoryGroups(path.join(roots.mojo, 'agents'), 'Mojo Agent', 'agent'),
+    ...await discoverDirectoryGroups(path.join(roots.watch, 'agents'), 'Watch Agent', 'agent')
+  );
+
+  const totalFiles = groups.reduce((total, group) => total + group.files.length, 0);
+  return {
+    ok: true,
+    standardPath,
+    groups,
+    totals: {
+      groups: groups.length,
+      files: totalFiles
+    }
+  };
+}
+
+async function openConfigurationFile(payload = {}) {
+  const filePath = String(payload.path || '');
+  const appName = String(payload.app || '').toLowerCase();
+  if (!filePath || !await pathExists(filePath)) {
+    return { ok: false, error: 'File does not exist.' };
+  }
+  if (appName === 'notepad') {
+    spawn('notepad.exe', [filePath], { detached: true, stdio: 'ignore', windowsHide: false }).unref();
+    return { ok: true };
+  }
+  if (appName === 'vscode') {
+    const code = await firstCommand('code.cmd') || await firstCommand('code');
+    if (!code) {
+      return { ok: false, error: 'VS Code command `code` was not found on PATH.' };
+    }
+    spawn(code, [filePath], { detached: true, stdio: 'ignore', windowsHide: false }).unref();
+    return { ok: true };
+  }
+  return { ok: false, error: `Unknown editor: ${appName || 'none'}.` };
+}
+
 async function loadRoleContext(payload = {}) {
   const roleSlug = String(payload?.roleSlug || payload?.name || '').trim().toLowerCase();
   const role = ROLE_CATALOG[roleSlug];
@@ -832,6 +958,8 @@ module.exports = {
   connectCodex,
   connectClaude,
   loadRoleContext,
+  listConfigurationFiles,
+  openConfigurationFile,
   runTessLevel4Automation,
   runVikAutomation,
   sendCodexMessage,

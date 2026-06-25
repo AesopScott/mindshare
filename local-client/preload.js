@@ -9,5 +9,7 @@ contextBridge.exposeInMainWorld('MindShareLocalClient', {
   controlAutomation: (payload) => ipcRenderer.invoke('mindshare:automation-control', payload),
   sendCodexMessage: (payload) => ipcRenderer.invoke('mindshare:codex-message', payload),
   sendClaudeMessage: (payload) => ipcRenderer.invoke('mindshare:claude-message', payload),
+  listConfigurationFiles: () => ipcRenderer.invoke('mindshare:configuration-files'),
+  openConfigurationFile: (payload) => ipcRenderer.invoke('mindshare:open-configuration-file', payload),
   chooseFiles: () => ipcRenderer.invoke('mindshare:choose-files')
 });

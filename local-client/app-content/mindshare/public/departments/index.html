@@ -59,6 +59,16 @@
         .prompt-engine-button.is-unavailable {
             opacity: 0.55;
         }
+        .prompt-action-button {
+            border: 1px solid rgba(190, 198, 224, 0.16);
+            background: rgba(255, 255, 255, 0.035);
+            color: rgba(220, 225, 251, 0.72);
+        }
+        .prompt-action-button:hover {
+            border-color: rgba(190, 198, 224, 0.58);
+            background: rgba(190, 198, 224, 0.12);
+            color: #dce1fb;
+        }
         .notification-badge {
             min-width: 1rem;
             height: 1rem;
@@ -429,6 +439,13 @@ Configuration is loaded from the local MindShare workspace.
 </div>
 </div>
 <div class="hidden pt-3 flex flex-wrap gap-2" id="attachment-tray"></div>
+<div class="pt-3 flex flex-wrap items-center gap-2" aria-label="Prompt quick actions">
+<button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="clear-screen-button" type="button">Clear Screen</button>
+<button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-quick-prompt="Clear">Clear</button>
+<button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-quick-prompt="Yes">Yes</button>
+<button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-quick-prompt="No">No</button>
+<button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-quick-prompt="Confirm">Confirm</button>
+</div>
 <div class="grid grid-cols-1 gap-1 pt-2 md:grid-cols-[1fr_auto] md:items-start">
 <div class="min-h-5 font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/60" id="chat-status" aria-live="polite"></div>
 <div class="min-h-5 text-right font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/70" id="token-usage-status">Tokens: no turns yet</div>
@@ -2558,19 +2575,17 @@ Configuration is loaded from the local MindShare workspace.
             }
         }
 
-        async function enqueuePromptFromInput() {
+        async function enqueuePromptText(message, attachments = []) {
             const input = document.getElementById('chat-input');
-            const message = input.value.trim();
-            const attachments = pendingAttachments.map((file) => ({ ...file }));
-            if (!message && !attachments.length) return;
+            const cleanMessage = String(message || '').trim();
+            if (!cleanMessage && !attachments.length) return;
             if (!activeRoleSlug || !roleSessions[activeRoleSlug]) {
                 addChatError('Select a role before sending a message.');
                 return;
             }
             const roleSession = roleSessions[activeRoleSlug];
-            input.value = '';
-            clearPendingAttachments();
-            const displayMessage = [message, attachmentLabel(attachments)].filter(Boolean).join('\n');
+            if (input) input.value = '';
+            const displayMessage = [cleanMessage, attachmentLabel(attachments)].filter(Boolean).join('\n');
             const messageRecord = addChatMessageToRole(roleSession, 'user', displayMessage);
             setChatStatus(`Sending ${roleSession.name}'s prompt...`);
 
@@ -2582,7 +2597,7 @@ Configuration is loaded from the local MindShare workspace.
             }
 
             roleSession.promptQueue.push({
-                message,
+                message: cleanMessage,
                 attachments,
                 engine,
                 messageRecord
@@ -2594,6 +2609,38 @@ Configuration is loaded from the local MindShare workspace.
                 return;
             }
             processPromptQueue(roleSession);
+        }
+
+        async function enqueuePromptFromInput() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            const attachments = pendingAttachments.map((file) => ({ ...file }));
+            if (!message && !attachments.length) return;
+            if (!activeRoleSlug || !roleSessions[activeRoleSlug]) {
+                addChatError('Select a role before sending a message.');
+                return;
+            }
+            clearPendingAttachments();
+            enqueuePromptText(message, attachments);
+        }
+
+        function clearActiveOfficeScreen() {
+            if (!activeRoleSlug || !roleSessions[activeRoleSlug]) {
+                setChatStatus('Select a role before clearing the screen.');
+                return;
+            }
+            const roleSession = roleSessions[activeRoleSlug];
+            roleSession.messages = [];
+            persistOfficeState();
+            renderTranscript([]);
+            renderTokenUsage(roleSession);
+            setChatStatus(`${roleSession.name}'s visible chat screen cleared.`);
+        }
+
+        function sendQuickPrompt(word) {
+            const input = document.getElementById('chat-input');
+            if (input) input.value = word;
+            enqueuePromptText(word);
         }
 
         async function processPromptQueue(roleSession) {
@@ -2747,6 +2794,10 @@ Configuration is loaded from the local MindShare workspace.
             document.getElementById('global-agent-search').addEventListener('keydown', handleGlobalSearchKeydown);
             document.getElementById('global-search-results').addEventListener('click', (event) => event.stopPropagation());
             document.getElementById('send-message-button').addEventListener('click', sendCodexMessage);
+            document.getElementById('clear-screen-button').addEventListener('click', clearActiveOfficeScreen);
+            document.querySelectorAll('[data-quick-prompt]').forEach((button) => {
+                button.addEventListener('click', () => sendQuickPrompt(button.dataset.quickPrompt));
+            });
             document.getElementById('attach-file-button').addEventListener('click', chooseAttachments);
             document.getElementById('microphone-shortcut-button').addEventListener('click', triggerMicrophoneShortcut);
             document.getElementById('office-context-title').addEventListener('click', toggleOfficeTitleDropdown);

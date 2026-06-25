@@ -774,6 +774,18 @@ Configuration is loaded from the local MindShare workspace.
             }
         }
 
+        function isAutomationStatusMessage(message) {
+            const text = String(message?.text || '');
+            return /^Tess Level 4 automation (ran|failed) from Electron bundle/.test(text) ||
+                /^Tess Level 4 automation failed in Electron/.test(text) ||
+                /^Vik automation (ran|failed) from Electron bundle/.test(text) ||
+                /^Vik automation failed in Electron/.test(text);
+        }
+
+        function conversationMessages(messages) {
+            return Array.isArray(messages) ? messages.filter((message) => !isAutomationStatusMessage(message)) : [];
+        }
+
         function persistOfficeState() {
             try {
                 const serializableSessions = {};
@@ -787,7 +799,7 @@ Configuration is loaded from the local MindShare workspace.
                         codexSessionId: session.codexSessionId,
                         claudeSessionId: session.claudeSessionId,
                         roleContext: session.roleContext,
-                        messages: session.messages,
+                        messages: conversationMessages(session.messages),
                         officeInjected: session.officeInjected,
                         connectionIssue: session.connectionIssue
                     };
@@ -822,7 +834,7 @@ Configuration is loaded from the local MindShare workspace.
                         codexSessionId: session.codexSessionId || null,
                         claudeSessionId: session.claudeSessionId || null,
                         roleContext: session.roleContext || null,
-                        messages: Array.isArray(session.messages) ? session.messages : [],
+                        messages: conversationMessages(session.messages),
                         promptQueue: [],
                         officeInjected: Boolean(session.officeInjected),
                         connectionIssue: Boolean(session.connectionIssue),
@@ -956,9 +968,9 @@ Configuration is loaded from the local MindShare workspace.
                 const summary = state
                     ? `Tess Level 4 automation ran from Electron bundle: ${state.result}; backlog=${state.backlog_counts?.backlog ?? 'unknown'}; Reid route gaps=${state.reid_durability?.active_automation_route_gaps?.length ?? 'unknown'}.`
                     : `Tess Level 4 automation ${result.ok ? 'ran' : 'failed'} from Electron bundle.${result.error ? ` ${result.error}` : ''}`;
-                addChatMessageToRole(roleSession, result.ok ? 'system' : 'system', summary);
+                console.info(summary);
             } catch (error) {
-                addChatMessageToRole(roleSession, 'system', `Tess Level 4 automation failed in Electron: ${error.message || error}`);
+                console.warn(`Tess Level 4 automation failed in Electron: ${error.message || error}`);
             } finally {
                 if (activeRoleSlug === roleSession.slug) clearChatStatus();
             }
@@ -979,9 +991,9 @@ Configuration is loaded from the local MindShare workspace.
                 const summary = level4 || level5
                     ? `Vik automation ran from Electron bundle: Level 4=${level4?.result || 'unknown'}; eligible=${level4?.counts?.eligible_items ?? 'unknown'}; Level 5=${level5?.result || 'unknown'}; unreviewed=${level5?.counts?.unreviewed_completed_reports ?? 'unknown'}.`
                     : `Vik automation ${result.ok ? 'ran' : 'failed'} from Electron bundle.`;
-                addChatMessageToRole(roleSession, result.ok ? 'system' : 'system', summary);
+                console.info(summary);
             } catch (error) {
-                addChatMessageToRole(roleSession, 'system', `Vik automation failed in Electron: ${error.message || error}`);
+                console.warn(`Vik automation failed in Electron: ${error.message || error}`);
             } finally {
                 if (activeRoleSlug === roleSession.slug) clearChatStatus();
             }

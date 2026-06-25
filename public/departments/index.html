@@ -276,6 +276,12 @@
 </div>
 <div class="flex items-center gap-4">
 <div class="relative">
+<button class="relative text-on-surface-variant cursor-pointer active:opacity-80 transition-all hover:bg-white/5 p-2 rounded-full" id="work-queue-button" type="button" aria-label="Active work queue" aria-expanded="false">
+<span class="material-symbols-outlined">pending_actions</span>
+<span class="notification-badge absolute -right-1 -top-1 hidden items-center justify-center rounded-full px-1 text-[10px] font-bold leading-none" id="work-queue-count">0</span>
+</button>
+</div>
+<div class="relative">
 <button class="relative text-on-surface-variant cursor-pointer active:opacity-80 transition-all hover:bg-white/5 p-2 rounded-full" id="notification-bell-button" type="button" aria-label="Completed session notifications" aria-expanded="false">
 <span class="material-symbols-outlined">notifications</span>
 <span class="notification-badge absolute -right-1 -top-1 hidden items-center justify-center rounded-full px-1 text-[10px] font-bold leading-none" id="notification-count">0</span>
@@ -318,6 +324,43 @@ Configuration is loaded from the local MindShare workspace.
 </div>
 </section>
 </div>
+<div class="fixed inset-0 z-[115] hidden bg-black/55" id="work-queue-panel">
+<section class="absolute right-0 top-0 flex h-full w-full max-w-2xl flex-col border-l border-primary-fixed-dim/30 bg-[#050812] shadow-2xl">
+<div class="flex items-start justify-between gap-4 border-b border-white/10 px-6 py-5">
+<div>
+<h2 class="font-display-lg text-headline-sm text-primary-fixed">Work Queue</h2>
+<p class="mt-1 text-sm text-on-surface-variant" id="work-queue-summary">No active work is running.</p>
+</div>
+<button class="rounded-full p-2 text-on-surface-variant transition hover:bg-white/10 hover:text-primary-fixed" id="work-queue-close" type="button" aria-label="Close work queue">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="min-h-0 flex-1 overflow-y-auto p-6 custom-scrollbar">
+<div class="mb-6">
+<div class="mb-3 flex items-center justify-between gap-4">
+<h3 class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Active Prompts</h3>
+<span class="font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/60" id="active-sessions-count">0 Active</span>
+</div>
+<div class="space-y-3" id="active-sessions-list">
+<div class="h-16 glass-panel-heavy rounded-xl silver-edge flex items-center justify-center border-dashed border-white/10">
+<span class="font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/50">No active processing</span>
+</div>
+</div>
+</div>
+<div>
+<div class="mb-3 flex items-center justify-between gap-4">
+<h3 class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Automation Runs</h3>
+<span class="font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/60" id="automation-runs-count">0 Runs</span>
+</div>
+<div class="space-y-3" id="automation-runs-list">
+<div class="h-16 glass-panel-heavy rounded-xl silver-edge flex items-center justify-center border-dashed border-white/10">
+<span class="font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/50">No automation runs</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
 <!-- Main Workspace Container -->
 <main class="workspace-shell flex flex-1 gap-6 overflow-hidden p-6 pt-24">
 <!-- SideNavBar (Strategy & Operations) -->
@@ -347,23 +390,7 @@ Configuration is loaded from the local MindShare workspace.
 <div class="flex flex-col space-y-2" id="department-sections">
 <!-- Department sections are populated from the selected division. -->
 </div>
-<!-- Holding Spaces -->
-<div class="mt-auto space-y-4 pt-6 flex-1">
-<h3 class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">ACTIVE SESSIONS</h3>
-<div class="space-y-3" id="active-sessions-list">
-<div class="h-16 glass-panel-heavy rounded-xl silver-edge flex items-center justify-center border-dashed border-white/10">
-<span class="font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/50">No active processing</span>
-</div>
-</div>
-<div class="pt-4">
-<h3 class="font-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">AUTOMATION RUNS</h3>
-<div class="mt-3 space-y-3" id="automation-runs-list">
-<div class="h-16 glass-panel-heavy rounded-xl silver-edge flex items-center justify-center border-dashed border-white/10">
-<span class="font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/50">No automation runs</span>
-</div>
-</div>
-</div>
-</div>
+
 <!-- Footer CTA -->
 
 </aside>
@@ -1869,6 +1896,51 @@ Configuration is loaded from the local MindShare workspace.
             button?.setAttribute('aria-expanded', 'false');
         }
 
+        function closeWorkQueuePanel() {
+            const panel = document.getElementById('work-queue-panel');
+            const button = document.getElementById('work-queue-button');
+            panel?.classList.add('hidden');
+            button?.setAttribute('aria-expanded', 'false');
+        }
+
+        function toggleWorkQueuePanel(event) {
+            event?.stopPropagation();
+            const panel = document.getElementById('work-queue-panel');
+            const button = document.getElementById('work-queue-button');
+            if (!panel) return;
+            const willOpen = panel.classList.contains('hidden');
+            panel.classList.toggle('hidden', !willOpen);
+            button?.setAttribute('aria-expanded', String(willOpen));
+            if (willOpen) {
+                renderActiveSessions();
+                renderAutomationRuns();
+            }
+        }
+
+        function updateWorkQueueBadge(activeSessions = null) {
+            const sessions = activeSessions || Object.values(roleSessions).filter((session) => session.processing || session.promptQueue?.length);
+            const activeRunCount = automationRuns.filter((run) => ['running', 'queued'].includes(run.status)).length;
+            const total = sessions.length + activeRunCount;
+            const badge = document.getElementById('work-queue-count');
+            const button = document.getElementById('work-queue-button');
+            const summary = document.getElementById('work-queue-summary');
+            const sessionCount = document.getElementById('active-sessions-count');
+            const runCount = document.getElementById('automation-runs-count');
+            if (badge) {
+                badge.textContent = String(total);
+                badge.classList.toggle('hidden', total === 0);
+                badge.classList.toggle('flex', total > 0);
+            }
+            button?.classList.toggle('notification-bell-active', total > 0);
+            if (summary) {
+                summary.textContent = total
+                    ? `${sessions.length} active prompt${sessions.length === 1 ? '' : 's'} and ${activeRunCount} active automation run${activeRunCount === 1 ? '' : 's'}.`
+                    : 'No active work is running.';
+            }
+            if (sessionCount) sessionCount.textContent = `${sessions.length} Active`;
+            if (runCount) runCount.textContent = `${automationRuns.length} Run${automationRuns.length === 1 ? '' : 's'}`;
+        }
+
         function configurationCategoryLabel(category) {
             if (category === 'global') return 'Global';
             if (category === 'agent') return 'Agent';
@@ -2050,6 +2122,8 @@ Configuration is loaded from the local MindShare workspace.
             const container = document.getElementById('active-sessions-list');
             renderOfficeWorkingState(activeRoleSlug ? roleSessions[activeRoleSlug] : null);
             const activeSessions = Object.values(roleSessions).filter((session) => session.processing || session.promptQueue?.length);
+            updateWorkQueueBadge(activeSessions);
+            if (!container) return;
             if (!activeSessions.length) {
                 container.innerHTML = `
                     <div class="h-16 glass-panel-heavy rounded-xl silver-edge flex items-center justify-center border-dashed border-white/10">
@@ -2078,6 +2152,7 @@ Configuration is loaded from the local MindShare workspace.
                     const session = roleSessions[button.dataset.activeRole];
                     if (session) {
                         selectRole(session.slug, session.name, session.title, session.level, session.department);
+                        closeWorkQueuePanel();
                     }
                 });
             });
@@ -2106,8 +2181,9 @@ Configuration is loaded from the local MindShare workspace.
 
         function renderAutomationRuns() {
             const container = document.getElementById('automation-runs-list');
+            updateWorkQueueBadge();
             if (!container) return;
-            const visibleRuns = automationRuns.slice(0, 8);
+            const visibleRuns = automationRuns.slice(0, 50);
             if (!visibleRuns.length) {
                 container.innerHTML = `
                     <div class="h-16 glass-panel-heavy rounded-xl silver-edge flex items-center justify-center border-dashed border-white/10">
@@ -2900,6 +2976,11 @@ Configuration is loaded from the local MindShare workspace.
             document.getElementById('connect-claude-button').addEventListener('click', connectClaude);
             document.getElementById('prompt-engine-codex').addEventListener('click', () => setPromptEngine('codex'));
             document.getElementById('prompt-engine-claude').addEventListener('click', () => setPromptEngine('claude'));
+            document.getElementById('work-queue-button').addEventListener('click', toggleWorkQueuePanel);
+            document.getElementById('work-queue-close').addEventListener('click', closeWorkQueuePanel);
+            document.getElementById('work-queue-panel').addEventListener('click', (event) => {
+                if (event.target.id === 'work-queue-panel') closeWorkQueuePanel();
+            });
             document.getElementById('configuration-button').addEventListener('click', (event) => {
                 event.stopPropagation();
                 showConfigurationPanel();

@@ -3,8 +3,8 @@
   "role": "Vik / MAPS ASPA",
   "automation_id": "vik-visible-backlog-research",
   "logic_owner": "C:\\Users\\scott\\Code\\mindshare\\local-client\\app-content\\mojo\\roles\\maps-agentic-systems-program-architect\\scripts\\level4automation.py",
-  "mode": "scheduled",
-  "checked_at": "2026-06-25T09:37:22-06:00",
+  "mode": "manual",
+  "checked_at": "2026-06-25T09:51:50-06:00",
   "current_policy": "Level 4 scoped backlog research",
   "result": "source_conflict",
   "counts": {

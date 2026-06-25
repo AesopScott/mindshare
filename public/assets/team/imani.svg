@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Imani portrait placeholder</title>
+  <desc id="desc">Stylized data engineering portrait placeholder for Imani.</desc>
+  <defs>
+    <linearGradient id="bg" x1="20" y1="12" x2="142" y2="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="0.48" stop-color="#12364a"/>
+      <stop offset="1" stop-color="#7c5c2e"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="35" y1="36" x2="124" y2="133" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#dbeafe"/>
+      <stop offset="0.55" stop-color="#9fb5d8"/>
+      <stop offset="1" stop-color="#526178"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="22" fill="url(#bg)"/>
+  <path d="M20 116c23-10 42-10 60 0s38 10 60-1" fill="none" stroke="#d6b16a" stroke-width="2" opacity=".45"/>
+  <path d="M32 48h96M32 68h96M32 88h96" stroke="#b7c7e8" stroke-width="1" opacity=".2"/>
+  <path d="M48 38v84M72 30v98M96 33v92M120 42v78" stroke="#b7c7e8" stroke-width="1" opacity=".22"/>
+  <circle cx="80" cy="68" r="28" fill="url(#metal)"/>
+  <path d="M38 136c5-25 23-39 42-39s37 14 42 39" fill="url(#metal)"/>
+  <circle cx="56" cy="52" r="3" fill="#6ee7f9"/>
+  <circle cx="112" cy="84" r="3" fill="#facc15"/>
+  <circle cx="102" cy="46" r="2.5" fill="#93c5fd"/>
+  <path d="M56 52l24 16 32 16M102 46 80 68" fill="none" stroke="#e0f2fe" stroke-width="1.5" opacity=".7"/>
+  <text x="80" y="145" text-anchor="middle" fill="#e5eefc" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2">IMANI</text>
+</svg>

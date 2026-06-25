@@ -3,8 +3,8 @@
   "role": "Tess / Autonomy Engineer",
   "automation_id": "tess-level-4-autonomy-backlog-processing",
   "logic_owner": "C:\\Users\\scott\\Code\\mindshare\\local-client\\app-content\\mindshare\\roles\\autonomy-engineer\\scripts\\level4automation.py",
-  "mode": "scheduled",
-  "checked_at": "2026-06-25T09:30:36-06:00",
+  "mode": "manual",
+  "checked_at": "2026-06-25T09:51:50-06:00",
   "result": "no_eligible_work",
   "current_level": "Level 4 Senior Staff (Scoped Autonomy)",
   "backlog_counts": {

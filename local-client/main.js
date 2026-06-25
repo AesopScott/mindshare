@@ -9,6 +9,40 @@ const VIK_AUTOMATION_INTERVAL_MS = 30 * 60 * 1000;
 let tessLevel4Timer = null;
 let vikAutomationTimer = null;
 
+function clearAutomationTimer(role) {
+  if (role === 'tess' && tessLevel4Timer) {
+    clearInterval(tessLevel4Timer);
+    tessLevel4Timer = null;
+  }
+  if (role === 'vik' && vikAutomationTimer) {
+    clearInterval(vikAutomationTimer);
+    vikAutomationTimer = null;
+  }
+}
+
+function startAutomationTimer(role) {
+  if (role === 'tess' && !tessLevel4Timer) {
+    tessLevel4Timer = setInterval(() => {
+      runTessLevel4Automation({ mode: 'scheduled' }).catch((error) => {
+        console.warn('Tess Level 4 automation scheduled run failed.', error);
+      });
+    }, TESS_LEVEL4_INTERVAL_MS);
+  }
+  if (role === 'vik' && !vikAutomationTimer) {
+    vikAutomationTimer = setInterval(() => {
+      runVikAutomation({ mode: 'scheduled' }).catch((error) => {
+        console.warn('Vik automation scheduled run failed.', error);
+      });
+    }, VIK_AUTOMATION_INTERVAL_MS);
+  }
+}
+
+async function runAutomationNow(role) {
+  if (role === 'tess') return runTessLevel4Automation({ mode: 'manual' });
+  if (role === 'vik') return runVikAutomation({ mode: 'manual' });
+  return { ok: false, error: `No automation runner is registered for ${role}.` };
+}
+
 function createWindow() {
   const window = new BrowserWindow({
     width: 1440,
@@ -51,6 +85,25 @@ ipcMain.handle('mindshare:claude-connect', async (_event, payload) => connectCla
 ipcMain.handle('mindshare:role-context', async (_event, payload) => loadRoleContext(payload));
 ipcMain.handle('mindshare:tess-level4-automation', async (_event, payload) => runTessLevel4Automation(payload));
 ipcMain.handle('mindshare:vik-automation', async (_event, payload) => runVikAutomation(payload));
+ipcMain.handle('mindshare:automation-control', async (_event, payload = {}) => {
+  const role = String(payload.role || '').toLowerCase();
+  const action = String(payload.action || '').toLowerCase();
+  if (!['tess', 'vik'].includes(role)) return { ok: false, error: `No automation timer is registered for ${role || 'that role'}.` };
+  if (action === 'run') return { ok: true, action, role, result: await runAutomationNow(role) };
+  if (action === 'pause') {
+    clearAutomationTimer(role);
+    return { ok: true, action, role, timerActive: false };
+  }
+  if (action === 'stop') {
+    clearAutomationTimer(role);
+    return { ok: true, action, role, timerActive: false };
+  }
+  if (action === 'resume') {
+    startAutomationTimer(role);
+    return { ok: true, action, role, timerActive: true };
+  }
+  return { ok: false, error: `Unsupported automation action: ${action || 'none'}.` };
+});
 ipcMain.handle('mindshare:codex-message', async (_event, payload) => sendCodexMessage(payload));
 ipcMain.handle('mindshare:claude-message', async (_event, payload) => sendClaudeMessage(payload));
 ipcMain.handle('mindshare:choose-files', async () => {
@@ -76,29 +129,17 @@ app.whenReady().then(() => {
   runTessLevel4Automation({ mode: 'scheduled' }).catch((error) => {
     console.warn('Tess Level 4 automation startup run failed.', error);
   });
-  tessLevel4Timer = setInterval(() => {
-    runTessLevel4Automation({ mode: 'scheduled' }).catch((error) => {
-      console.warn('Tess Level 4 automation scheduled run failed.', error);
-    });
-  }, TESS_LEVEL4_INTERVAL_MS);
+  startAutomationTimer('tess');
   runVikAutomation({ mode: 'scheduled' }).catch((error) => {
     console.warn('Vik automation startup run failed.', error);
   });
-  vikAutomationTimer = setInterval(() => {
-    runVikAutomation({ mode: 'scheduled' }).catch((error) => {
-      console.warn('Vik automation scheduled run failed.', error);
-    });
-  }, VIK_AUTOMATION_INTERVAL_MS);
+  startAutomationTimer('vik');
 });
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    if (tessLevel4Timer) {
-      clearInterval(tessLevel4Timer);
-    }
-    if (vikAutomationTimer) {
-      clearInterval(vikAutomationTimer);
-    }
+    clearAutomationTimer('tess');
+    clearAutomationTimer('vik');
     app.quit();
   }
 });

@@ -339,6 +339,10 @@
 <span class="font-display-lg text-body-lg text-primary font-bold leading-tight" id="office-context-name">Agent Name</span>
 </div>
 <div class="flex flex-wrap gap-2 text-[10px] uppercase tracking-widest font-label-sm shrink-0">
+<div class="relative hidden" id="office-autonomy-control">
+<button class="glass-panel px-3 py-2 rounded-md text-primary silver-edge hover:border-primary/50 hover:text-primary-fixed transition-colors cursor-pointer" id="office-context-autonomy" type="button">Autonomy</button>
+<div class="hidden absolute right-0 top-full mt-2 w-[620px] max-w-[calc(100vw-2rem)] opaque-dropdown silver-edge rounded-lg p-4 z-50 normal-case tracking-normal text-left" id="office-autonomy-dropdown"></div>
+</div>
 <div class="relative">
 <button class="glass-panel px-3 py-2 rounded-md text-on-surface-variant silver-edge hover:border-primary/50 hover:text-primary transition-colors cursor-pointer" id="office-context-title" type="button">Title</button>
 <div class="hidden absolute right-0 top-full mt-2 w-[500px] max-w-[calc(100vw-2rem)] opaque-dropdown silver-edge rounded-lg p-4 z-40 normal-case tracking-normal text-left" id="office-title-dropdown"></div>
@@ -434,7 +438,7 @@
                         { slug: "reid", name: "Reid", title: "Release Manager", level: "Level 3 Staff", image: "../assets/team/reid.webp" }
                     ],
                     "Data Engineering": [
-                        { slug: "imani", name: "Imani", title: "Data Engineering Director", level: "Level 3 Staff" }
+                        { slug: "imani", name: "Imani", title: "Data Engineering Director", level: "Level 3 Staff", image: "../assets/team/imani.svg" }
                     ],
                     "AI Engineering": [
                         { slug: "bea", name: "Bea", title: "Mojo MAPS Engineer", level: "Level 3 Staff", image: "../assets/team/bea.webp" },
@@ -480,36 +484,6 @@
         };
 
         const departmentIcons = ["corporate_fare", "account_tree", "groups_2", "person_search", "shield"];
-        function autonomyControlMarkup(entry) {
-            if (!entry.autonomy) return '';
-            const autonomyId = `${entry.slug}-autonomy-details`;
-            return `
-                <div class="relative">
-                    <button class="px-2 py-1 rounded border border-primary/30 bg-primary/10 text-[10px] uppercase tracking-widest text-primary hover:bg-primary/20 transition-colors" type="button" onclick="event.stopPropagation(); toggleAutonomyDetails('${autonomyId}')">Autonomy</button>
-                    <div class="hidden absolute left-0 top-full z-[70] mt-2 w-72 opaque-dropdown silver-edge rounded-lg p-3 text-left" id="${autonomyId}" onclick="event.stopPropagation()">
-                        <div class="font-label-sm text-[10px] uppercase tracking-widest text-primary">Autonomy Settings</div>
-                        <div class="mt-3 space-y-3 text-xs leading-relaxed text-on-surface-variant">
-                            <div><span class="font-semibold text-on-surface">Level 4:</span> ${escapeHtml(entry.autonomy.level4 || 'Not defined.')}</div>
-                            <div><span class="font-semibold text-on-surface">Level 5:</span> ${escapeHtml(entry.autonomy.level5 || 'Not defined.')}</div>
-                            <div><span class="font-semibold text-on-surface">Level 6:</span> ${escapeHtml(entry.autonomy.level6 || 'Not defined.')}</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function toggleAutonomyDetails(id) {
-            const panel = document.getElementById(id);
-            if (!panel) return;
-            document.querySelectorAll('[id$="-autonomy-details"]').forEach((candidate) => {
-                if (candidate.id !== id) candidate.classList.add('hidden');
-            });
-            panel.classList.toggle('hidden');
-        }
-
-        function closeAutonomyDetails() {
-            document.querySelectorAll('[id$="-autonomy-details"]').forEach((panel) => panel.classList.add('hidden'));
-        }
 
         const levelDefinitions = {
             "level 0": {
@@ -598,7 +572,6 @@
                             <span class="min-w-0 flex flex-col gap-1">
                                 <span class="text-sm font-medium text-primary">${entry.name}</span>
                                 <span class="flex items-center gap-2 text-xs text-on-surface">
-                                    ${autonomyControlMarkup(entry)}
                                     <span>${entry.title}</span>
                                 </span>
                                 <span class="text-[10px] uppercase tracking-widest text-on-surface-variant">${entry.level}</span>
@@ -663,6 +636,16 @@
         const departmentBackdrops = {
             "AI Engineering": "../assets/departments/ai-engineering-wiring.png"
         };
+
+        function findRoleEntry(slug) {
+            for (const division of Object.values(divisionDepartments)) {
+                for (const entries of Object.values(division.entries || {})) {
+                    const match = entries.find((entry) => entry.slug === slug);
+                    if (match) return match;
+                }
+            }
+            return null;
+        }
 
         function persistOfficeState() {
             try {
@@ -778,6 +761,7 @@
             renderOfficeFilesDropdown(activeRoleContext);
             renderOfficeTitleDropdown(title);
             renderOfficeLevelDropdown(level);
+            renderOfficeAutonomyControl(findRoleEntry(slug));
             closeContextDropdowns();
             showOfficeContext({
                 name,
@@ -806,6 +790,7 @@
                 roleSession.roleContext = payload.roleContext;
                 persistOfficeState();
                 renderOfficeFilesDropdown(payload.roleContext);
+                renderOfficeAutonomyControl(findRoleEntry(slug));
                 showOfficeContext({
                     name,
                     title,
@@ -1016,10 +1001,15 @@
             document.getElementById('office-title-dropdown')?.classList.add('hidden');
         }
 
+        function closeOfficeAutonomyDropdown() {
+            document.getElementById('office-autonomy-dropdown')?.classList.add('hidden');
+        }
+
         function closeContextDropdowns() {
             closeOfficeFilesDropdown();
             closeOfficeLevelDropdown();
             closeOfficeTitleDropdown();
+            closeOfficeAutonomyDropdown();
         }
 
         function toggleOfficeFilesDropdown(event) {
@@ -1029,6 +1019,7 @@
             renderOfficeFilesDropdown(activeRoleContext);
             closeOfficeLevelDropdown();
             closeOfficeTitleDropdown();
+            closeOfficeAutonomyDropdown();
             dropdown.classList.toggle('hidden');
         }
 
@@ -1076,6 +1067,7 @@
             renderOfficeLevelDropdown(activeLevel);
             closeOfficeFilesDropdown();
             closeOfficeTitleDropdown();
+            closeOfficeAutonomyDropdown();
             dropdown.classList.toggle('hidden');
         }
 
@@ -1138,7 +1130,98 @@
             renderOfficeTitleDropdown(activeTitle);
             closeOfficeFilesDropdown();
             closeOfficeLevelDropdown();
+            closeOfficeAutonomyDropdown();
             dropdown.classList.toggle('hidden');
+        }
+
+        function renderOfficeAutonomyControl(entry) {
+            const control = document.getElementById('office-autonomy-control');
+            const dropdown = document.getElementById('office-autonomy-dropdown');
+            if (!control || !dropdown) return;
+            const autonomy = entry?.autonomy;
+            control.classList.toggle('hidden', !autonomy);
+            if (!autonomy) {
+                dropdown.innerHTML = '';
+                return;
+            }
+            const rows = [
+                ['level4', 'Level 4', autonomy.level4],
+                ['level5', 'Level 5', autonomy.level5],
+                ['level6', 'Level 6', autonomy.level6]
+            ];
+            dropdown.innerHTML = `
+                <div class="flex items-start justify-between gap-4 border-b border-white/10 pb-3">
+                    <div>
+                        <div class="font-label-sm text-[10px] uppercase tracking-widest text-primary">Autonomy</div>
+                        <div class="mt-1 font-body-md text-sm text-on-surface">${escapeHtml(entry.name)} · ${escapeHtml(entry.level)}</div>
+                    </div>
+                    <button class="text-on-surface-variant hover:text-primary" type="button" data-close-autonomy>
+                        <span class="material-symbols-outlined text-[18px]">close</span>
+                    </button>
+                </div>
+                <div class="mt-4 space-y-3">
+                    ${rows.map(([levelKey, label, description]) => `
+                        <div class="rounded-lg border border-white/10 bg-surface-container-lowest p-3">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="min-w-0">
+                                    <div class="font-label-sm text-[10px] uppercase tracking-widest text-primary">${label}</div>
+                                    <p class="mt-2 text-sm leading-relaxed text-on-surface-variant">${escapeHtml(description || 'Not defined.')}</p>
+                                </div>
+                                <div class="flex shrink-0 gap-2">
+                                    <button class="glass-panel px-3 py-2 rounded-md text-primary silver-edge hover:border-primary/60 transition-colors" type="button" data-automation-action="run" data-automation-role="${entry.slug}" data-automation-level="${levelKey}">Run</button>
+                                    <button class="glass-panel px-3 py-2 rounded-md text-yellow-300 silver-edge hover:border-yellow-300/60 transition-colors" type="button" data-automation-action="pause" data-automation-role="${entry.slug}" data-automation-level="${levelKey}">Pause</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            dropdown.querySelector('[data-close-autonomy]')?.addEventListener('click', closeOfficeAutonomyDropdown);
+            dropdown.querySelectorAll('[data-automation-action]').forEach((button) => {
+                button.addEventListener('click', () => handleAutomationControl(button.dataset.automationRole, button.dataset.automationAction, button.dataset.automationLevel));
+            });
+        }
+
+        function toggleOfficeAutonomyDropdown(event) {
+            event?.stopPropagation();
+            const dropdown = document.getElementById('office-autonomy-dropdown');
+            if (!dropdown || !activeRoleSlug) return;
+            renderOfficeAutonomyControl(findRoleEntry(activeRoleSlug));
+            closeOfficeFilesDropdown();
+            closeOfficeLevelDropdown();
+            closeOfficeTitleDropdown();
+            dropdown.classList.toggle('hidden');
+        }
+
+        async function handleAutomationControl(role, action, level) {
+            const client = mindShareLocalClient();
+            const roleSession = roleSessions[role];
+            if (!client?.controlAutomation || !roleSession) {
+                addChatError('Automation controls are available only inside the MindShare Local desktop app.');
+                return;
+            }
+            setChatStatus(`${action === 'run' ? 'Running' : 'Pausing'} ${roleSession.name} ${level.toUpperCase()} automation...`);
+            try {
+                const result = await client.controlAutomation({ role, action, level });
+                if (!result.ok) {
+                    addChatMessageToRole(roleSession, 'system', result.error || `${roleSession.name} automation ${action} failed.`);
+                    return;
+                }
+                const runResult = result.result;
+                let summary = `${roleSession.name} ${level.toUpperCase()} automation ${action} complete.`;
+                if (runResult?.state) {
+                    summary += ` Result: ${runResult.state.result || 'unknown'}.`;
+                } else if (runResult?.result) {
+                    summary += ` Level 4: ${runResult.result.level4 || 'unknown'}; Level 5: ${runResult.result.level5 || 'unknown'}.`;
+                } else if (action === 'pause') {
+                    summary = `${roleSession.name} automation timer paused.`;
+                }
+                addChatMessageToRole(roleSession, 'system', summary);
+            } catch (error) {
+                addChatMessageToRole(roleSession, 'system', `${roleSession.name} automation ${action} failed: ${error.message || error}`);
+            } finally {
+                if (activeRoleSlug === role) clearChatStatus();
+            }
         }
 
         function clearChatPlaceholder() {
@@ -1738,13 +1821,14 @@
             document.getElementById('attach-file-button').addEventListener('click', chooseAttachments);
             document.getElementById('office-context-title').addEventListener('click', toggleOfficeTitleDropdown);
             document.getElementById('office-title-dropdown').addEventListener('click', (event) => event.stopPropagation());
+            document.getElementById('office-context-autonomy').addEventListener('click', toggleOfficeAutonomyDropdown);
+            document.getElementById('office-autonomy-dropdown').addEventListener('click', (event) => event.stopPropagation());
             document.getElementById('office-context-level').addEventListener('click', toggleOfficeLevelDropdown);
             document.getElementById('office-level-dropdown').addEventListener('click', (event) => event.stopPropagation());
             document.getElementById('office-context-files').addEventListener('click', toggleOfficeFilesDropdown);
             document.getElementById('office-files-dropdown').addEventListener('click', (event) => event.stopPropagation());
             document.addEventListener('click', () => {
                 closeContextDropdowns();
-                closeAutonomyDetails();
                 closeNotificationMenu();
             });
             document.getElementById('chat-input').addEventListener('keydown', (event) => {

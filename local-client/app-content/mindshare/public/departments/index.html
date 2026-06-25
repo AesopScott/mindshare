@@ -107,15 +107,35 @@
             transition: max-height 0.3s ease-out, opacity 0.2s ease;
         }
         .division-button {
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(190, 198, 224, 0.14);
-            color: rgba(220, 225, 251, 0.72);
+            min-height: 2.5rem;
+            background: linear-gradient(180deg, rgba(36, 44, 68, 0.96) 0%, rgba(9, 13, 26, 0.98) 100%);
+            border: 1px solid rgba(218, 226, 253, 0.18);
+            color: rgba(220, 225, 251, 0.82);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.16),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.72),
+                0 8px 16px rgba(0, 0, 0, 0.42);
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.78);
         }
-        .division-button:hover,
+        .division-button:hover {
+            border-color: rgba(218, 226, 253, 0.38);
+            color: #f0f3ff;
+            transform: translateY(-1px);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.24),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.76),
+                0 11px 22px rgba(0, 0, 0, 0.5);
+        }
         .division-button.is-active {
             background: linear-gradient(135deg, #bec6e0 0%, #798098 100%);
             border-color: rgba(218, 226, 253, 0.55);
             color: #131b2e;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
+            transform: translateY(1px);
+            box-shadow:
+                inset 0 2px 5px rgba(19, 27, 46, 0.48),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.36),
+                0 3px 8px rgba(0, 0, 0, 0.32);
         }
     </style>
 <script id="tailwind-config">
@@ -255,12 +275,12 @@
 <div class="w-full flex flex-col items-start gap-3 group/nav">
 <h2 class="font-display-lg text-headline-md text-primary leading-none group-hover/nav:text-primary-fixed transition-colors">Division</h2>
 <div class="grid w-full grid-cols-2 gap-2" id="division-buttons" aria-label="Division navigation">
-<button class="division-button rounded-md px-3 py-2 text-left font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-division-button="strategy-and-operations">Strategy</button>
-<button class="division-button rounded-md px-3 py-2 text-left font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-division-button="product-and-design">Product</button>
-<button class="division-button rounded-md px-3 py-2 text-left font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-division-button="technology-and-data">Tech</button>
-<button class="division-button rounded-md px-3 py-2 text-left font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-division-button="revenue-and-market">Revenue</button>
-<button class="division-button rounded-md px-3 py-2 text-left font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-division-button="finance">Finance</button>
-<button class="division-button rounded-md px-3 py-2 text-left font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-division-button="administration">Admin</button>
+<button class="division-button rounded-md px-3 py-2 text-center font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-division-button="strategy-and-operations">Strategy</button>
+<button class="division-button rounded-md px-3 py-2 text-center font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-division-button="product-and-design">Product</button>
+<button class="division-button rounded-md px-3 py-2 text-center font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-division-button="technology-and-data">Tech</button>
+<button class="division-button rounded-md px-3 py-2 text-center font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-division-button="revenue-and-market">Revenue</button>
+<button class="division-button rounded-md px-3 py-2 text-center font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-division-button="finance">Finance</button>
+<button class="division-button rounded-md px-3 py-2 text-center font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-division-button="administration">Admin</button>
 </div>
 </div>
 </div></div>

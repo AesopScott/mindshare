@@ -56,6 +56,30 @@
             color: #dae2fd;
             animation: notification-shake 1.35s ease-in-out infinite;
         }
+        .chat-canvas {
+            background: #020204;
+            isolation: isolate;
+        }
+        .chat-canvas::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: var(--chat-department-backdrop);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 300ms ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .chat-canvas.has-department-backdrop::before {
+            opacity: 0.3;
+        }
+        .chat-canvas > * {
+            position: relative;
+            z-index: 1;
+        }
         @keyframes notification-shake {
             0%, 38%, 100% { transform: rotate(0deg); }
             8% { transform: rotate(-12deg); }
@@ -311,7 +335,7 @@
 </div>
 </div>
 <!-- Chat Canvas -->
-<div class="flex-1 overflow-y-auto p-8 custom-scrollbar" id="chat-transcript" aria-live="polite">
+<div class="chat-canvas relative flex-1 overflow-y-auto p-8 custom-scrollbar" id="chat-transcript" aria-live="polite">
 <div class="h-full min-h-[320px] flex items-center justify-center border border-white/5 bg-surface/30" data-chat-placeholder>
 <p class="font-label-sm text-on-surface-variant/50 uppercase tracking-widest">Chat Window</p>
 </div>
@@ -481,7 +505,7 @@
                 const icon = departmentIcons[index] || "business_center";
                 const entries = selected.entries?.[department] || [];
                 const entryMarkup = entries.length ? entries.map(entry => `
-                    <button class="w-full text-left flex items-center justify-between gap-3 p-3 rounded-lg border border-white/10 bg-surface-container-lowest hover:border-primary/40 hover:bg-white/5 transition-all" type="button" onclick="selectRole('${entry.slug}', '${entry.name}', '${entry.title}', '${entry.level}')">
+                    <button class="w-full text-left flex items-center justify-between gap-3 p-3 rounded-lg border border-white/10 bg-surface-container-lowest hover:border-primary/40 hover:bg-white/5 transition-all" type="button" onclick="selectRole('${entry.slug}', '${entry.name}', '${entry.title}', '${entry.level}', '${department}')">
                         <span class="min-w-0 flex flex-col gap-1">
                             <span class="text-sm font-medium text-primary">${entry.name}</span>
                             <span class="text-xs text-on-surface">${entry.title}</span>
@@ -497,7 +521,7 @@
                 `;
                 return `
                     <div class="group">
-                        <button class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all silver-edge" onclick="toggleSection('${listId}', '${iconId}')">
+                        <button class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-all silver-edge" onclick="setChatDepartmentBackdrop('${department}'); toggleSection('${listId}', '${iconId}')">
                             <div class="flex items-center gap-3">
                                 <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">${icon}</span>
                                 <span class="font-body-md font-semibold text-on-surface">${department}</span>
@@ -522,6 +546,7 @@
                 button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
             });
             renderDepartmentSections(selectedSlug);
+            setChatDepartmentBackdrop('');
             const url = new URL(window.location.href);
             url.searchParams.set('division', selectedSlug);
             history.replaceState(null, '', url.toString());
@@ -537,14 +562,18 @@
         const notificationTimers = {};
         const NOTIFICATION_TTL_MS = 120000;
         const pendingAttachments = [];
+        const departmentBackdrops = {
+            "AI Engineering": "../assets/departments/ai-engineering-wiring.png"
+        };
 
-        function ensureRoleSession(slug, name, title, level) {
+        function ensureRoleSession(slug, name, title, level, department = '') {
             if (!roleSessions[slug]) {
                 roleSessions[slug] = {
                     slug,
                     name,
                     title,
                     level,
+                    department,
                     codexSessionId: null,
                     claudeSessionId: null,
                     roleContext: null,
@@ -555,17 +584,30 @@
                     processingEngine: null
                 };
             } else {
-                Object.assign(roleSessions[slug], { name, title, level });
+                Object.assign(roleSessions[slug], { name, title, level, department: department || roleSessions[slug].department });
             }
             return roleSessions[slug];
         }
 
-        async function selectRole(slug, name, title, level) {
-            const roleSession = ensureRoleSession(slug, name, title, level);
+        function setChatDepartmentBackdrop(department) {
+            const transcript = document.getElementById('chat-transcript');
+            if (!transcript) return;
+            const imagePath = departmentBackdrops[department] || '';
+            transcript.classList.toggle('has-department-backdrop', Boolean(imagePath));
+            if (imagePath) {
+                transcript.style.setProperty('--chat-department-backdrop', `url("${imagePath}")`);
+            } else {
+                transcript.style.removeProperty('--chat-department-backdrop');
+            }
+        }
+
+        async function selectRole(slug, name, title, level, department = '') {
+            const roleSession = ensureRoleSession(slug, name, title, level, department);
             const mainWindowTitle = document.getElementById('main-window-title');
             mainWindowTitle.textContent = `${name} · ${title} · ${level}`;
             activeRoleSlug = slug;
             activeRoleContext = roleSession.roleContext;
+            setChatDepartmentBackdrop(roleSession.department);
             renderTranscript(roleSession.messages);
             renderOfficeConnectionStatus(roleSession);
             renderOfficeFilesDropdown(activeRoleContext);
@@ -1001,7 +1043,7 @@
                 button.addEventListener('click', () => {
                     const session = roleSessions[button.dataset.activeRole];
                     if (session) {
-                        selectRole(session.slug, session.name, session.title, session.level);
+                        selectRole(session.slug, session.name, session.title, session.level, session.department);
                     }
                 });
             });
@@ -1046,7 +1088,7 @@
                 button.addEventListener('click', () => {
                     const session = roleSessions[button.dataset.notificationRole];
                     if (session) {
-                        selectRole(session.slug, session.name, session.title, session.level);
+                        selectRole(session.slug, session.name, session.title, session.level, session.department);
                     }
                     removeSessionNotification(button.dataset.notificationId);
                     closeNotificationMenu();

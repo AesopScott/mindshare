@@ -1210,6 +1210,7 @@ Configuration is loaded from the local MindShare workspace.
                     level,
                     filesText: contextFilesText(payload.roleContext)
                 });
+                await refreshProviderReadiness();
                 const createdSessions = await provisionAvailableProviderSessions(roleSession);
                 await runTessAutomationIfNeeded(roleSession);
                 await runVikAutomationIfNeeded(roleSession);
@@ -2182,6 +2183,12 @@ Configuration is loaded from the local MindShare workspace.
                 };
             }
             if (roleSession[sessionKey]) {
+                setProviderReady(engine, true);
+                if (isClaude) {
+                    claudeAvailable = true;
+                } else {
+                    codexAvailable = true;
+                }
                 markOfficeSessionConnected(roleSession);
                 return {
                     ok: true,
@@ -2192,10 +2199,22 @@ Configuration is loaded from the local MindShare workspace.
 
             const payload = await connect({ roleSlug: roleSession.slug });
             if (!payload.ok) {
+                setProviderReady(engine, false);
+                if (isClaude) {
+                    claudeAvailable = false;
+                } else {
+                    codexAvailable = false;
+                }
                 if (roleSession[sessionKey]) {
                     markOfficeSessionIssue(roleSession);
                 }
                 return payload;
+            }
+            setProviderReady(engine, true);
+            if (isClaude) {
+                claudeAvailable = true;
+            } else {
+                codexAvailable = true;
             }
             roleSession[sessionKey] = payload.sessionId;
             if (payload.roleContext) {

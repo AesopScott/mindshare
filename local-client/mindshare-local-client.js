@@ -1213,6 +1213,51 @@ function formatAttachments(attachments) {
   }).join('\n');
 }
 
+function parseJsonLines(text) {
+  return String(text || '')
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line.startsWith('{') && line.endsWith('}'))
+    .map((line) => {
+      try {
+        return JSON.parse(line);
+      } catch {
+        return null;
+      }
+    })
+    .filter(Boolean);
+}
+
+function normalizeUsage(provider, usage = {}, extra = {}) {
+  const inputTokens = Number(usage.input_tokens ?? usage.inputTokens ?? 0) || 0;
+  const outputTokens = Number(usage.output_tokens ?? usage.outputTokens ?? 0) || 0;
+  const cachedInputTokens = Number(
+    usage.cached_input_tokens ??
+    usage.cache_read_input_tokens ??
+    usage.cacheReadInputTokens ??
+    0
+  ) || 0;
+  const cacheCreationInputTokens = Number(
+    usage.cache_creation_input_tokens ??
+    usage.cacheCreationInputTokens ??
+    0
+  ) || 0;
+  const reasoningOutputTokens = Number(usage.reasoning_output_tokens ?? 0) || 0;
+  return {
+    provider,
+    inputTokens,
+    outputTokens,
+    cachedInputTokens,
+    cacheCreationInputTokens,
+    reasoningOutputTokens,
+    totalContextInputTokens: inputTokens + cachedInputTokens + cacheCreationInputTokens,
+    costUsd: typeof extra.costUsd === 'number' ? extra.costUsd : null,
+    model: extra.model || null,
+    source: extra.source || `${provider}-cli`,
+    measuredAt: new Date().toISOString()
+  };
+}
+
 async function pythonLaunch() {
   const configured = process.env.PYTHON || process.env.PYTHON_EXE;
   if (configured && await pathExists(configured)) {
@@ -1502,7 +1547,6 @@ If an attached file has a local path, you may inspect it if your CLI/runtime sup
 USER: ${message}
 `;
 
-  const outputPath = path.join(os.tmpdir(), `mindshare-codex-${sessionId}.txt`);
   const launch = await codexLaunch();
   if (!launch) {
     return {
@@ -1513,11 +1557,10 @@ USER: ${message}
   }
   const result = await run(launch.command, [...launch.argsPrefix,
     'exec',
+    '--json',
     '--dangerously-bypass-approvals-and-sandbox',
     '-C',
     repoRoot,
-    '--output-last-message',
-    outputPath,
     '-'
   ], { timeout: 300000, input: prompt });
 
@@ -1528,12 +1571,14 @@ USER: ${message}
     };
   }
 
-  const reply = (await fs.readFile(outputPath, 'utf8')).trim();
-  await fs.rm(outputPath, { force: true });
+  const events = parseJsonLines(result.stdout);
+  const reply = [...events].reverse().find((event) => event.type === 'item.completed' && event.item?.type === 'agent_message')?.item?.text?.trim() || '';
+  const usageEvent = [...events].reverse().find((event) => event.type === 'turn.completed' && event.usage);
+  const tokenUsage = usageEvent?.usage ? normalizeUsage('codex', usageEvent.usage) : null;
   session.messages.push({ role: 'user', content: message });
   session.messages.push({ role: 'assistant', content: reply });
   session.updatedAt = new Date().toISOString();
-  return { ok: true, reply };
+  return { ok: true, reply, tokenUsage };
 }
 
 async function sendClaudeMessage(payload) {
@@ -1597,6 +1642,8 @@ USER: ${message}
   }
   const result = await run(launch.command, [...launch.argsPrefix,
     '--print',
+    '--output-format',
+    'json',
     '--permission-mode',
     'bypassPermissions',
     '--dangerously-skip-permissions',
@@ -1611,11 +1658,25 @@ USER: ${message}
     };
   }
 
-  const reply = result.stdout.trim();
+  let parsed = null;
+  try {
+    parsed = JSON.parse(result.stdout.trim());
+  } catch {
+    parsed = null;
+  }
+  const reply = parsed?.result ?? result.stdout.trim();
+  const modelName = parsed?.modelUsage ? Object.keys(parsed.modelUsage)[0] : null;
+  const tokenUsage = parsed?.usage
+    ? normalizeUsage('claude', parsed.usage, {
+      costUsd: typeof parsed.total_cost_usd === 'number' ? parsed.total_cost_usd : null,
+      model: modelName,
+      source: 'claude-cli-json'
+    })
+    : null;
   session.messages.push({ role: 'user', content: message });
   session.messages.push({ role: 'assistant', content: reply });
   session.updatedAt = new Date().toISOString();
-  return { ok: true, reply };
+  return { ok: true, reply, tokenUsage };
 }
 
 module.exports = {

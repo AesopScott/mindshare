@@ -415,7 +415,10 @@ Configuration is loaded from the local MindShare workspace.
 </div>
 </div>
 <div class="hidden pt-3 flex flex-wrap gap-2" id="attachment-tray"></div>
-<div class="min-h-5 pt-2 font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/60" id="chat-status" aria-live="polite"></div>
+<div class="grid grid-cols-1 gap-1 pt-2 md:grid-cols-[1fr_auto] md:items-start">
+<div class="min-h-5 font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/60" id="chat-status" aria-live="polite"></div>
+<div class="min-h-5 text-right font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/70" id="token-usage-status">Tokens: no turns yet</div>
+</div>
 </div>
 </div>
 </section>
@@ -878,6 +881,7 @@ Configuration is loaded from the local MindShare workspace.
                         claudeSessionId: session.claudeSessionId,
                         roleContext: session.roleContext,
                         messages: conversationMessages(session.messages),
+                        tokenUsage: session.tokenUsage || null,
                         officeInjected: session.officeInjected,
                         connectionIssue: session.connectionIssue
                     };
@@ -913,6 +917,7 @@ Configuration is loaded from the local MindShare workspace.
                         claudeSessionId: session.claudeSessionId || null,
                         roleContext: session.roleContext || null,
                         messages: conversationMessages(session.messages),
+                        tokenUsage: session.tokenUsage || null,
                         promptQueue: [],
                         officeInjected: Boolean(session.officeInjected),
                         connectionIssue: Boolean(session.connectionIssue),
@@ -1039,6 +1044,7 @@ Configuration is loaded from the local MindShare workspace.
                     claudeSessionId: null,
                     roleContext: null,
                     messages: [],
+                    tokenUsage: null,
                     promptQueue: [],
                     officeInjected: false,
                     connectionIssue: false,
@@ -1074,6 +1080,61 @@ Configuration is loaded from the local MindShare workspace.
             } catch {
                 return '';
             }
+        }
+
+        function formatTokenCount(value) {
+            const number = Number(value || 0);
+            if (!number) return '0';
+            if (number >= 1000000) return `${(number / 1000000).toFixed(number >= 10000000 ? 0 : 1)}m`;
+            if (number >= 1000) return `${(number / 1000).toFixed(number >= 10000 ? 0 : 1)}k`;
+            return String(number);
+        }
+
+        function emptyTokenTotals() {
+            return {
+                inputTokens: 0,
+                outputTokens: 0,
+                cachedInputTokens: 0,
+                cacheCreationInputTokens: 0,
+                reasoningOutputTokens: 0,
+                totalContextInputTokens: 0,
+                costUsd: 0
+            };
+        }
+
+        function applyTokenUsage(roleSession, usage) {
+            if (!roleSession || !usage) return;
+            const totals = roleSession.tokenUsage?.totals || emptyTokenTotals();
+            ['inputTokens', 'outputTokens', 'cachedInputTokens', 'cacheCreationInputTokens', 'reasoningOutputTokens', 'totalContextInputTokens'].forEach((key) => {
+                totals[key] = Number(totals[key] || 0) + Number(usage[key] || 0);
+            });
+            if (typeof usage.costUsd === 'number') {
+                totals.costUsd = Number(totals.costUsd || 0) + usage.costUsd;
+            }
+            roleSession.tokenUsage = {
+                last: usage,
+                totals
+            };
+            if (activeRoleSlug === roleSession.slug) {
+                renderTokenUsage(roleSession);
+            }
+            persistOfficeState();
+        }
+
+        function renderTokenUsage(roleSession = activeRoleSlug ? roleSessions[activeRoleSlug] : null) {
+            const element = document.getElementById('token-usage-status');
+            if (!element) return;
+            const usage = roleSession?.tokenUsage;
+            if (!usage?.last) {
+                element.textContent = roleSession ? 'Tokens: no turns yet' : 'Tokens: select an office';
+                return;
+            }
+            const last = usage.last;
+            const totals = usage.totals || emptyTokenTotals();
+            const provider = last.provider === 'claude' ? 'Claude' : 'Codex';
+            const cache = Number(last.cachedInputTokens || 0) + Number(last.cacheCreationInputTokens || 0);
+            const totalCache = Number(totals.cachedInputTokens || 0) + Number(totals.cacheCreationInputTokens || 0);
+            element.textContent = `Last ${provider}: In ${formatTokenCount(last.inputTokens)} · Cache ${formatTokenCount(cache)} · Out ${formatTokenCount(last.outputTokens)} | Total: In ${formatTokenCount(totals.inputTokens)} · Cache ${formatTokenCount(totalCache)} · Out ${formatTokenCount(totals.outputTokens)}`;
         }
 
         function createAutomationRun(roleSession, { level = 'level4', action = 'run', mode = 'manual', label = '' } = {}) {
@@ -1148,6 +1209,7 @@ Configuration is loaded from the local MindShare workspace.
             renderOfficeLevelDropdown('');
             renderOfficeAutonomyControl(null);
             renderOfficeRunsControl(null);
+            renderTokenUsage(null);
             showOfficeContext({
                 name: 'Agent Name',
                 title: department,
@@ -1174,6 +1236,7 @@ Configuration is loaded from the local MindShare workspace.
             renderOfficeLevelDropdown(level);
             renderOfficeAutonomyControl(findRoleEntry(slug));
             renderOfficeRunsControl(findRoleEntry(slug));
+            renderTokenUsage(roleSession);
             closeContextDropdowns();
             showOfficeContext({
                 name,
@@ -2483,6 +2546,7 @@ Configuration is loaded from the local MindShare workspace.
                     return;
                 }
                 markOfficeSessionConnected(roleSession);
+                applyTokenUsage(roleSession, payload.tokenUsage);
                 addChatMessageToRole(roleSession, 'assistant', payload.reply || '(No response)');
                 addSessionCompletionNotification(roleSession);
                 if (activeRoleSlug === roleSession.slug) clearChatStatus();
@@ -2518,6 +2582,7 @@ Configuration is loaded from the local MindShare workspace.
             renderOfficeLevelDropdown(roleSession.level);
             renderOfficeAutonomyControl(findRoleEntry(roleSession.slug));
             renderOfficeRunsControl(findRoleEntry(roleSession.slug));
+            renderTokenUsage(roleSession);
             showOfficeContext({
                 name: roleSession.name,
                 title: roleSession.title,

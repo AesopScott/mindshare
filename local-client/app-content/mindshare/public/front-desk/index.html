@@ -232,7 +232,7 @@
         const chatMessages = document.getElementById('chat-messages');
         const typingIndicator = document.getElementById('typing-indicator');
         const input = chatForm.querySelector('textarea');
-        const MARA_GUIDED_WELCOME = "Welcome to Mindshare Central. I'm Mara at the front desk. Would you like to know more about Mindshare, the Mindshare Central app, or agent capability?";
+        const MARA_GUIDED_WELCOME = "Welcome to Mindshare Central. I'm Mara at the front desk. I can help with Mindshare, the Mindshare Central app, or agent capability. Which would you like to explore?";
         const maraState = { sessionId: null, roleContext: null, messages: [], processing: false };
 
         function mindShareLocalClient() { return window.MindShareLocalClient || null; }
@@ -263,7 +263,7 @@
             return maraState.messages.some((message) => String(message.text || '').toLowerCase().includes("mara's office"));
         }
         function hasGuidedWelcome() {
-            return maraState.messages.some((message) => String(message.text || '').toLowerCase().includes('would you like to know more about mindshare'));
+            return maraState.messages.some((message) => String(message.text || '').toLowerCase().includes('mindshare central app, or agent capability'));
         }
         function renderMessages() {
             [...chatMessages.children].forEach((child) => { if (child !== typingIndicator) child.remove(); });

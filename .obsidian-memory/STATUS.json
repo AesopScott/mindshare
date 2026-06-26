@@ -1,10 +1,10 @@
 {
   "status": "loaded",
-  "agent": "codex",
+  "agent": "claude",
   "project": "mindshare",
   "task": "general project session",
-  "packet": "C:\\Users\\scott\\Code\\mindshare\\.obsidian-memory\\CODEX_SESSION_CONTEXT.md",
+  "packet": "C:\\Users\\scott\\Code\\mindshare\\.obsidian-memory\\CLAUDE_SESSION_CONTEXT.md",
   "store": "C:\\Users\\scott\\.obsidianify\\store",
-  "generatedAt": "2026-06-22T04:39:55.062735+00:00",
+  "generatedAt": "2026-06-26T02:18:40.334476+00:00",
   "memoryCount": 20
 }

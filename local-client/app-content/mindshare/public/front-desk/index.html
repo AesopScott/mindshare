@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mara Office - MindShare Central</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #0a0f1d;
+      color: #e6ebff;
+      font-family: Inter, system-ui, sans-serif;
+    }
+    .front-desk-shell {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: clamp(1rem, 3vw, 2.5rem);
+      background:
+        radial-gradient(circle at top, rgba(190, 198, 224, 0.12), transparent 32rem),
+        #070b15;
+    }
+    .front-desk-frame {
+      width: min(100%, 1280px);
+      border: 1px solid rgba(220, 225, 251, 0.28);
+      border-radius: 18px;
+      background: rgba(10, 15, 29, 0.86);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+    .front-desk-image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <main class="front-desk-shell">
+    <section class="front-desk-frame">
+      <img class="front-desk-image" src="../assets/front-desk/mara-office.png" alt="Mara Office front desk interface">
+      <div class="flex flex-col gap-4 border-t border-white/10 bg-black/35 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.28em] text-[#f8e7a2]">Mara Office</p>
+          <h1 class="mt-1 text-xl font-semibold text-white">Front Desk</h1>
+        </div>
+        <a class="inline-flex items-center justify-center rounded-md border border-[#f8e7a2]/45 bg-[#f8e7a2]/10 px-5 py-3 text-sm font-bold uppercase tracking-widest text-[#fff3bd] transition hover:bg-[#f8e7a2]/18" href="../departments/index.html?role=mara">
+          Enter Mara's Office
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

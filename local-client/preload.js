@@ -17,5 +17,7 @@ contextBridge.exposeInMainWorld('MindShareLocalClient', {
   chooseFiles: () => ipcRenderer.invoke('mindshare:choose-files'),
   chooseImageFiles: () => ipcRenderer.invoke('mindshare:choose-image-files'),
   copyText: (payload) => ipcRenderer.invoke('mindshare:copy-text', payload),
-  showFile: (payload) => ipcRenderer.invoke('mindshare:show-file', payload)
+  showFile: (payload) => ipcRenderer.invoke('mindshare:show-file', payload),
+  installSkill: (payload) => ipcRenderer.invoke('mindshare:install-skill', payload),
+  installSkills: (payload) => ipcRenderer.invoke('mindshare:install-skills', payload)
 });

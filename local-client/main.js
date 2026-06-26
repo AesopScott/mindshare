@@ -1,6 +1,8 @@
 const { app, BrowserWindow, dialog, ipcMain, Menu, clipboard, shell } = require('electron');
 const { spawn } = require('node:child_process');
 const path = require('node:path');
+const fs = require('node:fs');
+const os = require('node:os');
 const {
   connectCodex,
   connectClaude,
@@ -17,6 +19,40 @@ const {
 
 const bundledPublicRoot = path.join(__dirname, 'app-content', 'mindshare', 'public');
 const devPublicRoot = path.join(__dirname, '..', 'public');
+const skillsSourceRoot = path.join(__dirname, 'app-content', 'mojo', 'assets', 'maps', 'skills');
+const sharedTemplatesRoot = path.join(__dirname, 'app-content', 'mojo', 'assets', 'maps', 'templates');
+const codexHome = process.env.CODEX_HOME || path.join(os.homedir(), '.codex');
+// Skills install into both the Claude Code and Codex skills directories.
+const skillsInstallRoots = [
+  path.join(os.homedir(), '.claude', 'skills'),
+  path.join(codexHome, 'skills')
+];
+const SKILL_NAME_PATTERN = /^[a-z0-9][a-z0-9-]*$/;
+const TEMPLATE_REF_PATTERN = /templates\/([A-Za-z0-9._-]+\.md)/g;
+
+// A skill's SKILL.md references `templates/<name>.md` relative to its own folder.
+// The multi-agent-* skills keep those templates centralized in the shared maps
+// templates dir, so copy any referenced-but-missing template into the installed
+// skill's own templates/ dir to keep it self-contained.
+function installRelatedTemplates(skillDir) {
+  const skillMd = path.join(skillDir, 'SKILL.md');
+  if (!fs.existsSync(skillMd)) return [];
+  const text = fs.readFileSync(skillMd, 'utf8');
+  const referenced = new Set();
+  for (const match of text.matchAll(TEMPLATE_REF_PATTERN)) referenced.add(match[1]);
+  const copied = [];
+  const skillTemplatesDir = path.join(skillDir, 'templates');
+  for (const file of referenced) {
+    const localCopy = path.join(skillTemplatesDir, file);
+    if (fs.existsSync(localCopy)) continue; // skill already ships this template
+    const shared = path.join(sharedTemplatesRoot, file);
+    if (!shared.startsWith(sharedTemplatesRoot + path.sep) || !fs.existsSync(shared)) continue;
+    fs.mkdirSync(skillTemplatesDir, { recursive: true });
+    fs.copyFileSync(shared, localCopy);
+    copied.push(file);
+  }
+  return copied;
+}
 const appIconPath = path.join(
   __dirname,
   'assets',
@@ -179,6 +215,45 @@ Write-Output "sent=$sent"
   return { ok: true, message: (result.stdout || '').trim() || 'Shortcut sent.' };
 }
 
+function installOneSkill(rawName) {
+  const name = String(rawName || '').trim();
+  if (!name || !SKILL_NAME_PATTERN.test(name)) {
+    return { name, ok: false, error: 'Invalid skill name.' };
+  }
+  const source = path.join(skillsSourceRoot, name);
+  // Guard against path traversal: resolved source must stay under the source root.
+  if (source !== path.join(skillsSourceRoot, name) || !source.startsWith(skillsSourceRoot + path.sep)) {
+    return { name, ok: false, error: 'Skill path is not allowed.' };
+  }
+  if (!fs.existsSync(path.join(source, 'SKILL.md'))) {
+    return { name, ok: false, error: 'Skill not found in the app bundle.' };
+  }
+  try {
+    let templates = 0;
+    const dests = [];
+    for (const root of skillsInstallRoots) {
+      const dest = path.join(root, name);
+      fs.mkdirSync(root, { recursive: true });
+      fs.rmSync(dest, { recursive: true, force: true }); // overwrite existing
+      fs.cpSync(source, dest, { recursive: true });
+      templates += installRelatedTemplates(dest).length;
+      dests.push(dest);
+    }
+    return { name, ok: true, dests, templates };
+  } catch (error) {
+    return { name, ok: false, error: error.message || String(error) };
+  }
+}
+
+function installSkills(names) {
+  const list = Array.isArray(names) ? names : [];
+  const results = list.map(installOneSkill);
+  const installed = results.filter((r) => r.ok).map((r) => r.name);
+  const failed = results.filter((r) => !r.ok).map((r) => ({ name: r.name, error: r.error }));
+  const templates = results.reduce((sum, r) => sum + ((r.ok && r.templates) || 0), 0);
+  return { ok: failed.length === 0, installed, failed, templates, roots: skillsInstallRoots };
+}
+
 function createWindow() {
   const window = new BrowserWindow({
     width: 1440,
@@ -333,6 +408,8 @@ ipcMain.handle('mindshare:show-file', async (_event, payload = {}) => {
   shell.showItemInFolder(filePath);
   return { ok: true };
 });
+ipcMain.handle('mindshare:install-skill', async (_event, payload = {}) => installSkills([payload.name]));
+ipcMain.handle('mindshare:install-skills', async (_event, payload = {}) => installSkills(payload.names));
 
 app.whenReady().then(() => {
   app.setName('MindShare Central');

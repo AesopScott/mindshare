@@ -1,0 +1,9 @@
+﻿{
+    "name":  "com.mindshare.local_client",
+    "description":  "MindShare Local Client Native Host",
+    "path":  "C:\\Users\\scott\\Code\\mindshare\\local-client\\native-host\\run-native-host.cmd",
+    "type":  "stdio",
+    "allowed_origins":  [
+                            "chrome-extension://clibcbehkkkdcehfofhnhhpofakajnlg/"
+                        ]
+}

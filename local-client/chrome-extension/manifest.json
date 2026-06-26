@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "MindShare Local Client",
+  "description": "Connects MindShare web offices to local Codex and Claude CLI sessions through a native host.",
+  "version": "0.1.0",
+  "permissions": [
+    "nativeMessaging"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://mojoaistudio.com/*"
+    ]
+  },
+  "host_permissions": [
+    "https://mojoaistudio.com/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mojoaistudio.com/mindshare/*",
+        "https://mojoaistudio.com/MindShare/*",
+        "http://localhost/*",
+        "http://127.0.0.1/*"
+      ],
+      "js": [
+        "content-script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "page-bridge.js"
+      ],
+      "matches": [
+        "https://mojoaistudio.com/*",
+        "http://localhost/*",
+        "http://127.0.0.1/*"
+      ]
+    }
+  ]
+}

@@ -29,6 +29,15 @@ The sync is exact for `app-content`: the script clears that folder, verifies the
 
 `app-content/manifest.json` records the bundled content using portable paths so the executable does not carry Scott's machine paths as runtime dependencies.
 
+## Packaging Boundary
+
+The product packaging boundary is tracked in:
+
+- `PACKAGING_MANIFEST.md` for the human-readable source of truth.
+- `packaging-manifest.json` for future script/build enforcement.
+
+Update those files before adding new app-bundled content, excluding development-only folders, or moving mutable state into `%APPDATA%\Mindshare Central\`.
+
 The Electron preload exposes:
 
 - The page calls `window.MindShareLocalClient.connectCodex()`.

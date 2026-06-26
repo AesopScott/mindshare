@@ -1,0 +1,122 @@
+{
+  "version": "0.1.0",
+  "lastUpdated": "2026-06-26",
+  "owner": "Tess / Autonomy Engineer",
+  "productName": "Mindshare Central",
+  "purpose": "Defines what belongs in the Mindshare Central desktop app package, what is bundled content, what is excluded, and what remains runtime user data.",
+  "shipInApp": [
+    {
+      "id": "electron-shell",
+      "source": "local-client/main.js; local-client/preload.js; local-client/mindshare-local-client.js",
+      "destination": "app root",
+      "notes": "Core desktop runtime."
+    },
+    {
+      "id": "app-metadata",
+      "source": "local-client/package.json; local-client/package-lock.json",
+      "destination": "app root",
+      "notes": "Build metadata and dependency lock."
+    },
+    {
+      "id": "app-assets",
+      "source": "local-client/assets/",
+      "destination": "app assets",
+      "notes": "Icons and app-owned static assets."
+    },
+    {
+      "id": "public-ui",
+      "source": "public/",
+      "destination": "app-content/mindshare/public/",
+      "notes": "Central UI pages and office surfaces."
+    },
+    {
+      "id": "mindshare-role-content",
+      "source": "selected roles/",
+      "destination": "app-content/mindshare/roles/",
+      "notes": "Role files needed for offices and context loading. Exclude volatile proof/state unless promoted to app state."
+    },
+    {
+      "id": "mindshare-agent-content",
+      "source": "selected agents/",
+      "destination": "app-content/mindshare/agents/",
+      "notes": "Only active or required office support files."
+    },
+    {
+      "id": "global-org-files",
+      "source": "selected global roster, artifacts, taxonomy, and manifest files",
+      "destination": "app-content/mindshare/global/",
+      "notes": "Global context required by role loading and configuration."
+    },
+    {
+      "id": "maps-org-docs",
+      "source": "selected docs/; catalogs/; phases/; rooms/; templates/",
+      "destination": "app-content/mindshare/",
+      "notes": "Only docs used by Central, role context, configuration, or tools."
+    },
+    {
+      "id": "mojo-maps-content",
+      "source": "selected C:/Users/scott/Code/mojo assets/maps, maps, roles, agents",
+      "destination": "app-content/mojo/",
+      "notes": "Only content needed by Central UI and role offices."
+    },
+    {
+      "id": "watch-content",
+      "source": "selected Watch roles/agents",
+      "destination": "app-content/watch/",
+      "notes": "Only active roles/offices that Central can load."
+    }
+  ],
+  "doNotShip": [
+    ".git/",
+    ".claude/",
+    ".codex/",
+    ".obsidian-memory/",
+    "graphify-out/",
+    "node_modules/",
+    ".pytest_cache/",
+    "__pycache__/",
+    ".env",
+    ".env.*",
+    "*.key",
+    "*.pem",
+    "*.pfx",
+    "*.log",
+    "local-client/chrome-extension/",
+    "local-client/native-host/",
+    "local-client/chrome-extension.crx",
+    "local-client/chrome-extension.pem",
+    "local-client/extension-update.xml",
+    "non-canonical docs/stitch-artifacts/** drafts",
+    "runtime proof/state files unless explicitly promoted",
+    "personal/training/finance docs unless explicitly promoted"
+  ],
+  "runtimeDataOutsideApp": {
+    "basePath": "%APPDATA%/Mindshare Central/",
+    "items": [
+      "user sessions",
+      "role chat transcripts",
+      "automation run state",
+      "proof logs",
+      "user config/preferences",
+      "tool webview auth/cookies",
+      "generated images/assets"
+    ]
+  },
+  "externalRequirements": [
+    "Codex CLI installed and authenticated locally",
+    "Claude CLI installed and authenticated locally",
+    "Optional webview logins for connected tools"
+  ],
+  "currentDecisions": [
+    "Chrome extension/native-host path is deprecated for Mindshare Central installer builds.",
+    "local-client/app-content is generated content and should become manifest-driven build output.",
+    "Canonical app UI currently lives in public/ and syncs into local-client/app-content/mindshare/public/.",
+    "The sync script should be narrowed before installer packaging."
+  ],
+  "maintenanceRules": [
+    "Add app-required files here before relying on them.",
+    "Exclude development-only files here before installer work.",
+    "Move mutable role/runtime state to runtimeDataOutsideApp instead of baking it into the app.",
+    "Installer builds should report included, excluded, missing, and generated manifest entries."
+  ]
+}

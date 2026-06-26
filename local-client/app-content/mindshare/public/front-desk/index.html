@@ -5,31 +5,349 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mara Office - MindShare Central</title>
   <style>
-    html {
-      background: #101a34;
+    :root {
+      color-scheme: dark;
+      --page-blue: #101a34;
+      --panel-blue: #071123;
+      --panel-border: rgba(216, 224, 255, 0.18);
+      --text: #edf2ff;
+      --muted: rgba(237, 242, 255, 0.62);
+      --accent: #d8e0ff;
     }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
     body {
       margin: 0;
       min-height: 100vh;
-      background: #101a34;
+      background: var(--page-blue);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
+
     .front-desk-shell {
       min-height: 100vh;
       display: grid;
       place-items: center;
       padding: clamp(0.75rem, 2.5vw, 2rem);
     }
+
+    .front-desk-stage {
+      position: relative;
+      width: min(100%, 1280px);
+      aspect-ratio: 1280 / 1024;
+    }
+
     .front-desk-image {
       display: block;
-      width: min(100%, 1280px);
-      height: auto;
-      border-radius: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .mara-chat-window {
+      position: absolute;
+      left: 25.2%;
+      top: 34.9%;
+      width: 49.6%;
+      height: 26.6%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      overflow-y: auto;
+      padding: clamp(0.8rem, 1.7vw, 1.35rem);
+      border: 1px solid var(--panel-border);
+      border-radius: 0.65rem;
+      background: rgba(7, 17, 35, 0.96);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    .mara-message {
+      max-width: 84%;
+      padding: 0.7rem 0.85rem;
+      border: 1px solid rgba(216, 224, 255, 0.12);
+      border-radius: 0.8rem;
+      background: rgba(31, 42, 67, 0.92);
+      color: var(--text);
+      font-size: clamp(0.74rem, 1.2vw, 0.95rem);
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+
+    .mara-message.user {
+      align-self: flex-end;
+      background: rgba(70, 82, 118, 0.95);
+    }
+
+    .mara-message.system {
+      align-self: center;
+      max-width: 92%;
+      color: var(--muted);
+      font-size: clamp(0.66rem, 1vw, 0.82rem);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: rgba(7, 17, 35, 0.72);
+    }
+
+    .mara-prompt-form {
+      position: absolute;
+      left: 12.7%;
+      bottom: 16.2%;
+      width: 74.8%;
+      height: 7.4%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.55rem 0.75rem 0.55rem 1.35rem;
+      border: 1px solid rgba(216, 224, 255, 0.11);
+      border-radius: 0.25rem;
+      background: rgba(7, 17, 35, 0.98);
+    }
+
+    .mara-prompt {
+      min-width: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      outline: 0;
+      resize: none;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      font-size: clamp(0.78rem, 1.2vw, 1rem);
+      line-height: 1.35;
+      padding: 0.35rem 0;
+    }
+
+    .mara-prompt::placeholder {
+      color: rgba(237, 242, 255, 0.36);
+    }
+
+    .mara-send {
+      width: clamp(2.25rem, 4vw, 3.15rem);
+      height: clamp(2.25rem, 4vw, 3.15rem);
+      border: 0;
+      border-radius: 0.35rem;
+      background: #f6f7ff;
+      color: #101522;
+      font-size: clamp(1.25rem, 2vw, 1.8rem);
+      cursor: pointer;
+    }
+
+    .mara-send:disabled,
+    .mara-prompt:disabled {
+      cursor: wait;
+      opacity: 0.68;
+    }
+
+    .mara-status {
+      position: absolute;
+      left: 12.7%;
+      bottom: 13.4%;
+      width: 74.8%;
+      overflow: hidden;
+      color: rgba(237, 242, 255, 0.72);
+      font-size: clamp(0.58rem, 0.9vw, 0.75rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   </style>
 </head>
 <body>
   <main class="front-desk-shell">
-    <img class="front-desk-image" src="../assets/front-desk/mara-office.png" alt="Mara Office front desk interface">
+    <section class="front-desk-stage" aria-label="Mara front desk office">
+      <img class="front-desk-image" src="../assets/front-desk/mara-office.png" alt="">
+      <div class="mara-chat-window" id="mara-transcript" aria-live="polite"></div>
+      <form class="mara-prompt-form" id="mara-prompt-form">
+        <textarea class="mara-prompt" id="mara-prompt" rows="1" placeholder="Type your command..."></textarea>
+        <button class="mara-send" id="mara-send" type="submit" aria-label="Send to Mara">-></button>
+      </form>
+      <div class="mara-status" id="mara-status">Loading Mara's office...</div>
+    </section>
   </main>
+
+  <script>
+    const MARA_STORAGE_KEY = 'mindshare.frontDesk.mara.v1';
+    const maraState = {
+      sessionId: null,
+      roleContext: null,
+      messages: [],
+      processing: false
+    };
+
+    function client() {
+      return window.MindShareLocalClient || null;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function setStatus(text) {
+      document.getElementById('mara-status').textContent = text || '';
+    }
+
+    function setProcessing(isProcessing) {
+      maraState.processing = isProcessing;
+      document.getElementById('mara-prompt').disabled = isProcessing;
+      document.getElementById('mara-send').disabled = isProcessing;
+    }
+
+    function persist() {
+      try {
+        localStorage.setItem(MARA_STORAGE_KEY, JSON.stringify({
+          sessionId: maraState.sessionId,
+          roleContext: maraState.roleContext,
+          messages: maraState.messages
+        }));
+      } catch {
+        /* Non-critical UI persistence only. */
+      }
+    }
+
+    function restore() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(MARA_STORAGE_KEY) || '{}');
+        maraState.sessionId = saved.sessionId || null;
+        maraState.roleContext = saved.roleContext || null;
+        maraState.messages = Array.isArray(saved.messages) ? saved.messages : [];
+      } catch {
+        maraState.messages = [];
+      }
+    }
+
+    function addMessage(role, text) {
+      maraState.messages.push({ role, text });
+      persist();
+      renderMessages();
+    }
+
+    function renderMessages() {
+      const transcript = document.getElementById('mara-transcript');
+      transcript.innerHTML = maraState.messages.map((message) => `
+        <div class="mara-message ${escapeHtml(message.role)}">${escapeHtml(message.text)}</div>
+      `).join('');
+      transcript.scrollTop = transcript.scrollHeight;
+    }
+
+    function hasOfficeEntry() {
+      return maraState.messages.some((message) =>
+        String(message.text || '').toLowerCase().includes("mara's office")
+      );
+    }
+
+    async function loadMaraOffice() {
+      restore();
+      renderMessages();
+
+      const local = client();
+      if (!local?.loadRoleContext || !local?.connectClaude) {
+        setStatus('Open this page in MindShare Central to connect Mara to Claude.');
+        if (!maraState.messages.length) addMessage('system', 'MindShare Central is required for Mara office chat.');
+        return;
+      }
+
+      try {
+        const contextPayload = await local.loadRoleContext({ roleSlug: 'mara' });
+        if (!contextPayload?.ok) {
+          setStatus(contextPayload?.error || "Mara's role context could not be loaded.");
+          return;
+        }
+        maraState.roleContext = contextPayload.roleContext;
+
+        const claudePayload = await local.connectClaude({ roleSlug: 'mara' });
+        if (!claudePayload?.ok) {
+          setStatus(claudePayload?.message || claudePayload?.error || 'Claude CLI is not connected.');
+          return;
+        }
+
+        maraState.sessionId = claudePayload.sessionId;
+        if (Array.isArray(claudePayload.messages) && claudePayload.messages.length && !maraState.messages.length) {
+          maraState.messages = claudePayload.messages.map((message) => ({
+            role: message.role,
+            text: message.text || message.content || ''
+          })).filter((message) => message.text);
+        }
+        if (!hasOfficeEntry()) {
+          addMessage('user', claudePayload.initialMessage || "This is Mara's office.");
+        } else {
+          renderMessages();
+        }
+        persist();
+        setStatus('Mara is connected to Claude.');
+      } catch (error) {
+        setStatus(`Mara office failed to load: ${error.message || error}`);
+      }
+    }
+
+    async function sendToMara() {
+      const prompt = document.getElementById('mara-prompt');
+      const message = prompt.value.trim();
+      if (!message || maraState.processing) return;
+
+      const local = client();
+      if (!local?.sendClaudeMessage) {
+        setStatus('MindShare Central is required to send messages to Mara.');
+        return;
+      }
+      if (!maraState.sessionId) {
+        await loadMaraOffice();
+      }
+      if (!maraState.sessionId) return;
+
+      prompt.value = '';
+      addMessage('user', message);
+      setProcessing(true);
+      setStatus('Mara is working in Claude...');
+      try {
+        const transcript = maraState.messages.slice(-6);
+        const payload = await local.sendClaudeMessage({
+          sessionId: maraState.sessionId,
+          message,
+          roleContext: maraState.roleContext,
+          transcript
+        });
+        if (!payload?.ok) {
+          addMessage('system', payload?.error || payload?.reply || 'Claude returned an error.');
+          setStatus('Mara could not complete that prompt.');
+          return;
+        }
+        addMessage('assistant', payload.reply || '(No response)');
+        setStatus('Mara is ready.');
+      } catch (error) {
+        addMessage('system', `Lost connection to Claude: ${error.message || error}`);
+        setStatus('Mara connection failed.');
+      } finally {
+        setProcessing(false);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('mara-prompt-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        sendToMara();
+      });
+      document.getElementById('mara-prompt').addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+          event.preventDefault();
+          sendToMara();
+        }
+      });
+      loadMaraOffice();
+    });
+  </script>
 </body>
 </html>

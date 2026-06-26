@@ -1,0 +1,169 @@
+{
+  "generated_at": "2026-06-24T21:53:58.695Z",
+  "transaction_count": 587,
+  "included_count": 117,
+  "review_count": 254,
+  "excluded_count": 216,
+  "included_total": 6323.57,
+  "review_total": 12264.4,
+  "date_min": "2026-03-26",
+  "date_max": "2026-06-24",
+  "included_by_month": [
+    {
+      "name": "2026-03",
+      "amount": 607.98
+    },
+    {
+      "name": "2026-04",
+      "amount": 3036.6
+    },
+    {
+      "name": "2026-05",
+      "amount": 2115.01
+    },
+    {
+      "name": "2026-06",
+      "amount": 563.98
+    }
+  ],
+  "included_by_category": [
+    {
+      "name": "ai-models",
+      "amount": 2237.95
+    },
+    {
+      "name": "payments-platform",
+      "amount": 1249.8
+    },
+    {
+      "name": "internet-domains",
+      "amount": 1245.44
+    },
+    {
+      "name": "internet-telecom",
+      "amount": 1010.53
+    },
+    {
+      "name": "hardware",
+      "amount": 240.28
+    },
+    {
+      "name": "software",
+      "amount": 146.16
+    },
+    {
+      "name": "computer-internet-review",
+      "amount": 69.99
+    },
+    {
+      "name": "cloud-infra",
+      "amount": 63.55
+    },
+    {
+      "name": "developer-tools",
+      "amount": 59.87
+    }
+  ],
+  "included_by_merchant_top_40": [
+    {
+      "name": "Anthropic Headquarters",
+      "amount": 1139.68
+    },
+    {
+      "name": "Wak Tech LTD",
+      "amount": 1130.84
+    },
+    {
+      "name": "GoDaddy",
+      "amount": 970.31
+    },
+    {
+      "name": "AT&T",
+      "amount": 856.84
+    },
+    {
+      "name": "Claude.ai",
+      "amount": 600.28
+    },
+    {
+      "name": "OpenAI",
+      "amount": 393.99
+    },
+    {
+      "name": "Mochahost M-in",
+      "amount": 275.13
+    },
+    {
+      "name": "Apple",
+      "amount": 240.28
+    },
+    {
+      "name": "Comcast",
+      "amount": 153.69
+    },
+    {
+      "name": "Fiverr",
+      "amount": 108.36
+    },
+    {
+      "name": "Replika",
+      "amount": 69.99
+    },
+    {
+      "name": "Zoom",
+      "amount": 56.87
+    },
+    {
+      "name": "GitHub",
+      "amount": 50.87
+    },
+    {
+      "name": "Www.perplexity.ai",
+      "amount": 50
+    },
+    {
+      "name": "Elevenlabs.io",
+      "amount": 44
+    },
+    {
+      "name": "Microsoft",
+      "amount": 42.18
+    },
+    {
+      "name": "CloudFlare HQ",
+      "amount": 38.36
+    },
+    {
+      "name": "Office Depot",
+      "amount": 37.87
+    },
+    {
+      "name": "Google Cloud",
+      "amount": 25.19
+    },
+    {
+      "name": "DOMAINAGENTS.COM MILTON",
+      "amount": -19.95
+    },
+    {
+      "name": "Domainagents",
+      "amount": 19.95
+    },
+    {
+      "name": "杭州深[unk][unk]索人",
+      "amount": 10.6
+    },
+    {
+      "name": "Replicate",
+      "amount": 10
+    },
+    {
+      "name": "Google One",
+      "amount": 9.24
+    },
+    {
+      "name": "Slack",
+      "amount": 9
+    }
+  ]
+}

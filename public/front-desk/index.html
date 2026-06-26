@@ -232,6 +232,7 @@
         const chatMessages = document.getElementById('chat-messages');
         const typingIndicator = document.getElementById('typing-indicator');
         const input = chatForm.querySelector('textarea');
+        const MARA_GUIDED_WELCOME = "Welcome to Mindshare Central. I'm Mara at the front desk. Would you like to know more about Mindshare, the Mindshare Central app, or agent capability?";
         const maraState = { sessionId: null, roleContext: null, messages: [], processing: false };
 
         function mindShareLocalClient() { return window.MindShareLocalClient || null; }
@@ -260,6 +261,9 @@
         }
         function hasOfficeEntry() {
             return maraState.messages.some((message) => String(message.text || '').toLowerCase().includes("mara's office"));
+        }
+        function hasGuidedWelcome() {
+            return maraState.messages.some((message) => String(message.text || '').toLowerCase().includes('would you like to know more about mindshare'));
         }
         function renderMessages() {
             [...chatMessages.children].forEach((child) => { if (child !== typingIndicator) child.remove(); });
@@ -313,6 +317,7 @@
                     maraState.messages = claudePayload.messages.map((message) => ({ role: message.role, text: message.text || message.content || '' })).filter((message) => message.text);
                 }
                 if (!hasOfficeEntry()) appendMessage(claudePayload.initialMessage || "This is Mara's office.", 'user');
+                if (!hasGuidedWelcome()) appendMessage(MARA_GUIDED_WELCOME, 'mara');
                 else renderMessages();
                 persistMaraState();
             } catch (error) { appendMessage('Mara office failed to load: ' + (error.message || error), 'system'); }

@@ -123,6 +123,15 @@
             background: rgba(190, 198, 224, 0.2);
             border-radius: 10px;
         }
+        .message-bubble {
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .message-text {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
         .typing-dot {
             animation: bounce 1.4s infinite ease-in-out both;
         }
@@ -172,7 +181,7 @@
 </div>
 </header>
 <!-- Message Area -->
-<div class="flex-1 overflow-y-auto chat-scroll p-gutter flex flex-col gap-6 bg-surface-container-lowest silver-edge rounded-xl mx-auto my-auto mt-12" id="chat-messages" style="height: 288px; flex: 0 0 auto; width: 90%; max-width: 700px; margin: 136px auto auto; background-color: rgb(7, 14, 30); border: 1px solid rgba(190, 198, 224, 0.2);">
+<div class="flex-1 overflow-y-auto chat-scroll p-gutter flex flex-col gap-6 bg-surface-container-lowest silver-edge rounded-xl mx-auto my-auto mt-12" id="chat-messages" style="height: 288px; flex: 0 0 auto; width: 90%; max-width: 700px; margin: 136px auto auto; background-color: rgb(7, 14, 30); border: 1px solid rgba(190, 198, 224, 0.2); overflow-x: hidden;">
 <!-- Live Mara messages render here. -->
 <!-- Mara Typing Indicator (Hidden by default, shown when user sends) -->
 <div class="flex gap-4 max-w-[85%] hidden" id="typing-indicator">
@@ -276,14 +285,14 @@ CLEAR
             const safeText = escapeHtml(text);
             const normalizedRole = role === 'user' ? 'user' : role === 'system' ? 'system' : 'mara';
             if (normalizedRole === 'user') {
-                messageDiv.className = 'flex gap-4 max-w-[85%] self-end flex-row-reverse slide-up';
-                messageDiv.innerHTML = '<div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/40 flex-shrink-0 flex items-center justify-center"><span class="material-symbols-outlined text-[16px] text-primary">person</span></div><div class="flex flex-col gap-1 items-end"><div class="bg-primary/10 p-4 rounded-xl rounded-tr-none border border-primary/20"><p class="font-body-md text-on-surface leading-relaxed">' + safeText + '</p></div><span class="text-[10px] font-label-sm text-on-surface-variant opacity-40">' + time + '</span></div>';
+                messageDiv.className = 'flex gap-4 max-w-[85%] min-w-0 self-end flex-row-reverse slide-up';
+                messageDiv.innerHTML = '<div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/40 flex-shrink-0 flex items-center justify-center"><span class="material-symbols-outlined text-[16px] text-primary">person</span></div><div class="flex flex-col gap-1 items-end min-w-0 max-w-full"><div class="message-bubble bg-primary/10 p-4 rounded-xl rounded-tr-none border border-primary/20"><p class="message-text font-body-md text-on-surface leading-relaxed">' + safeText + '</p></div><span class="text-[10px] font-label-sm text-on-surface-variant opacity-40">' + time + '</span></div>';
             } else if (normalizedRole === 'system') {
-                messageDiv.className = 'flex max-w-[90%] self-center slide-up';
-                messageDiv.innerHTML = '<div class="bg-surface-container-high/80 px-4 py-3 rounded-xl border border-white/10"><p class="font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant">' + safeText + '</p></div>';
+                messageDiv.className = 'flex max-w-[90%] min-w-0 self-center slide-up';
+                messageDiv.innerHTML = '<div class="message-bubble bg-surface-container-high/80 px-4 py-3 rounded-xl border border-white/10"><p class="message-text font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant">' + safeText + '</p></div>';
             } else {
-                messageDiv.className = 'flex gap-4 max-w-[85%] slide-up';
-                messageDiv.innerHTML = '<div class="w-8 h-8 rounded-full bg-surface-container-high border border-primary/10 flex-shrink-0 flex items-center justify-center"><span class="material-symbols-outlined text-[16px] text-primary">smart_toy</span></div><div class="flex flex-col gap-1"><div class="bg-surface-container p-4 rounded-xl rounded-tl-none border border-white/5"><p class="font-body-md text-on-surface leading-relaxed">' + safeText + '</p></div><span class="text-[10px] font-label-sm text-on-surface-variant opacity-40">' + time + '</span></div>';
+                messageDiv.className = 'flex gap-4 max-w-[85%] min-w-0 slide-up';
+                messageDiv.innerHTML = '<div class="w-8 h-8 rounded-full bg-surface-container-high border border-primary/10 flex-shrink-0 flex items-center justify-center"><span class="material-symbols-outlined text-[16px] text-primary">smart_toy</span></div><div class="flex flex-col gap-1 min-w-0 max-w-full"><div class="message-bubble bg-surface-container p-4 rounded-xl rounded-tl-none border border-white/5"><p class="message-text font-body-md text-on-surface leading-relaxed">' + safeText + '</p></div><span class="text-[10px] font-label-sm text-on-surface-variant opacity-40">' + time + '</span></div>';
             }
             chatMessages.insertBefore(messageDiv, typingIndicator);
             chatMessages.scrollTop = chatMessages.scrollHeight;

@@ -34,7 +34,7 @@ Role lifecycle status: Authorized Mindshare role.
 
 Approval evidence: Scott asked Ana on 2026-06-21 to create an HR Director role that owns team-member file existence, freshness, new-file structure updates, team-member structure, taxonomy, and auditing; clarified the role belongs under Human Resources beneath Strategy and Operations; then opened Cole's separate office and asked Ana to show Cole there.
 
-Operational status: activated Role+ Operator in Cole's Office. Role-home thread id: `019eecad-49b2-7633-9e09-11276c531833`.
+Operational status: activated Role+ Operator in Cole's Office. Role-home thread id: `019efbcf-4894-7413-9975-cad9594794f8`.
 
 Operating taxonomy stage: Operator.
 
@@ -206,7 +206,7 @@ Assigned handoff files after activation:
 
 Active Automation/FileWatch: `hr-director-handoff-check`.
 
-Role-home thread: Cole's Office, `019eecad-49b2-7633-9e09-11276c531833`.
+Role-home thread: Cole's Office, `019efbcf-4894-7413-9975-cad9594794f8`.
 
 ## Memory Contract
 

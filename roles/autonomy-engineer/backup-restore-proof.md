@@ -113,7 +113,7 @@ python scripts/backup_roles.py --execute --root C:\custom\backup\path
   "timestamp": "2026-06-21T12:34:56.789000+00:00",
   "files": [
     {
-      "source": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\role-agent.md",
+      "source": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\role-agent.md",
       "destination": "C:\\Users\\scott\\Code\\mindshare-backup-proof\\latest\\role_contract\\ana-recruiter\\role-agent.md",
       "category": "role_contract",
       "size": 2048,

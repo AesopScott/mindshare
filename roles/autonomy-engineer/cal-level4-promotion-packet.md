@@ -22,14 +22,14 @@ Scott remains final approval authority for any Cal promotion or runtime activati
 
 | Source | Path | Result |
 | --- | --- | --- |
-| Role contract | `C:\Users\scott\Code\mojo\roles\cal\role-agent.md` | Present |
-| Autonomy contract | `C:\Users\scott\Code\mojo\roles\cal\Autonomy.md` | Present |
-| Workflow | `C:\Users\scott\Code\mojo\roles\cal\workflow.md` | Present |
-| Heartbeat/automation snapshot | `C:\Users\scott\Code\mojo\roles\cal\heartbeat-automation.md` | Present; draft only, not installed |
-| Memory | `C:\Users\scott\Code\mojo\roles\cal\memory.md` | Present |
-| Memory state | `C:\Users\scott\Code\mojo\roles\cal\memory-state.json` | Present |
+| Role contract | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-manager\role-agent.md` | Present |
+| Autonomy contract | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-manager\Autonomy.md` | Present |
+| Workflow | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-manager\workflow.md` | Present |
+| Heartbeat/automation snapshot | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-manager\heartbeat-automation.md` | Present; draft only, not installed |
+| Memory | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-manager\memory.md` | Present |
+| Memory state | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-manager\memory-state.json` | Present |
 | Agent profile | `C:\Users\scott\Code\mojo\agents\cal-aspm\agent-profile.md` | Present |
-| Gate blocks | `C:\Users\scott\Code\mojo\roles\cal\gate-blocks.md` | Present; no open blocks |
+| Gate blocks | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-manager\gate-blocks.md` | Present; no open blocks |
 | Current autonomy evaluation | `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\Autonomy Evaluation 1.md` | Present |
 | Automation backlog | `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\automation.backlog.md` | Present |
 | Promotion packet policy | `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\level4-promotion-packet-policy.md` | Present |

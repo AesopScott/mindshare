@@ -11,19 +11,30 @@
   "professional_maturity_level": "L7 Director",
   "role_lifecycle_status": "Authorized Mindshare role; activated operator",
   "operating_taxonomy_stage": "Operator",
-  "role_automation_status": "Role+",
+  "role_automation_status": "Role+; Level 4 runtime-installed-scheduler-proof-pending",
   "room_binding_status": "activated in Cole's Office",
   "role_home_thread": {
     "title": "Cole - HR",
-    "thread_id": "019eecad-49b2-7633-9e09-11276c531833"
+    "thread_id": "019efbcf-4894-7413-9975-cad9594794f8"
   },
+  "current_autonomy_level": "Level 4 Senior Staff (Scoped Autonomy), runtime-installed-scheduler-proof-pending",
   "agent_build_readiness": "role-only",
   "activation_approved": true,
   "automation": {
     "name": "hr-director-handoff-check",
     "status": "ACTIVE",
     "kind": "FileWatch",
-    "target_thread_id": "019eecad-49b2-7633-9e09-11276c531833"
+    "target_thread_id": "019efbcf-4894-7413-9975-cad9594794f8"
+  },
+  "level4_automation": {
+    "name": "cole-hourly-role-file-and-whoami-validation",
+    "status": "ACTIVE",
+    "kind": "heartbeat",
+    "cadence": "hourly",
+    "target_thread_id": "019efbcf-4894-7413-9975-cad9594794f8",
+    "state": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\level4-role-file-validation-state.json",
+    "proof": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\level4-proof.md",
+    "scheduler_proof": "pending"
   },
   "primary_voice": "Reviewer",
   "secondary_voice_blend": "Operator 30%, Diplomat 20%, Analyst 10%",
@@ -53,5 +64,5 @@
     "room_card": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\cole.md"
   },
   "correction_note": "An earlier Automation entry was mistakenly attached to Ana's office and was deleted before durable activation records were updated. The active FileWatch is attached to Cole's actual office thread.",
-  "last_updated": "2026-06-21T00:00:00-06:00"
+  "last_updated": "2026-06-24T15:45:00-06:00"
 }

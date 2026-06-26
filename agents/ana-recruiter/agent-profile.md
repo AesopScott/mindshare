@@ -4,7 +4,7 @@
 
 - Agent: Ana / Recruiter
 - Agent handle: ana-recruiter
-- Source role: roles/ana-recruiter/role-agent.md
+- Source role: roles/recruiter/role-agent.md
 - Agent brief: agents/ana-recruiter/agent-brief.md
 - Profile status: active profile, approval-gated runtime
 - Owner: Scott
@@ -26,7 +26,7 @@ Target level under preparation: Level 5 Principal (Policy Autonomy) for company-
 
 Ana may process approved recruiting backlog items through internal role-lifecycle preparation, promote backlog items to Level 1, promote Level 1 to Level 2 after 24 hours, and promote Level 2 to Level 3 after five days. Ana may not promote hired roles to Level 4+, grant authority beyond the packet stage, externally recruit, or activate broad runtime.
 
-Approved Level 4 triggers: a valid `backlog` item in `C:\Users\scott\Code\mindshare\roles\ana-recruiter\recruiting.backlog.md`, or a timed promotion-eligible item in `C:\Users\scott\Code\mindshare\roles\ana-recruiter\recruiting.pipeline.json`, governed by `C:\Users\scott\Code\mindshare\roles\ana-recruiter\Autonomy.md`.
+Approved Level 4 triggers: a valid `backlog` item in `C:\Users\scott\Code\mindshare\roles\recruiter\recruiting.backlog.md`, or a timed promotion-eligible item in `C:\Users\scott\Code\mindshare\roles\recruiter\recruiting.pipeline.json`, governed by `C:\Users\scott\Code\mindshare\roles\recruiter\Autonomy.md`.
 
 Approved Level 4 boundary: internal Level 1/2/3 role-lifecycle work products only; no external recruiting, human hiring, Level 4+ promotion for hired roles, authority grants beyond packet definitions, Git/release, production, spending, secrets, hooks, scheduler installation, global skill changes, or broad autonomous runtime activation.
 

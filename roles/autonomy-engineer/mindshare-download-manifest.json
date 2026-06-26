@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "manifest_name": "mindshare-download-manifest",
+  "owner": "Tess / Autonomy Engineer",
+  "purpose": "Define what a remote or local MindShare install downloads as global system context, role package context, and agent/runtime context.",
+  "source_of_truth": {
+    "local_repo": "C:\\Users\\scott\\Code\\mindshare",
+    "drive_root": "G:\\My Drive\\Mindshare",
+    "notes": [
+      "Do not include secrets, local auth files, transient state, or machine-specific caches in downloadable packages.",
+      "Global files establish governance and shared operating context.",
+      "Role files establish a named role's voice, boundaries, workflow, memory, and autonomy contract.",
+      "Agent files establish executable/runtime behavior for a role that has entered the Agent Path or local autonomous operation."
+    ]
+  },
+  "download_scopes": {
+    "global": {
+      "description": "Shared MindShare system context required before any role or agent package is installed.",
+      "required_files": [
+        {
+          "path": "AGENTS.md",
+          "reason": "Repo-level operating instructions, role routing, conference-room rules, and source boundaries."
+        },
+        {
+          "path": "MINDSHARE_CULTURE.md",
+          "reason": "Shared culture and behavior context for role voice and collaboration."
+        },
+        {
+          "path": "project-foundation.md",
+          "reason": "Project control artifact and persistent memory contract."
+        },
+        {
+          "path": "README.md",
+          "reason": "Repository orientation."
+        },
+        {
+          "path": ".env.example",
+          "reason": "Template only; never package .env.local."
+        },
+        {
+          "path": "catalogs/",
+          "reason": "Global install, skill, repo, and tool catalogs."
+        },
+        {
+          "path": "templates/",
+          "reason": "Shared role, agent, workflow, memory, deployment, evaluation, and MAPS templates."
+        },
+        {
+          "path": "rooms/",
+          "reason": "Conference-room and multi-role prompt protocols."
+        },
+        {
+          "path": "phases/",
+          "reason": "MAPS phase definitions."
+        },
+        {
+          "path": "skills/",
+          "reason": "Repo-local MAPS and role skills required by the operating model."
+        },
+        {
+          "path": "scripts/validate_maps_skills.py",
+          "reason": "Shared validator for MAPS skill contracts."
+        },
+        {
+          "path": "scripts/backup_roles.py",
+          "reason": "Shared role backup helper."
+        },
+        {
+          "path": "roles/autonomy-engineer/autonomy-requirements.md",
+          "reason": "Global autonomy file/capability requirements."
+        },
+        {
+          "path": "roles/autonomy-engineer/level4-gate-checklist.md",
+          "reason": "Shared Level 4+ operational checklist."
+        },
+        {
+          "path": "roles/autonomy-engineer/policy-autonomy.md",
+          "reason": "Shared policy autonomy definition."
+        },
+        {
+          "path": "roles/autonomy-engineer/strict-intent-gate-design.md",
+          "reason": "Shared strict-intent gate design."
+        },
+        {
+          "path": "roles/autonomy-engineer/runtime-adapter-selection.md",
+          "reason": "Shared runtime adapter selection rules."
+        },
+        {
+          "path": "roles/autonomy-engineer/templates/",
+          "reason": "Shared autonomy templates."
+        },
+        {
+          "path": "roles/autonomy-engineer/evals/",
+          "reason": "Shared autonomy promotion/evaluation fixtures."
+        },
+        {
+          "path": "roles/autonomy-engineer/scripts/autonomy_level_monitor.py",
+          "reason": "Shared autonomy standing drift monitor."
+        },
+        {
+          "path": "G:\\My Drive\\Mindshare\\roles.md",
+          "reason": "Canonical roster, reporting structure, and org-wide role/status context."
+        }
+      ],
+      "optional_files": [
+        {
+          "path": "docs/role-handoffs.md",
+          "reason": "Role handoff documentation."
+        },
+        {
+          "path": "docs/OrgChart.docx",
+          "reason": "Top-level organization structure source."
+        },
+        {
+          "path": ".obsidian-memory/STATUS.json",
+          "reason": "Local graph-memory injection status when available."
+        },
+        {
+          "path": ".obsidian-memory/CODEX_SESSION_CONTEXT.md",
+          "reason": "Local graph-memory packet when available."
+        }
+      ],
+      "excluded_files": [
+        {
+          "path": ".env.local",
+          "reason": "Secrets/local machine configuration."
+        },
+        {
+          "path": ".git/",
+          "reason": "Git metadata is not part of an install package."
+        },
+        {
+          "path": ".pytest_cache/",
+          "reason": "Local cache."
+        },
+        {
+          "path": "finance/",
+          "reason": "Domain-specific working area, not global role/agent substrate unless explicitly requested."
+        },
+        {
+          "path": "docs/stitch-artifacts/",
+          "reason": "Website design artifacts; not required for local autonomous operation."
+        },
+        {
+          "path": "public/",
+          "reason": "Website/demo surface; include only in the optional web bundle."
+        }
+      ]
+    },
+    "role": {
+      "description": "A role package is the human-readable role office and operating contract. It can power conversation mode and is required before local autonomous operation.",
+      "root_pattern": "roles/{role_slug}/",
+      "required_files": [
+        {
+          "path": "roles/{role_slug}/name.md",
+          "reason": "Role identity."
+        },
+        {
+          "path": "roles/{role_slug}/role-agent.md",
+          "reason": "Primary role contract, scope, authority, and responsibilities."
+        },
+        {
+          "path": "roles/{role_slug}/workflow.md",
+          "reason": "How the role works."
+        },
+        {
+          "path": "roles/{role_slug}/loop.md",
+          "reason": "Role learning/growth and operating loop."
+        },
+        {
+          "path": "roles/{role_slug}/memory.md",
+          "reason": "Durable role memory."
+        },
+        {
+          "path": "roles/{role_slug}/Autonomy.md",
+          "reason": "Canonical autonomy level, Level 4/5/6 capability definitions, boundaries, and revocation."
+        }
+      ],
+      "conditional_files": [
+        {
+          "path": "roles/{role_slug}/WhoAmI.md",
+          "condition": "Required for roles with office/session injection or Cole validation.",
+          "reason": "Injected role card and autonomy context."
+        },
+        {
+          "path": "roles/{role_slug}/personality.md",
+          "condition": "Required when the role has a dedicated personality file.",
+          "reason": "Role voice and behavior."
+        },
+        {
+          "path": "roles/{role_slug}/gate-blocks.md",
+          "condition": "Required when the role has explicit gate exceptions or denied actions.",
+          "reason": "Authority and boundary blocks."
+        },
+        {
+          "path": "roles/{role_slug}/state.json",
+          "condition": "Required when the role tracks current state outside memory.",
+          "reason": "Structured role state."
+        },
+        {
+          "path": "roles/{role_slug}/automation.md",
+          "condition": "Required when the role has automation behavior documented.",
+          "reason": "Role automation contract."
+        },
+        {
+          "path": "G:\\My Drive\\Mindshare\\{role_room_card}.md",
+          "condition": "Required when a G Drive room card exists for the role.",
+          "reason": "Human-facing room/mirror card."
+        },
+        {
+          "path": "G:\\My Drive\\Mindshare\\role\\{role_slug}\\",
+          "condition": "Required when Drive mirrors are part of the install target.",
+          "reason": "Role mirror files."
+        }
+      ],
+      "excluded_files": [
+        {
+          "path": "roles/{role_slug}/memory-archive/",
+          "reason": "Historical local memory archive; include only for owner-approved migration."
+        },
+        {
+          "path": "roles/{role_slug}/level*-state.json",
+          "reason": "Runtime state belongs in the agent/runtime package, not the base role package."
+        },
+        {
+          "path": "roles/{role_slug}/level*-proof.md",
+          "reason": "Runtime proof belongs in the agent/runtime package, not the base role package."
+        }
+      ]
+    },
+    "agent": {
+      "description": "An agent package is the executable/local runtime layer for a role that performs autonomous or automated work on the user's machine.",
+      "root_patterns": [
+        "roles/{role_slug}/scripts/",
+        "agents/{agent_slug}/",
+        "agents/shared/",
+        "local-client/"
+      ],
+      "required_files": [
+        {
+          "path": "local-client/",
+          "reason": "Client-side shell that exposes local CLI capabilities to the website/app without putting local-machine access in the web page."
+        },
+        {
+          "path": "agents/shared/",
+          "reason": "Shared agent runtime validators, source loaders, and gates."
+        },
+        {
+          "path": "roles/{role_slug}/scripts/",
+          "reason": "Role-specific deterministic automation/autonomy logic."
+        },
+        {
+          "path": "roles/{role_slug}/Autonomy.md",
+          "reason": "Runtime must read current authorized autonomy level and active capability boundaries."
+        }
+      ],
+      "conditional_files": [
+        {
+          "path": "agents/{agent_slug}/agent-profile.md",
+          "condition": "Required when the role has entered the Agent Path.",
+          "reason": "Agent runtime profile."
+        },
+        {
+          "path": "agents/{agent_slug}/agent-brief.md",
+          "condition": "Required for MAPS Define/Design/Build agent packages.",
+          "reason": "Agent brief."
+        },
+        {
+          "path": "agents/{agent_slug}/agent-design.md",
+          "condition": "Required when the agent has a design artifact.",
+          "reason": "Agent design."
+        },
+        {
+          "path": "agents/{agent_slug}/eval-suite.md",
+          "condition": "Required when evaluation gates exist.",
+          "reason": "Agent evaluation suite."
+        },
+        {
+          "path": "agents/{agent_slug}/eval-report.md",
+          "condition": "Required when latest eval evidence should migrate.",
+          "reason": "Agent eval result evidence."
+        },
+        {
+          "path": "roles/{role_slug}/level4automation.py",
+          "condition": "Required when role is Level 4 and script-backed.",
+          "reason": "Level 4 deterministic automation loop."
+        },
+        {
+          "path": "roles/{role_slug}/scripts/level4automation.py",
+          "condition": "Required when role is Level 4 and uses per-role scripts folder standard.",
+          "reason": "Level 4 deterministic automation loop."
+        },
+        {
+          "path": "roles/{role_slug}/scripts/level5automation.py",
+          "condition": "Required when role is Level 5 and script-backed.",
+          "reason": "Level 5 deterministic policy-autonomy loop."
+        },
+        {
+          "path": "roles/{role_slug}/level*-state.json",
+          "condition": "Include only when migrating an existing active local agent instance.",
+          "reason": "Runtime state evidence."
+        },
+        {
+          "path": "roles/{role_slug}/level*-proof.md",
+          "condition": "Include only when migrating an existing active local agent instance.",
+          "reason": "Runtime proof evidence."
+        },
+        {
+          "path": "C:\\Users\\scott\\.codex\\automations\\{automation_id}\\automation.toml",
+          "condition": "Template only; target machine must create its own automation record.",
+          "reason": "Timer/trigger configuration."
+        }
+      ],
+      "excluded_files": [
+        {
+          "path": "C:\\Users\\scott\\.codex\\auth.json",
+          "reason": "Local auth belongs only to the target user's machine."
+        },
+        {
+          "path": "C:\\Users\\scott\\.codex\\sessions/",
+          "reason": "Session history is not portable agent source."
+        },
+        {
+          "path": "C:\\Users\\scott\\.codex\\logs_*.sqlite",
+          "reason": "Local logs are not portable source."
+        },
+        {
+          "path": "C:\\Users\\scott\\.codex\\automations\\*/state*",
+          "reason": "Runtime state should be regenerated or migrated through an explicit migration path."
+        }
+      ]
+    },
+    "web_demo": {
+      "description": "Optional public website/demo surface. This is not required for local autonomous operation.",
+      "optional_files": [
+        {
+          "path": "public/",
+          "reason": "Website pages and local mockups."
+        },
+        {
+          "path": "docs/stitch-artifacts/",
+          "reason": "Design-source artifacts."
+        },
+        {
+          "path": "scripts/sync-public-to-mojo.ps1",
+          "reason": "Local MindShare-to-Mojo website mirror helper."
+        }
+      ]
+    }
+  },
+  "install_order": [
+    "global",
+    "role",
+    "agent",
+    "web_demo"
+  ],
+  "validation_checks": [
+    {
+      "id": "global-no-secrets",
+      "scope": "global",
+      "check": "Package must not include .env.local, auth.json, session logs, local sqlite logs, or machine-specific caches."
+    },
+    {
+      "id": "global-roster-present",
+      "scope": "global",
+      "check": "A roles.md source or exported roster snapshot must be present."
+    },
+    {
+      "id": "role-autonomy-present",
+      "scope": "role",
+      "check": "Each installed role must include Autonomy.md."
+    },
+    {
+      "id": "role-boundaries-present",
+      "scope": "role",
+      "check": "Each installed role must define authority boundaries through role-agent.md, Autonomy.md, or gate-blocks.md."
+    },
+    {
+      "id": "agent-local-auth",
+      "scope": "agent",
+      "check": "Target machine must authenticate Codex/Claude locally; downloaded package must not provide credentials."
+    },
+    {
+      "id": "agent-runtime-contract",
+      "scope": "agent",
+      "check": "Web page must communicate through the local client contract, not direct local filesystem or hardcoded 127.0.0.1 access."
+    }
+  ],
+  "open_questions": [
+    "Should roles.md be packaged from G Drive directly, exported into the repo, or generated as a sanitized roster snapshot?",
+    "Should active state/proof migrate when installing an agent, or should target machines always start with fresh state/proof?",
+    "Should public conversation mode use the role package only, or a separate sanitized conversation package?",
+    "Should legacy agents/{agent_slug}/ files remain part of the Agent Path or be folded into roles/{role_slug}/ agent metadata?"
+  ]
+}

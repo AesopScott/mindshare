@@ -175,11 +175,11 @@
         "last_reviewed": "2026-06-21"
       },
       "source_files": {
-        "role_agent_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\role-agent.md",
+        "role_agent_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\role-agent.md",
         "autonomy_md": "Not yet created",
-        "memory_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\memory.md",
-        "personality_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\personality.md",
-        "whoami_card": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\name.md (inferred)"
+        "memory_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\name.md (inferred)"
       },
       "agent_artifacts": {
         "agent_profile_md": "C:\\Users\\scott\\Code\\mindshare\\agents\\ana-recruiter\\agent-profile.md",
@@ -194,8 +194,8 @@
         }
       ],
       "memory_and_mirrors": {
-        "durable_memory_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\ana-recruiter\\memory.md",
-        "obsidian_vault_path": "G:\\My Drive\\Mindshare\\ana.md; G:\\My Drive\\Mindshare\\role\\ana-recruiter"
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mindshare\\ana.md; G:\\My Drive\\Mindshare\\role\\recruiter"
       },
       "authority_boundaries": {
         "allowed_actions": [
@@ -310,11 +310,11 @@
         "last_reviewed": "2026-06-20"
       },
       "source_files": {
-        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\cal\\role-agent.md",
+        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\role-agent.md",
         "autonomy_md": "Not yet created",
-        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\cal\\memory.md",
-        "personality_md": "C:\\Users\\scott\\Code\\mojo\\roles\\cal\\personality.md",
-        "whoami_card": "C:\\Users\\scott\\Code\\mojo\\roles\\cal\\name.md (inferred)"
+        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\name.md (inferred)"
       },
       "channels": [
         {
@@ -325,8 +325,8 @@
         }
       ],
       "memory_and_mirrors": {
-        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\cal\\memory.md",
-        "obsidian_vault_path": "G:\\My Drive\\Mojo\\cal.md; G:\\My Drive\\Mojo\\role\\cal"
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mojo\\cal.md; G:\\My Drive\\Mojo\\role\\maps-agentic-systems-program-manager"
       },
       "authority_boundaries": {
         "allowed_actions": [
@@ -435,13 +435,13 @@
         "last_reviewed": "2026-06-19"
       },
       "source_files": {
-        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\role-agent.md",
-        "autonomy_md": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\Autonomy.md",
-        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\memory.md",
-        "personality_md": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\personality.md",
-        "whoami_card": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\name.md (inferred)",
-        "workflow_md": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\workflow.md (inferred)",
-        "loop_md": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\loop.md (inferred)"
+        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\role-agent.md",
+        "autonomy_md": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\Autonomy.md",
+        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\name.md (inferred)",
+        "workflow_md": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\workflow.md (inferred)",
+        "loop_md": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\loop.md (inferred)"
       },
       "agent_artifacts": {
         "agent_profile_md": "C:\\Users\\scott\\Code\\mojo\\agents\\vik-aspa\\agent-profile.md (inferred)"
@@ -455,9 +455,9 @@
         }
       ],
       "memory_and_mirrors": {
-        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\memory.md",
-        "runtime_state_path": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\state.json (inferred)",
-        "audit_log_path": "C:\\Users\\scott\\Code\\mojo\\roles\\vik\\audit.jsonl (inferred)",
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\memory.md",
+        "runtime_state_path": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\state.json (inferred)",
+        "audit_log_path": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\audit.jsonl (inferred)",
         "obsidian_vault_path": "G:\\My Drive\\Mojo\\vik.md; G:\\My Drive\\Mojo\\role\\vik"
       },
       "authority_boundaries": {
@@ -629,11 +629,11 @@
         "last_reviewed": "2026-06-19"
       },
       "source_files": {
-        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\liz\\role-agent.md",
+        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\role-agent.md",
         "autonomy_md": "Not yet created",
-        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\liz\\memory.md",
-        "personality_md": "C:\\Users\\scott\\Code\\mojo\\roles\\liz\\personality.md",
-        "whoami_card": "C:\\Users\\scott\\Code\\mojo\\roles\\liz\\name.md (inferred)"
+        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\name.md (inferred)"
       },
       "channels": [
         {
@@ -644,8 +644,8 @@
         }
       ],
       "memory_and_mirrors": {
-        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\liz\\memory.md",
-        "obsidian_vault_path": "G:\\My Drive\\Mojo\\role\\liz"
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mojo\\role\\mojo-website-manager"
       },
       "authority_boundaries": {
         "allowed_actions": [
@@ -1168,11 +1168,11 @@
         "last_reviewed": "2026-06-19"
       },
       "source_files": {
-        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\bea\\role-agent.md",
+        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer\\role-agent.md",
         "autonomy_md": "Not yet created",
-        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\bea\\memory.md",
-        "personality_md": "C:\\Users\\scott\\Code\\mojo\\roles\\bea\\personality.md",
-        "whoami_card": "C:\\Users\\scott\\Code\\mojo\\roles\\bea\\name.md (inferred)"
+        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer\\memory.md",
+        "personality_md": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer\\personality.md",
+        "whoami_card": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer\\name.md (inferred)"
       },
       "channels": [
         {
@@ -1183,8 +1183,8 @@
         }
       ],
       "memory_and_mirrors": {
-        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\bea\\memory.md",
-        "obsidian_vault_path": "G:\\My Drive\\Mojo\\bea.md; G:\\My Drive\\Mojo\\role\\bea"
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer\\memory.md",
+        "obsidian_vault_path": "G:\\My Drive\\Mojo\\bea.md; G:\\My Drive\\Mojo\\role\\mojo-maps-engineer"
       },
       "authority_boundaries": {
         "allowed_actions": [
@@ -1519,14 +1519,14 @@
         "last_reviewed": "2026-06-20"
       },
       "source_files": {
-        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\matt\\role-agent.md",
+        "role_agent_md": "C:\\Users\\scott\\Code\\mojo\\roles\\released-maps-agentic-systems-program-manager\\role-agent.md",
         "autonomy_md": "Not applicable; released",
-        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\matt\\memory.md",
+        "memory_md": "C:\\Users\\scott\\Code\\mojo\\roles\\released-maps-agentic-systems-program-manager\\memory.md",
         "legacy_mindshare_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\agentic-systems-program-manager (legacy)"
       },
       "channels": [],
       "memory_and_mirrors": {
-        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\matt\\memory.md (historical context only)",
+        "durable_memory_path": "C:\\Users\\scott\\Code\\mojo\\roles\\released-maps-agentic-systems-program-manager\\memory.md (historical context only)",
         "obsidian_vault_path": "G:\\My Drive\\Mojo\\matt.md (historical context only)"
       },
       "authority_boundaries": {

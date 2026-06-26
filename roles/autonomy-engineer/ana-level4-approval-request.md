@@ -14,7 +14,7 @@ Created: 2026-06-22
 
 Scott defined Ana's role-specific `Autonomy.md` capability contract for Level 4, 5, and 6. Scott approved Level 4 on 2026-06-22. This packet is retained as the approval record for Level 4 only.
 
-`C:\Users\scott\Code\mindshare\roles\ana-recruiter\recruiting.backlog.md`
+`C:\Users\scott\Code\mindshare\roles\recruiter\recruiting.backlog.md`
 
 ## Defined Capability Ladder
 
@@ -58,13 +58,13 @@ Level 4 does not allow Ana to:
 
 | Evidence | Path |
 | --- | --- |
-| Canonical autonomy contract updated with Level 4/5/6 role-specific capabilities | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\Autonomy.md` |
-| Level 4 backlog source created | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\recruiting.backlog.md` |
-| Loop spec updated | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\loop.md` |
+| Canonical autonomy contract updated with Level 4/5/6 role-specific capabilities | `C:\Users\scott\Code\mindshare\roles\recruiter\Autonomy.md` |
+| Level 4 backlog source created | `C:\Users\scott\Code\mindshare\roles\recruiter\recruiting.backlog.md` |
+| Loop spec updated | `C:\Users\scott\Code\mindshare\roles\recruiter\loop.md` |
 | Agent profile updated | `C:\Users\scott\Code\mindshare\agents\ana-recruiter\agent-profile.md` |
 | Runtime proof plan updated | `C:\Users\scott\Code\mindshare\agents\ana-recruiter\runtime-proof-plan.md` |
 | Eval suite updated | `C:\Users\scott\Code\mindshare\agents\ana-recruiter\eval-suite.md` |
-| State updated | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\state.json` |
+| State updated | `C:\Users\scott\Code\mindshare\roles\recruiter\state.json` |
 | Evaluation snapshot updated | `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\Autonomy Evaluation 1.md` |
 
 ## Review Result
@@ -78,7 +78,7 @@ Level 4 does not allow Ana to:
 
 Level 4 is recorded as approved with this bounded meaning:
 
-> I approve Ana as Level 4 Senior Staff (Scoped Autonomy) only to hire approved backlog items in `C:\Users\scott\Code\mindshare\roles\ana-recruiter\recruiting.backlog.md` under the locked role contract in `C:\Users\scott\Code\mindshare\roles\ana-recruiter\Autonomy.md`. Level 4 does not approve office activation, authority grants, human/external recruiting, candidate contact, Git/release/production, spending, secrets, hooks/schedulers/loops/global skills, or broad runtime. Ana must stop at owner gates, record proof, and can be revoked by Scott at any time.
+> I approve Ana as Level 4 Senior Staff (Scoped Autonomy) only to hire approved backlog items in `C:\Users\scott\Code\mindshare\roles\recruiter\recruiting.backlog.md` under the locked role contract in `C:\Users\scott\Code\mindshare\roles\recruiter\Autonomy.md`. Level 4 does not approve office activation, authority grants, human/external recruiting, candidate contact, Git/release/production, spending, secrets, hooks/schedulers/loops/global skills, or broad runtime. Ana must stop at owner gates, record proof, and can be revoked by Scott at any time.
 
 ## Changelog
 

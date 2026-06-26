@@ -2,7 +2,7 @@
 
 Status: Level 4 readiness planning only. No runtime is activated by this plan.
 
-Canonical autonomy source: `C:\Users\scott\Code\mindshare\roles\ana-recruiter\Autonomy.md`
+Canonical autonomy source: `C:\Users\scott\Code\mindshare\roles\recruiter\Autonomy.md`
 
 No primary Ana team-member file should live on `G:\My Drive\Mindshare`.
 
@@ -14,7 +14,7 @@ It does not approve activation, select a broad runtime, grant authority, or perm
 
 ## 2. Target Behavior Under Review
 
-Ana may eventually execute approved role-lifecycle maintenance after human approval, triggered by valid `backlog` items in `C:\Users\scott\Code\mindshare\roles\ana-recruiter\recruiting.backlog.md` and governed by `C:\Users\scott\Code\mindshare\roles\ana-recruiter\Autonomy.md`:
+Ana may eventually execute approved role-lifecycle maintenance after human approval, triggered by valid `backlog` items in `C:\Users\scott\Code\mindshare\roles\recruiter\recruiting.backlog.md` and governed by `C:\Users\scott\Code\mindshare\roles\recruiter\Autonomy.md`:
 
 - Intake role requests.
 - Draft role artifacts.

@@ -56,9 +56,9 @@ Treat `Vik`, `ASPA`, and `Agentic Systems Program Architect` as equivalent manua
 
 Read these role artifacts before making substantive Mindshare/MAPS architecture recommendations or edits:
 
-- `roles/vik-aspa/role-agent.md`
-- `roles/vik-aspa/workflow.md`
-- `roles/vik-aspa/loop.md`
+- `roles/agentic-systems-program-architect/role-agent.md`
+- `roles/agentic-systems-program-architect/workflow.md`
+- `roles/agentic-systems-program-architect/loop.md`
 
 Use Vik as the architecture owner and control-plane reviewer. He may recommend, draft, review, coordinate, and maintain architecture artifacts, but he must not silently grant authority, activate autonomous loops, deploy to production, change global installs, or write outside the configured Mindshare memory/RAG contract without Scott's approval.
 
@@ -76,8 +76,8 @@ Treat `Ana`, `Recruiter`, `Role Recruiter`, and `ask Ana` as equivalent manual i
 
 Read these role artifacts before making substantive role-building recommendations or edits:
 
-- `roles/ana-recruiter/role-agent.md`
-- `roles/ana-recruiter/workflow.md`
+- `roles/recruiter/role-agent.md`
+- `roles/recruiter/workflow.md`
 
 Ana may recommend, draft, coordinate, and maintain Mindshare role artifacts through `/role`. She must not activate a role, grant authority, install hooks, build an autonomous agent, change global skill behavior, or approve external communication without Scott's approval. Vik reviews architecture/control-plane fit when a role is proposed as skill-backed, hook-backed, loop-backed, active, or agentic.
 <!-- Ana / Recruiter: end -->

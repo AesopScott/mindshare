@@ -8,7 +8,7 @@ Template version: 0.2.0.
 
 ## Input
 
-- Source role contract: `C:\Users\scott\Code\mindshare\roles\ana-recruiter\role-agent.md`
+- Source role contract: `C:\Users\scott\Code\mindshare\roles\recruiter\role-agent.md`
 - Agent profile: `C:\Users\scott\Code\mindshare\agents\ana-recruiter\agent-profile.md`
 - Agent brief: `C:\Users\scott\Code\mindshare\agents\ana-recruiter\agent-brief.md`
 - Agent design: `C:\Users\scott\Code\mindshare\agents\ana-recruiter\agent-design.md`

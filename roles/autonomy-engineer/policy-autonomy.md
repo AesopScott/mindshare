@@ -92,9 +92,9 @@ Vik:
 
 - Current Level 4: scoped research backlog loop. Scott confirmed this is correct.
 - Current Level 5 definition: goal-based product/implementation recommendation policy autonomy. Vik looks across completed research and analysis and recommends whether the company would be well served by making, implementing, adopting, integrating, or further reviewing researched products, tools, capabilities, workflows, or programs.
-- Current Level 5 prerequisites: `C:\Users\scott\Code\mojo\roles\vik\level5-product-recommendation-policy.md`, promotion approval, runtime policy loading, eval proof, observation, audit, rollback, and revocation.
+- Current Level 5 prerequisites: `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\level5-product-recommendation-policy.md`, promotion approval, runtime policy loading, eval proof, observation, audit, rollback, and revocation.
 - Current Level 6 definition: native AI/security discovery loop. Vik researches the internet/world for AI and security topics not previously researched, adds eligible novel topics to the backlog, performs deep analysis, and applies Level 5 recommendation criteria.
-- Current Level 6 prerequisites: `C:\Users\scott\Code\mojo\roles\vik\level6-ai-security-research-loop-policy.md`, source-quality controls, novelty/deduplication, backlog-state controls, Level 4 and Level 5 proof, observation, rollback, revocation, human override, and Scott promotion approval.
+- Current Level 6 prerequisites: `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\level6-ai-security-research-loop-policy.md`, source-quality controls, novelty/deduplication, backlog-state controls, Level 4 and Level 5 proof, observation, rollback, revocation, human override, and Scott promotion approval.
 - Current standing: Level 4 active only. Level 5 and Level 6 are defined but not active.
 
 Tess:

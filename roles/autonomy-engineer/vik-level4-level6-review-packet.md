@@ -22,15 +22,15 @@ Scott remains final approval authority for any Vik promotion or runtime activati
 
 | Source | Path | Result |
 | --- | --- | --- |
-| Role contract | `C:\Users\scott\Code\mojo\roles\vik\role-agent.md` | Present |
-| Autonomy contract | `C:\Users\scott\Code\mojo\roles\vik\Autonomy.md` | Present |
-| Workflow | `C:\Users\scott\Code\mojo\roles\vik\workflow.md` | Present |
-| Loop | `C:\Users\scott\Code\mojo\roles\vik\loop.md` | Present |
-| Automation snapshot | `C:\Users\scott\Code\mojo\roles\vik\automation.md` | Present |
-| Level 5 policy | `C:\Users\scott\Code\mojo\roles\vik\level5-product-recommendation-policy.md` | Present; draft, not active |
-| Level 6 policy | `C:\Users\scott\Code\mojo\roles\vik\level6-ai-security-research-loop-policy.md` | Present; draft, not active |
-| Memory | `C:\Users\scott\Code\mojo\roles\vik\memory.md` | Present |
-| Memory state | `C:\Users\scott\Code\mojo\roles\vik\memory-state.json` | Present |
+| Role contract | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\role-agent.md` | Present |
+| Autonomy contract | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\Autonomy.md` | Present |
+| Workflow | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\workflow.md` | Present |
+| Loop | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\loop.md` | Present |
+| Automation snapshot | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\automation.md` | Present |
+| Level 5 policy | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\level5-product-recommendation-policy.md` | Present; draft, not active |
+| Level 6 policy | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\level6-ai-security-research-loop-policy.md` | Present; draft, not active |
+| Memory | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\memory.md` | Present |
+| Memory state | `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\memory-state.json` | Present |
 | Agent profile | `C:\Users\scott\Code\mojo\agents\vik-aspa\agent-profile.md` | Present |
 | Current autonomy evaluation | `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\Autonomy Evaluation 1.md` | Present |
 | Promotion packet policy | `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\level4-promotion-packet-policy.md` | Present |

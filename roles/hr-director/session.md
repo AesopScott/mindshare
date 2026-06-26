@@ -5,7 +5,7 @@ Status: active
 ## Session
 
 - Title: Cole - HR
-- Thread id: `019eecad-49b2-7633-9e09-11276c531833`
+- Thread id: `019efbcf-4894-7413-9975-cad9594794f8`
 - Project: Mindshare
 - Role: Cole / HR Director
 - Activation approval: Scott opened Cole's separate office and asked Ana to show Cole there.
@@ -21,4 +21,4 @@ I am an activated Role+ Operator only for bounded handoff monitoring and HR file
 
 ## Correction Note
 
-Ana initially created `hr-director-handoff-check` against Ana's office by mistake. That Automation entry was deleted. Active FileWatch is attached to Cole's actual office thread: `019eecad-49b2-7633-9e09-11276c531833`.
+Ana initially created `hr-director-handoff-check` against Ana's office by mistake. That Automation entry was deleted. Active FileWatch is attached to Cole's actual office thread: `019efbcf-4894-7413-9975-cad9594794f8`.

@@ -20,11 +20,11 @@ This packet is a Level 4 promotion review draft. It does not promote Liz, approv
 
 | Source | Path | Result |
 | --- | --- | --- |
-| Role contract | `C:\Users\scott\Code\mojo\roles\liz\role-agent.md` | Present |
-| Autonomy contract | `C:\Users\scott\Code\mojo\roles\liz\Autonomy.md` | Present |
-| Workflow | `C:\Users\scott\Code\mojo\roles\liz\workflow.md` | Present |
-| Automation snapshot | `C:\Users\scott\Code\mojo\roles\liz\automation.md` | Present |
-| Memory/state | `C:\Users\scott\Code\mojo\roles\liz\memory.md`; `memory-state.json` | Present |
+| Role contract | `C:\Users\scott\Code\mojo\roles\mojo-website-manager\role-agent.md` | Present |
+| Autonomy contract | `C:\Users\scott\Code\mojo\roles\mojo-website-manager\Autonomy.md` | Present |
+| Workflow | `C:\Users\scott\Code\mojo\roles\mojo-website-manager\workflow.md` | Present |
+| Automation snapshot | `C:\Users\scott\Code\mojo\roles\mojo-website-manager\automation.md` | Present |
+| Memory/state | `C:\Users\scott\Code\mojo\roles\mojo-website-manager\memory.md`; `memory-state.json` | Present |
 | Agent profile | `C:\Users\scott\Code\mojo\agents\liz-training\agent-profile.md` | Present |
 | Evaluation/backlog/policy | Tess autonomy evaluation, backlog, packet policy | Present |
 

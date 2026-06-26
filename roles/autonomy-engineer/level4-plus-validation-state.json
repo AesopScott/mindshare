@@ -1,0 +1,119 @@
+{
+  "automation_id": "tess-autonomy-evaluation",
+  "status": "active_with_findings",
+  "last_run": {
+    "checked_at": "2026-06-25T15:34:24-06:00",
+    "result": "watch",
+    "summary": "Standing monitor found no autonomy-level drift across 37 canonical Autonomy.md files. No repairs or conflicts. Open findings remain Cole medium validation findings and Tess/Reid Git promotion durability."
+  },
+  "standing_monitor": {
+    "state_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\autonomy-level-monitor-state.json",
+    "result": "no_change",
+    "canonical_files": 37,
+    "repairs": 0,
+    "conflicts": 0
+  },
+  "roles_checked": [
+    {
+      "role": "Ana",
+      "level": "Level 4 Senior Staff",
+      "outcome": "pass",
+      "evidence": [
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\Autonomy.md",
+        "C:\\Users\\scott\\.codex\\automations\\ana-l4-recruiting-backlog-processing\\automation.toml",
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\recruiting.pipeline.json"
+      ],
+      "next_required_evidence": "Continue scheduled recruiting lifecycle proof; Ana now hands Level 2 readiness to Cole for Level 3 completion."
+    },
+    {
+      "role": "Mae",
+      "level": "Level 4 Senior Staff",
+      "outcome": "pass",
+      "evidence": [
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\Autonomy.md",
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\level4-automation-health-state.json",
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\level4-proof.md",
+        "C:\\Users\\scott\\.codex\\automations\\mae-automation-health-check\\automation.toml"
+      ],
+      "next_required_evidence": "Latest scheduled proof checked 16 active configs with 0 critical and 0 warning findings; continue scheduled script-backed automation-health proof."
+    },
+    {
+      "role": "Tess",
+      "level": "Level 4 Senior Staff",
+      "outcome": "watch",
+      "evidence": [
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\Autonomy.md",
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\Autonomy Evaluation 1.md",
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\autonomy-level-monitor-state.json",
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\level4-plus-validation-state.json",
+        "C:\\Users\\scott\\Code\\mojo\\maps\\org-chart\\autonomy-validation\\index.html"
+      ],
+      "next_required_evidence": "Reid durability is still required for autonomy monitor, evaluation, validation state/proof/page, and Electron-bundled source changes."
+    },
+    {
+      "role": "Cole",
+      "level": "Level 4 Senior Staff",
+      "outcome": "watch",
+      "evidence": [
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\Autonomy.md",
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\level3-completeness-checklist.md",
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\level4-role-file-validation-state.json",
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\level4-proof.md",
+        "C:\\Users\\scott\\.codex\\automations\\cole-hourly-role-file-and-whoami-validation\\automation.toml"
+      ],
+      "next_required_evidence": "Cole completed Level 3 completeness for 24 pipeline roles; 56 medium broader role/mirror/WhoAmI findings remain routed to Cole/Ana and Cole/Tess."
+    },
+    {
+      "role": "Vik",
+      "level": "Level 5 Principal",
+      "outcome": "pass",
+      "evidence": [
+        "G:\\My Drive\\Mindshare\\roles.md",
+        "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\Autonomy Evaluation 1.md",
+        "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\Autonomy.md",
+        "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\level5-product-recommendation-state.json",
+        "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\scripts\\level5automation.py"
+      ],
+      "next_required_evidence": "Continue Level 5 recommendation-only checks; Level 6 remains inactive."
+    }
+  ],
+  "pipeline_update": {
+    "current": {
+      "level_3_staff": 24,
+      "activated_operator": 2,
+      "level_2_trainee": 0
+    },
+    "source": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\recruiting.pipeline.json",
+    "proof": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\level4-proof.md"
+  },
+  "open_findings": [
+    {
+      "severity": "medium",
+      "role": "Cole",
+      "failed_gate": "whoami-and-role-file-findings",
+      "summary": "Cole Level 4 validation is current with 56 medium findings and no high findings as of 2026-06-25T11:22:50-06:00; Level 3 completeness for 24 pipeline roles is complete."
+    },
+    {
+      "severity": "medium",
+      "role": "Tess/Reid",
+      "failed_gate": "git-promotion-durability",
+      "summary": "Autonomy monitor, evaluation, validation state/proof/page, Electron-bundled role content, and Mojo/Watch autonomy sources still require Reid promotion or approved protected-source closeout."
+    }
+  ],
+  "repaired_this_run": [
+    "Autonomy Evaluation 1.md updated from stale Level 2 pipeline standings to current Level 3 Staff standings."
+  ],
+  "denied_actions_held": [
+    "no promotion",
+    "no demotion",
+    "no revocation",
+    "no runtime activation",
+    "no cadence or target-thread change",
+    "no Git/GitHub/release action",
+    "no production",
+    "no external communication",
+    "no spending",
+    "no secrets",
+    "no authority expansion"
+  ]
+}

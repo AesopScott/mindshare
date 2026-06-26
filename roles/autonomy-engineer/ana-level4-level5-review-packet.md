@@ -22,16 +22,16 @@ Scott remains final approval authority for any Ana promotion or policy activatio
 
 | Source | Path | Result |
 | --- | --- | --- |
-| Role contract | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\role-agent.md` | Present |
-| Autonomy contract | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\Autonomy.md` | Present |
-| Workflow | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\workflow.md` | Present |
-| Loop | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\loop.md` | Present |
-| Automation snapshot | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\automation.md` | Present |
-| Recruiting backlog | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\recruiting.backlog.md` | Present |
-| Recruiting pipeline | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\recruiting.pipeline.json` | Present |
-| Leadership taxonomy | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\leadership-role-taxonomy.md` | Present |
-| Level 5 company-position policy | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\level5-company-position-research-policy.md` | Present; draft, not active |
-| Level 5 leader-demand policy | `C:\Users\scott\Code\mindshare\roles\ana-recruiter\level5-leader-hiring-demand-policy.md` | Present; draft, not active |
+| Role contract | `C:\Users\scott\Code\mindshare\roles\recruiter\role-agent.md` | Present |
+| Autonomy contract | `C:\Users\scott\Code\mindshare\roles\recruiter\Autonomy.md` | Present |
+| Workflow | `C:\Users\scott\Code\mindshare\roles\recruiter\workflow.md` | Present |
+| Loop | `C:\Users\scott\Code\mindshare\roles\recruiter\loop.md` | Present |
+| Automation snapshot | `C:\Users\scott\Code\mindshare\roles\recruiter\automation.md` | Present |
+| Recruiting backlog | `C:\Users\scott\Code\mindshare\roles\recruiter\recruiting.backlog.md` | Present |
+| Recruiting pipeline | `C:\Users\scott\Code\mindshare\roles\recruiter\recruiting.pipeline.json` | Present |
+| Leadership taxonomy | `C:\Users\scott\Code\mindshare\roles\recruiter\leadership-role-taxonomy.md` | Present |
+| Level 5 company-position policy | `C:\Users\scott\Code\mindshare\roles\recruiter\level5-company-position-research-policy.md` | Present; draft, not active |
+| Level 5 leader-demand policy | `C:\Users\scott\Code\mindshare\roles\recruiter\level5-leader-hiring-demand-policy.md` | Present; draft, not active |
 | Agent profile | `C:\Users\scott\Code\mindshare\agents\ana-recruiter\agent-profile.md` | Present |
 | Current autonomy evaluation | `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\Autonomy Evaluation 1.md` | Present |
 | Promotion packet policy | `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\level4-promotion-packet-policy.md` | Present |

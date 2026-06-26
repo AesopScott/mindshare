@@ -26,10 +26,11 @@ This protocol defines how a prompt entered in the MindShare Conference Room beco
 For each attendee, load:
 
 1. Dedicated `WhoAmI.md` if present.
-2. `role-agent.md`.
-3. `personality.md` when present and the room needs distinct voice or participation behavior.
-4. `memory.md` when current context, open loops, or status may matter.
-5. Relevant agent profile, brief, or design only when the prompt asks about agent build/runtime behavior.
+2. `Autonomy.md` when present.
+3. `role-agent.md`.
+4. `personality.md` when present and the room needs distinct voice or participation behavior.
+5. `memory.md` when current context, open loops, or status may matter.
+6. Relevant agent profile, brief, or design only when the prompt asks about agent build/runtime behavior.
 
 Load only what is needed for the prompt. Do not read every channel just because a role is invited.
 
@@ -46,6 +47,7 @@ Mandate:
 What I notice first:
 What I protect:
 Authority boundary:
+Autonomy context:
 Participation value:
 Culture lines:
 Voice:
@@ -53,6 +55,8 @@ Current relevant memory:
 ```
 
 The assembled card goes into prompt context before generating that role's contribution.
+
+Autonomy context must include current level and operating stage, what the active level permits, lower-level context the role must still remember, higher Level 4/5/6 capabilities only as defined/inactive unless formally promoted, and the canonical `Autonomy.md` source path or a missing-source note. The autonomy context is awareness, not authority.
 
 ## Participation Algorithm
 
@@ -100,8 +104,9 @@ Do not write memory, handoffs, channel entries, or automation changes unless Sco
 
 ## Version And Changelog
 
-Version: 0.1.0
+Version: 0.1.1
 
 | Date | Version | Change |
 | --- | --- | --- |
+| 2026-06-24 | 0.1.1 | Added Autonomy Context to Who Am I card assembly and loading rules. |
 | 2026-06-21 | 0.1.0 | Created prompt protocol for attendee resolution, Who Am I card assembly, participation checks, facilitator synthesis, and boundary controls. |

@@ -222,7 +222,7 @@ When an agent requests permission to edit a sensitive file, it must provide:
 ### 3.1 Intent Field Requirements
 
 Intent must be:
-- **Specific:** "Add Scott activation approval to roles/vik/Autonomy.md line 47" (yes)
+- **Specific:** "Add Scott activation approval to roles/maps-agentic-systems-program-architect/Autonomy.md line 47" (yes)
 - **Not vague:** "Update Autonomy.md" (no — blocked until specific)
 - **Single operation:** One intent per approval request
 - **Non-adjacent:** No "while we're here, also update..."
@@ -412,7 +412,7 @@ When a file touches multiple domains, routing is:
 2. **Route to all corresponding owners**
 3. **Require unanimous approval**
 
-Example: Editing roles/vik/Autonomy.md (control-plane) that includes Release-gate section (Reid domain):
+Example: Editing roles/maps-agentic-systems-program-architect/Autonomy.md (control-plane) that includes Release-gate section (Reid domain):
 - Primary: Scott (final authority)
 - Secondary: Vik (control-plane), Reid (release gate section)
 - Consensus: All three must approve
@@ -424,7 +424,7 @@ If an agent not owning the file requests an edit:
 2. Owner verifies intent is within their lane
 3. Owner escalates to final approver if needed
 
-Example: Bea (engineer) requests edit to roles/ana-recruiter/memory.md:
+Example: Bea (engineer) requests edit to roles/recruiter/memory.md:
 - Routes to Ana (memory owner)
 - Ana decides if it's in-scope or routes to Scott
 
@@ -627,7 +627,7 @@ Rollback is append-only. Original approval record is preserved (not deleted).
 **Sensitive-file edit approval:** Edits to memory.md and name.md for recruiting/onboarding.
 
 **Routing triggers:**
-- Edits to roles/ana-recruiter/memory.md
+- Edits to roles/recruiter/memory.md
 - Role lifecycle status changes
 - Onboarding packet updates
 
@@ -650,13 +650,13 @@ Proof harness (AUTO-009) must test these scenarios:
 ### 12.1 Valid Approval Scenarios
 
 **Scenario 1a: Single hunk, single approver**
-- Request: Edit roles/vik/Autonomy.md, add one line to changelog
+- Request: Edit roles/maps-agentic-systems-program-architect/Autonomy.md, add one line to changelog
 - Approver: Scott
 - Expected: Approved if Scott approves
 - Proof: Audit entry recorded with Scott signature
 
 **Scenario 1b: Multiple hunks, same intent**
-- Request: Edit roles/vik/Autonomy.md sections 5 and 17 (both about same gate change)
+- Request: Edit roles/maps-agentic-systems-program-architect/Autonomy.md sections 5 and 17 (both about same gate change)
 - Approver: Scott, Vik
 - Expected: Approved if both approve, denied if either denies
 - Proof: Both signatures in audit entry
@@ -694,7 +694,7 @@ Proof harness (AUTO-009) must test these scenarios:
 - Proof: Audit shows both original approval and superseding instruction
 
 **Scenario 2e: Multi-file scope**
-- Request: Edit both roles/vik/Autonomy.md and roles/ana-recruiter/Autonomy.md
+- Request: Edit both roles/maps-agentic-systems-program-architect/Autonomy.md and roles/recruiter/Autonomy.md
 - Approver: Scott
 - Expected: Denied, route as separate requests
 - Proof: Audit records denial with routing instruction
@@ -732,13 +732,13 @@ Proof harness (AUTO-009) must test these scenarios:
 - Proof: Approval shows both signatures
 
 **Scenario 3c: Multi-domain file**
-- Request: Edit roles/vik/Autonomy.md with Release-gate section change
+- Request: Edit roles/maps-agentic-systems-program-architect/Autonomy.md with Release-gate section change
 - Expected routing: Scott (final) + Vik (control-plane) + Reid (release section)
 - Expected: Denied unless all three approve
 - Proof: Approval shows three signatures
 
 **Scenario 3d: Non-owner requests edit**
-- Request: Bea requests edit to roles/ana-recruiter/memory.md
+- Request: Bea requests edit to roles/recruiter/memory.md
 - Expected routing: Ana (owner) + Scott (final)
 - Expected: Ana decides if in-scope, escalates if needed
 - Proof: Audit shows Ana's decision and reasoning
@@ -1115,7 +1115,7 @@ After approved execution, runtime updates state.json:
     "last_approved_edit": {
       "request_id": "uuid",
       "approval_timestamp": "2026-06-21T12:00:00Z",
-      "target_file": "roles/vik/Autonomy.md",
+      "target_file": "roles/maps-agentic-systems-program-architect/Autonomy.md",
       "approver": "Scott",
       "expiry": "2026-06-21T13:00:00Z"
     }

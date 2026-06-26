@@ -26,12 +26,12 @@ Example: "Vik / MAPS ASPA, Mojo"
 **Template question:** Where is the canonical role contract?
 
 Replace with: [Path to role-agent.md]
-Example: "C:\Users\scott\Code\mojo\roles\vik\role-agent.md"
+Example: "C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\role-agent.md"
 
 **Template question:** Where is this autonomy contract canonically stored?
 
 Replace with: [Path to this file]
-Example: "C:\Users\scott\Code\mojo\roles\vik\Autonomy.md"
+Example: "C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\Autonomy.md"
 
 ---
 
@@ -542,7 +542,7 @@ Example:
 **Template question:** If this role appears in multiple places, which copy is canonical?
 
 Replace with: [Path to canonical copy]
-Example: "C:\Users\scott\Code\mojo\roles\vik\Autonomy.md is canonical. All other copies point to this source."
+Example: "C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\Autonomy.md is canonical. All other copies point to this source."
 
 **Template question:** How do compatibility shims or mirrors reference the canonical source?
 
@@ -552,7 +552,7 @@ Example:
 ```
 # Compatibility note
 If you see agent-profile.md or agent-contract.md, they must point to
-the canonical source: C:\Users\scott\Code\mojo\roles\vik\Autonomy.md
+the canonical source: C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\Autonomy.md
 ```
 
 ---

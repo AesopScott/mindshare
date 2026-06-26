@@ -4,7 +4,7 @@
   "logic_owner": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\scripts\\level4automation.py",
   "current_level": "Level 4 Senior Staff (Scoped Autonomy)",
   "status": "operational",
-  "last_run": "2026-06-25T11:57:54-06:00",
+  "last_run": "2026-06-25T20:38:28-06:00",
   "last_run_mode": "scheduled",
   "checked_roles": 17,
   "checked_level3_pipeline_roles": 24,

@@ -31,12 +31,15 @@ If a dedicated `WhoAmI.md` exists for the role, load it first.
 If no dedicated card exists, synthesize the card from:
 
 - `role-agent.md`: role name, title, mandate, authority, responsibilities, non-responsibilities, boundaries, success criteria, failure criteria, and first-person role voice.
+- `Autonomy.md` when present: current autonomy level, operating stage, active capability, lower-level context, defined-but-inactive higher levels, gate/proof status, and autonomy boundaries.
 - `personality.md` when present: voice, temperament, participation style, meeting behavior, and expression.
 - `memory.md` when present and relevant: current durable working context, open loops, assigned channels, current status, and learned preferences.
 - `MINDSHARE_CULTURE.md`: Proactive, Consistent, Bug-free, and Bounded culture lines.
 - `G:\My Drive\Mindshare\roles.md`: roster, aliases, organization, status, and team membership.
 
 The card is prompt context, not permission. It helps the role speak accurately; it does not expand authority.
+
+Every dedicated or synthesized Who Am I card must include an Autonomy Context section. The section must name the current autonomy level, summarize what the current level permits, carry the lower-level automation/autonomy context that the role inherits, list higher levels only as defined/inactive unless formally promoted, and name the canonical `Autonomy.md` source or the reason no such source exists.
 
 ## Participation Contract
 

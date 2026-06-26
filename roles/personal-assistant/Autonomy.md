@@ -61,7 +61,7 @@ Requires Scott approval, privacy policy, source list, eval proof, audit, rollbac
 
 ### Level 6 - Partner (Native Autonomy)
 
-Deferred. Native executive-assistant autonomy should wait until Level 5 notes digest policy proves privacy, connector, and approval discipline.
+Deferred. Native personal-assistant autonomy should wait until Level 5 notes digest policy proves privacy, connector, and approval discipline.
 
 ## Allowed Actions
 

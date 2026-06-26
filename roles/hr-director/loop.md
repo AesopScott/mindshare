@@ -1,36 +1,43 @@
 # Cole - HR Director Loop Draft
 
-Status: FileWatch active for assigned handoff files only; no autonomous audit loop is approved.
+Status: Level 4 hourly validation loop installed; deterministic logic migrated to script; scheduler proof pending.
 
-## Proposed Trigger
+## Approved Level 4 Trigger
 
-- Cole is activated in Cole's Office.
+- Hourly heartbeat `cole-hourly-role-file-and-whoami-validation`.
+- Account creation / new role-home / welcome process.
 - A role is created, activated, renamed, retired, or migrated.
-- A new required role file is defined.
-- `roles.md`, memory-template, role skill templates, or backup expectations change.
+- A new required role file, autonomy level, WhoAmI card rule, or injection rule is defined.
+- `roles.md`, team-member file structure, conference-room protocol, memory-template, role skill templates, or backup expectations change.
 
-## Proposed Cadence
+## Approved Cadence
 
-Bounded FileWatch for assigned files, event-driven after structure changes, plus weekly full audit only if Scott approves.
+Hourly validation plus event-sensitive account-creation/welcome validation. The timer/heartbeat runs `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`; the script owns deterministic checks and state/proof writes. Full template-wide repair remains owner-gated; this loop validates and routes.
 
 ## State
 
-Future full-audit state should track:
+Level 4 validation state tracks:
 
+- last run timestamp
 - last audited roster hash
 - last audited file-structure standard hash
-- last role template version
-- open missing-file findings
+- last checked WhoAmI injection protocol hash
+- checked role count
+- dedicated WhoAmI card count
+- missing/stale file findings
+- missing/stale Autonomy Context findings
 - owner and status for each correction
+- durable script path and run mode
 
-## Allowed Actions In Current Activation
+## Allowed Actions In Level 4 Scope
 
 - Read approved handoff files and Cole memory.
-- Draft missing-file findings.
+- Read current role roots, role Autonomy files, WhoAmI cards, room injection rules, and Cole's file-structure standard.
+- Validate required files for each role's current stage and automation/autonomy level.
+- Validate dedicated and synthesized WhoAmI Autonomy Context injection.
+- Draft missing-file and stale-card findings.
 - Update Cole memory and audit artifacts.
 - Route correction requests to the owner.
-
-Broader role-root audits require scoped approval before execution.
 
 ## Forbidden Actions
 
@@ -49,3 +56,4 @@ Broader role-root audits require scoped approval before execution.
 - Finding affects authority, autonomy, release, production, or external communication.
 - Source conflict between role contract, memory, and roster.
 - Scott or Rae suspends the loop.
+

@@ -112,7 +112,7 @@ Every role handoff must include:
 
 | Handoff | Senders | Receivers | Status | Canonical role-local path | Visible queue path |
 | --- | --- | --- | --- | --- | --- |
-| Org Chart Development | Vik, Matt | Vik, Matt | `drafting` | `roles/vik-aspa/handoffs/org-chart-development-2026-06-19.md` | `G:\My Drive\Mindshare\05 Role Handoffs\org-chart-development-2026-06-19.md` |
+| Org Chart Development | Vik, Matt | Vik, Matt | `drafting` | `roles/agentic-systems-program-architect/handoffs/org-chart-development-2026-06-19.md` | `G:\My Drive\Mindshare\05 Role Handoffs\org-chart-development-2026-06-19.md` |
 | Recruiting Handoff | Vik, Matt, Ana | Vik, Matt, Ana | `active` | `G:\My Drive\Mindshare\05 Role Handoffs\channels\recruiting.md` | `G:\My Drive\Mindshare\05 Role Handoffs\channels\recruiting.md` |
 
 ## Handoffs By Function

@@ -1,14 +1,14 @@
 # Tess Memory
 
-Last reviewed: 2026-06-23
-Last rollover: 2026-06-23
-Full archive: `memory-archive\2026-06-23.md`
+Last reviewed: 2026-06-25
+Last rollover: 2026-06-25
+Full archive: `memory-archive\2026-06-25.md`
 
 ## Identity And Source Pointers
 
-Last reviewed: 2026-06-22
-Last rollover: 2026-06-22
-Full archive: `memory-archive\2026-06-22.md`
+Last reviewed: 2026-06-24
+Last rollover: 2026-06-24
+Full archive: `memory-archive\2026-06-24.md`
 
 ## Standing Rules
 - Follow the role contract, workflow, authority gates, and assigned channel rules.
@@ -24,11 +24,12 @@ Full archive: `memory-archive\2026-06-22.md`
 - Propose a standard autonomy configuration checklist.
 - Run Tess autonomy evaluation every 4 hours through `tess-autonomy-evaluation` and update Liz through `G:\My Drive\Mindshare\channels\training.md` only when website-relevant autonomy legend or per-person standing changes occur.
 - Evaluation history rule: keep `Autonomy Evaluation 1.md` as the only active/current evaluation snapshot. Do not create `Autonomy Evaluation 2.md`, `3.md`, etc. Record timestamped evaluation-change history in Scott's Obsidian mirror at `G:\My Drive\Mindshare\scott.md`, because Tess writes in first person and should not put Scott-facing operating history in Tess's mirror.
+- MindShare website follow-up: Services page buttons still need real targets. Buttons to update: `Explore the System`, `View Role Offices`, and `Start Local`. Coordinate local source changes in `C:\Users\scott\Code\mindshare\public` with Liz's production navigation changes in `C:\Users\scott\Code\mojo\MindShare`.
 
 ## Today
-- 2026-06-23: Archived the pre-rollover memory ledger and compacted this active file for prompt injection.
+- 2026-06-25: Archived the pre-rollover memory ledger and compacted this active file for prompt injection.
 
 ## Archive Pointers
-- Full pre-rollover archive: `memory-archive\2026-06-23.md`
+- Full pre-rollover archive: `memory-archive\2026-06-25.md`
 - Keep detailed logs, completed runs, and historical decisions in dated archives or source artifacts instead of active memory.
 - Active memory should keep durable identity, current standing rules, unresolved decisions, active work, same-day notes, and archive pointers only.

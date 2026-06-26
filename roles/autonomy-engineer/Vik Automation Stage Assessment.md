@@ -16,12 +16,12 @@ This file does not activate Vik, grant autonomous runtime, approve Git/GitHub/re
 
 ## Sources Reviewed
 
-- `C:\Users\scott\Code\mojo\roles\vik\Autonomy.md`
-- `C:\Users\scott\Code\mojo\roles\vik\role-agent.md`
-- `C:\Users\scott\Code\mojo\roles\vik\workflow.md`
-- `C:\Users\scott\Code\mojo\roles\vik\loop.md`
-- `C:\Users\scott\Code\mojo\roles\vik\memory.md`
-- `C:\Users\scott\Code\mojo\roles\vik\state.json`
+- `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\Autonomy.md`
+- `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\role-agent.md`
+- `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\workflow.md`
+- `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\loop.md`
+- `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\memory.md`
+- `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect\state.json`
 - `C:\Users\scott\Code\mojo\agents\vik-aspa\agent-profile.md`
 - `C:\Users\scott\Code\mojo\agents\vik-aspa\runtime\aspa_runtime.py`
 - `C:\Users\scott\Code\mojo\agents\vik-aspa\tests\test_aspa_runtime.py`
@@ -133,7 +133,7 @@ That trigger and initial research are still workflow automation, not autonomy by
 Completed conversion items:
 
 1. Update Vik-facing docs to the new autonomy-stage names: Staff, Senior Staff, Principal, Partner.
-2. Clarify canonical autonomy source chain: profile still references `agents/vik-aspa/autonomy-contract.md`, while canonical source is `roles/vik/Autonomy.md`; keep shim only as pointer.
+2. Clarify canonical autonomy source chain: profile still references `agents/vik-aspa/autonomy-contract.md`, while canonical source is `roles/maps-agentic-systems-program-architect/Autonomy.md`; keep shim only as pointer.
 3. Define Senior Staff role-native workflow trigger:
    - valid architecture research backlog item
    - valid control-plane assessment backlog item

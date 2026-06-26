@@ -1,6 +1,6 @@
 # Autonomy Requirements
 
-Version: 0.1.12
+Version: 0.1.15
 
 Status: draft requirements artifact; not an authority grant
 
@@ -70,6 +70,8 @@ Level 4 has four non-paused states:
 
 Do not describe a role as operational Level 4 unless every gate in `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\level4-gate-checklist.md` passes.
 
+Promotion durability rule: a Level 4+ promotion or autonomy-source repair is not operationally durable while its canonical runtime-read files exist only as uncommitted local working-tree changes. The owning role must route the source change through Reid / Release Management for Git promotion, commit, PR, or an explicitly approved protected-source alternative. Reid should not clean or stash Level 4+ autonomy-source drift as routine main hygiene; he should require the owning role to create or complete a Release Management request. Until that route is complete, record the role as approved-not-operational, runtime-installed-pending-proof, blocked, or source-drift-blocked as appropriate.
+
 Required Level 4 gates:
 
 1. Authority gate.
@@ -83,6 +85,7 @@ Required Level 4 gates:
 9. Review gate.
 10. Revocation gate.
 11. Display gate.
+12. Git promotion/durability gate.
 
 If any gate fails, record the role as Level 4 approved-not-operational, runtime-installed-pending-proof, runtime-configured-scheduler-proof-pending, candidate, or paused as appropriate.
 
@@ -106,6 +109,7 @@ Every autonomous-agent candidate must have these files or explicit equivalents:
 | `memory.md` | Durable role memory, current decisions, active work, source pointers, approved channels, privacy rules, update log. | Memory claims authority not present in contract. |
 | `personality.md` | Voice and expression only. | Personality implies authority or changes boundaries. |
 | `name.md` or WhoAmI card | Name, aliases, room/thread identity, role center. | Room or role identity is ambiguous. |
+| WhoAmI Autonomy Context | Current autonomy level, operating stage, active capability, lower-level context, inactive higher-level definitions, canonical `Autonomy.md` path or missing-source note, and awareness-not-authority reminder. | Role can forget its current stage, overclaim higher autonomy, or lose context on lower-level responsibilities. |
 | `Autonomy.md` | Canonical autonomy contract for the role or agent. Must define Level 4 scoped-autonomy capability and, before any Level 5+ review, must define the approved policy-autonomy model instead of a mere list of larger tasks. | Missing, stale, conflicting, not explicit about activation status, missing Level 4 scoped capability, or treating Level 5/6 as ordinary task expansion instead of policy/native autonomy. |
 | `agent-profile.md` | Agent category, activation status, runtime status, authority domains, tool access, memory rights, hooks, stop conditions, proof gates. | Profile grants broader rights than role/autonomy contract. |
 | `agent-design.md` | Runtime-neutral or runtime-specific design, tool model, state model, memory model, approval gates, failure behavior, adapter decision. | Design omits runtime, state, stop, or adapter requirements. |
@@ -119,6 +123,7 @@ Every autonomous-agent candidate must have these files or explicit equivalents:
 | `state.json` | Current machine-readable status, approvals, open questions, pending actions, last run/review timestamps. | State can drift from contract without detection. |
 | `audit.jsonl` or audit log | Append-only trace of non-trivial decisions, approvals, actions, denied actions, proof, and rollback notes. | Actions occur without auditable trace. |
 | `gate.md` or gate policy | Allowed paths, actions, denied paths/actions, approver, expiry, proof requirement, revocation path. | Gate is broad, stale, malformed, or not exact-operation scoped. |
+| Git promotion request / release note | Release Management request or closeout showing canonical autonomy-source files, runtime state/proof files, and website/source mirrors were routed through Reid for commit/promotion or explicitly protected by an approved alternative. | Canonical runtime-read source exists only as uncommitted local drift, was left without an owner-filed Release Management request, or was mirrored to website without the role source being committed/protected. |
 
 ## Required Runtime Capabilities
 
@@ -127,6 +132,7 @@ An autonomous agent runtime must enforce these capabilities before any Level 5 o
 | Capability | Requirement | Recommendation |
 | --- | --- | --- |
 | WhoAmI gate | Confirm active role, room/thread, source contract, and requested identity. | Block if room card and source files disagree. |
+| WhoAmI Autonomy Context gate | Confirm the injected WhoAmI card includes current autonomy level, lower-level context, inactive higher-level boundaries, and source path. | Block if the card omits autonomy context or implies authority beyond the canonical `Autonomy.md`. |
 | Source-of-truth loader | Load role, workflow, loop, memory, profile, design, autonomy contract, gate, and state before action. | Prefer canonical pointers; compatibility shims must follow canonical source. |
 | Contract validator | Verify activation status, authority domains, allowed actions, disallowed actions, stop conditions, and approvers. | Fail closed on stale status vocabulary. |
 | Research/Respond/Plan/Do-Not-Act gate | Detect questions, policy discussion, backlog discussion, approval topics, and assignments without implementation approval. | Answer and stop unless explicit operational approval exists. |
@@ -134,10 +140,12 @@ An autonomous agent runtime must enforce these capabilities before any Level 5 o
 | Scope gate | Compare intended action to exact approved scope. | Block adjacent helpful changes. |
 | Owner gate | Route work to correct owner when not in agent lane. | Must know Scott, Rae, Reid, Vik, Mae, Ana, and role-specific owners. |
 | Release gate | Block Git, GitHub, branch, PR, release, promotion, cleanup, remote source updates without Reid or waived approval. | Required for any source-writing agent. |
+| Git promotion/durability gate | Confirm canonical source edits that change autonomy status, runtime gates, state/proof, or role authority have been routed through Reid and committed/promoted or placed in an approved protected source. | Promotion is not operational if source lives only in a dirty worktree. |
 | Memory/RAG gate | Permit writes only to approved memory, RAG, Obsidian, channel, mirror, and project locations. | Distinguish memory from runtime state. |
 | Tool gate | Map tools to approved authority, not just availability. | Deny connector, shell, filesystem, production, and secret actions outside scope. |
 | Strict-intent gate | For sensitive files, require exact-operation approval and default-deny any diff outside approved intent. | Build before control-plane file autonomy. |
 | Runtime adapter | Bind the agent to the selected runtime's tool, state, permission, and packaging model. | Keep runtime-neutral until target selected; require adapter proof after selection. |
+| Durable logic gate | Keep deterministic automation logic in a durable script, module, or similarly reviewable source file; schedulers/heartbeats should trigger it rather than reimplement it in prompt text. | Start with script-owned logic for file checks, state/proof generation, and validation pages; use role reasoning only for interpretation, routing, and exceptions. |
 | Audit gate | Write trace for non-trivial action, approval, denied action, proof, and rollback note. | Do not create noisy no-work logs. |
 | Revocation gate | Stop immediately when authority is paused, narrowed, revoked, or superseded. | Preserve evidence and report in-progress state. |
 
@@ -186,12 +194,13 @@ Use this sequence for every role promoted toward autonomy:
 16. Rollback and revocation plan.
 17. Promotion review.
 18. Final Scott activation approval.
+19. Git promotion / durable source routing through Reid for any runtime-read source, state/proof, website source mirror, or release-relevant autonomy file changed by the promotion.
 
 No step implies approval for the next step.
 
-When Scott says "promote [role] to Level 4," Tess should treat that as an instruction to build or update the role's `Autonomy.md` for review. The promotion is not complete until Scott reviews and approves the locked contract. The locked contract is the source of truth for what that role may do at Level 4.
+When Scott says "promote [role] to Level 4," Tess should treat that as an instruction to build or update the role's `Autonomy.md`, runtime state/proof paths, evaluation record, and display handoff for review. The promotion is not complete until Scott reviews and approves the locked contract and the canonical runtime-read source changes are routed through Reid for Git promotion or explicitly protected by an approved durable-source alternative. The locked and durable contract is the source of truth for what that role may do at Level 4.
 
-When Scott says "promote [role] to Level 5," Tess should not reuse old task ladders as policy autonomy. Tess should first build the role's Level 5 policy packet for review, then require runtime/eval proof that the policy is enforceable before promotion.
+When Scott says "promote [role] to Level 5," Tess should not reuse old task ladders as policy autonomy. Tess should first build the role's Level 5 policy packet for review, then require runtime/eval proof that the policy is enforceable before promotion. The Level 5 promotion is not operational until the Level 5 `Autonomy.md`, policy, runtime state/proof, automation prompt changes, evaluation, and display/source mirrors are committed/promoted through Reid or otherwise protected by an approved durable-source path.
 
 ## Vik Findings Incorporated
 
@@ -199,9 +208,9 @@ Vik's current autonomy work shows the right pattern and the current gaps:
 
 - Good: role contract, workflow, loop, memory, profile, design, build plan, autonomy contract, local runtime harness, tests, state, audit, and handoff file-watch exist.
 - Good: `vik-handoff-check` file-watch separates watched-file detection from role authority.
-- Good: `roles/vik/Autonomy.md` names levels, gates, stop conditions, eval classes, and owner boundaries.
+- Good: `roles/maps-agentic-systems-program-architect/Autonomy.md` names levels, gates, stop conditions, eval classes, and owner boundaries.
 - Gap: local runtime proof harness is stale against the newer canonical autonomy contract pointer.
-- Gap: `agent-profile.md` and compatibility files may lag `roles/vik/Autonomy.md`.
+- Gap: `agent-profile.md` and compatibility files may lag `roles/maps-agentic-systems-program-architect/Autonomy.md`.
 - Gap: strict-intent gate support is specified but not implemented.
 - Gap: runtime target and adapter are not selected.
 - Gap: deploy, observe, rollback, and promotion review are not complete.
@@ -220,12 +229,14 @@ For any autonomous-agent candidate, open gaps should be recorded in this form:
 | No eval hardening | Agent promotion rests on claims, not proof. | Add denial, owner-routing, no-action, latest-instruction, malformed-gate, and stale-contract tests. | Scott/Tess/Vik |
 | No deploy/observe plan | Runtime cannot be monitored, paused, or rolled back. | Create deployment record, observation plan, incident thresholds, rollback path, and review cadence. | Scott/Reid/Vik |
 | No promotion review | Activation may happen by drift. | Run formal promotion review with evidence, gaps, owner signoffs, and final activation decision. | Scott |
+| No Git promotion/durable source route | Runtime reads old committed files because uncommitted autonomy edits were never routed for release and durability. | Route all autonomy-source changes through Reid for commit/promotion or approved protected-source handling before calling the promotion operational; Reid should request the owning role's Release Management packet instead of cleaning this drift. | Scott/Reid/Tess |
 
 ## Review Checklist
 
 Tess should not recommend autonomy promotion unless all answers are yes:
 
 - Is canonical `Autonomy.md` present and current?
+- Does the injected WhoAmI card carry current autonomy level, lower-level context, inactive higher-level boundaries, and canonical source path?
 - Does `Autonomy.md` define this role's Level 4 scoped-autonomy capability?
 - For Level 5+, does `Autonomy.md` define an actual written policy-autonomy model rather than a list of larger role tasks?
 - Has the requested promotion level been reviewed and locked in `Autonomy.md`?
@@ -239,8 +250,10 @@ Tess should not recommend autonomy promotion unless all answers are yes:
 - Are evals executed, not only planned?
 - Does runtime fail closed on missing or stale source files?
 - Does strict-intent protection exist for control-plane edits?
+- Does deterministic automation logic live in durable source rather than only in an automation prompt?
 - Are audit, state, observation, rollback, and revocation paths present?
 - Are release/Git actions routed through Reid?
+- Are autonomy-source, runtime state/proof, website source mirror, and automation prompt changes committed/promoted through Reid or protected by an approved durable-source alternative?
 - Has Scott approved activation explicitly?
 
 ## Changelog
@@ -258,3 +271,6 @@ Tess should not recommend autonomy promotion unless all answers are yes:
 - 2026-06-22 - v0.1.10 - Added the mandatory Level 4 gate and status distinction between approved-not-operational and operational Level 4.
 - 2026-06-22 - v0.1.11 - Added the runtime-installed-pending-proof intermediate state for Level 4 gates.
 - 2026-06-22 - v0.1.12 - Added the runtime-configured-scheduler-proof-pending status for configured scheduler paths that have not yet written proof.
+- 2026-06-24 - v0.1.13 - Added Git promotion/durability gate after Vik/Mae regressions showed uncommitted autonomy-source edits can lose operational effect when not routed through Reid; Scott clarified Reid should stop cleaning this class of drift and require owner-filed Release Management requests.
+- 2026-06-24 - v0.1.14 - Added WhoAmI Autonomy Context requirement so each role carries current autonomy level, lower-level context, inactive higher-level boundaries, and canonical source path in injected role context.
+- 2026-06-24 - v0.1.15 - Added durable logic gate: deterministic Level 4+ validation logic should move into scripts/modules one role at a time, with automations acting as timers/triggers and role reasoning handling exceptions.

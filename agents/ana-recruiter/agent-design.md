@@ -10,8 +10,8 @@ Template version: 0.2.0.
 ## Input
 
 - Agent brief: `C:\Users\scott\Code\mindshare\agents\ana-recruiter\agent-brief.md`
-- Source role contract: `C:\Users\scott\Code\mindshare\roles\ana-recruiter\role-agent.md`
-- Source role memory: `C:\Users\scott\Code\mindshare\roles\ana-recruiter\memory.md`
+- Source role contract: `C:\Users\scott\Code\mindshare\roles\recruiter\role-agent.md`
+- Source role memory: `C:\Users\scott\Code\mindshare\roles\recruiter\memory.md`
 - Agent profile: `C:\Users\scott\Code\mindshare\agents\ana-recruiter\agent-profile.md`
 - Research sources: Ana role research sources already recorded in the source role contract.
 - Project foundation: `C:\Users\scott\Code\mindshare\project-foundation.md`
@@ -28,7 +28,7 @@ Template version: 0.2.0.
 
 ## Source Of Truth
 
-- Role contract authority source: `roles/ana-recruiter/role-agent.md`.
+- Role contract authority source: `roles/recruiter/role-agent.md`.
 - Agent brief runnable scope: `agents/ana-recruiter/agent-brief.md`.
 - Agent profile runtime control contract: `agents/ana-recruiter/agent-profile.md`.
 - Website/profile mirror status: Mojo website profile page is a mirror only and does not grant authority.
@@ -95,7 +95,7 @@ Template version: 0.2.0.
 
 - Durable state allowed: role queue, role gaps, drafted roles, role status, approvals, next skill, accepted/rejected recommendations.
 - Durable state forbidden: secrets, private candidate data, noisy raw logs, unsupported personal claims, unapproved external data.
-- Primary memory location: `C:\Users\scott\Code\mindshare\roles\ana-recruiter\memory.md`.
+- Primary memory location: `C:\Users\scott\Code\mindshare\roles\recruiter\memory.md`.
 - Mirror memory location: `G:\My Drive\Mindshare\ana.md`.
 - Memory write authority: approval-gated and within Mindshare foundation contract.
 - Stale or harmful memory correction path: record correction, update source artifact, mirror to Obsidian, log in MAPS run note.

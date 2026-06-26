@@ -40,6 +40,8 @@ A role is not operationally Level 4 until every required gate passes with curren
 | Review gate | Human review is requested where the contract requires it, especially for promotion packets. | The role treats review request as approval or bypasses review. |
 | Revocation gate | Pause, rollback, correction, and revocation path exists and is recorded. | No way to stop or unwind the loop exists. |
 | Display gate | Evaluation, profile, memory, website handoff, and mirrors distinguish approved-not-operational from operational. | Any source says operational Level 4 without all gates passing. |
+| Git promotion/durability gate | Any canonical runtime-read source, role `Autonomy.md`, automation prompt, state/proof file, evaluation snapshot, website source mirror, or release-relevant autonomy artifact changed by the promotion has been routed through Reid / Release Management for commit/promotion, or Scott/Reid approved an explicit protected-source alternative. | Promotion source exists only as uncommitted local drift, lacks an owner-filed Release Management request, or website/source mirrors update without the role source being committed or otherwise protected. |
+| Script/timer separation gate | Level 4+ recurring work that writes durable state, proof, source files, evaluations, websites, or release-relevant artifacts keeps deterministic logic in a human-readable script where practical; the automation timer/heartbeat acts as trigger, interpreter, live-context router, and escalation path. | Core logic exists only in a long automation prompt, no durable script owns repeatable checks, or file-changing runs lack Release Management routing for Reid. |
 
 ## Tess Current Gate Result
 
@@ -58,10 +60,12 @@ Passing gates:
 - Review gate: promotion packets route to Scott review.
 - Revocation gate: pause/resume drill completed and cadence restored to 30 minutes.
 - Display gate: current Tess source files distinguish pending-proof from operational. Historical changelog entries may still record earlier overclaims as history.
+- Git promotion/durability gate: `level4-processing-state.json` records `release_management_request_present=true` and zero active automation Reid-route gaps.
+- Script/timer separation gate: `C:\Users\scott\Code\mindshare\roles\autonomy-engineer\scripts\level4automation.py` owns deterministic Level 4 checks/state/proof; the app cron is being reduced to timer/router behavior.
 
 Failing or unproven gates:
 
-- None currently known for Tess Level 4 operational scope.
+- None currently recorded after the 2026-06-24 manual script proof run. The first scheduled script-backed run remains useful follow-up evidence, but manual proof and durable state currently pass the required gates.
 
 ## Changelog
 
@@ -69,3 +73,6 @@ Failing or unproven gates:
 - 2026-06-22 - Installed `tess-level-4-autonomy-backlog-processing`, added state/proof files, and moved Tess from approved-not-operational to runtime-installed-pending-proof.
 - 2026-06-22 - Recorded first proof observation window with no scheduled proof write; Tess is runtime-configured-scheduler-proof-pending, not operational.
 - 2026-06-22 - Recorded scheduled work-loop proof, Rae packet output, state/proof evidence, and pause/resume revocation proof; Tess is Level 4 operational inside approved scope.
+- 2026-06-24 - Added Git promotion/durability gate: Level 4+ source changes must be routed through Reid for commit/promotion or approved protected-source handling before operational status is durable; Scott clarified Reid should not clean this class of drift and should require owner-filed Release Management requests.
+- 2026-06-24 - Added script/timer separation gate and recorded Tess's script-owned Level 4 proof: deterministic checks now live in `scripts\level4automation.py`, with timer prompts acting as trigger/router only.
+

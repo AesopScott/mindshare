@@ -118,13 +118,13 @@
       "category": "vik-promotion",
       "priority": "P0",
       "status": "complete",
-      "description": "Update Vik's runtime proof harness so it follows roles/vik/Autonomy.md as canonical and no longer fails on the updated compatibility shim.",
+      "description": "Update Vik's runtime proof harness so it follows roles/maps-agentic-systems-program-architect/Autonomy.md as canonical and no longer fails on the updated compatibility shim.",
       "owner": "Vik",
       "approvers": ["Scott", "Tess"],
       "dependencies": ["AUTO-005", "AUTO-006"],
       "outputs": ["C:\\Users\\scott\\Code\\mojo\\agents\\vik-aspa\\runtime\\aspa_runtime.py", "C:\\Users\\scott\\Code\\mojo\\agents\\vik-aspa\\tests\\test_aspa_runtime.py"],
       "proof_required": ["python -m unittest agents.vik-aspa.tests.test_aspa_runtime passes", "Autonomous activation remains blocked"],
-      "proof_notes": "Repaired Vik runtime contract loader drift in C:\\Users\\scott\\Code\\mojo\\agents\\vik-aspa\\runtime\\aspa_runtime.py and tests; runtime now reads canonical C:\\Users\\scott\\Code\\mojo\\roles\\vik\\Autonomy.md, validates completed contract answers, and keeps activation blocked; python -m unittest agents.vik-aspa.tests.test_aspa_runtime passed 14 tests from Mojo; shared autonomy tests passed 55 tests from Mindshare.",
+      "proof_notes": "Repaired Vik runtime contract loader drift in C:\\Users\\scott\\Code\\mojo\\agents\\vik-aspa\\runtime\\aspa_runtime.py and tests; runtime now reads canonical C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\Autonomy.md, validates completed contract answers, and keeps activation blocked; python -m unittest agents.vik-aspa.tests.test_aspa_runtime passed 14 tests from Mojo; shared autonomy tests passed 55 tests from Mindshare.",
       "stop_conditions": ["Fix activates Vik", "Fix narrows Scott approval gates without approval"]
     },
     {
@@ -289,9 +289,9 @@
       "owner": "Tess",
       "approvers": ["Scott", "Ana", "Vik"],
       "dependencies": ["AUTO-003", "AUTO-004", "AUTO-010", "AUTO-015"],
-      "outputs": ["roles/ana-recruiter/Autonomy.md", "agents/ana-recruiter/runtime-proof-plan.md"],
+      "outputs": ["roles/recruiter/Autonomy.md", "agents/ana-recruiter/runtime-proof-plan.md"],
       "proof_required": ["Role draft does not activate role", "Roster update does not grant authority", "One-question-at-a-time intake passes"],
-      "proof_notes": "Created roles/ana-recruiter/Autonomy.md and agents/ana-recruiter/runtime-proof-plan.md; docs are autonomy-readiness only, no Ana role change, no runtime activation, no authority grant; protect draft-is-not-activation, roster-text-is-not-authority, one-question-at-a-time intake, Scott final approval, Vik/Mae/Reid/Matt owner routing, rollback/revocation, and 18 inherited eval classes.",
+      "proof_notes": "Created roles/recruiter/Autonomy.md and agents/ana-recruiter/runtime-proof-plan.md; docs are autonomy-readiness only, no Ana role change, no runtime activation, no authority grant; protect draft-is-not-activation, roster-text-is-not-authority, one-question-at-a-time intake, Scott final approval, Vik/Mae/Reid/Matt owner routing, rollback/revocation, and 18 inherited eval classes.",
       "stop_conditions": ["Ana hires or activates without Scott", "Ana expands authority through roster text"]
     },
     {
@@ -305,9 +305,9 @@
       "owner": "Tess",
       "approvers": ["Scott", "Cal", "Vik", "Reid"],
       "dependencies": ["AUTO-003", "AUTO-004", "AUTO-010", "AUTO-015"],
-      "outputs": ["C:\\Users\\scott\\Code\\mojo\\roles\\cal\\Autonomy.md", "C:\\Users\\scott\\Code\\mojo\\agents\\cal-aspm\\agent-profile.md"],
+      "outputs": ["C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\Autonomy.md", "C:\\Users\\scott\\Code\\mojo\\agents\\cal-aspm\\agent-profile.md"],
       "proof_required": ["Cal routes architecture to Vik", "Cal routes release/Git to Reid", "Cal does not implement Bea-owned work"],
-      "proof_notes": "Created C:\\Users\\scott\\Code\\mojo\\roles\\cal\\Autonomy.md and C:\\Users\\scott\\Code\\mojo\\agents\\cal-aspm\\agent-profile.md; docs are autonomy-readiness only, no runtime activation, no authority grant; Cal routes architecture/control-plane to Vik, release/Git/production to Reid, engineering implementation to Bea, and preserves backlog-text-is-not-implementation-approval, rollback/revocation, and 18 inherited eval classes.",
+      "proof_notes": "Created C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\Autonomy.md and C:\\Users\\scott\\Code\\mojo\\agents\\cal-aspm\\agent-profile.md; docs are autonomy-readiness only, no runtime activation, no authority grant; Cal routes architecture/control-plane to Vik, release/Git/production to Reid, engineering implementation to Bea, and preserves backlog-text-is-not-implementation-approval, rollback/revocation, and 18 inherited eval classes.",
       "stop_conditions": ["Cal changes release state", "Cal overrides Vik architecture decisions"]
     },
     {
@@ -337,9 +337,9 @@
       "owner": "Tess",
       "approvers": ["Scott", "Liz", "Vik", "Reid"],
       "dependencies": ["AUTO-003", "AUTO-004", "AUTO-010", "AUTO-015"],
-      "outputs": ["C:\\Users\\scott\\Code\\mojo\\roles\\liz\\Autonomy.md", "C:\\Users\\scott\\Code\\mojo\\agents\\liz-training\\agent-profile.md"],
+      "outputs": ["C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\Autonomy.md", "C:\\Users\\scott\\Code\\mojo\\agents\\liz-training\\agent-profile.md"],
       "proof_required": ["Liz distinguishes mirror recommendation from site publish", "Release-sensitive changes route to Reid", "Customer-facing copy changes require approval"],
-      "proof_notes": "Created C:\\Users\\scott\\Code\\mojo\\roles\\liz\\Autonomy.md and C:\\Users\\scott\\Code\\mojo\\agents\\liz-training\\agent-profile.md; docs are autonomy-readiness only, no runtime activation, no authority grant; Liz distinguishes mirror recommendation from site publish, treats training mirrors as non-primary/non-authority, routes release-sensitive/non-/maps production changes to Reid, preserves existing scoped /maps policy boundary, requires approval for customer-facing/external copy, includes rollback/revocation and 18 inherited eval classes.",
+      "proof_notes": "Created C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\Autonomy.md and C:\\Users\\scott\\Code\\mojo\\agents\\liz-training\\agent-profile.md; docs are autonomy-readiness only, no runtime activation, no authority grant; Liz distinguishes mirror recommendation from site publish, treats training mirrors as non-primary/non-authority, routes release-sensitive/non-/maps production changes to Reid, preserves existing scoped /maps policy boundary, requires approval for customer-facing/external copy, includes rollback/revocation and 18 inherited eval classes.",
       "stop_conditions": ["Liz publishes production without approval", "Liz treats training mirror as source authority"]
     },
     {
@@ -401,9 +401,9 @@
       "owner": "Tess",
       "approvers": ["Scott", "Bea", "Vik", "Reid"],
       "dependencies": ["AUTO-003", "AUTO-004", "AUTO-010", "AUTO-015"],
-      "outputs": ["C:\\Users\\scott\\Code\\mojo\\roles\\bea\\Autonomy.md", "C:\\Users\\scott\\Code\\mojo\\agents\\bea-maps-engineer\\agent-profile.md"],
+      "outputs": ["C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer\\Autonomy.md", "C:\\Users\\scott\\Code\\mojo\\agents\\bea-maps-engineer\\agent-profile.md"],
       "proof_required": ["Bea implements only approved scope", "Bea routes Git/release to Reid", "Bea preserves Cal/Vik owner lanes"],
-      "proof_notes": "Updated C:\\Users\\scott\\Code\\mojo\\roles\\bea\\Autonomy.md with canonical source/no-primary-on-G addendum and created C:\\Users\\scott\\Code\\mojo\\agents\\bea-maps-engineer\\agent-profile.md; docs are autonomy-readiness only, no runtime activation, no authority grant; Bea implements only approved scope, preserves Cal backlog/program lane, routes architecture/control-plane to Vik, routes Git/release/production to Reid, captures validation/proof, includes rollback/revocation and 18 inherited eval classes.",
+      "proof_notes": "Updated C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer\\Autonomy.md with canonical source/no-primary-on-G addendum and created C:\\Users\\scott\\Code\\mojo\\agents\\bea-maps-engineer\\agent-profile.md; docs are autonomy-readiness only, no runtime activation, no authority grant; Bea implements only approved scope, preserves Cal backlog/program lane, routes architecture/control-plane to Vik, routes Git/release/production to Reid, captures validation/proof, includes rollback/revocation and 18 inherited eval classes.",
       "stop_conditions": ["Bea writes beyond assigned scope", "Bea releases or pushes without approval"]
     },
     {
@@ -449,9 +449,9 @@
       "owner": "Ana",
       "approvers": ["Scott", "Ana", "Tess"],
       "dependencies": ["AUTO-003"],
-      "outputs": ["C:\\Users\\scott\\Code\\mojo\\roles\\matt\\Autonomy.md"],
+      "outputs": ["C:\\Users\\scott\\Code\\mojo\\roles\\released-maps-agentic-systems-program-manager\\Autonomy.md"],
       "proof_required": ["Matt marked no-promotion/released", "Cal remains active ASPM", "Legacy heartbeat handling reviewed"],
-      "proof_notes": "Created C:\\Users\\scott\\Code\\mojo\\roles\\matt\\Autonomy.md as released legacy/no-promotion block; Cal remains active Mojo MAPS ASPM; historical Matt artifacts cannot override current roster or Cal authority; legacy heartbeat/automation handling reviewed and treated as non-authoritative unless Scott explicitly reopens Matt; no runtime activation or authority grant.",
+      "proof_notes": "Created C:\\Users\\scott\\Code\\mojo\\roles\\released-maps-agentic-systems-program-manager\\Autonomy.md as released legacy/no-promotion block; Cal remains active Mojo MAPS ASPM; historical Matt artifacts cannot override current roster or Cal authority; legacy heartbeat/automation handling reviewed and treated as non-authoritative unless Scott explicitly reopens Matt; no runtime activation or authority grant.",
       "stop_conditions": ["Matt is promoted or reactivated by backlog entry", "Historical artifacts override current roster"]
     },
     {

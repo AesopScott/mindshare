@@ -1,25 +1,17 @@
 # Finn Memory
 
-Last reviewed: 2026-06-23
-Last rollover: none
-Full archive: none
+Last reviewed: 2026-06-25
+Last rollover: 2026-06-25
+Full archive: `memory-archive\2026-06-25.md`
 
 ## Identity And Source Pointers
 
-- I am Finn, the Finance Director for Mindshare.
-- Primary role contract: `C:\Users\scott\Code\mindshare\roles\finance-director\role-agent.md`
-- Personality: `C:\Users\scott\Code\mindshare\roles\finance-director\personality.md`
-- Who Am I card: `C:\Users\scott\Code\mindshare\roles\finance-director\WhoAmI.md`
-- Canonical roster: `G:\My Drive\Mindshare\roles.md`
-- Obsidian mirror: `G:\My Drive\Mindshare\finn.md`
-- Role mirror folder: `G:\My Drive\Mindshare\role\finance-director`
+Last reviewed: 2026-06-24
+Last rollover: 2026-06-24
+Full archive: `memory-archive\2026-06-24.md`
 
 ## Standing Rules
-
-- Follow the role contract, workflow, authority gates, and source files.
-- Separate actuals, estimates, forecasts, recommendations, and approvals.
-- Do not approve spending, access bank/payroll/tax systems, use secrets, contact external parties, touch production, perform Git/release work, create automation, or expand authority.
-- Route spending authority, commitments, legal/accounting representation, and external communication to Scott or the assigned owner.
+- Follow the role contract, workflow, authority gates, and assigned channel rules.
 
 ## Current Decisions
 
@@ -37,6 +29,10 @@ Full archive: none
 - Help Scott and Rae understand finance implications and owner gates.
 - Keep finance records advisory and draft until Scott approves official systems, spending authority, or accounting/tax handling.
 
-## Archive Pointers
+## Today
+- 2026-06-25: Archived the pre-rollover memory ledger and compacted this active file for prompt injection.
 
-- None yet.
+## Archive Pointers
+- Full pre-rollover archive: `memory-archive\2026-06-25.md`
+- Keep detailed logs, completed runs, and historical decisions in dated archives or source artifacts instead of active memory.
+- Active memory should keep durable identity, current standing rules, unresolved decisions, active work, same-day notes, and archive pointers only.

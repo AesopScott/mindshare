@@ -31,7 +31,7 @@ class TestSensitivePathClassification(unittest.TestCase):
 
     def test_control_plane_role_autonomy(self):
         """Classify role Autonomy.md as control-plane."""
-        path = 'roles/vik/Autonomy.md'
+        path = 'roles/maps-agentic-systems-program-architect/Autonomy.md'
         cls = self.gate.classify_sensitive_path(path)
         self.assertEqual(cls, 'control-plane')
 
@@ -49,7 +49,7 @@ class TestSensitivePathClassification(unittest.TestCase):
 
     def test_gate_policy_gate_file(self):
         """Classify roles/*/gate.md as gate-policy."""
-        path = 'roles/vik/gate.md'
+        path = 'roles/maps-agentic-systems-program-architect/gate.md'
         cls = self.gate.classify_sensitive_path(path)
         self.assertEqual(cls, 'gate-policy')
 
@@ -73,7 +73,7 @@ class TestSensitivePathClassification(unittest.TestCase):
 
     def test_state_audit_state_json(self):
         """Classify roles/*/state.json as state-audit."""
-        path = 'roles/vik/state.json'
+        path = 'roles/maps-agentic-systems-program-architect/state.json'
         cls = self.gate.classify_sensitive_path(path)
         self.assertEqual(cls, 'state-audit')
 
@@ -85,7 +85,7 @@ class TestSensitivePathClassification(unittest.TestCase):
 
     def test_workflow_loop_workflow_md(self):
         """Classify workflow.md as workflow-loop."""
-        path = 'roles/vik/workflow.md'
+        path = 'roles/maps-agentic-systems-program-architect/workflow.md'
         cls = self.gate.classify_sensitive_path(path)
         self.assertEqual(cls, 'workflow-loop')
 
@@ -97,7 +97,7 @@ class TestSensitivePathClassification(unittest.TestCase):
 
     def test_memory_memory_md(self):
         """Classify memory.md as memory."""
-        path = 'roles/vik/memory.md'
+        path = 'roles/maps-agentic-systems-program-architect/memory.md'
         cls = self.gate.classify_sensitive_path(path)
         self.assertEqual(cls, 'memory')
 
@@ -134,7 +134,7 @@ class TestIntentValidation(unittest.TestCase):
     def test_intent_vague_update_file(self):
         """Reject vague 'update file' intent."""
         with self.assertRaises(Exception):
-            self.gate._validate_intent("Update roles/vik/Autonomy.md")
+            self.gate._validate_intent("Update roles/maps-agentic-systems-program-architect/Autonomy.md")
 
     def test_intent_adjacent_changes(self):
         """Reject intent suggesting adjacent changes."""
@@ -145,7 +145,7 @@ class TestIntentValidation(unittest.TestCase):
         """Accept specific, valid intent."""
         # Should not raise
         self.gate._validate_intent(
-            "Add Scott activation approval to roles/vik/Autonomy.md line 47"
+            "Add Scott activation approval to roles/maps-agentic-systems-program-architect/Autonomy.md line 47"
         )
 
     def test_intent_changelog_valid(self):
@@ -488,9 +488,9 @@ This is NOT an activation authority.
             'id': 'req-001',
             'timestamp': self.current_time,
             'requester': 'Bea',
-            'target_file': 'roles/vik/Autonomy.md',
+            'target_file': 'roles/maps-agentic-systems-program-architect/Autonomy.md',
             'target_class': 'control-plane',
-            'intent': 'Add Scott activation approval to roles/vik/Autonomy.md line 47',
+            'intent': 'Add Scott activation approval to roles/maps-agentic-systems-program-architect/Autonomy.md line 47',
             'reason': 'Recording Scott approval decision',
             'diff_hunks': [
                 DiffHunk(
@@ -677,9 +677,9 @@ class TestPublicInterface(unittest.TestCase):
             'id': 'req-001',
             'timestamp': current,
             'requester': 'Bea',
-            'target_file': 'roles/vik/Autonomy.md',
+            'target_file': 'roles/maps-agentic-systems-program-architect/Autonomy.md',
             'target_class': 'control-plane',
-            'intent': 'Add Scott activation approval to roles/vik/Autonomy.md line 47',
+            'intent': 'Add Scott activation approval to roles/maps-agentic-systems-program-architect/Autonomy.md line 47',
             'reason': 'Recording decision',
             'diff_hunks': [
                 {
@@ -764,7 +764,7 @@ This is NOT an activation authority.
             'id': 'req-test',
             'timestamp': self.current_time,
             'requester': 'Bea',
-            'target_file': 'roles/vik/Autonomy.md',
+            'target_file': 'roles/maps-agentic-systems-program-architect/Autonomy.md',
             'target_class': 'control-plane',
             'intent': 'Add Scott activation to Autonomy.md line 47',
             'reason': 'Recording decision',

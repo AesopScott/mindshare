@@ -32,16 +32,16 @@ Mindshare gains a reliable role pipeline where every role has a clear job, bound
 
 ## Source Role Or Originating Request
 
-Source role: `roles/ana-recruiter/role-agent.md`
+Source role: `roles/recruiter/role-agent.md`
 
 Originating request: Scott identified Ana as the Recruiter who will hire/build everyone else in Mindshare and own `/role`, then invoked `/define-agent` for Ana.
 
 ## Source Artifacts
 
-- `roles/ana-recruiter/role-agent.md`
-- `roles/ana-recruiter/workflow.md`
-- `roles/ana-recruiter/loop.md`
-- `roles/ana-recruiter/state.json`
+- `roles/recruiter/role-agent.md`
+- `roles/recruiter/workflow.md`
+- `roles/recruiter/loop.md`
+- `roles/recruiter/state.json`
 - `project-foundation.md`
 - `.maps/foundation-preferences.json`
 
@@ -135,9 +135,9 @@ Ana needs lightweight state for:
 - next recommended skill per role
 - recurring role patterns and lessons learned
 
-Initial state source: `roles/ana-recruiter/state.json`
+Initial state source: `roles/recruiter/state.json`
 
-Primary role memory location: `C:\Users\scott\Code\mindshare\roles\ana-recruiter\memory.md`
+Primary role memory location: `C:\Users\scott\Code\mindshare\roles\recruiter\memory.md`
 
 Obsidian memory mirror: `G:\My Drive\Mindshare\ana.md`
 
@@ -251,7 +251,7 @@ Risks:
 Assumptions:
 
 - Scott remains the approval authority.
-- Ana's primary role memory lives at `C:\Users\scott\Code\mindshare\roles\ana-recruiter\memory.md`; Obsidian at `G:\My Drive\Mindshare` remains the durable notes/RAG location and mirror surface.
+- Ana's primary role memory lives at `C:\Users\scott\Code\mindshare\roles\recruiter\memory.md`; Obsidian at `G:\My Drive\Mindshare` remains the durable notes/RAG location and mirror surface.
 - MAPS-specific outputs and run summaries belong in `G:\My Drive\Mindshare\maps-runs`.
 - Ana's agent design should start human-in-the-loop and approval-gated.
 

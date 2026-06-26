@@ -1,14 +1,14 @@
 # June Memory
 
-Last reviewed: 2026-06-23
-Last rollover: 2026-06-23
-Full archive: `memory-archive\2026-06-23.md`
+Last reviewed: 2026-06-25
+Last rollover: 2026-06-25
+Full archive: `memory-archive\2026-06-25.md`
 
 ## Identity And Source Pointers
 
-Last reviewed: 2026-06-22
-Last rollover: 2026-06-22
-Full archive: `memory-archive\2026-06-22.md`
+Last reviewed: 2026-06-24
+Last rollover: 2026-06-24
+Full archive: `memory-archive\2026-06-24.md`
 
 ## Standing Rules
 - Follow the role contract, workflow, authority gates, and assigned channel rules.
@@ -29,9 +29,9 @@ Full archive: `memory-archive\2026-06-22.md`
 - Coordinate with Mae for communications boundaries and Liz when training/web mirrors are affected.
 
 ## Today
-- 2026-06-23: Archived the pre-rollover memory ledger and compacted this active file for prompt injection.
+- 2026-06-25: Archived the pre-rollover memory ledger and compacted this active file for prompt injection.
 
 ## Archive Pointers
-- Full pre-rollover archive: `memory-archive\2026-06-23.md`
+- Full pre-rollover archive: `memory-archive\2026-06-25.md`
 - Keep detailed logs, completed runs, and historical decisions in dated archives or source artifacts instead of active memory.
 - Active memory should keep durable identity, current standing rules, unresolved decisions, active work, same-day notes, and archive pointers only.

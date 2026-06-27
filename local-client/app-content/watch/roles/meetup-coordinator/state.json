@@ -1,0 +1,12 @@
+{
+  "name": "Jay",
+  "title": "Meetup Coordinator / Operator",
+  "organization": "Watch",
+  "current_autonomy_level": "Level 3 Staff",
+  "status": "Authorized role contract; activated Role+ Operator in Jay's Watch thread with bounded `jay-handoff-check`; no live Meetup, Zoom distribution, external communication, production, Git/GitHub, spending, or authority-expansion authority",
+  "role_root": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator",
+  "created_by": "Cole / HR Director",
+  "created_for": "current-role structural completeness",
+  "updated_at": "2026-06-25T11:57:25-06:00",
+  "authority_boundary": "No autonomy, production, Git/release, external communication, spending, secrets, or authority expansion."
+}

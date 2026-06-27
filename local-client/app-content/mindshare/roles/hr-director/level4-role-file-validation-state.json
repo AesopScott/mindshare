@@ -3,9 +3,9 @@
   "automation_id": "cole-hourly-role-file-and-whoami-validation",
   "logic_owner": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\scripts\\level4automation.py",
   "current_level": "Level 4 Senior Staff (Scoped Autonomy)",
-  "status": "runtime-installed-scheduler-proof-pending",
-  "last_run": "2026-06-25T11:22:50-06:00",
-  "last_run_mode": "manual",
+  "status": "operational",
+  "last_run": "2026-06-25T20:38:28-06:00",
+  "last_run_mode": "scheduled",
   "checked_roles": 17,
   "checked_level3_pipeline_roles": 24,
   "level3_required_files": [
@@ -20,33 +20,8 @@
     "state.json"
   ],
   "level3_completeness_checklist": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\level3-completeness-checklist.md",
-  "whoami_surfaces_checked": 33,
-  "whoami_surfaces_missing_autonomy_context": [
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\rae.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\paige.md",
-    "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\WhoAmI.md",
-    "G:\\My Drive\\Mindshare\\role\\front-desk-administrator\\WhoAmI.md",
-    "G:\\My Drive\\Mindshare\\role\\finance-director\\WhoAmI.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\finn.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\ana.md",
-    "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\WhoAmI.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\cal.md",
-    "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\WhoAmI.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\vik.md",
-    "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\WhoAmI.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\liz.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\mae.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\reid.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\tess.md",
-    "G:\\My Drive\\Mindshare\\role\\staff-writer\\WhoAmI.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\june.md",
-    "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer\\WhoAmI.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\bea.md",
-    "C:\\Users\\scott\\Code\\mojo\\roles\\data-engineering-director\\WhoAmI.md",
-    "C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\WhoAmI.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\lane.md",
-    "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\lab-operator.md"
-  ],
+  "whoami_surfaces_checked": 46,
+  "whoami_surfaces_missing_autonomy_context": [],
   "level_2_readiness_items": [],
   "level_2_readiness_counts": {
     "waiting_for_cole": 0,
@@ -66,6 +41,16 @@
       "suggested_prompt": "This is Paige's office. Please load your Who Am I card from `C:\\Users\\scott\\Code\\mindshare\\roles\\personal-assistant\\WhoAmI.md` and confirm your current identity, autonomy level, active boundaries, and canonical autonomy source in first person. This is a context repair/check only; it does not grant new authority, activate runtime, approve promotion, or change your role."
     },
     {
+      "role": "Mara",
+      "title": "Front Desk Administrator",
+      "organization": "Mindshare",
+      "thread_id": "019efcf9-792f-7d83-9cae-757015181e67",
+      "whoami_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\WhoAmI.md",
+      "autonomy_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\Autonomy.md",
+      "status": "Authorized Mindshare role; Level 3 Staff / activated Operator in `Mara - 3 - Front Desk Administrator` (`019efcf9-792f-7d83-9cae-757015181e67`); public-facing front-desk welcome/intake/routing scope; no access approval outside established procedure, security decisions, private information disclosure, executive commitments, HR/legal/media/sales/payment/procurement handling, production, Git/release, spending, secrets, automation, broad runtime, Level 4+, or authority expansion",
+      "suggested_prompt": "This is Mara's office. Please load your Who Am I card from `C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\WhoAmI.md` and confirm your current identity, autonomy level, active boundaries, and canonical autonomy source in first person. This is a context repair/check only; it does not grant new authority, activate runtime, approve promotion, or change your role."
+    },
+    {
       "role": "Finn",
       "title": "Finance Director",
       "organization": "Mindshare",
@@ -74,6 +59,16 @@
       "autonomy_path": "No canonical Autonomy.md found; use current role status and route missing source to Tess/Cole.",
       "status": "Authorized Mindshare role; Level 3 Staff / activated Operator in `Finn - Finance Director` (`019ef46f-ac78-7932-bcb3-5426c5259a62`); no FileWatch/Automation, spending authority, bank/payroll/tax/accounting-system access, secrets, external communication, production, Git/release, autonomous runtime, or authority expansion",
       "suggested_prompt": "This is Finn's office. Please load your Who Am I card from `C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\WhoAmI.md` and confirm your current identity, autonomy level, active boundaries, and canonical autonomy source in first person. This is a context repair/check only; it does not grant new authority, activate runtime, approve promotion, or change your role."
+    },
+    {
+      "role": "Cal",
+      "title": "MAPS ASPM",
+      "organization": "Mojo",
+      "thread_id": "019ee371-0da3-74f1-bbea-1a8a66b35bd6",
+      "whoami_path": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\WhoAmI.md",
+      "autonomy_path": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\Autonomy.md",
+      "status": "Authorized role contract; activated Role+ Coordinator in Cal's Mojo channel `Cal - ASPM` (`019ee371-0da3-74f1-bbea-1a8a66b35bd6`); reports to Vik in the MAPS Management Team; no autonomous runtime or release authority",
+      "suggested_prompt": "This is Cal's office. Please load your Who Am I card from `C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\WhoAmI.md` and confirm your current identity, autonomy level, active boundaries, and canonical autonomy source in first person. This is a context repair/check only; it does not grant new authority, activate runtime, approve promotion, or change your role."
     },
     {
       "role": "Tess",
@@ -104,6 +99,26 @@
       "autonomy_path": "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-writer\\Autonomy.md",
       "status": "Authorized Mindshare role; activated Operator in June's role-home thread `June - Staff Writer` (`019eed17-7348-7593-b2ae-661027ba9cb2`); no FileWatch/Automation, autonomous runtime, external publishing/sending authority, production authority, Git/release authority, spending authority, secrets access, or authority expansion",
       "suggested_prompt": "This is June's office. Please load your Who Am I card from `C:\\Users\\scott\\Code\\mindshare\\roles\\staff-writer\\WhoAmI.md` and confirm your current identity, autonomy level, active boundaries, and canonical autonomy source in first person. This is a context repair/check only; it does not grant new authority, activate runtime, approve promotion, or change your role."
+    },
+    {
+      "role": "Imani Brooks",
+      "title": "Data Engineering Director",
+      "organization": "Mojo",
+      "thread_id": "019efc1d-b79a-7dd2-9a62-a7ff4e901cde",
+      "whoami_path": "C:\\Users\\scott\\Code\\mojo\\roles\\data-engineering-director\\WhoAmI.md",
+      "autonomy_path": "C:\\Users\\scott\\Code\\mojo\\roles\\data-engineering-director\\Autonomy.md",
+      "status": "Authorized Mojo role; Level 3 Staff / activated Operator in `Imani - Data Engineering Director` (`019efc1d-b79a-7dd2-9a62-a7ff4e901cde`); no FileWatch/Automation, production, Git/release, data-system credentials, secrets, external communication, spending, procurement, broad runtime, Level 4+, or authority expansion",
+      "suggested_prompt": "This is Imani Brooks's office. Please load your Who Am I card from `C:\\Users\\scott\\Code\\mojo\\roles\\data-engineering-director\\WhoAmI.md` and confirm your current identity, autonomy level, active boundaries, and canonical autonomy source in first person. This is a context repair/check only; it does not grant new authority, activate runtime, approve promotion, or change your role."
+    },
+    {
+      "role": "Lane",
+      "title": "Mojo Lab Operator",
+      "organization": "Mojo",
+      "thread_id": "019eedc7-9e34-78c2-9792-5e8c1787fd46",
+      "whoami_path": "C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\WhoAmI.md",
+      "autonomy_path": "C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\Autonomy.md",
+      "status": "Authorized role; activated Operator in Mojo role-home thread `019eedc7-9e34-78c2-9792-5e8c1787fd46`; reports to Vik in the Mojo MAPS Management Team; no autonomous runtime, production, Git/GitHub, release, spending, external communication, secrets, connector access, or authority-expansion authority",
+      "suggested_prompt": "This is Lane's office. Please load your Who Am I card from `C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\WhoAmI.md` and confirm your current identity, autonomy level, active boundaries, and canonical autonomy source in first person. This is a context repair/check only; it does not grant new authority, activate runtime, approve promotion, or change your role."
     }
   ],
   "session_injection_instruction": "The heartbeat must inspect each target office thread. If the recent thread context does not show the role's WhoAmI/Autonomy Context was loaded or confirmed, send the target's suggested_prompt to that thread. Do not send when the thread already shows current identity/autonomy context, and do not change authority.",
@@ -111,464 +126,13 @@
     "roles_md": "83a535294115d234b1cf16390652e5c585973af437b56585e695d6e3dbb3948e",
     "conference_room": "689c76421f27fa1f9a3519ad349f5981a3314e481156220a58fa7fd81d7f69f4",
     "conference_room_prompt_protocol": "e402e438ed582ef3b94a57b7a1db273468ebbb76f3681da0ecbb2713bfb6c28c",
-    "welcome_script": "9ed778b95cf0056e7586bfcaafcf79b9f216df716587e17a673b8ce579ecdf2d",
+    "welcome_script": "0984170871d313fe5024156f90af7062834c77c3d04fb46cea58262a2b5025d2",
     "level3_completeness_checklist": "1556439cf219f80b110ab069b74c29ff9003dde4a5b871b9c53155b72650945c",
     "recruiting_pipeline": "d767f11cdef78d5fd415926991c2ec58d55efd16c6ef0a0aa1b37662710d59d0"
   },
-  "result": "level3_completeness_completed_with_validation_findings",
-  "finding_counts_by_severity": {
-    "medium": 56
-  },
-  "findings": [
-    {
-      "severity": "medium",
-      "role": "Rae",
-      "check": "required-file:WhoAmI.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Rae",
-      "check": "required-file:loop.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\loop.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Rae",
-      "check": "required-file:state.json",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\state.json",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Mara",
-      "check": "required-file:automation.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\automation.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Finn",
-      "check": "required-file:automation.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\finance-director\\automation.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Ana",
-      "check": "required-file:WhoAmI.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Cal",
-      "check": "required-file:automation.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\automation.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Cal",
-      "check": "required-file:loop.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\loop.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Cal",
-      "check": "required-file:state.json",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\state.json",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Liz",
-      "check": "required-file:loop.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\loop.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Mae",
-      "check": "required-file:WhoAmI.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Reid",
-      "check": "required-file:WhoAmI.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\release-manager\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Tess",
-      "check": "required-file:automation.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\automation.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Tess",
-      "check": "required-file:state.json",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\state.json",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "June",
-      "check": "required-file:automation.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-writer\\automation.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Imani Brooks",
-      "check": "required-file:automation.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\data-engineering-director\\automation.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Jay",
-      "check": "required-file:WhoAmI.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Jay",
-      "check": "required-file:loop.md",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\loop.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Jay",
-      "check": "required-file:state.json",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\state.json",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Rae",
-      "check": "whoami-surface:local-role-file",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Rae",
-      "check": "whoami-surface:gdrive-role-mirror",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\chief-executive-officer\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Rae",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\rae.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Paige",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\paige.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Mara",
-      "check": "whoami-autonomy-context:local-role-file",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\front-desk-administrator\\WhoAmI.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Mara",
-      "check": "whoami-autonomy-context:gdrive-role-mirror",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\front-desk-administrator\\WhoAmI.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Mara",
-      "check": "whoami-surface:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\mara.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Finn",
-      "check": "whoami-autonomy-context:gdrive-role-mirror",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\finance-director\\WhoAmI.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Finn",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\finn.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Ana",
-      "check": "whoami-surface:local-role-file",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Ana",
-      "check": "whoami-surface:gdrive-role-mirror",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\recruiter\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Ana",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\ana.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Cal",
-      "check": "whoami-autonomy-context:local-role-file",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-manager\\WhoAmI.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Cal",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\cal.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Vik",
-      "check": "whoami-autonomy-context:local-role-file",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\WhoAmI.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Vik",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\vik.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Liz",
-      "check": "whoami-autonomy-context:local-role-file",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-website-manager\\WhoAmI.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Liz",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\liz.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Mae",
-      "check": "whoami-surface:local-role-file",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Mae",
-      "check": "whoami-surface:gdrive-role-mirror",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\communications-director\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Mae",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\mae.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Reid",
-      "check": "whoami-surface:local-role-file",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mindshare\\roles\\release-manager\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Reid",
-      "check": "whoami-surface:gdrive-role-mirror",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\release-manager\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Reid",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\reid.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Tess",
-      "check": "whoami-surface:gdrive-role-mirror",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\autonomy-engineer\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Tess",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\tess.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "June",
-      "check": "whoami-autonomy-context:gdrive-role-mirror",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\staff-writer\\WhoAmI.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "June",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\june.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Bea",
-      "check": "whoami-autonomy-context:local-role-file",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\mojo-maps-engineer\\WhoAmI.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Bea",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\bea.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Imani Brooks",
-      "check": "whoami-autonomy-context:local-role-file",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\data-engineering-director\\WhoAmI.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Imani Brooks",
-      "check": "whoami-surface:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\imani-brooks.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Lane",
-      "check": "whoami-autonomy-context:local-role-file",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\mojo\\roles\\lab-operator\\WhoAmI.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Lane",
-      "check": "whoami-autonomy-context:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\lane.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Lane",
-      "check": "whoami-autonomy-context:gdrive-room-card-alias",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\lab-operator.md",
-      "owner_route": "Cole/Tess"
-    },
-    {
-      "severity": "medium",
-      "role": "Jay",
-      "check": "whoami-surface:local-role-file",
-      "status": "missing",
-      "evidence": "C:\\Users\\scott\\Code\\watch\\roles\\meetup-coordinator\\WhoAmI.md",
-      "owner_route": "Cole/Ana"
-    },
-    {
-      "severity": "medium",
-      "role": "Jay",
-      "check": "whoami-surface:gdrive-room-card",
-      "status": "missing",
-      "evidence": "G:\\My Drive\\Mindshare\\role\\who-am-i-cards\\jay.md",
-      "owner_route": "Cole/Ana"
-    }
-  ],
+  "result": "pass",
+  "finding_counts_by_severity": {},
+  "findings": [],
   "denied_actions_held": [
     "No role activation",
     "No promotion above Level 3 Staff",
@@ -579,414 +143,6 @@
     "No spending or secrets"
   ],
   "level_2_to_level_3_promotions": [],
-  "level3_completeness_repairs": [
-    {
-      "id": "REC-001",
-      "display_name": "Morgan Vale / Operations Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\operations-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\operations-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\operations-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\operations-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\operations-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\operations-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\operations-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\operations-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\operations-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\operations-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-002",
-      "display_name": "Priya Sen / Product Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\product-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-003",
-      "display_name": "Owen Kline / Technology Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\technology-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\technology-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\technology-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\technology-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\technology-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\technology-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\technology-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\technology-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\technology-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\technology-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-004",
-      "display_name": "Nia Calder / Engineering Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\engineering-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\engineering-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\engineering-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\engineering-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\engineering-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\engineering-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\engineering-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\engineering-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\engineering-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\engineering-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-005",
-      "display_name": "Mateo Ruiz / Platform Engineering Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\platform-engineering-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\platform-engineering-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\platform-engineering-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\platform-engineering-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\platform-engineering-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\platform-engineering-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\platform-engineering-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\platform-engineering-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\platform-engineering-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\platform-engineering-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-007",
-      "display_name": "Theo Nakamura / AI Systems Engineering Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\ai-systems-engineering-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\ai-systems-engineering-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\ai-systems-engineering-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\ai-systems-engineering-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\ai-systems-engineering-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\ai-systems-engineering-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\ai-systems-engineering-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\ai-systems-engineering-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\ai-systems-engineering-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\ai-systems-engineering-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-008",
-      "display_name": "Harper Quinn / Security Engineering Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\security-engineering-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\security-engineering-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\security-engineering-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\security-engineering-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\security-engineering-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\security-engineering-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\security-engineering-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\security-engineering-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\security-engineering-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\security-engineering-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-009",
-      "display_name": "Sloane Mercer / Revenue Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\revenue-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\revenue-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\revenue-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\revenue-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\revenue-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\revenue-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\revenue-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\revenue-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\revenue-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\revenue-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-011",
-      "display_name": "June Park / Staff Operations Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-operations-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-operations-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-operations-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-operations-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-operations-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-operations-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-operations-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-operations-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-operations-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-operations-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-012",
-      "display_name": "Leon Archer / Executive Operations Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-operations-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-operations-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-operations-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-operations-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-operations-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-operations-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-operations-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-operations-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-operations-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-operations-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-013",
-      "display_name": "Mira Patel / PMO Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\pmo-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\pmo-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\pmo-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\pmo-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\pmo-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\pmo-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\pmo-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\pmo-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\pmo-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\pmo-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-014",
-      "display_name": "Gabe Rowan / Product Management Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\product-management-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-management-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-management-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-management-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-management-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-management-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-management-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-management-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-management-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-management-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-015",
-      "display_name": "Elise Hart / Product Operations Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\product-operations-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-operations-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-operations-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-operations-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-operations-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-operations-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-operations-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-operations-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-operations-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\product-operations-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-016",
-      "display_name": "Nora Voss / Service Design Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\service-design-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\service-design-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\service-design-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\service-design-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\service-design-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\service-design-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\service-design-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\service-design-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\service-design-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\service-design-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-017",
-      "display_name": "Kai Bennett / Experience Design Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\experience-design-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\experience-design-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\experience-design-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\experience-design-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\experience-design-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\experience-design-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\experience-design-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\experience-design-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\experience-design-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\experience-design-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-018",
-      "display_name": "Amara Hayes / User Research Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\user-research-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\user-research-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\user-research-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\user-research-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\user-research-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\user-research-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\user-research-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\user-research-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\user-research-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\user-research-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-019",
-      "display_name": "Drew Collins / Sales Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\sales-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\sales-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\sales-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\sales-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\sales-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\sales-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\sales-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\sales-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\sales-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\sales-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-020",
-      "display_name": "Celia Grant / Partnerships Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\partnerships-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\partnerships-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\partnerships-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\partnerships-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\partnerships-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\partnerships-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\partnerships-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\partnerships-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\partnerships-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\partnerships-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-021",
-      "display_name": "Jordan Hale / Customer Success Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\customer-success-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\customer-success-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\customer-success-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\customer-success-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\customer-success-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\customer-success-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\customer-success-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\customer-success-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\customer-success-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\customer-success-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-022",
-      "display_name": "Samira Knox / Support Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\support-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\support-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\support-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\support-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\support-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\support-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\support-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\support-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\support-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\support-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-023",
-      "display_name": "Mila Chen / People Operations Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\people-operations-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\people-operations-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\people-operations-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\people-operations-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\people-operations-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\people-operations-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\people-operations-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\people-operations-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\people-operations-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\people-operations-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-024",
-      "display_name": "Adrian Moss / Legal Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\legal-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\legal-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\legal-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\legal-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\legal-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\legal-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\legal-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\legal-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\legal-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\legal-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-025",
-      "display_name": "Isla Monroe / Compliance Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\compliance-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\compliance-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\compliance-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\compliance-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\compliance-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\compliance-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\compliance-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\compliance-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\compliance-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\compliance-director\\state.json"
-      ],
-      "existing_files": []
-    },
-    {
-      "id": "REC-026",
-      "display_name": "Victor Lane / Vendor Management Director",
-      "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\vendor-management-director",
-      "created_files": [
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\vendor-management-director\\name.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\vendor-management-director\\personality.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\vendor-management-director\\WhoAmI.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\vendor-management-director\\gate-blocks.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\vendor-management-director\\role-agent.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\vendor-management-director\\memory.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\vendor-management-director\\workflow.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\vendor-management-director\\Autonomy.md",
-        "C:\\Users\\scott\\Code\\mindshare\\roles\\vendor-management-director\\state.json"
-      ],
-      "existing_files": []
-    }
-  ]
+  "level3_completeness_repairs": [],
+  "current_roster_repairs": []
 }

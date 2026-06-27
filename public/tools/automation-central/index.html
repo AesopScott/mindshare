@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>MindShare Central | Automation Central</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        background: '#020204',
+        surface: '#0c1324',
+        'surface-container': '#151b2d',
+        primary: '#bec6e0',
+        'primary-fixed': '#dae2fd',
+        'on-surface': '#dce1fb',
+        'on-surface-variant': '#aeb6cf',
+        outline: '#454b61'
+      },
+      fontFamily: {
+        display: ['Montserrat', 'sans-serif'],
+        body: ['Inter', 'sans-serif']
+      }
+    }
+  }
+};
+</script>
+<style>
+body {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(91, 141, 255, 0.16), transparent 28rem),
+    radial-gradient(circle at 82% 10%, rgba(84, 244, 214, 0.08), transparent 24rem),
+    #020204;
+  color: #dce1fb;
+  font-family: Inter, sans-serif;
+}
+.panel {
+  background: rgba(12, 19, 36, 0.78);
+  border: 1px solid rgba(190, 198, 224, 0.18);
+  backdrop-filter: blur(28px);
+}
+.field {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(190, 198, 224, 0.16);
+}
+.field:focus {
+  border-color: rgba(218, 226, 253, 0.62);
+  box-shadow: 0 0 0 3px rgba(190, 198, 224, 0.12);
+  outline: none;
+}
+select.field {
+  background-color: #080d1d;
+  color: #f2f5ff;
+}
+select.field option {
+  background-color: #080d1d;
+  color: #f2f5ff;
+}
+.status-dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 999px;
+  background: rgba(174, 182, 207, 0.36);
+}
+.status-dot.ready {
+  background: #79f2c0;
+  box-shadow: 0 0 16px rgba(121, 242, 192, 0.45);
+}
+</style>
+</head>
+<body class="min-h-screen">
+<header class="sticky top-0 z-40 h-20 border-b border-white/10 bg-surface/85 backdrop-blur-xl">
+<div class="mx-auto flex h-full max-w-[1500px] items-center justify-between px-6 md:px-12">
+<a class="font-display text-2xl font-semibold tracking-wider text-primary-fixed" href="../../index.html">MindShare Central</a>
+<nav class="hidden items-center gap-8 md:flex">
+<a class="text-sm text-on-surface-variant transition hover:text-primary" href="../../index.html">Home</a>
+<a class="text-sm text-on-surface-variant transition hover:text-primary" href="../../our-team/index.html">Our Team</a>
+<a class="text-sm text-on-surface-variant transition hover:text-primary" href="../../services/index.html">Services</a>
+<a class="border-b-2 border-primary pb-1 text-sm font-semibold text-primary" href="../index.html">Tools</a>
+</nav>
+</div>
+</header>
+<main class="mx-auto grid max-w-[1500px] gap-6 px-6 py-8 md:grid-cols-[360px_minmax(0,1fr)] md:px-12">
+<aside class="panel rounded-xl p-6">
+<p class="text-[10px] uppercase tracking-[0.26em] text-on-surface-variant">Personnel Tool</p>
+<h1 class="mt-3 font-display text-4xl font-semibold text-primary-fixed">Automation Central</h1>
+<p class="mt-4 text-sm leading-7 text-on-surface-variant">Define scoped, policy, and full autonomy capabilities for an existing person before Tess builds their automation files.</p>
+<div class="mt-8 grid gap-4">
+<div class="rounded-xl border border-white/10 bg-black/25 p-4">
+<div class="flex items-center gap-4">
+<img class="h-16 w-16 rounded-xl object-cover" src="../../assets/team/tess.webp" alt="Tess">
+<div>
+<h2 class="font-display text-xl font-semibold text-primary-fixed">Tess</h2>
+<p class="text-sm text-on-surface-variant">Autonomy Engineer</p>
+</div>
+</div>
+<p class="mt-3 text-xs uppercase tracking-[0.18em] text-primary">Autonomy design and automation file verification</p>
+</div>
+</div>
+<a class="mt-8 inline-flex w-full items-center justify-center rounded-lg border border-primary/40 bg-primary/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary transition hover:bg-primary/20" href="../index.html">Back to Tools</a>
+</aside>
+<section class="space-y-6">
+<div class="panel rounded-xl p-6">
+<div class="flex flex-wrap items-start justify-between gap-4">
+<div>
+<p class="text-[10px] uppercase tracking-[0.26em] text-on-surface-variant">Automation Intake</p>
+<h2 class="mt-2 font-display text-2xl font-semibold text-primary-fixed">Autonomy capability draft</h2>
+</div>
+<details class="relative">
+<summary class="list-none cursor-pointer rounded-lg border border-primary/40 bg-primary/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-primary transition hover:bg-primary/20">Automation Files</summary>
+<div class="absolute right-0 z-50 mt-3 max-h-[72vh] w-[min(760px,calc(100vw-3rem))] overflow-y-auto rounded-xl border border-primary/25 bg-[#050915] p-4 shadow-2xl shadow-black/60">
+<div class="grid gap-3">
+<div class="rounded-lg border border-white/10 bg-black/30 p-4 text-sm text-on-surface-variant">
+<p class="text-sm font-semibold text-primary-fixed">Automation Definition and Contract</p>
+<p class="mt-2 text-primary-fixed">Defines the automation contract, authority, boundaries, and operating agreement.</p>
+<p class="mt-2 rounded-md bg-black/40 px-3 py-2 text-orange-300">/roles/&lt;role name&gt;/automation/automation.md</p>
+</div>
+<div class="rounded-lg border border-white/10 bg-black/30 p-4 text-sm text-on-surface-variant">
+<p class="text-sm font-semibold text-primary-fixed">Automation Schedule and Goal</p>
+<p class="mt-2 text-primary-fixed">Defines the schedule, loop goal, continuation behavior, and stop conditions.</p>
+<p class="mt-2 rounded-md bg-black/40 px-3 py-2 text-orange-300">/roles/&lt;role name&gt;/automation/loop.md</p>
+</div>
+<div class="rounded-lg border border-white/10 bg-black/30 p-4 text-sm text-on-surface-variant">
+<p class="text-sm font-semibold text-primary-fixed">Automation Workflow</p>
+<p class="mt-2 text-primary-fixed">Human-readable durable automation logic for the selected autonomy level.</p>
+<p class="mt-2 rounded-md bg-black/40 px-3 py-2 text-orange-300">/roles/&lt;role name&gt;/automation/scripts/levelXautomation.py</p>
+</div>
+<div class="rounded-lg border border-white/10 bg-black/30 p-4 text-sm text-on-surface-variant">
+<p class="text-sm font-semibold text-primary-fixed">Automation State</p>
+<p class="mt-2 text-primary-fixed">Role state file used to record current automation state, routing, and status.</p>
+<p class="mt-2 rounded-md bg-black/40 px-3 py-2 text-orange-300">/roles/&lt;role name&gt;/state.json</p>
+</div>
+<div class="rounded-lg border border-white/10 bg-black/30 p-4 text-sm text-on-surface-variant">
+<p class="text-sm font-semibold text-primary-fixed">Automation Evaluations</p>
+<p class="mt-2 text-primary-fixed">Proof and evaluation record for automation runs, failures, recoveries, and validation.</p>
+<p class="mt-2 rounded-md bg-black/40 px-3 py-2 text-orange-300">/roles/&lt;role name&gt;/automation/automationproofs.md</p>
+</div>
+<div class="rounded-lg border border-white/10 bg-black/30 p-4 text-sm text-on-surface-variant">
+<p class="text-sm font-semibold text-primary-fixed">Automation Triggers</p>
+<p class="mt-2 text-primary-fixed">Codex, Claude Desktop, or role-owned hook trigger locations.</p>
+<div class="mt-2 space-y-2">
+<p class="rounded-md bg-black/40 px-3 py-2 text-orange-300">C:\Users\scott\.codex\hooks.json (Codex)</p>
+<p class="rounded-md bg-black/40 px-3 py-2 text-orange-300">%APPDATA%\Claude\hooks.json (Claude Desktop)</p>
+<p class="rounded-md bg-black/40 px-3 py-2 text-orange-300">/roles/&lt;role name&gt;/automation/hooks/&lt;hook function&gt;</p>
+</div>
+</div>
+<div class="rounded-lg border border-white/10 bg-black/30 p-4 text-sm text-on-surface-variant">
+<p class="text-sm font-semibold text-primary-fixed">Prompt Automation</p>
+<p class="mt-2 text-primary-fixed">WhoAmI prompt context and autonomy awareness injected into role sessions.</p>
+<p class="mt-2 rounded-md bg-black/40 px-3 py-2 text-orange-300">/roles/&lt;role name&gt;/WhoAmI.md</p>
+</div>
+</div>
+</div>
+</details>
+</div>
+<div class="mt-6 grid gap-4 md:grid-cols-2">
+<label class="block md:col-span-2">
+<span class="text-xs uppercase tracking-[0.18em] text-on-surface-variant">Automation Description</span>
+<input class="field mt-2 w-full rounded-lg px-4 py-3 text-primary-fixed placeholder:text-on-surface-variant" placeholder="Example: Review open research backlog and produce product recommendations">
+</label>
+<label class="block">
+<span class="text-xs uppercase tracking-[0.18em] text-on-surface-variant">Division</span>
+<select class="field mt-2 w-full rounded-lg px-4 py-3 text-primary-fixed" id="division-select"></select>
+</label>
+<label class="block">
+<span class="text-xs uppercase tracking-[0.18em] text-on-surface-variant">Department</span>
+<select class="field mt-2 w-full rounded-lg px-4 py-3 text-primary-fixed" id="department-select"></select>
+</label>
+<label class="block">
+<span class="text-xs uppercase tracking-[0.18em] text-on-surface-variant">Individual</span>
+<select class="field mt-2 w-full rounded-lg px-4 py-3 text-primary-fixed" id="individual-select"></select>
+</label>
+<div class="block">
+<span class="text-xs uppercase tracking-[0.18em] text-on-surface-variant">Current Settings</span>
+<div class="mt-2 grid grid-cols-3 gap-2">
+<button class="rounded-lg border border-white/15 bg-white/5 px-3 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-primary-fixed transition hover:border-primary/50 hover:bg-primary/10" type="button">Level 4</button>
+<button class="rounded-lg border border-white/15 bg-white/5 px-3 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-primary-fixed transition hover:border-primary/50 hover:bg-primary/10" type="button">Level 5</button>
+<button class="rounded-lg border border-white/15 bg-white/5 px-3 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-primary-fixed transition hover:border-primary/50 hover:bg-primary/10" type="button">Level 6</button>
+</div>
+</div>
+<div class="block md:col-span-2">
+<div class="flex flex-wrap items-end justify-between gap-3">
+<span class="text-xs uppercase tracking-[0.18em] text-on-surface-variant">Autonomy Definition</span>
+<div class="flex flex-wrap gap-2">
+<button class="rounded-lg border border-primary/40 bg-primary/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-primary transition hover:bg-primary/20" id="define-autonomy-button" type="button">Define Autonomy</button>
+<button class="rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-primary-fixed transition hover:border-primary/50 hover:bg-primary/10" id="redefine-autonomy-button" type="button">Redefine Autonomy</button>
+</div>
+</div>
+<div class="field mt-2 min-h-[430px] rounded-lg p-4">
+<div class="flex h-full min-h-[398px] flex-col rounded-lg border border-white/10 bg-black/25">
+<div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
+<span class="text-xs uppercase tracking-[0.18em] text-on-surface-variant">Tess Codex/Claude Office</span>
+<span class="text-[10px] uppercase tracking-[0.16em] text-primary" id="automation-chat-status">Connecting...</span>
+</div>
+<div class="flex-1 space-y-3 overflow-y-auto p-4 text-sm leading-7 text-on-surface-variant" id="automation-chat-transcript" aria-live="polite">
+<div class="rounded-lg border border-white/10 bg-surface-container/70 p-4" data-chat-placeholder>
+This is Tess's office.
+</div>
+</div>
+<div class="border-t border-white/10 p-4">
+<div class="relative">
+<textarea class="min-h-[96px] w-full resize-none rounded-lg border border-white/10 bg-surface-container px-4 py-3 pb-12 pr-16 text-primary-fixed placeholder:text-on-surface-variant focus:border-primary/60 focus:outline-none" id="automation-chat-input" placeholder="Ask Tess to define or redefine autonomy for the selected individual."></textarea>
+<button class="absolute bottom-3 right-3 rounded-lg border border-primary/40 bg-primary/20 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary transition hover:bg-primary/30" id="automation-chat-send" type="button">Send</button>
+</div>
+<div class="mt-3 flex flex-wrap items-center justify-between gap-3">
+<div class="flex flex-wrap gap-2">
+<button class="rounded-md border border-primary/40 bg-primary/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-primary" id="automation-engine-codex" type="button" data-engine="codex">Codex</button>
+<button class="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant" id="automation-engine-claude" type="button" data-engine="claude">Claude</button>
+</div>
+<div class="text-[10px] uppercase tracking-widest text-on-surface-variant/70" id="automation-provider-status">Codex and Claude will connect when available.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+const automationDivisions = [
+  {
+    label: 'Strategy & Operations',
+    departments: [
+      { label: 'Executive Leadership', people: ['Rae', 'Scott'] },
+      { label: 'PMO', people: ['Mira'] },
+      { label: 'Human Resources', people: ['Cole'] },
+      { label: 'Recruiting', people: ['Ana'] },
+      { label: 'Risk Management', people: [] }
+    ]
+  },
+  {
+    label: 'Product & Design',
+    departments: [
+      { label: 'Product Management', people: ['Gabe', 'Priya'] },
+      { label: 'Service Design', people: ['Nora'] },
+      { label: 'Experience Design', people: ['Kai'] },
+      { label: 'User Research', people: ['Amara'] }
+    ]
+  },
+  {
+    label: 'Technology & Data',
+    departments: [
+      { label: 'Engineering', people: ['Nia', 'Owen', 'Theo'] },
+      { label: 'Platform Engineering', people: ['Mateo', 'Reid'] },
+      { label: 'Data Engineering', people: ['Imani'] },
+      { label: 'AI Engineering', people: ['Bea', 'Tess', 'Vik'] },
+      { label: 'Security', people: ['Harper'] }
+    ]
+  },
+  {
+    label: 'Revenue & Market',
+    departments: [
+      { label: 'Sales', people: ['Drew'] },
+      { label: 'Marketing', people: ['Mae'] },
+      { label: 'Partnerships', people: ['Celia'] },
+      { label: 'Customer Success', people: ['Jordan'] },
+      { label: 'Support', people: ['Samira'] }
+    ]
+  },
+  {
+    label: 'Finance',
+    departments: [
+      { label: 'Accounting', people: ['Finn'] },
+      { label: 'Accounts Payable', people: [] },
+      { label: 'Accounts Receivable', people: [] },
+      { label: 'Purchasing', people: ['Victor'] },
+      { label: 'Tax', people: [] }
+    ]
+  },
+  {
+    label: 'Administration',
+    departments: [
+      { label: 'People Operations', people: ['Mila', 'Paige'] },
+      { label: 'Legal', people: ['Adrian'] },
+      { label: 'Compliance', people: ['Isla'] },
+      { label: 'Vendor Management', people: ['Victor'] }
+    ]
+  }
+];
+
+const divisionSelect = document.getElementById('division-select');
+const departmentSelect = document.getElementById('department-select');
+const individualSelect = document.getElementById('individual-select');
+const automationClient = window.MindShareLocalClient;
+const automationChatTranscript = document.getElementById('automation-chat-transcript');
+const automationChatInput = document.getElementById('automation-chat-input');
+const automationChatStatus = document.getElementById('automation-chat-status');
+const automationProviderStatus = document.getElementById('automation-provider-status');
+const automationProviderSessions = {
+  codex: null,
+  claude: null
+};
+let activeAutomationProvider = 'codex';
+const automationTranscript = [{ role: 'user', content: "This is Tess's office." }];
+
+function renderDivisionOptions() {
+  divisionSelect.innerHTML = automationDivisions.map((division, index) => (
+    `<option value="${index}">${division.label}</option>`
+  )).join('');
+}
+
+function renderDepartmentOptions() {
+  const selectedDivision = automationDivisions[Number(divisionSelect.value)] || automationDivisions[0];
+  departmentSelect.innerHTML = selectedDivision.departments.map((department, index) => (
+    `<option value="${index}">${department.label}</option>`
+  )).join('');
+  renderIndividualOptions();
+}
+
+function renderIndividualOptions() {
+  const selectedDivision = automationDivisions[Number(divisionSelect.value)] || automationDivisions[0];
+  const selectedDepartment = selectedDivision.departments[Number(departmentSelect.value)] || selectedDivision.departments[0];
+  const people = selectedDepartment.people.length ? selectedDepartment.people : ['No assigned people yet'];
+  individualSelect.innerHTML = people.sort((a, b) => a.localeCompare(b)).map((person) => (
+    `<option value="${person}">${person}</option>`
+  )).join('');
+}
+
+renderDivisionOptions();
+divisionSelect.value = '2';
+renderDepartmentOptions();
+divisionSelect.addEventListener('change', renderDepartmentOptions);
+departmentSelect.addEventListener('change', renderIndividualOptions);
+
+function selectedAutomationTarget() {
+  const division = automationDivisions[Number(divisionSelect.value)]?.label || '';
+  const department = automationDivisions[Number(divisionSelect.value)]?.departments[Number(departmentSelect.value)]?.label || '';
+  const individual = individualSelect.value || '';
+  const description = document.querySelector('input[placeholder^="Example: Review"]')?.value.trim() || '';
+  return { division, department, individual, description };
+}
+
+function appendAutomationChatMessage(role, content) {
+  const placeholder = automationChatTranscript.querySelector('[data-chat-placeholder]');
+  if (placeholder) {
+    placeholder.remove();
+  }
+  const bubble = document.createElement('div');
+  const isUser = role === 'user';
+  bubble.className = `max-w-[86%] rounded-lg border border-white/10 px-4 py-3 ${isUser ? 'ml-auto bg-primary/15 text-primary-fixed' : 'mr-auto bg-surface-container/80 text-on-surface-variant'}`;
+  bubble.textContent = content;
+  automationChatTranscript.appendChild(bubble);
+  automationChatTranscript.scrollTop = automationChatTranscript.scrollHeight;
+}
+
+function setAutomationProvider(provider) {
+  activeAutomationProvider = provider;
+  document.querySelectorAll('[data-engine]').forEach((button) => {
+    const active = button.dataset.engine === provider;
+    button.classList.toggle('border-primary/40', active);
+    button.classList.toggle('bg-primary/10', active);
+    button.classList.toggle('text-primary', active);
+    button.classList.toggle('border-white/10', !active);
+    button.classList.toggle('bg-white/5', !active);
+    button.classList.toggle('text-on-surface-variant', !active);
+  });
+}
+
+async function connectAutomationProviders() {
+  if (!automationClient) {
+    automationChatStatus.textContent = 'Local client unavailable';
+    automationProviderStatus.textContent = 'Open this page inside MindShare Central to connect Codex or Claude.';
+    return;
+  }
+
+  automationChatStatus.textContent = 'Connecting providers...';
+  const [codex, claude] = await Promise.allSettled([
+    automationClient.connectCodex({ roleSlug: 'tess' }),
+    automationClient.connectClaude({ roleSlug: 'tess' })
+  ]);
+
+  if (codex.status === 'fulfilled' && codex.value?.ok) {
+    automationProviderSessions.codex = codex.value;
+  }
+  if (claude.status === 'fulfilled' && claude.value?.ok) {
+    automationProviderSessions.claude = claude.value;
+  }
+
+  const connected = Object.entries(automationProviderSessions)
+    .filter(([, session]) => Boolean(session?.sessionId))
+    .map(([provider]) => provider === 'codex' ? 'Codex' : 'Claude');
+
+  automationChatStatus.textContent = connected.length ? `${connected.join(' + ')} connected` : 'No provider connected';
+  automationProviderStatus.textContent = connected.length
+    ? `${connected.join(' and ')} ready for Tess.`
+    : 'Codex/Claude were not available or not logged in.';
+}
+
+function buildAutonomySkillPrompt(kind) {
+  const target = selectedAutomationTarget();
+  const action = kind === 'redefine' ? 'Redefine autonomy' : 'Define autonomy';
+  return `${action} for ${target.individual || 'the selected individual'}.\n\nDivision: ${target.division}\nDepartment: ${target.department}\nAutomation description: ${target.description || '(none provided)'}\n\nRun this as Tess from Tess's office. Use research-and-recommend style reasoning, identify the next required autonomy level, and draft the autonomy capability packet. Do not change files yet.`;
+}
+
+async function sendAutomationChatMessage() {
+  const message = automationChatInput.value.trim();
+  if (!message) return;
+  const provider = activeAutomationProvider;
+  let session = automationProviderSessions[provider];
+  if (!session?.sessionId) {
+    await connectAutomationProviders();
+    session = automationProviderSessions[provider];
+  }
+  appendAutomationChatMessage('user', message);
+  automationTranscript.push({ role: 'user', content: message });
+  automationChatInput.value = '';
+
+  if (!session?.sessionId) {
+    appendAutomationChatMessage('assistant', `${provider === 'codex' ? 'Codex' : 'Claude'} is not connected. Confirm the CLI is installed and logged in locally, then try again.`);
+    return;
+  }
+
+  automationChatStatus.textContent = `${provider === 'codex' ? 'Codex' : 'Claude'} working...`;
+  const send = provider === 'codex' ? automationClient.sendCodexMessage : automationClient.sendClaudeMessage;
+  const payload = await send({
+    sessionId: session.sessionId,
+    message,
+    roleContext: session.roleContext,
+    transcript: automationTranscript.slice(-16)
+  });
+
+  if (!payload?.ok) {
+    appendAutomationChatMessage('assistant', payload?.error || payload?.message || 'Provider call failed.');
+    automationChatStatus.textContent = 'Error';
+    return;
+  }
+
+  const reply = payload.reply || payload.message || '(no response)';
+  appendAutomationChatMessage('assistant', reply);
+  automationTranscript.push({ role: 'assistant', content: reply });
+  automationChatStatus.textContent = `${provider === 'codex' ? 'Codex' : 'Claude'} ready`;
+}
+
+document.getElementById('automation-engine-codex').addEventListener('click', () => setAutomationProvider('codex'));
+document.getElementById('automation-engine-claude').addEventListener('click', () => setAutomationProvider('claude'));
+document.getElementById('automation-chat-send').addEventListener('click', sendAutomationChatMessage);
+automationChatInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' && !event.shiftKey) {
+    event.preventDefault();
+    sendAutomationChatMessage();
+  }
+});
+document.getElementById('define-autonomy-button').addEventListener('click', () => {
+  automationChatInput.value = buildAutonomySkillPrompt('define');
+  automationChatInput.focus();
+});
+document.getElementById('redefine-autonomy-button').addEventListener('click', () => {
+  automationChatInput.value = buildAutonomySkillPrompt('redefine');
+  automationChatInput.focus();
+});
+setAutomationProvider('codex');
+connectAutomationProviders();
+</script>
+</body>
+</html>

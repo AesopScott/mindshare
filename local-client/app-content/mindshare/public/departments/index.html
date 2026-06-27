@@ -34,7 +34,10 @@
         }
         .floating-sidebar {
             background: #030407;
-            box-shadow: 0 28px 90px rgba(0, 0, 0, 0.72);
+            border: 2px solid rgba(190, 198, 224, 0.7) !important;
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.08),
+                0 28px 90px rgba(0, 0, 0, 0.72);
         }
         .provider-ready-dot {
             background: rgba(121, 128, 152, 0.28);
@@ -276,7 +279,7 @@
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary font-body-md transition-colors duration-300" href="../index.html">Home</a>
 <a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 font-body-md" href="../our-team/index.html">Our Team</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary font-body-md transition-colors duration-300" href="../services/index.html">Services</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary font-body-md transition-colors duration-300" href="../contact/index.html">Contact</a>
+
 </nav>
 <div class="flex items-center space-x-6">
 <div class="relative hidden md:flex items-center bg-surface-container-high/50 px-4 py-1.5 rounded-full border border-white/5" id="global-search-shell">
@@ -429,6 +432,10 @@ Configuration is loaded from the local MindShare workspace.
 <span class="provider-ready-dot w-2 h-2 rounded-full transition-all" id="claude-ready-dot" aria-hidden="true"></span>
 <span class="font-label-sm text-primary">Connect Claude</span>
 </button>
+<a class="flex items-center gap-2 glass-panel px-3 py-2 rounded-md border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all cursor-pointer" id="provider-balances-link" href="../tools/index.html#openai-balance">
+<span class="material-symbols-outlined text-[16px]" aria-hidden="true">account_balance_wallet</span>
+<span class="font-label-sm text-primary">Balances</span>
+</a>
 </div>
 </div>
 <div class="office-working-banner hidden items-center justify-between gap-4 border-b border-emerald-300/25 px-8 py-3 text-emerald-100" id="office-working-banner">
@@ -487,6 +494,9 @@ Configuration is loaded from the local MindShare workspace.
 </button>
 <button class="prompt-engine-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="prompt-engine-claude" type="button" data-prompt-engine="claude">
 <span class="inline-block h-1.5 w-1.5 rounded-full align-middle mr-2 bg-current opacity-70"></span>Claude
+</button>
+<button class="prompt-engine-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="prompt-engine-deepseek" type="button" data-prompt-engine="deepseek">
+<span class="inline-block h-1.5 w-1.5 rounded-full align-middle mr-2 bg-current opacity-70"></span>DeepSeek
 </button>
 </div>
 <div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-3">
@@ -852,6 +862,7 @@ Configuration is loaded from the local MindShare workspace.
         let activeRoleContext = null;
         let codexAvailable = false;
         let claudeAvailable = false;
+        let deepseekAvailable = false;
         let activeEngine = 'codex';
         const roleSessions = {};
         const sessionNotifications = [];
@@ -874,6 +885,46 @@ Configuration is loaded from the local MindShare workspace.
             "Security": "../assets/departments/security-dashboard.png"
         };
         let currentChatBackdropImagePath = '';
+
+        function providerLabel(engine) {
+            if (engine === 'claude') return 'Claude';
+            if (engine === 'deepseek') return 'DeepSeek';
+            return 'Codex';
+        }
+
+        function providerAvailable(engine) {
+            if (engine === 'claude') return claudeAvailable;
+            if (engine === 'deepseek') return deepseekAvailable;
+            return codexAvailable;
+        }
+
+        function setProviderAvailable(engine, available) {
+            if (engine === 'claude') {
+                claudeAvailable = Boolean(available);
+            } else if (engine === 'deepseek') {
+                deepseekAvailable = Boolean(available);
+            } else {
+                codexAvailable = Boolean(available);
+            }
+        }
+
+        function providerSessionKey(engine) {
+            if (engine === 'claude') return 'claudeSessionId';
+            if (engine === 'deepseek') return 'deepseekSessionId';
+            return 'codexSessionId';
+        }
+
+        function providerConnect(client, engine) {
+            if (engine === 'claude') return client?.connectClaude;
+            if (engine === 'deepseek') return client?.connectDeepSeek;
+            return client?.connectCodex;
+        }
+
+        function providerSend(client, engine) {
+            if (engine === 'claude') return client?.sendClaudeMessage;
+            if (engine === 'deepseek') return client?.sendDeepSeekMessage;
+            return client?.sendCodexMessage;
+        }
 
         function findRoleEntry(slug) {
             for (const division of Object.values(divisionDepartments)) {
@@ -999,6 +1050,7 @@ Configuration is loaded from the local MindShare workspace.
                         department: session.department,
                         codexSessionId: session.codexSessionId,
                         claudeSessionId: session.claudeSessionId,
+                        deepseekSessionId: session.deepseekSessionId,
                         roleContext: session.roleContext,
                         image: session.image || '',
                         messages: conversationMessages(session.messages),
@@ -1013,6 +1065,7 @@ Configuration is loaded from the local MindShare workspace.
                     activeEngine,
                     codexAvailable,
                     claudeAvailable,
+                    deepseekAvailable,
                     roleSessions: serializableSessions
                 }));
             } catch (error) {
@@ -1028,6 +1081,7 @@ Configuration is loaded from the local MindShare workspace.
                 activeEngine = saved.activeEngine || activeEngine;
                 codexAvailable = Boolean(saved.codexAvailable);
                 claudeAvailable = Boolean(saved.claudeAvailable);
+                deepseekAvailable = Boolean(saved.deepseekAvailable);
                 Object.entries(saved.roleSessions || {}).forEach(([slug, session]) => {
                     roleSessions[slug] = {
                         slug,
@@ -1037,6 +1091,7 @@ Configuration is loaded from the local MindShare workspace.
                         department: session.department || '',
                         codexSessionId: session.codexSessionId || null,
                         claudeSessionId: session.claudeSessionId || null,
+                        deepseekSessionId: session.deepseekSessionId || null,
                         roleContext: session.roleContext || null,
                         image: session.image || findRoleEntry(slug)?.image || '',
                         messages: conversationMessages(session.messages),
@@ -1063,16 +1118,20 @@ Configuration is loaded from the local MindShare workspace.
             if (!client) {
                 codexAvailable = false;
                 claudeAvailable = false;
+                deepseekAvailable = false;
                 return;
             }
-            const [codexResult, claudeResult] = await Promise.allSettled([
+            const [codexResult, claudeResult, deepseekResult] = await Promise.allSettled([
                 client.connectCodex ? client.connectCodex({ checkOnly: true }) : Promise.resolve({ ok: false }),
-                client.connectClaude ? client.connectClaude({ checkOnly: true }) : Promise.resolve({ ok: false })
+                client.connectClaude ? client.connectClaude({ checkOnly: true }) : Promise.resolve({ ok: false }),
+                client.connectDeepSeek ? client.connectDeepSeek({ checkOnly: true }) : Promise.resolve({ ok: false })
             ]);
             codexAvailable = Boolean(codexResult.status === 'fulfilled' && codexResult.value?.ok);
             claudeAvailable = Boolean(claudeResult.status === 'fulfilled' && claudeResult.value?.ok);
+            deepseekAvailable = Boolean(deepseekResult.status === 'fulfilled' && deepseekResult.value?.ok);
             setProviderReady('codex', codexAvailable);
             setProviderReady('claude', claudeAvailable);
+            setProviderReady('deepseek', deepseekAvailable);
             persistOfficeState();
         }
 
@@ -1080,7 +1139,7 @@ Configuration is loaded from the local MindShare workspace.
             const client = mindShareLocalClient();
             if (!client?.listSessions) {
                 Object.values(roleSessions).forEach((session) => {
-                    if (session.codexSessionId || session.claudeSessionId) {
+                    if (session.codexSessionId || session.claudeSessionId || session.deepseekSessionId) {
                         session.connectionIssue = true;
                     }
                 });
@@ -1091,6 +1150,7 @@ Configuration is loaded from the local MindShare workspace.
 
             const liveCodex = new Set();
             const liveClaude = new Set();
+            const liveDeepSeek = new Set();
             (payload.sessions || []).forEach((snapshot) => {
                 const slug = snapshot.roleSlug;
                 if (!slug) return;
@@ -1105,6 +1165,9 @@ Configuration is loaded from the local MindShare workspace.
                 if (snapshot.provider === 'claude') {
                     roleSession.claudeSessionId = snapshot.sessionId;
                     liveClaude.add(snapshot.sessionId);
+                } else if (snapshot.provider === 'deepseek') {
+                    roleSession.deepseekSessionId = snapshot.sessionId;
+                    liveDeepSeek.add(snapshot.sessionId);
                 } else if (snapshot.provider === 'codex') {
                     roleSession.codexSessionId = snapshot.sessionId;
                     liveCodex.add(snapshot.sessionId);
@@ -1129,6 +1192,10 @@ Configuration is loaded from the local MindShare workspace.
                 }
                 if (session.claudeSessionId && !liveClaude.has(session.claudeSessionId)) {
                     session.claudeSessionId = null;
+                    removed = true;
+                }
+                if (session.deepseekSessionId && !liveDeepSeek.has(session.deepseekSessionId)) {
+                    session.deepseekSessionId = null;
                     removed = true;
                 }
                 if (removed && !hasConnectedOfficeSession(session)) {
@@ -1169,6 +1236,7 @@ Configuration is loaded from the local MindShare workspace.
                     image,
                     codexSessionId: null,
                     claudeSessionId: null,
+                    deepseekSessionId: null,
                     roleContext: null,
                     messages: [],
                     draftText: '',
@@ -1268,7 +1336,7 @@ Configuration is loaded from the local MindShare workspace.
             }
             const last = usage.last;
             const totals = usage.totals || emptyTokenTotals();
-            const provider = last.provider === 'claude' ? 'Claude' : 'Codex';
+            const provider = providerLabel(last.provider);
             const cache = Number(last.cachedInputTokens || 0) + Number(last.cacheCreationInputTokens || 0);
             const totalCache = Number(totals.cachedInputTokens || 0) + Number(totals.cacheCreationInputTokens || 0);
             element.textContent = `Last ${provider}: In ${formatTokenCount(last.inputTokens)} · Cache ${formatTokenCount(cache)} · Out ${formatTokenCount(last.outputTokens)} · ${formatContextPercent(last)} | Total: In ${formatTokenCount(totals.inputTokens)} · Cache ${formatTokenCount(totalCache)} · Out ${formatTokenCount(totals.outputTokens)}`;
@@ -2192,7 +2260,7 @@ Configuration is loaded from the local MindShare workspace.
                     </span>
                     <span class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-on-surface-variant">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        ${session.processing ? (session.processingEngine === 'claude' ? 'Claude' : 'Codex') : 'Queued'}
+                        ${session.processing ? providerLabel(session.processingEngine) : 'Queued'}
                         ${session.promptQueue?.length ? ` · ${session.promptQueue.length}` : ''}
                     </span>
                 </button>
@@ -2216,7 +2284,7 @@ Configuration is loaded from the local MindShare workspace.
             const detail = document.getElementById('office-working-detail');
             const title = document.getElementById('main-window-title');
             const isWorking = Boolean(roleSession?.processing);
-            const engine = roleSession?.processingEngine === 'claude' ? 'Claude' : 'Codex';
+            const engine = providerLabel(roleSession?.processingEngine);
             frame?.classList.toggle('is-working', isWorking);
             banner?.classList.toggle('hidden', !isWorking);
             banner?.classList.toggle('is-visible', isWorking);
@@ -2441,7 +2509,7 @@ Configuration is loaded from the local MindShare workspace.
         }
 
         function setProviderReady(engine, ready) {
-            const dot = document.getElementById(engine === 'claude' ? 'claude-ready-dot' : 'codex-ready-dot');
+            const dot = document.getElementById(`${engine}-ready-dot`);
             if (!dot) return;
             dot.classList.toggle('is-ready', Boolean(ready));
             dot.classList.toggle('animate-pulse', Boolean(ready));
@@ -2451,10 +2519,12 @@ Configuration is loaded from the local MindShare workspace.
         function renderPromptEngineSelector() {
             const codexButton = document.getElementById('prompt-engine-codex');
             const claudeButton = document.getElementById('prompt-engine-claude');
-            if (!codexButton || !claudeButton) return;
+            const deepseekButton = document.getElementById('prompt-engine-deepseek');
+            if (!codexButton || !claudeButton || !deepseekButton) return;
             const buttons = [
                 { button: codexButton, engine: 'codex', available: codexAvailable },
-                { button: claudeButton, engine: 'claude', available: claudeAvailable }
+                { button: claudeButton, engine: 'claude', available: claudeAvailable },
+                { button: deepseekButton, engine: 'deepseek', available: deepseekAvailable }
             ];
             buttons.forEach(({ button, engine, available }) => {
                 const isActive = activeEngine === engine;
@@ -2462,45 +2532,45 @@ Configuration is loaded from the local MindShare workspace.
                 button.classList.toggle('is-unavailable', !available);
                 button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
                 button.title = available
-                    ? `Send next prompt to ${engine === 'claude' ? 'Claude' : 'Codex'}`
-                    : `${engine === 'claude' ? 'Claude' : 'Codex'} is not connected yet`;
+                    ? `Send next prompt to ${providerLabel(engine)}`
+                    : `${providerLabel(engine)} is not connected yet`;
             });
         }
 
         function setPromptEngine(engine) {
-            if (!['codex', 'claude'].includes(engine)) return;
+            if (!['codex', 'claude', 'deepseek'].includes(engine)) return;
             activeEngine = engine;
             renderPromptEngineSelector();
             persistOfficeState();
-            const available = engine === 'claude' ? claudeAvailable : codexAvailable;
+            const available = providerAvailable(engine);
             if (!available) {
-                setChatStatus(`${engine === 'claude' ? 'Claude' : 'Codex'} selected. Connect ${engine === 'claude' ? 'Claude' : 'Codex'} before sending.`);
+                setChatStatus(`${providerLabel(engine)} selected. Connect ${providerLabel(engine)} before sending.`);
             } else {
-                setChatStatus(`Next prompt will use ${engine === 'claude' ? 'Claude' : 'Codex'}.`);
+                setChatStatus(`Next prompt will use ${providerLabel(engine)}.`);
             }
         }
 
         async function resolvePromptEngineForSend() {
-            let available = activeEngine === 'claude' ? claudeAvailable : codexAvailable;
+            let available = providerAvailable(activeEngine);
             if (available) return activeEngine;
 
-            setChatStatus(`Checking ${activeEngine === 'claude' ? 'Claude' : 'Codex'} connection...`);
+            setChatStatus(`Checking ${providerLabel(activeEngine)} connection...`);
             await refreshProviderReadiness();
-            available = activeEngine === 'claude' ? claudeAvailable : codexAvailable;
+            available = providerAvailable(activeEngine);
             if (available) return activeEngine;
 
-            const fallback = codexAvailable ? 'codex' : (claudeAvailable ? 'claude' : null);
+            const fallback = codexAvailable ? 'codex' : (claudeAvailable ? 'claude' : (deepseekAvailable ? 'deepseek' : null));
             if (!fallback) return null;
 
             activeEngine = fallback;
             renderPromptEngineSelector();
             persistOfficeState();
-            setChatStatus(`Switched to available ${fallback === 'claude' ? 'Claude' : 'Codex'} connection.`);
+            setChatStatus(`Switched to available ${providerLabel(fallback)} connection.`);
             return fallback;
         }
 
         function hasConnectedOfficeSession(roleSession) {
-            return Boolean(roleSession?.codexSessionId || roleSession?.claudeSessionId);
+            return Boolean(roleSession?.codexSessionId || roleSession?.claudeSessionId || roleSession?.deepseekSessionId);
         }
 
         function setOfficeStatusDot(id, litClass, dimClass, isLit) {
@@ -2553,9 +2623,8 @@ Configuration is loaded from the local MindShare workspace.
 
         async function ensureProviderSession(roleSession, engine) {
             const client = mindShareLocalClient();
-            const isClaude = engine === 'claude';
-            const connect = isClaude ? client?.connectClaude : client?.connectCodex;
-            const sessionKey = isClaude ? 'claudeSessionId' : 'codexSessionId';
+            const connect = providerConnect(client, engine);
+            const sessionKey = providerSessionKey(engine);
             if (!connect) {
                 return {
                     ok: false,
@@ -2577,11 +2646,7 @@ Configuration is loaded from the local MindShare workspace.
             }
             if (roleSession[sessionKey]) {
                 setProviderReady(engine, true);
-                if (isClaude) {
-                    claudeAvailable = true;
-                } else {
-                    codexAvailable = true;
-                }
+                setProviderAvailable(engine, true);
                 markOfficeSessionConnected(roleSession);
                 return {
                     ok: true,
@@ -2593,22 +2658,14 @@ Configuration is loaded from the local MindShare workspace.
             const payload = await connect({ roleSlug: roleSession.slug });
             if (!payload.ok) {
                 setProviderReady(engine, false);
-                if (isClaude) {
-                    claudeAvailable = false;
-                } else {
-                    codexAvailable = false;
-                }
+                setProviderAvailable(engine, false);
                 if (roleSession[sessionKey]) {
                     markOfficeSessionIssue(roleSession);
                 }
                 return payload;
             }
             setProviderReady(engine, true);
-            if (isClaude) {
-                claudeAvailable = true;
-            } else {
-                codexAvailable = true;
-            }
+            setProviderAvailable(engine, true);
             roleSession[sessionKey] = payload.sessionId;
             if (payload.roleContext) {
                 roleSession.roleContext = payload.roleContext;
@@ -2641,6 +2698,10 @@ Configuration is loaded from the local MindShare workspace.
             if (claudeAvailable && !roleSession.claudeSessionId) {
                 const payload = await ensureProviderSession(roleSession, 'claude');
                 if (payload.ok && !payload.reused) created.push('Claude');
+            }
+            if (deepseekAvailable && !roleSession.deepseekSessionId) {
+                const payload = await ensureProviderSession(roleSession, 'deepseek');
+                if (payload.ok && !payload.reused) created.push('DeepSeek');
             }
             return created;
         }
@@ -2715,6 +2776,39 @@ Configuration is loaded from the local MindShare workspace.
 
         function connectClaude() {
             return connectClaudeCli();
+        }
+
+        async function showDeepSeekBalance() {
+            const button = document.getElementById('deepseek-balance-button');
+            if (button) {
+                button.disabled = true;
+                button.classList.add('opacity-60');
+            }
+            setChatStatus('Checking DeepSeek balance...');
+            try {
+                const client = mindShareLocalClient();
+                if (!client?.getDeepSeekBalance) {
+                    showLocalClientInstallPrompt();
+                    return;
+                }
+                const payload = await client.getDeepSeekBalance();
+                if (!payload?.ok) {
+                    addChatError(payload?.error || payload?.message || 'DeepSeek balance lookup failed.');
+                    clearChatStatus();
+                    return;
+                }
+                const balance = payload.formatted || `${payload.currency || 'USD'} ${Number(payload.totalBalance || 0).toFixed(2)}`;
+                addChatError(`DeepSeek balance: ${balance} remaining.`);
+                clearChatStatus();
+            } catch (error) {
+                addChatError(`DeepSeek balance lookup failed: ${error.message || error}`);
+                clearChatStatus();
+            } finally {
+                if (button) {
+                    button.disabled = false;
+                    button.classList.remove('opacity-60');
+                }
+            }
         }
 
         async function triggerMicrophoneShortcut() {
@@ -2805,7 +2899,7 @@ Configuration is loaded from the local MindShare workspace.
 
             const engine = await resolvePromptEngineForSend();
             if (!engine) {
-                addChatMessageToRole(roleSession, 'system', 'Connect Codex or Claude once before sending a message.');
+                addChatMessageToRole(roleSession, 'system', 'Connect Codex, Claude, or DeepSeek once before sending a message.');
                 clearChatStatus();
                 return;
             }
@@ -2867,6 +2961,7 @@ Configuration is loaded from the local MindShare workspace.
             }
             roleSession.codexSessionId = null;
             roleSession.claudeSessionId = null;
+            roleSession.deepseekSessionId = null;
             roleSession.promptQueue = [];
             roleSession.processing = false;
             roleSession.processingEngine = null;
@@ -2901,13 +2996,13 @@ Configuration is loaded from the local MindShare workspace.
 
             const queuedPrompt = roleSession.promptQueue.shift();
             const engine = queuedPrompt.engine || 'codex';
-            let available = engine === 'claude' ? claudeAvailable : codexAvailable;
+            let available = providerAvailable(engine);
             if (!available) {
                 await refreshProviderReadiness();
-                available = engine === 'claude' ? claudeAvailable : codexAvailable;
+                available = providerAvailable(engine);
             }
             if (!available) {
-                addChatMessageToRole(roleSession, 'system', `Connect ${engine === 'claude' ? 'Claude' : 'Codex'} before this queued prompt can run.`);
+                addChatMessageToRole(roleSession, 'system', `Connect ${providerLabel(engine)} before this queued prompt can run.`);
                 renderActiveSessions();
                 if (roleSession.promptQueue.length) {
                     processPromptQueue(roleSession);
@@ -2920,7 +3015,7 @@ Configuration is loaded from the local MindShare workspace.
                 if (hasConnectedOfficeSession(roleSession)) {
                     markOfficeSessionIssue(roleSession);
                 }
-                addChatError(sessionPayload.message || sessionPayload.error || `Could not connect ${roleSession.name}'s ${engine === 'claude' ? 'Claude' : 'Codex'} office session.`);
+                addChatError(sessionPayload.message || sessionPayload.error || `Could not connect ${roleSession.name}'s ${providerLabel(engine)} office session.`);
                 renderActiveSessions();
                 return;
             }
@@ -2933,22 +3028,22 @@ Configuration is loaded from the local MindShare workspace.
             persistOfficeState();
             renderActiveSessions();
             if (activeRoleSlug === roleSession.slug) {
-                setChatStatus(`${roleSession.name} is working in ${engine === 'claude' ? 'Claude' : 'Codex'}${roleSession.promptQueue.length ? ` · ${roleSession.promptQueue.length} queued` : ''}...`);
+                setChatStatus(`${roleSession.name} is working in ${providerLabel(engine)}${roleSession.promptQueue.length ? ` · ${roleSession.promptQueue.length} queued` : ''}...`);
             }
 
             try {
                 const client = mindShareLocalClient();
-                const send = engine === 'claude' ? client?.sendClaudeMessage : client?.sendCodexMessage;
+                const send = providerSend(client, engine);
                 if (!send) {
                     markOfficeSessionIssue(roleSession);
-                    addChatMessageToRole(roleSession, 'system', `MindShare Local Client is not connected. Start the local client, reconnect ${engine === 'claude' ? 'Claude' : 'Codex'}, then send again.`);
+                    addChatMessageToRole(roleSession, 'system', `MindShare Local Client is not connected. Start the local client, reconnect ${providerLabel(engine)}, then send again.`);
                     if (activeRoleSlug === roleSession.slug) clearChatStatus();
                     return;
                 }
                 const payload = await send({ sessionId: sessionPayload.sessionId, message: queuedPrompt.message, roleContext: roleSession.roleContext, transcript, attachments: queuedPrompt.attachments });
                 if (!payload.ok) {
                     markOfficeSessionIssue(roleSession);
-                    addChatMessageToRole(roleSession, 'system', payload.error || payload.reply || 'Codex returned an error.');
+                    addChatMessageToRole(roleSession, 'system', payload.error || payload.reply || `${providerLabel(engine)} returned an error.`);
                     if (activeRoleSlug === roleSession.slug) clearChatStatus();
                     return;
                 }
@@ -3033,6 +3128,7 @@ Configuration is loaded from the local MindShare workspace.
             document.getElementById('connect-claude-button').addEventListener('click', connectClaude);
             document.getElementById('prompt-engine-codex').addEventListener('click', () => setPromptEngine('codex'));
             document.getElementById('prompt-engine-claude').addEventListener('click', () => setPromptEngine('claude'));
+            document.getElementById('prompt-engine-deepseek').addEventListener('click', () => setPromptEngine('deepseek'));
             document.getElementById('work-queue-button').addEventListener('click', toggleWorkQueuePanel);
             document.getElementById('work-queue-close').addEventListener('click', closeWorkQueuePanel);
             document.getElementById('work-queue-panel').addEventListener('click', (event) => {

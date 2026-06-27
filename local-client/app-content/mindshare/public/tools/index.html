@@ -55,6 +55,14 @@ body {
   background: rgba(190, 198, 224, 0.14);
   color: #dae2fd;
 }
+.tool-button[hidden] {
+  display: none !important;
+}
+.tool-scope-toggle.is-active {
+  border-color: rgba(218, 226, 253, 0.75);
+  background: rgba(190, 198, 224, 0.18);
+  color: #dae2fd;
+}
 .tool-frame {
   background: #050812;
 }
@@ -74,7 +82,7 @@ webview, iframe {
 <a class="text-sm text-on-surface-variant transition-colors hover:text-primary" href="../index.html">Home</a>
 <a class="text-sm text-on-surface-variant transition-colors hover:text-primary" href="../our-team/index.html">Our Team</a>
 <a class="text-sm text-on-surface-variant transition-colors hover:text-primary" href="../services/index.html">Services</a>
-<a class="text-sm text-on-surface-variant transition-colors hover:text-primary" href="../contact/index.html">Contact</a>
+
 <a class="border-b-2 border-primary pb-1 text-sm font-semibold text-primary" href="index.html">Tools</a>
 </nav>
 </div>
@@ -83,41 +91,68 @@ webview, iframe {
 <aside class="glass-panel-heavy flex w-80 shrink-0 flex-col rounded-xl p-6">
 <div>
 <p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Connected Tools</p>
-<h1 class="mt-3 font-display-lg text-3xl font-semibold text-primary-fixed">Tools</h1>
+<div class="mt-3 flex flex-wrap items-center gap-3">
+<h1 class="font-display-lg text-3xl font-semibold text-primary-fixed">Tools</h1>
+<div class="inline-flex rounded-lg border border-white/10 bg-black/35 p-1" aria-label="Tool scope" role="tablist">
+<button class="tool-scope-toggle is-active rounded-md border border-transparent px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-fixed transition hover:border-primary/50" type="button" data-tool-scope="external" role="tab" aria-selected="true">External</button>
+<button class="tool-scope-toggle rounded-md border border-transparent px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-on-surface-variant transition hover:border-primary/50 hover:text-primary" type="button" data-tool-scope="maps" role="tab" aria-selected="false">Maps</button>
+<button class="tool-scope-toggle rounded-md border border-transparent px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-on-surface-variant transition hover:border-primary/50 hover:text-primary" type="button" data-tool-scope="internal" role="tab" aria-selected="false">Personnel</button>
+</div>
+</div>
 </div>
 <div class="mt-8 space-y-3" id="tool-list">
-<button class="tool-button is-active w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="openai-images">
-<span class="block text-sm font-semibold text-primary-fixed">OpenAI Images</span>
-<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Generate employee portraits and other image assets in the OpenAI Playground.</span>
-</button>
-<button class="tool-button w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="purelymail-inbox">
-<span class="block text-sm font-semibold text-primary-fixed">Purelymail Inbox</span>
-<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Open Purelymail webmail for approved assistant email workflows.</span>
-</button>
-<button class="tool-button w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="maps-skills">
+<a class="tool-button flex min-h-[108px] w-full flex-col justify-center rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" href="automation-central/index.html" data-tool-id="automation-central" data-tool-scope="internal" hidden>
+<span class="block text-sm font-semibold text-primary-fixed">Automation Central</span>
+<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Define Level 4, Level 5, and Level 6 autonomy capabilities for Tess to build.</span>
+</a>
+<button class="tool-button flex min-h-[108px] w-full flex-col justify-center rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="maps-skills" data-tool-scope="maps" onclick="selectTool('maps-skills')" hidden>
 <span class="block text-sm font-semibold text-primary-fixed">MAPS Skills</span>
 <span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Browse the Multi-Agent Pipeline Skills catalog: M0&ndash;M11 base and augmented skills.</span>
 </button>
+<a class="tool-button flex min-h-[108px] w-full flex-col justify-center rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" href="recruiting-central/index.html" data-tool-id="recruiting-central" data-tool-scope="internal" hidden>
+<span class="block text-sm font-semibold text-primary-fixed">Recruiting Central</span>
+<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Design, hire, and promote new roles through Ana and Cole's onboarding lanes.</span>
+</a>
+<button class="tool-button is-active w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="claude-balance" data-tool-scope="external" onclick="selectTool('claude-balance')">
+<span class="block text-sm font-semibold text-primary-fixed">Claude Balance</span>
+<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Open Claude usage and plan-limit details.</span>
+</button>
+<button class="tool-button w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="kling-video" data-tool-scope="external" onclick="selectTool('kling-video')">
+<span class="block text-sm font-semibold text-primary-fixed">Kling AI Video</span>
+<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Create AI video and image assets in Kling AI's studio.</span>
+</button>
+<button class="tool-button w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="openai-balance" data-tool-scope="external" onclick="selectTool('openai-balance')">
+<span class="block text-sm font-semibold text-primary-fixed">OpenAI API Usage</span>
+<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Open OpenAI API billing credits and usage details.</span>
+</button>
+<button class="tool-button w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="openai-images" data-tool-scope="external" onclick="selectTool('openai-images')">
+<span class="block text-sm font-semibold text-primary-fixed">OpenAI Images</span>
+<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Generate employee portraits and other image assets in the OpenAI Playground.</span>
+</button>
+<button class="tool-button w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="purelymail-inbox" data-tool-scope="external" onclick="selectTool('purelymail-inbox')">
+<span class="block text-sm font-semibold text-primary-fixed">Purelymail Inbox</span>
+<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Open Purelymail webmail for approved assistant email workflows.</span>
+</button>
 </div>
-<div class="mt-auto rounded-lg border border-white/10 bg-black/35 p-4 text-xs leading-relaxed text-on-surface-variant">
-External tools keep their own login, billing, and action controls. MindShare only provides the local frame; role intent comes from the office session that sends you here.
+<div class="mt-auto rounded-lg border border-white/10 bg-black/35 p-4 text-xs leading-relaxed text-on-surface-variant" id="tool-scope-note">
+External tools keep their own login, billing, credits, and action controls. MindShare only provides the local frame.
 </div>
 </aside>
 <section class="glass-panel-heavy flex min-w-0 flex-1 flex-col overflow-hidden rounded-xl">
 <div class="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-4">
 <div class="min-w-0">
-<p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant" id="tool-eyebrow">Image Generation</p>
-<h2 class="truncate font-display-lg text-xl font-semibold text-primary-fixed" id="tool-title">OpenAI Images Playground</h2>
+<p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant" id="tool-eyebrow">Claude Usage Settings</p>
+<h2 class="truncate font-display-lg text-xl font-semibold text-primary-fixed" id="tool-title">Claude Balance</h2>
 </div>
 <div class="flex shrink-0 items-center gap-3">
 <button class="rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-on-surface-variant transition hover:border-primary/50 hover:text-primary" id="reload-tool" type="button">Reload</button>
-<a class="rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-primary transition hover:bg-primary/20" id="open-external" href="https://platform.openai.com/playground/images" target="_blank" rel="noreferrer">Open</a>
+<a class="rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-primary transition hover:bg-primary/20" id="open-external" href="https://claude.ai/settings/usage" target="_blank" rel="noreferrer">Open</a>
 </div>
 </div>
 <div class="min-h-0 flex-1">
 <div class="tool-frame relative h-full min-h-0">
-<webview id="tool-webview" src="https://platform.openai.com/playground/images" partition="persist:mindshare-tools" allowpopups></webview>
-<iframe class="hidden" id="tool-iframe" src="https://platform.openai.com/playground/images" title="OpenAI Images Playground"></iframe>
+<webview class="hidden" id="tool-webview" src="about:blank" partition="persist:mindshare-tools" allowpopups></webview>
+<iframe class="hidden" id="tool-iframe" src="about:blank" title="External tool"></iframe>
 <div class="hidden h-full overflow-y-auto p-6 md:p-8" id="tool-catalog"></div>
 </div>
 </div>
@@ -125,22 +160,52 @@ External tools keep their own login, billing, and action controls. MindShare onl
 </main>
 <script>
 const tools = {
+  'maps-skills': {
+    title: 'MAPS Skills Catalog',
+    eyebrow: 'Multi-Agent Pipeline Skills',
+    scope: 'internal',
+    kind: 'panel'
+  },
+  'recruiting-central': {
+    title: 'Recruiting Central',
+    eyebrow: 'Role Hiring + Level 3 Readiness',
+    scope: 'internal',
+    kind: 'recruiting'
+  },
   'openai-images': {
     title: 'OpenAI Images Playground',
     eyebrow: 'Image Generation',
+    scope: 'external',
     url: 'https://platform.openai.com/playground/images',
     workflow: 'image'
+  },
+  'openai-balance': {
+    title: 'OpenAI API Usage',
+    eyebrow: 'OpenAI API Billing + Credits',
+    scope: 'external',
+    url: 'https://platform.openai.com/settings/organization/billing/credit-grants',
+    workflow: 'account'
+  },
+  'claude-balance': {
+    title: 'Claude Balance',
+    eyebrow: 'Claude Usage Settings',
+    scope: 'external',
+    url: 'https://claude.ai/settings/usage',
+    workflow: 'account'
+  },
+  'kling-video': {
+    title: 'Kling AI Video',
+    eyebrow: 'Video Generation',
+    scope: 'external',
+    kind: 'kling-api',
+    workflow: 'video'
   },
   'purelymail-inbox': {
     title: 'Purelymail Inbox',
     eyebrow: 'Email',
+    scope: 'external',
     url: 'https://inbox.purelymail.com/',
     workflow: 'email'
-  },
-  'maps-skills': {
-    title: 'MAPS Skills Catalog',
-    eyebrow: 'Multi-Agent Pipeline Skills',
-    kind: 'panel'
   }
 };
 
@@ -318,7 +383,488 @@ function buildCatalog() {
   });
 }
 
-let activeTool = 'openai-images';
+const RECRUITING_FILES = [
+  { file: 'name.md', owner: 'Ana', stage: 'Level 2 hire', purpose: 'Display name, aliases, title, invocation names, and identity basics.' },
+  { file: 'personality.md', owner: 'Ana', stage: 'Level 2 hire', purpose: 'First-person voice, tone, point of view, and behavior texture.' },
+  { file: 'WhoAmI.md', owner: 'Ana', stage: 'Level 2 hire', purpose: 'Office-load identity card with autonomy context, boundaries, and current stage.' },
+  { file: 'gate-blocks.md', owner: 'Ana', stage: 'Level 2 hire', purpose: 'Explicit blocked authority areas and escalation reminders.' },
+  { file: 'role-agent.md', owner: 'Ana', stage: 'Level 2 hire', purpose: 'Canonical role contract, mandate, authority, workflow fit, and proof plan.' },
+  { file: 'memory.md', owner: 'Ana', stage: 'Level 2 hire', purpose: 'Role memory seed, assigned handoff files, durable context, and loading proposal.' },
+  { file: 'workflow.md', owner: 'Ana', stage: 'Level 2 hire', purpose: 'Required when the role owns a repeatable process or handoff lane.' },
+  { file: 'Autonomy.md', owner: 'Ana', stage: 'Level 2 hire', purpose: 'Baseline autonomy source showing Level 3 is non-autonomous and 4/5/6 are undefined until reviewed.' },
+  { file: 'state.json', owner: 'Ana', stage: 'Level 2 hire', purpose: 'Machine-readable lifecycle state, current level, title, owner, and role root.' },
+  { file: 'session.md', owner: 'Ana', stage: 'Office placement', purpose: 'Role-home session record when thread creation is blocked or needs durable reference.' },
+  { file: 'G Drive role mirror', owner: 'Cole', stage: 'Level 3 readiness', purpose: 'Mirrored role files under the Mindshare memory root when required.' },
+  { file: 'room-card WhoAmI mirror', owner: 'Cole', stage: 'Level 3 readiness', purpose: 'Current office card that includes Autonomy Context and role boundaries.' },
+  { file: 'image assignment', owner: 'Cole', stage: 'Level 3 readiness', purpose: 'Local app portrait and display metadata for the team member.' },
+  { file: 'level3-completeness proof', owner: 'Cole', stage: 'Level 3 readiness', purpose: 'Evidence that welcome, file readiness, WhoAmI context, and owner routing passed.' }
+];
+
+function recruitingStatusBadge(status) {
+  const colors = {
+    planned: 'border-white/10 bg-white/5 text-on-surface-variant',
+    ana: 'border-primary/30 bg-primary/10 text-primary',
+    cole: 'border-emerald-300/30 bg-emerald-400/10 text-emerald-100'
+  };
+  return `<span class="rounded border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest ${colors[status] || colors.planned}">${status}</span>`;
+}
+
+function recruitingFileRow(item, index) {
+  const status = item.owner === 'Ana' ? 'ana' : 'cole';
+  return `<details class="group rounded-lg border border-white/10 bg-black/25">
+    <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3">
+      <div class="min-w-0">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="font-mono text-sm text-primary-fixed">${escapeHtml(item.file)}</span>
+          ${recruitingStatusBadge(status)}
+        </div>
+        <p class="mt-1 text-xs text-on-surface-variant">${escapeHtml(item.stage)} &middot; ${escapeHtml(item.owner)}</p>
+      </div>
+      <span class="material-symbols-outlined text-lg text-on-surface-variant transition group-open:rotate-180">expand_more</span>
+    </summary>
+    <div class="border-t border-white/10 px-4 py-3 text-xs leading-relaxed text-on-surface-variant">
+      ${escapeHtml(item.purpose)}
+    </div>
+  </details>`;
+}
+
+function buildRecruitingPanel() {
+  const catalog = document.getElementById('tool-catalog');
+  if (!catalog) return;
+  catalog.dataset.built = '';
+  const anaFiles = RECRUITING_FILES.filter((item) => item.owner === 'Ana').length;
+  const coleFiles = RECRUITING_FILES.filter((item) => item.owner === 'Cole').length;
+  catalog.innerHTML = `
+    <div class="mx-auto flex max-w-6xl flex-col gap-5">
+      <section class="rounded-xl border border-white/10 bg-black/35 p-5">
+        <div class="flex flex-wrap items-start justify-between gap-5">
+          <div class="max-w-3xl">
+            <p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Internal Role Factory</p>
+            <h3 class="mt-2 font-display-lg text-2xl font-semibold text-primary-fixed">Recruiting Central</h3>
+            <p class="mt-3 text-sm leading-relaxed text-on-surface-variant">Ana creates the Level 2 role packet and office placement. Cole verifies and completes the Level 3 readiness packet, including the Who Am I card, mirrors, image assignment, and proof that the person is ready to operate as Staff.</p>
+            <p class="mt-3 text-[10px] uppercase tracking-[0.2em] text-primary">Recruiting interface v1</p>
+          </div>
+          <div class="grid min-w-56 grid-cols-2 gap-3 text-center">
+            <div class="rounded-lg border border-primary/20 bg-primary/10 p-3">
+              <p class="font-display-lg text-2xl font-semibold text-primary-fixed">${anaFiles}</p>
+              <p class="mt-1 text-[10px] uppercase tracking-widest text-primary">Ana-owned</p>
+            </div>
+            <div class="rounded-lg border border-emerald-300/20 bg-emerald-400/10 p-3">
+              <p class="font-display-lg text-2xl font-semibold text-emerald-100">${coleFiles}</p>
+              <p class="mt-1 text-[10px] uppercase tracking-widest text-emerald-100/80">Cole-owned</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="grid gap-5 xl:grid-cols-[0.9fr_1.1fr]">
+        <div class="space-y-5">
+          <div class="rounded-xl border border-white/10 bg-black/35 p-5">
+            <p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">New Role Intake</p>
+            <div class="mt-4 grid gap-3">
+              <label class="block">
+                <span class="text-xs uppercase tracking-widest text-on-surface-variant">Role title</span>
+                <input class="mt-2 w-full rounded-lg border border-white/10 bg-surface-container px-4 py-3 text-sm text-primary-fixed placeholder:text-on-surface-variant" placeholder="Example: Community Operations Director" type="text">
+              </label>
+              <label class="block">
+                <span class="text-xs uppercase tracking-widest text-on-surface-variant">Function</span>
+                <textarea class="mt-2 w-full rounded-lg border border-white/10 bg-surface-container px-4 py-3 text-sm text-primary-fixed placeholder:text-on-surface-variant" rows="4" placeholder="What should this role own, produce, protect, or improve?"></textarea>
+              </label>
+              <div class="grid gap-3 sm:grid-cols-2">
+                <label class="block">
+                  <span class="text-xs uppercase tracking-widest text-on-surface-variant">Division</span>
+                  <input class="mt-2 w-full rounded-lg border border-white/10 bg-surface-container px-4 py-3 text-sm text-primary-fixed placeholder:text-on-surface-variant" placeholder="Division" type="text">
+                </label>
+                <label class="block">
+                  <span class="text-xs uppercase tracking-widest text-on-surface-variant">Department</span>
+                  <input class="mt-2 w-full rounded-lg border border-white/10 bg-surface-container px-4 py-3 text-sm text-primary-fixed placeholder:text-on-surface-variant" placeholder="Department" type="text">
+                </label>
+              </div>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <button type="button" class="rounded-md border border-primary/40 bg-primary/10 px-4 py-3 text-xs font-semibold uppercase tracking-widest text-primary hover:bg-primary/20">Draft with Ana</button>
+              <button type="button" class="rounded-md border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-widest text-primary-fixed hover:border-primary/50">Open role folder</button>
+            </div>
+          </div>
+          <div class="rounded-xl border border-white/10 bg-black/35 p-5">
+            <p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Promotion Flow</p>
+            <div class="mt-4 space-y-3">
+              <div class="rounded-lg border border-primary/20 bg-primary/10 p-4">
+                <p class="text-sm font-semibold text-primary-fixed">Ana &middot; Level 2 Trainee</p>
+                <p class="mt-2 text-xs leading-relaxed text-on-surface-variant">Runs `/role`, creates the role-root packet, creates the Who Am I card, records the role in the roster, and places the person in their office.</p>
+              </div>
+              <div class="rounded-lg border border-emerald-300/20 bg-emerald-400/10 p-4">
+                <p class="text-sm font-semibold text-emerald-100">Cole &middot; Level 3 Staff</p>
+                <p class="mt-2 text-xs leading-relaxed text-on-surface-variant">Runs the Level 2 to Level 3 readiness skill, fills missing structural files, assigns the image, verifies mirrors and WhoAmI injection, welcomes the person, and records proof.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-xl border border-white/10 bg-black/35 p-5">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Role File Drawer</p>
+              <h4 class="mt-2 font-display-lg text-xl font-semibold text-primary-fixed">Required files and ownership</h4>
+            </div>
+            <div class="flex gap-2">
+              <span class="rounded border border-primary/30 bg-primary/10 px-3 py-1 text-[10px] uppercase tracking-widest text-primary">Ana</span>
+              <span class="rounded border border-emerald-300/30 bg-emerald-400/10 px-3 py-1 text-[10px] uppercase tracking-widest text-emerald-100">Cole</span>
+            </div>
+          </div>
+          <div class="mt-5 max-h-[calc(100vh-18rem)] space-y-3 overflow-y-auto pr-1">
+            ${RECRUITING_FILES.map(recruitingFileRow).join('')}
+          </div>
+        </div>
+      </section>
+    </div>`;
+}
+
+const KLING_DEFAULTS_STORAGE_KEY = 'mindshare.kling.defaults.v1';
+const KLING_BUILT_IN_DEFAULTS = {
+  model: 'kling-video-3',
+  mode: 'pro',
+  generateAudio: true,
+  voice: 'auto',
+  resolution: '1080p',
+  duration: '5',
+  aspectRatio: '16:9',
+  outputCount: '1'
+};
+let klingSourceImages = [];
+
+function escapeKlingHtml(value) {
+  return String(value ?? '').replace(/[<>&]/g, (char) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[char]));
+}
+
+function readKlingDefaults() {
+  try {
+    return { ...KLING_BUILT_IN_DEFAULTS, ...JSON.parse(localStorage.getItem(KLING_DEFAULTS_STORAGE_KEY) || '{}') };
+  } catch {
+    return { ...KLING_BUILT_IN_DEFAULTS };
+  }
+}
+
+function getSelectedKlingOption(name) {
+  return document.querySelector(`.kling-option.is-selected[data-kling-option="${name}"]`)?.dataset.value;
+}
+
+function setSelectedKlingOption(name, value) {
+  const buttons = [...document.querySelectorAll(`.kling-option[data-kling-option="${name}"]`)];
+  const selectedButton = buttons.find((button) => button.dataset.value === String(value)) || buttons[0];
+  buttons.forEach((entry) => {
+    const selected = entry === selectedButton;
+    entry.classList.toggle('is-selected', selected);
+    entry.classList.toggle('bg-white/15', selected);
+    entry.classList.toggle('text-primary-fixed', selected);
+    entry.classList.toggle('text-on-surface-variant', !selected);
+  });
+}
+
+function collectKlingSettings() {
+  return {
+    model: document.getElementById('kling-model')?.value || KLING_BUILT_IN_DEFAULTS.model,
+    mode: document.getElementById('kling-mode')?.value || KLING_BUILT_IN_DEFAULTS.mode,
+    generateAudio: !!document.getElementById('kling-generate-audio')?.checked,
+    voice: document.getElementById('kling-voice')?.value || KLING_BUILT_IN_DEFAULTS.voice,
+    resolution: getSelectedKlingOption('resolution') || KLING_BUILT_IN_DEFAULTS.resolution,
+    duration: getSelectedKlingOption('duration') || KLING_BUILT_IN_DEFAULTS.duration,
+    aspectRatio: getSelectedKlingOption('aspectRatio') || KLING_BUILT_IN_DEFAULTS.aspectRatio,
+    outputCount: getSelectedKlingOption('outputCount') || KLING_BUILT_IN_DEFAULTS.outputCount
+  };
+}
+
+function applyKlingSettings(settings = readKlingDefaults()) {
+  const model = document.getElementById('kling-model');
+  const mode = document.getElementById('kling-mode');
+  const audio = document.getElementById('kling-generate-audio');
+  const voice = document.getElementById('kling-voice');
+  if (model) model.value = settings.model || KLING_BUILT_IN_DEFAULTS.model;
+  if (mode) mode.value = settings.mode || KLING_BUILT_IN_DEFAULTS.mode;
+  if (audio) audio.checked = settings.generateAudio !== false;
+  if (voice) voice.value = settings.voice || KLING_BUILT_IN_DEFAULTS.voice;
+  setSelectedKlingOption('resolution', settings.resolution || KLING_BUILT_IN_DEFAULTS.resolution);
+  setSelectedKlingOption('duration', settings.duration || KLING_BUILT_IN_DEFAULTS.duration);
+  setSelectedKlingOption('aspectRatio', settings.aspectRatio || KLING_BUILT_IN_DEFAULTS.aspectRatio);
+  setSelectedKlingOption('outputCount', settings.outputCount || KLING_BUILT_IN_DEFAULTS.outputCount);
+}
+
+function resetKlingWorkspace(message = 'Ready.') {
+  klingSourceImages = [];
+  renderKlingImages();
+  const prompt = document.getElementById('kling-prompt');
+  const results = document.getElementById('kling-results');
+  const status = document.getElementById('kling-status');
+  if (prompt) prompt.value = '';
+  if (results) results.innerHTML = '<p class="text-sm text-on-surface-variant">No videos generated yet.</p>';
+  if (status) status.textContent = message;
+}
+
+function renderKlingImages() {
+  const list = document.getElementById('kling-image-list');
+  if (!list) return;
+  if (!klingSourceImages.length) {
+    list.innerHTML = '<p class="text-sm text-on-surface-variant">No source images selected. Kling will use text-to-video.</p>';
+    return;
+  }
+  list.innerHTML = klingSourceImages.map((file, index) => `
+    <div class="flex items-center justify-between gap-3 rounded-lg border border-white/10 bg-black/25 px-3 py-2">
+      <div class="min-w-0">
+        <p class="truncate text-sm font-semibold text-primary-fixed">${index + 1}. ${file.name}</p>
+        <p class="truncate text-[11px] text-on-surface-variant">${file.path || ''}</p>
+      </div>
+      <button type="button" class="rounded border border-white/10 px-2 py-1 text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-primary" data-kling-remove="${index}">Remove</button>
+    </div>
+  `).join('');
+}
+
+function buildKlingPanel() {
+  const catalog = document.getElementById('tool-catalog');
+  if (!catalog) return;
+  catalog.dataset.built = '';
+  const apiAvailable = !!window.MindShareLocalClient?.generateKlingVideo;
+  catalog.innerHTML = `
+    <div class="mx-auto flex h-full max-w-5xl flex-col gap-5 overflow-y-auto">
+      <div class="rounded-xl border border-white/10 bg-black/35 p-5">
+        <p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Kling API</p>
+        <h3 class="mt-2 font-display-lg text-2xl font-semibold text-primary-fixed">Video Studio</h3>
+        <p class="mt-2 max-w-3xl text-sm leading-relaxed text-on-surface-variant">Generate text-to-video through the local Kling API credentials loaded by MindShare Central. Every request automatically opens and closes with MindShare Central branding. Secrets stay in local env files and are never sent to this page.</p>
+      </div>
+      <div class="grid gap-5 lg:grid-cols-[1fr_1.2fr]">
+        <section class="rounded-xl border border-white/10 bg-black/35 p-5">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Reference Images</p>
+              <p class="mt-1 text-xs text-on-surface-variant">Optional. Leave empty for text-to-video. Branding is injected automatically at the beginning and end.</p>
+            </div>
+            <button type="button" id="kling-choose-images" class="rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-primary hover:bg-primary/20${apiAvailable ? '' : ' cursor-not-allowed opacity-50'}"${apiAvailable ? '' : ' disabled'}>Choose</button>
+          </div>
+          <div class="mt-4 space-y-2" id="kling-image-list"></div>
+        </section>
+        <section class="rounded-xl border border-white/10 bg-black/35 p-5">
+          <div class="grid gap-4 md:grid-cols-2">
+            <label class="block">
+              <span class="font-label-sm text-[10px] uppercase tracking-[0.22em] text-on-surface-variant">Model</span>
+              <select id="kling-model" class="mt-2 w-full rounded-md border border-white/10 bg-surface-container px-3 py-2 text-sm text-primary-fixed">
+                <option value="kling-video-3">Kling Video 3.0</option>
+                <option value="kling-video-2-6">Kling Video 2.6</option>
+              </select>
+            </label>
+            <label class="block">
+              <span class="font-label-sm text-[10px] uppercase tracking-[0.22em] text-on-surface-variant">Mode</span>
+              <select id="kling-mode" class="mt-2 w-full rounded-md border border-white/10 bg-surface-container px-3 py-2 text-sm text-primary-fixed">
+                <option value="pro">Pro</option>
+                <option value="std">Standard</option>
+              </select>
+            </label>
+          </div>
+          <div class="mt-5 grid gap-4 md:grid-cols-[0.7fr_1.3fr]">
+            <label class="flex items-center gap-3 rounded-lg border border-white/10 bg-black/25 px-4 py-3 text-sm text-primary-fixed">
+              <input id="kling-generate-audio" type="checkbox" class="rounded border-white/20 bg-surface-container text-primary" checked>
+              Native audio
+            </label>
+            <label class="block" id="kling-voice-wrap">
+              <span class="font-label-sm text-[10px] uppercase tracking-[0.22em] text-on-surface-variant">Voice</span>
+              <select id="kling-voice" class="mt-2 w-full rounded-md border border-white/10 bg-surface-container px-3 py-2 text-sm text-primary-fixed">
+                <option value="auto">Auto match prompt</option>
+                <option value="prompt:female-warm">Warm female narrator</option>
+                <option value="prompt:female-bright">Bright female presenter</option>
+                <option value="prompt:male-calm">Calm male narrator</option>
+                <option value="prompt:male-cinematic">Cinematic male voice</option>
+                <option value="prompt:childlike">Youthful voice</option>
+              </select>
+            </label>
+          </div>
+          <div class="mt-5 rounded-xl border border-white/10 bg-white/[0.03] p-4">
+            <p class="text-sm font-semibold text-primary-fixed">Generation Options</p>
+            <div class="mt-4 space-y-5">
+              <div>
+                <div class="mb-2 flex items-center gap-2 text-sm text-on-surface-variant">Resolution <span class="rounded bg-primary/80 px-2 py-0.5 text-[10px] font-semibold text-background">API</span></div>
+                <div class="grid grid-cols-2 overflow-hidden rounded-xl bg-black/30 p-1">
+                  <button type="button" class="kling-option rounded-lg px-4 py-3 text-sm font-semibold text-on-surface-variant" data-kling-option="resolution" data-value="720p">720p</button>
+                  <button type="button" class="kling-option is-selected bg-white/15 rounded-lg px-4 py-3 text-sm font-semibold text-primary-fixed" data-kling-option="resolution" data-value="1080p">1080p</button>
+                </div>
+              </div>
+              <div>
+                <div class="mb-2 text-sm text-on-surface-variant">Length</div>
+                <div class="grid grid-cols-2 overflow-hidden rounded-xl bg-black/30 p-1">
+                  <button type="button" class="kling-option is-selected bg-white/15 rounded-lg px-4 py-3 text-sm font-semibold text-primary-fixed" data-kling-option="duration" data-value="5">5s</button>
+                  <button type="button" class="kling-option rounded-lg px-4 py-3 text-sm font-semibold text-on-surface-variant" data-kling-option="duration" data-value="10">10s</button>
+                </div>
+              </div>
+              <div>
+                <div class="mb-2 text-sm text-on-surface-variant">Video Ratio</div>
+                <div class="grid grid-cols-3 overflow-hidden rounded-xl bg-black/30 p-1">
+                  <button type="button" class="kling-option is-selected bg-white/15 rounded-lg px-4 py-3 text-sm font-semibold text-primary-fixed" data-kling-option="aspectRatio" data-value="16:9">▭<span class="mt-1 block">16:9</span></button>
+                  <button type="button" class="kling-option rounded-lg px-4 py-3 text-sm font-semibold text-on-surface-variant" data-kling-option="aspectRatio" data-value="1:1">□<span class="mt-1 block">1:1</span></button>
+                  <button type="button" class="kling-option rounded-lg px-4 py-3 text-sm font-semibold text-on-surface-variant" data-kling-option="aspectRatio" data-value="9:16">▯<span class="mt-1 block">9:16</span></button>
+                </div>
+              </div>
+              <div>
+                <div class="mb-2 text-sm text-on-surface-variant">Number of Outputs</div>
+                <div class="grid grid-cols-4 overflow-hidden rounded-xl bg-black/30 p-1">
+                  <button type="button" class="kling-option is-selected bg-white/15 rounded-lg px-4 py-3 text-sm font-semibold text-primary-fixed" data-kling-option="outputCount" data-value="1">1</button>
+                  <button type="button" class="kling-option rounded-lg px-4 py-3 text-sm font-semibold text-on-surface-variant" data-kling-option="outputCount" data-value="2">2</button>
+                  <button type="button" class="kling-option rounded-lg px-4 py-3 text-sm font-semibold text-on-surface-variant" data-kling-option="outputCount" data-value="3">3</button>
+                  <button type="button" class="kling-option rounded-lg px-4 py-3 text-sm font-semibold text-on-surface-variant" data-kling-option="outputCount" data-value="4">4</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-xs leading-relaxed text-primary-fixed">
+            MindShare Central title-card branding is automatically added before your prompt and again at the end.
+          </div>
+          <label class="mt-4 block">
+            <span class="font-label-sm text-[10px] uppercase tracking-[0.22em] text-on-surface-variant">Prompt, dialogue, voice, and sound direction</span>
+            <textarea id="kling-prompt" rows="7" class="mt-2 w-full rounded-lg border border-white/10 bg-surface-container px-4 py-3 text-sm leading-relaxed text-primary-fixed placeholder:text-on-surface-variant" placeholder="Describe the shot, motion, dialogue, voice style, ambient sound, and ending frame."></textarea>
+          </label>
+          <div class="mt-4 flex flex-wrap items-center gap-3">
+            <button type="button" id="kling-generate" class="rounded-md border border-primary/40 bg-primary/10 px-4 py-3 text-xs font-semibold uppercase tracking-widest text-primary hover:bg-primary/20${apiAvailable ? '' : ' cursor-not-allowed opacity-50'}"${apiAvailable ? '' : ' disabled'}>Generate</button>
+            <button type="button" id="kling-new" class="rounded-md border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-widest text-primary-fixed hover:border-primary/50">New</button>
+            <button type="button" id="kling-reset" class="rounded-md border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-widest text-primary-fixed hover:border-primary/50">Reset</button>
+            <button type="button" id="kling-save-defaults" class="rounded-md border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-widest text-primary-fixed hover:border-primary/50">Save Defaults</button>
+            <span id="kling-status" class="text-sm text-on-surface-variant">${apiAvailable ? 'Ready.' : 'Open this page inside MindShare Central to use the Kling API.'}</span>
+          </div>
+        </section>
+      </div>
+      <section class="rounded-xl border border-white/10 bg-black/35 p-5">
+        <p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant">Results</p>
+        <div class="mt-4 space-y-3" id="kling-results"><p class="text-sm text-on-surface-variant">No videos generated yet.</p></div>
+      </section>
+    </div>`;
+  applyKlingSettings();
+  renderKlingImages();
+  document.getElementById('kling-choose-images')?.addEventListener('click', async () => {
+    const result = await window.MindShareLocalClient.chooseImageFiles();
+    if (result?.ok) {
+      klingSourceImages = (result.files || []).slice(0, 6);
+      renderKlingImages();
+    }
+  });
+  document.getElementById('kling-image-list')?.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-kling-remove]');
+    if (!button) return;
+    klingSourceImages.splice(Number(button.dataset.klingRemove), 1);
+    renderKlingImages();
+  });
+  document.querySelectorAll('.kling-option').forEach((button) => {
+    button.addEventListener('click', () => {
+      const group = button.dataset.klingOption;
+      document.querySelectorAll(`.kling-option[data-kling-option="${group}"]`).forEach((entry) => {
+        const selected = entry === button;
+        entry.classList.toggle('is-selected', selected);
+        entry.classList.toggle('bg-white/15', selected);
+        entry.classList.toggle('text-primary-fixed', selected);
+        entry.classList.toggle('text-on-surface-variant', !selected);
+      });
+    });
+  });
+  const audioToggle = document.getElementById('kling-generate-audio');
+  const voiceSelect = document.getElementById('kling-voice');
+  const voiceWrap = document.getElementById('kling-voice-wrap');
+  const syncVoiceState = () => {
+    const enabled = !!audioToggle?.checked;
+    if (voiceSelect) voiceSelect.disabled = !enabled;
+    if (voiceWrap) voiceWrap.classList.toggle('opacity-50', !enabled);
+  };
+  audioToggle?.addEventListener('change', syncVoiceState);
+  syncVoiceState();
+  document.getElementById('kling-new')?.addEventListener('click', () => {
+    resetKlingWorkspace('New Kling request ready.');
+  });
+  document.getElementById('kling-reset')?.addEventListener('click', () => {
+    applyKlingSettings();
+    resetKlingWorkspace('Reset to saved defaults.');
+    syncVoiceState();
+  });
+  document.getElementById('kling-save-defaults')?.addEventListener('click', () => {
+    localStorage.setItem(KLING_DEFAULTS_STORAGE_KEY, JSON.stringify(collectKlingSettings()));
+    const status = document.getElementById('kling-status');
+    if (status) status.textContent = 'Saved current Kling settings as default.';
+  });
+  document.getElementById('kling-generate')?.addEventListener('click', async () => {
+    const status = document.getElementById('kling-status');
+    const results = document.getElementById('kling-results');
+    const generateButton = document.getElementById('kling-generate');
+    const selectedValue = getSelectedKlingOption;
+    status.textContent = 'Generating with Kling...';
+    results.innerHTML = '<div class="rounded-lg border border-white/10 bg-black/25 p-4 text-sm text-on-surface-variant">Submitting request to Kling. This can take several minutes for video generation.</div>';
+    generateButton.disabled = true;
+    generateButton.classList.add('cursor-not-allowed', 'opacity-60');
+    let response;
+    try {
+      response = await window.MindShareLocalClient.generateKlingVideo({
+        images: klingSourceImages,
+        prompt: document.getElementById('kling-prompt').value,
+        modelPreset: document.getElementById('kling-model').value,
+        duration: selectedValue('duration'),
+        resolution: selectedValue('resolution'),
+        aspectRatio: selectedValue('aspectRatio'),
+        outputCount: selectedValue('outputCount'),
+        mode: document.getElementById('kling-mode').value,
+        generateAudio: document.getElementById('kling-generate-audio').checked,
+        voiceId: document.getElementById('kling-voice').value,
+        voiceName: document.getElementById('kling-voice').selectedOptions?.[0]?.textContent || ''
+      });
+    } catch (error) {
+      const message = error.message || String(error);
+      const staleMain = /No handler registered for 'mindshare:kling-generate-video'/i.test(message);
+      response = {
+        ok: false,
+        error: staleMain
+          ? 'MindShare Central needs a full restart before Kling generation is available. The page updated, but the Electron main process is still running the previous build.'
+          : message,
+        failure: {
+          code: staleMain ? 'electron_main_restart_required' : 'renderer_exception',
+          stage: 'ipc'
+        }
+      };
+    } finally {
+      generateButton.disabled = false;
+      generateButton.classList.remove('cursor-not-allowed', 'opacity-60');
+    }
+    if (!response?.ok) {
+      const failure = response?.failure || {};
+      status.textContent = response?.error || 'Kling generation failed.';
+      const failurePayload = failure.payload ? escapeKlingHtml(JSON.stringify(failure.payload, null, 2)) : '';
+      const authAttempts = Array.isArray(failure.authFailures)
+        ? failure.authFailures.map((attempt) => `${attempt.mode || 'unknown'}: ${attempt.status || 'n/a'} - ${attempt.error || attempt.code || 'failed'}`).join('\n')
+        : '';
+      results.innerHTML = `
+        <div class="rounded-lg border border-red-400/30 bg-red-950/30 p-4">
+          <p class="text-sm font-semibold text-red-100">Kling generation failed</p>
+          <p class="mt-2 text-sm text-red-100/80">${escapeKlingHtml(response?.error || 'Unknown error.')}</p>
+          <dl class="mt-3 grid gap-2 text-xs text-red-100/70 md:grid-cols-2">
+            <div><dt class="uppercase tracking-widest">Code</dt><dd>${escapeKlingHtml(failure.code || 'unknown')}</dd></div>
+            <div><dt class="uppercase tracking-widest">Stage</dt><dd>${escapeKlingHtml(failure.stage || 'unknown')}</dd></div>
+            <div><dt class="uppercase tracking-widest">Status</dt><dd>${escapeKlingHtml(failure.status || 'n/a')}</dd></div>
+            <div><dt class="uppercase tracking-widest">Task</dt><dd class="truncate">${escapeKlingHtml(failure.taskId || 'n/a')}</dd></div>
+            <div><dt class="uppercase tracking-widest">Auth</dt><dd>${escapeKlingHtml(failure.authMode || 'n/a')}</dd></div>
+          </dl>
+          ${authAttempts ? `<pre class="mt-3 max-h-28 overflow-auto rounded border border-red-400/20 bg-black/40 p-3 text-xs text-red-100/80">${escapeKlingHtml(authAttempts)}</pre>` : ''}
+          ${failurePayload ? `<pre class="mt-3 max-h-48 overflow-auto rounded border border-red-400/20 bg-black/40 p-3 text-xs text-red-100/80">${failurePayload}</pre>` : ''}
+        </div>`;
+      return;
+    }
+    status.textContent = 'Complete.';
+    results.innerHTML = response.results.map((item, index) => `
+      <div class="rounded-lg border border-white/10 bg-black/25 p-4">
+        <p class="text-sm font-semibold text-primary-fixed">Video ${index + 1} - ${item.model}</p>
+        <p class="mt-1 truncate text-xs text-on-surface-variant">${item.sourceImage || 'Text-to-video'}</p>
+        <div class="mt-3 flex flex-wrap gap-3">
+          <a class="rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-primary hover:bg-primary/20" href="${item.url}" target="_blank" rel="noreferrer">Open Video</a>
+        </div>
+      </div>
+    `).join('');
+  });
+}
+
+let activeTool = 'claude-balance';
+let activeToolScope = 'external';
+
+const toolScopeNotes = {
+  external: 'External tools keep their own login, billing, credits, and action controls. MindShare only provides the local frame.',
+  maps: 'MAPS tools support agent and multi-agent design, buildout, evaluation, deployment, observation, and improvement.',
+  internal: 'Internal tools are packaged with MindShare Central and run from local project content.',
+};
 
 function toolWebview() {
   return document.getElementById('tool-webview');
@@ -337,8 +883,11 @@ function unloadToolWebview() {
 }
 
 function renderTool(toolId) {
-  const tool = tools[toolId] || tools['openai-images'];
+  const tool = tools[toolId] || tools['maps-skills'];
   activeTool = toolId;
+  if (tool.scope && tool.scope !== activeToolScope) {
+    setToolScope(tool.scope, { renderFirst: false });
+  }
   document.getElementById('tool-title').textContent = tool.title;
   document.getElementById('tool-eyebrow').textContent = tool.eyebrow;
   document.querySelectorAll('[data-tool-id]').forEach((button) => {
@@ -362,6 +911,28 @@ function renderTool(toolId) {
     return;
   }
 
+  if (tool.kind === 'recruiting') {
+    unloadToolWebview();
+    webview.classList.add('hidden');
+    iframe.classList.add('hidden');
+    reloadBtn.classList.add('hidden');
+    openBtn.classList.add('hidden');
+    buildRecruitingPanel();
+    catalog.classList.remove('hidden');
+    return;
+  }
+
+  if (tool.kind === 'kling-api') {
+    unloadToolWebview();
+    webview.classList.add('hidden');
+    iframe.classList.add('hidden');
+    reloadBtn.classList.add('hidden');
+    openBtn.classList.add('hidden');
+    buildKlingPanel();
+    catalog.classList.remove('hidden');
+    return;
+  }
+
   catalog.classList.add('hidden');
   reloadBtn.classList.remove('hidden');
   openBtn.classList.remove('hidden');
@@ -376,9 +947,44 @@ function renderTool(toolId) {
   }
 }
 
+function selectTool(toolId) {
+  if (!tools[toolId]) return;
+  if (location.hash !== `#${toolId}`) {
+    history.replaceState(null, '', `#${toolId}`);
+  }
+  renderTool(toolId);
+}
+
+function setToolScope(scope, options = {}) {
+  if (!['external', 'maps', 'internal'].includes(scope)) return;
+  activeToolScope = scope;
+  document.querySelectorAll('[data-tool-scope][role="tab"]').forEach((button) => {
+    const selected = button.dataset.toolScope === scope;
+    button.classList.toggle('is-active', selected);
+    button.classList.toggle('text-primary-fixed', selected);
+    button.classList.toggle('text-on-surface-variant', !selected);
+    button.setAttribute('aria-selected', selected ? 'true' : 'false');
+  });
+  document.querySelectorAll('#tool-list [data-tool-id]').forEach((button) => {
+    button.hidden = button.dataset.toolScope !== scope;
+  });
+  const note = document.getElementById('tool-scope-note');
+  if (note) note.textContent = toolScopeNotes[scope];
+  if (options.renderFirst === false) return;
+  const currentTool = tools[activeTool];
+  if (currentTool?.scope === scope) return;
+  const firstTool = document.querySelector(`#tool-list [data-tool-scope="${scope}"]`);
+  if (firstTool) selectTool(firstTool.dataset.toolId);
+}
+
 document.getElementById('tool-list').addEventListener('click', (event) => {
   const button = event.target.closest('[data-tool-id]');
-  if (button) renderTool(button.dataset.toolId);
+  if (button?.tagName?.toLowerCase() === 'a') return;
+  if (button) selectTool(button.dataset.toolId);
+});
+
+document.querySelectorAll('[data-tool-scope][role="tab"]').forEach((button) => {
+  button.addEventListener('click', () => setToolScope(button.dataset.toolScope));
 });
 
 document.getElementById('reload-tool').addEventListener('click', () => {
@@ -399,7 +1005,11 @@ function toolFromHash() {
   return tools[id] ? id : null;
 }
 const initialTool = toolFromHash();
-if (initialTool) activeTool = initialTool;
+if (initialTool) {
+  activeTool = initialTool;
+  activeToolScope = tools[initialTool].scope || 'internal';
+  setToolScope(activeToolScope, { renderFirst: false });
+}
 window.addEventListener('hashchange', () => {
   const id = toolFromHash();
   if (id) renderTool(id);

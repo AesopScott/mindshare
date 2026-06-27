@@ -24,21 +24,30 @@ Proper names, display names, aliases, and invocation names belong inside `name.m
 
 Ana owns hiring and internal lifecycle movement through Level 2 Trainee. Cole owns the welcome/readiness lane after Ana places a Level 2 Trainee in the correct office: he verifies the required files and context surfaces, welcomes the person to the office, records proof, and may promote the person to Level 3 Staff when the readiness gates pass.
 
-Cole also owns assigning the team-member image for local app role records. Liz no longer owns image assignment for these people now that the operating surface is the local MindShare app instead of the public website.
+Cole also owns assigning the role image for local app role records. Liz no longer owns image assignment for these people now that the operating surface is the local MindShare app instead of the public website.
 
-For every new role draft:
+For every new Level 2 Trainee role packet, Ana creates:
 
 - `name.md`
 - `personality.md`
 - `WhoAmI.md`
-- `gate-blocks.md`
 - `role-agent.md`
 - `memory.md`
-- `workflow.md`
-- `Autonomy.md`
 - `state.json`
 
-For every current role, Cole validates the required file set for the role's current stage. Every Level 3 Staff role must have a baseline `Autonomy.md` source even when no autonomy is active; the file should explicitly state that Level 3 is non-autonomous and that Level 4, Level 5, and Level 6 are undefined until Tess builds and Scott reviews them. Level 4+, autonomy, runtime, FileWatch, heartbeat, or Role+ records must also have a canonical `Autonomy.md` source unless Scott and Tess explicitly record a different autonomy source.
+For Level 3 Staff readiness, Cole verifies:
+
+- required Level 3 files exist in the role root
+- role image assignment in local app assets/display metadata
+- Level 3 verification record/proof note
+- this `team-member-file-structure.md` standard remains current
+
+For role control-plane structure, Tess owns:
+
+- `workflow.md`
+- `gate-blocks.md`
+
+`Autonomy.md`, `loop.md`, automation files, runtime files, and gate/autonomy expansion belong to Tess/autonomy review and tests, not Cole's Level 3 completeness lane.
 
 Each `WhoAmI.md` must include an `Autonomy Context` section with:
 
@@ -49,7 +58,7 @@ Each `WhoAmI.md` must include an `Autonomy Context` section with:
 - canonical `Autonomy.md` source path, or a clear missing-source note
 - reminder that the card gives awareness, not authority
 
-Cole validates all current Who Am I surfaces, not only the local source file:
+Cole's Level 4 automation validates current Who Am I surfaces, not only the local source file:
 
 - local role-root `WhoAmI.md`
 - `G:\My Drive\Mindshare\role\<role-slug>\WhoAmI.md` when Mindshare is the mirror root
@@ -58,17 +67,20 @@ Cole validates all current Who Am I surfaces, not only the local source file:
 
 The local role-root `WhoAmI.md` is the primary source. G Drive role mirrors and room cards must stay current enough to carry the same Autonomy Context, even when their surrounding compiled text differs.
 
-When the role owns a workflow:
+When the role owns a workflow, Tess defines or reviews `workflow.md` before it is treated as canonical.
 
-- `workflow.md`
+When the role has proposed or active automation, Tess owns and verifies the automation file set:
 
-When the role has a proposed loop, hook, script, skill, FileWatch, or Automation:
-
-- `loop.md`
-- `hook-spec.md`
-- `script-spec.md`
-- `SKILL.draft.md`
-- `automation.md`
+- Automation Definition and Contract: `/roles/<role name>/automation/automation.md`
+- Automation Schedule and Goal: `/roles/<role name>/automation/loop.md`
+- Automation Workflow: `/roles/<role name>/automation/scripts/levelXautomation.py`
+- Automation State: `/roles/<role name>/state.json` role file
+- Automation Evaluations: `/roles/<role name>/automation/automationproofs.md`
+- Automation Triggers:
+  - `C:\Users\scott\.codex\hooks.json` for Codex
+  - `%APPDATA%\Claude\hooks.json` for Claude Desktop
+  - `/roles/<role name>/automation/hooks/<hook function>` for role-owned hook functions
+- Prompt Automation: `/roles/<role name>/WhoAmI.md`
 
 When the role is activated:
 
@@ -111,15 +123,15 @@ When Mindshare is the memory root, each role should have:
 - Missing WhoAmI injection evidence in an active role-home session.
 - Missing Level 2 to Level 3 readiness proof after Ana office placement.
 - Missing Level 3 completeness checklist or required Level 3 baseline file.
-- Missing or unassigned team-member image in the local app asset/display metadata.
+- Missing or unassigned role image in the local app asset/display metadata.
 - Unapproved authority implied by file text.
 - New structure not rolled into templates or backup expectations.
 
 ## Correction Routing
 
-- Cole may create missing stage-required structural files and mirrors when the requirement is clear, file content is template-derived, and the action does not change role authority, lifecycle, autonomy, Git/release, production, external communication, spending, secrets, or another owner's substantive content.
-- Cole owns Level 3 completeness and may create missing `name.md`, `personality.md`, `WhoAmI.md`, `gate-blocks.md`, `role-agent.md`, `memory.md`, `workflow.md`, `Autonomy.md`, and `state.json` files for Level 3 Staff roles when the files are template-derived and do not grant authority.
-- Cole may assign or update local app team-member images and corresponding display metadata when doing onboarding/readiness work, as long as the image assignment does not imply authority, autonomy, external publication, production release, or identity verification beyond the approved role record.
+- Cole may create missing Level 3 verification records when the requirement is clear, file content is template-derived, and the action does not change role authority, lifecycle, autonomy, Git/release, production, external communication, spending, secrets, or another owner's substantive content.
+- Cole owns Level 3 completeness file verification and may create missing verification records and local app role-image assignments when the requirement is clear and the action does not change role authority, lifecycle, autonomy, Git/release, production, external communication, spending, secrets, or another owner's substantive content.
+- Cole may assign or update local app role images and corresponding display metadata when doing onboarding/readiness work, as long as the image assignment does not imply authority, autonomy, external publication, production release, or identity verification beyond the approved role record.
 - Cole may promote an Ana-hired Level 2 Trainee to Level 3 Staff only after welcome, file-readiness, WhoAmI/Autonomy Context, owner-route, and proof gates pass. This promotion does not grant autonomy, production, external communication, Git/release, spending, secrets, or authority beyond Level 3 Staff.
 - Cole may send an internal role-home context-repair prompt when an active office lacks current WhoAmI/Autonomy Context evidence. The prompt may only ask the role to load its WhoAmI card and confirm identity, autonomy level, active boundaries, and canonical autonomy source in first person; it must not grant authority, activate runtime, approve promotion, or change role status.
 - Role lifecycle, roster, or `/role` output: Ana.

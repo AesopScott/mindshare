@@ -4,7 +4,7 @@
   "automation_id": "ana-l4-recruiting-backlog-processing",
   "logic_owner": "C:\\Users\\scott\\Code\\mindshare\\roles\\recruiter\\scripts\\level4automation.py",
   "mode": "scheduled",
-  "checked_at": "2026-06-24T20:56:10-06:00",
+  "checked_at": "2026-06-25T19:21:33-06:00",
   "result": "no_eligible_work",
   "current_level": "Level 4 Senior Staff (Scoped Autonomy)",
   "counts": {
@@ -12,23 +12,23 @@
     "backlog_eligible": 0,
     "pipeline_items": 26,
     "level_1_ready_for_level_2": 0,
-    "level_2_ready_for_level_3": 0
+    "level_2_ready_for_cole_handoff": 0
   },
   "eligible_backlog": [],
   "eligible_level_1_to_2": [],
-  "eligible_level_2_to_3": [],
+  "level_2_for_cole_handoff": [],
   "gate_status": {
     "contract": "pass",
     "trigger": "pass",
     "state": "pass_after_write",
     "boundary": "pass_denied_actions_held",
-    "reid_durability_route": "needs_request_when_files_change"
+    "reid_durability_route": "pass"
   },
   "denied_actions_held": [
     "no external recruiting",
     "no candidate contact",
     "no human hiring",
-    "no office activation",
+    "no Level 3 promotion",
     "no Level 4+ promotion for hired roles",
     "no Git/GitHub/release action",
     "no production or website edits",

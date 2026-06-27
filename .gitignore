@@ -7,6 +7,8 @@ __pycache__/
 *.pyc
 graphify-out/
 local-client/graphify-out/
+local-client/release/
+local-client/chrome-extension.pem
 .env
 .env.*
 !.env.example

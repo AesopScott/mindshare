@@ -7,13 +7,65 @@
   "main": "main.js",
   "scripts": {
     "sync-content": "powershell -ExecutionPolicy Bypass -File scripts/sync-app-content.ps1",
-    "start": "electron ."
+    "start": "electron .",
+    "prepack:win": "npm run sync-content",
+    "pack:win": "electron-builder --win portable",
+    "dist:win": "electron-builder --win nsis portable",
+    "verify:package": "node scripts/verify-package.js"
   },
   "build": {
     "appId": "com.mindshare.central",
     "productName": "MindShare Central",
+    "asar": false,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "mindshare-local-client.js",
+      "package.json",
+      "README.md",
+      "PACKAGING_MANIFEST.md",
+      "packaging-manifest.json",
+      "assets/**",
+      "app-content/**",
+      "!**/.env",
+      "!**/.env.*",
+      "!**/*.log",
+      "!**/*.pem",
+      "!**/*.pfx",
+      "!**/*.key",
+      "!chrome-extension/**",
+      "!native-host/**",
+      "!graphify-out/**",
+      "!chrome-extension.crx",
+      "!extension-update.xml"
+    ],
     "win": {
-      "icon": "assets/mindshare-central-icon.ico"
+      "icon": "assets/mindshare-central-icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "MindShare Central"
     },
     "mac": {
       "icon": "assets/mindshare-central-icon.png"
@@ -23,6 +75,7 @@
     }
   },
   "devDependencies": {
-    "electron": "^37.0.0"
+    "electron": "^37.0.0",
+    "electron-builder": "^24.13.3"
   }
 }

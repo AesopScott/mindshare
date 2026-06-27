@@ -40,6 +40,10 @@ if (-not $data.Count) {
   throw 'No data rows parsed from token usage markdown.'
 }
 
+function Is-ClaudeRow($row) {
+  return $row.interface -eq 'Claude' -or $row.interface -eq 'Claude CLI'
+}
+
 $updated = ($data | Sort-Object logged_at_mdt | Select-Object -Last 1).logged_at_mdt
 $buildVersion = Get-Date -Format 'yyyyMMddHHmmss'
 $displayVersion = 'v' + (Get-Date -Format 'HH:mm')
@@ -53,7 +57,7 @@ $hourly = $data |
     $end = $rows[0].window_end_mdt
     $start = ($rows | Sort-Object window_start_mdt | Select-Object -First 1).window_start_mdt
     $codex = ($rows | Where-Object interface -eq 'Codex' | Measure-Object total_tokens -Sum).Sum
-    $claude = ($rows | Where-Object interface -eq 'Claude' | Measure-Object total_tokens -Sum).Sum
+    $claude = ($rows | Where-Object { Is-ClaudeRow $_ } | Measure-Object total_tokens -Sum).Sum
     if ($null -eq $codex) { $codex = 0 }
     if ($null -eq $claude) { $claude = 0 }
 
@@ -68,7 +72,7 @@ $hourly = $data |
   Sort-Object end
 
 $codexTotal = ($data | Where-Object interface -eq 'Codex' | Measure-Object total_tokens -Sum).Sum
-$claudeTotal = ($data | Where-Object interface -eq 'Claude' | Measure-Object total_tokens -Sum).Sum
+$claudeTotal = ($data | Where-Object { Is-ClaudeRow $_ } | Measure-Object total_tokens -Sum).Sum
 if ($null -eq $codexTotal) { $codexTotal = 0 }
 if ($null -eq $claudeTotal) { $claudeTotal = 0 }
 $codexTotal = [long]$codexTotal
@@ -203,7 +207,7 @@ foreach ($item in $xLabels) {
   $xSvg += '<text class="label" x="' + ('{0:N2}' -f $item.x) + '" y="326" text-anchor="middle">' + (Escape-Html $item.label) + '</text>'
 }
 
-$largestClaude = $data | Where-Object interface -eq 'Claude' | Sort-Object total_tokens -Descending | Select-Object -First 3
+$largestClaude = $data | Where-Object { Is-ClaudeRow $_ } | Sort-Object total_tokens -Descending | Select-Object -First 3
 $largestCodex = $data | Where-Object interface -eq 'Codex' | Sort-Object total_tokens -Descending | Select-Object -First 3
 
 $codexRooms = $last24 |

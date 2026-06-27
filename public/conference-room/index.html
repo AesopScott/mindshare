@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MindShare Conference Room</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        background: '#0c1324',
+        surface: '#0c1324',
+        'surface-container': '#191f31',
+        'surface-container-lowest': '#070d1f',
+        'on-surface': '#dce1fb',
+        'on-surface-variant': '#c6c6cd',
+        primary: '#bec6e0',
+        'primary-fixed': '#dae2fd',
+        'primary-fixed-dim': '#bec6e0'
+      },
+      fontFamily: {
+        display: ['Montserrat', 'sans-serif'],
+        body: ['Inter', 'sans-serif']
+      }
+    }
+  }
+};
+</script>
+<style>
+body { background: #05070d; color: #dce1fb; font-family: Inter, sans-serif; overflow: hidden; }
+.glass-panel { background: rgba(255, 255, 255, 0.035); backdrop-filter: blur(22px); border: 1px solid rgba(190, 198, 224, 0.14); }
+.glass-panel-heavy { background: rgba(12, 19, 36, 0.78); backdrop-filter: blur(36px); border: 1px solid rgba(190, 198, 224, 0.18); }
+.silver-frame { border: 2px solid rgba(190, 198, 224, 0.7); box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 28px 90px rgba(0,0,0,0.72); }
+.metallic-silver { background: linear-gradient(135deg, #bec6e0 0%, #798098 100%); color: #131b2e; }
+.custom-scrollbar::-webkit-scrollbar { width: 5px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(190, 198, 224, 0.26); border-radius: 10px; }
+.provider-dot { background: rgba(121, 128, 152, 0.28); border: 1px solid rgba(190, 198, 224, 0.24); }
+.provider-dot.is-ready { background: #34d399; border-color: rgba(52, 211, 153, 0.85); box-shadow: 0 0 16px rgba(52, 211, 153, 0.62); }
+.room-bg { position: fixed; inset: 0; z-index: -2; background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBjoNhRIVSd23YMoY_YLuSXHuj-G1C9T_yN5ek_C-RUFSbo43X8HgC83pqImAPi7tTW6s-6OILXLLvc4UvuDscLhUF12lyam7BHOi-7zEglFbC6SVGUjNactEgRD3BoIXKmGMkCQGP5FraTyF_Lky903t6DdtnvjRZdXNFUfW18L6Cdwwmy73MoRa3o2ABSx3QfG5RrwG07VEFsEybFKsRybywrPQ1FkXdFxK6j9qZYyxc98Ej-kTGncSanSGHlxNyY9MExDl_qHnGg'); background-size: cover; background-position: center; opacity: 0.26; }
+.room-overlay { position: fixed; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(3,4,7,0.96), rgba(12,19,36,0.88) 42%, rgba(3,4,7,0.96)); }
+</style>
+</head>
+<body>
+<div class="room-bg"></div>
+<div class="room-overlay"></div>
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 h-20">
+<nav class="flex justify-between items-center h-20 px-8 max-w-[1800px] mx-auto">
+<a class="font-display text-3xl tracking-tight text-primary" href="../index.html">MINDSHARE CENTRAL</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-primary" href="../index.html">Home</a>
+<a class="text-on-surface-variant hover:text-primary" href="../departments/index.html">Departments</a>
+<a class="text-primary border-b border-primary pb-1" href="index.html">Conference Room</a>
+<a class="text-on-surface-variant hover:text-primary" href="../tools/index.html">Tools</a>
+</div>
+</nav>
+</header>
+<main class="h-screen pt-24 pb-6 px-6">
+<div class="mx-auto flex h-full max-w-[1800px] gap-6">
+<aside class="w-[380px] shrink-0 rounded-xl silver-frame bg-[#030407] p-6 flex flex-col">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-14 h-14 rounded-xl metallic-silver flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">groups_2</span>
+</div>
+<div>
+<p class="text-xs uppercase tracking-[0.28em] text-on-surface-variant">Room</p>
+<h1 class="font-display text-3xl text-primary">Conference Room</h1>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mb-6">
+<button class="glass-panel rounded-md px-3 py-2 text-xs uppercase tracking-widest text-primary" data-mode="everyone">Everyone</button>
+<button class="glass-panel rounded-md px-3 py-2 text-xs uppercase tracking-widest text-on-surface-variant" data-mode="objections">Objections</button>
+<button class="glass-panel rounded-md px-3 py-2 text-xs uppercase tracking-widest text-on-surface-variant" data-mode="round-robin">Round Robin</button>
+<button class="glass-panel rounded-md px-3 py-2 text-xs uppercase tracking-widest text-on-surface-variant" data-mode="decision">Decision Pass</button>
+</div>
+<div class="border-t border-white/10 pt-5 mb-4">
+<div class="flex items-center justify-between gap-3 mb-3">
+<p class="text-xs uppercase tracking-[0.24em] text-primary">Occupants</p>
+<button class="glass-panel rounded-md px-3 py-2 text-xs uppercase tracking-widest text-primary hover:border-primary/50" id="open-invite-button" type="button">
+<span class="material-symbols-outlined align-middle text-base mr-1">person_add</span>Search
+</button>
+</div>
+<p class="text-sm text-on-surface-variant leading-6">Loaded from the MindShare roster when available. Each prompt uses the room contract and invitation rules.</p>
+</div>
+<div class="hidden mb-4 rounded-lg border border-primary/25 bg-surface-container-lowest/95 p-3" id="invite-panel">
+<input class="w-full rounded-md border border-white/10 bg-black/60 px-3 py-2 text-sm text-on-surface placeholder:text-on-surface-variant focus:border-primary focus:ring-0" id="invite-search-input" placeholder="Search agent or title..." type="text">
+<div class="mt-3 max-h-56 overflow-y-auto custom-scrollbar space-y-2" id="invite-search-results"></div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar space-y-2 pr-1" id="occupant-list">
+<div class="text-on-surface-variant text-sm">Loading occupants...</div>
+</div>
+</aside>
+<section class="relative flex-1 flex flex-col rounded-xl silver-frame overflow-hidden bg-[#060912]">
+<div class="h-20 px-8 flex items-center justify-between border-b border-white/10 glass-panel-heavy">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-error/20 border border-error/30" id="status-red"></div>
+<div class="w-3 h-3 rounded-full bg-emerald-400/20 border border-emerald-400/30" id="status-green"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-300/20 border border-yellow-300/30" id="status-yellow"></div>
+</div>
+<div class="h-9 w-px bg-white/15"></div>
+<div>
+<p class="text-xs uppercase tracking-[0.24em] text-on-surface-variant">Active Surface</p>
+<h2 class="font-display text-2xl text-primary">MindShare Conference Room</h2>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="glass-panel px-4 py-2 rounded-md text-on-surface-variant hover:text-primary transition-colors" id="connect-codex-button" type="button"><span class="provider-dot inline-block w-2.5 h-2.5 rounded-full mr-2" id="codex-dot"></span>Connect Codex</button>
+<button class="glass-panel px-4 py-2 rounded-md text-on-surface-variant hover:text-primary transition-colors" id="connect-claude-button" type="button"><span class="provider-dot inline-block w-2.5 h-2.5 rounded-full mr-2" id="claude-dot"></span>Connect Claude</button>
+</div>
+</div>
+<div class="hidden border-b border-white/10 bg-surface-container/70 px-8 py-3 text-sm text-on-surface-variant" id="room-context-strip"></div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-8 space-y-6" id="chat-transcript">
+<div class="h-full min-h-[360px] flex items-center justify-center border border-white/5 bg-surface/30 rounded-xl">
+<div class="max-w-2xl text-center">
+<p class="text-xs uppercase tracking-[0.3em] text-primary mb-4">Workflow-backed room</p>
+<p class="text-2xl font-display text-on-surface mb-4">Invite the room into the conversation.</p>
+<p class="text-on-surface-variant leading-7">Connect a provider, choose a room mode, then ask. The room context loads the conference-room contract, prompt protocol, roster, and boundary rules.</p>
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-white/10 glass-panel-heavy">
+<div class="relative">
+<textarea class="w-full bg-surface-container border border-white/10 rounded-xl px-6 py-4 pr-24 focus:border-primary transition-all focus:ring-0 text-on-surface font-body resize-none custom-scrollbar" id="room-input" placeholder="Ask the room..." rows="3"></textarea>
+<button class="absolute right-4 bottom-4 metallic-silver p-3 rounded-lg" id="send-message-button" type="button"><span class="material-symbols-outlined">send</span></button>
+</div>
+<div class="mt-3 flex items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<button class="glass-panel px-4 py-2 rounded-md text-[#f8e7a2] text-xs uppercase tracking-widest" id="clear-button" type="button">Clear</button>
+<button class="glass-panel px-4 py-2 rounded-md text-[#f8e7a2] text-xs uppercase tracking-widest" id="yes-button" type="button">Yes</button>
+<button class="glass-panel px-4 py-2 rounded-md text-[#f8e7a2] text-xs uppercase tracking-widest" id="no-button" type="button">No</button>
+<button class="glass-panel px-4 py-2 rounded-md text-[#f8e7a2] text-xs uppercase tracking-widest" id="confirm-button" type="button">Confirm</button>
+</div>
+<div class="text-xs uppercase tracking-widest text-on-surface-variant" id="room-status">Room not connected.</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<script>
+const client = window.MindShareLocalClient;
+let roomContext = null;
+let occupants = [];
+let inviteCandidates = [];
+let invitedOccupants = [];
+let activeProvider = 'claude';
+let sessions = { codex: null, claude: null };
+let mode = 'everyone';
+let transcript = [];
+
+function setStatus(message) {
+  document.getElementById('room-status').textContent = message;
+}
+
+function setConnected(provider, connected) {
+  document.getElementById(`${provider}-dot`).classList.toggle('is-ready', connected);
+  document.getElementById('status-red').className = connected ? 'w-3 h-3 rounded-full bg-error/20 border border-error/30' : 'w-3 h-3 rounded-full bg-error shadow-[0_0_12px_rgba(255,180,171,0.75)] border-error';
+  document.getElementById('status-green').className = (sessions.codex || sessions.claude) ? 'w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.75)] border-emerald-300' : 'w-3 h-3 rounded-full bg-emerald-400/20 border border-emerald-400/30';
+}
+
+function renderOccupants() {
+  const list = document.getElementById('occupant-list');
+  const visible = invitedOccupants.length ? invitedOccupants : occupants;
+  list.innerHTML = visible.map((person) => `
+    <div class="glass-panel rounded-lg p-3">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <p class="font-semibold text-primary">${escapeHtml(person.name)}</p>
+          <p class="mt-1 text-xs uppercase tracking-wider text-on-surface-variant">${escapeHtml(person.title || 'MindShare role')}</p>
+          ${person.office ? `<p class="mt-1 text-[11px] text-on-surface-variant/75">${escapeHtml(person.office)}</p>` : ''}
+        </div>
+        ${person.slug && invitedOccupants.length ? `<button class="text-on-surface-variant hover:text-primary" type="button" data-remove-invite="${escapeHtml(person.slug)}" title="Remove occupant"><span class="material-symbols-outlined text-base">close</span></button>` : ''}
+      </div>
+    </div>
+  `).join('') || '<div class="text-on-surface-variant text-sm">No occupants loaded.</div>';
+  list.querySelectorAll('[data-remove-invite]').forEach((button) => {
+    button.addEventListener('click', () => removeInvite(button.dataset.removeInvite));
+  });
+}
+
+function modeInstruction() {
+  if (mode === 'objections') return 'Run an objection pass. Every invited role should surface objections, risks, missing evidence, or say no objection from their role boundary.';
+  if (mode === 'round-robin') return 'Run round robin. Every invited role must contribute or give a concise pass reason.';
+  if (mode === 'decision') return 'Run a decision pass. Roles should state recommendation, risk, approval need, and next owner.';
+  return 'Invite everyone. Run open floor. Every invited role should speak when useful and stay silent when they have no material value to add.';
+}
+
+function invitedInstruction() {
+  if (!invitedOccupants.length) {
+    return 'Invite everyone according to the Conference Room contract. Resolve active roles from the roster and load useful role context before speaking for them.';
+  }
+  const names = invitedOccupants.map((person) => `${person.name} (${person.title || person.office || person.slug})`).join(', ');
+  return `Invite only these office personas unless Scott asks for others: ${names}. Load each invited persona from their office/canonical Who Am I card and follow the Conference Room prompt protocol before representing their first-person contribution.`;
+}
+
+function appendMessage(role, text) {
+  const transcriptEl = document.getElementById('chat-transcript');
+  const placeholder = transcriptEl.querySelector('[class*="min-h"]');
+  if (placeholder) placeholder.remove();
+  const isUser = role === 'user';
+  const wrapper = document.createElement('div');
+  wrapper.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
+  wrapper.innerHTML = `<div class="${isUser ? 'metallic-silver' : 'glass-panel-heavy border border-primary/30 text-on-surface'} max-w-4xl rounded-2xl p-5 whitespace-pre-wrap leading-relaxed">${escapeHtml(text)}</div>`;
+  transcriptEl.appendChild(wrapper);
+  transcriptEl.scrollTop = transcriptEl.scrollHeight;
+  transcript.push({ role, content: text });
+}
+
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+}
+
+async function loadRoom() {
+  if (!client?.loadConferenceRoomContext) {
+    setStatus('Open inside MindShare Central to load room rules.');
+    occupants = [
+      { name: 'Scott', title: 'Human Owner / Final Authority' },
+      { name: 'Tess', title: 'Autonomy Engineer' },
+      { name: 'Vik', title: 'ASPA' },
+      { name: 'Rae', title: 'Chief Executive Officer' }
+    ];
+    inviteCandidates = occupants.map((person) => ({ ...person, slug: person.name.toLowerCase() }));
+    renderOccupants();
+    return;
+  }
+  const result = await client.loadConferenceRoomContext();
+  if (result.ok) {
+    roomContext = result.roomContext;
+    occupants = result.occupants || [];
+    inviteCandidates = result.inviteCandidates || [];
+    renderOccupants();
+    document.getElementById('room-context-strip').classList.remove('hidden');
+    document.getElementById('room-context-strip').textContent = `Loaded room contract, prompt protocol, roster, and ${occupants.length} occupants.`;
+    setStatus('Room context loaded.');
+  }
+}
+
+function renderInviteResults(query = '') {
+  const resultsEl = document.getElementById('invite-search-results');
+  const normalized = query.trim().toLowerCase();
+  const matches = inviteCandidates
+    .filter((person) => {
+      if (!normalized) return true;
+      return [person.name, person.title, person.level, person.office, person.slug].some((value) => String(value || '').toLowerCase().includes(normalized));
+    })
+    .slice(0, 18);
+  resultsEl.innerHTML = matches.map((person) => {
+    const isInvited = invitedOccupants.some((candidate) => candidate.slug === person.slug);
+    return `<button class="w-full rounded-md border ${isInvited ? 'border-primary/45 bg-primary/10' : 'border-white/10 bg-black/30'} px-3 py-3 text-left hover:border-primary/50 transition-colors" type="button" data-invite-slug="${escapeHtml(person.slug)}">
+      <span class="block font-semibold text-primary">${escapeHtml(person.name)}</span>
+      <span class="block mt-1 text-xs uppercase tracking-wider text-on-surface-variant">${escapeHtml(person.title || 'MindShare role')}</span>
+      <span class="block mt-1 text-[11px] text-on-surface-variant/75">${escapeHtml(person.office || person.level || '')}</span>
+    </button>`;
+  }).join('') || '<div class="text-sm text-on-surface-variant">No matching office personas.</div>';
+  resultsEl.querySelectorAll('[data-invite-slug]').forEach((button) => {
+    button.addEventListener('click', () => addInvite(button.dataset.inviteSlug));
+  });
+}
+
+function addInvite(slug) {
+  const person = inviteCandidates.find((candidate) => candidate.slug === slug);
+  if (!person || invitedOccupants.some((candidate) => candidate.slug === slug)) return;
+  invitedOccupants.push(person);
+  renderOccupants();
+  renderInviteResults(document.getElementById('invite-search-input').value);
+  setStatus(`${person.name} invited to the room.`);
+}
+
+function removeInvite(slug) {
+  invitedOccupants = invitedOccupants.filter((person) => person.slug !== slug);
+  renderOccupants();
+  renderInviteResults(document.getElementById('invite-search-input').value);
+  setStatus(invitedOccupants.length ? 'Updated invited occupants.' : 'No specific occupants invited; room will use everyone mode.');
+}
+
+async function connectProvider(provider) {
+  if (!client) {
+    setStatus('MindShare Central local client is not available.');
+    return;
+  }
+  activeProvider = provider;
+  setStatus(`Connecting ${provider}...`);
+  const method = provider === 'codex' ? client.connectCodex : client.connectClaude;
+  const result = await method({ roleSlug: 'conference-room' });
+  if (!result.ok) {
+    setStatus(result.message || result.error || `Could not connect ${provider}.`);
+    setConnected(provider, false);
+    return;
+  }
+  sessions[provider] = result.sessionId;
+  setConnected(provider, true);
+  setStatus(`Conference room connected in ${provider}.`);
+  if (!transcript.length) appendMessage('assistant', 'MindShare Conference Room loaded. Who should I invite, and what should the room discuss?');
+}
+
+async function sendRoomPrompt() {
+  const input = document.getElementById('room-input');
+  const text = input.value.trim();
+  if (!text) return;
+  if (!sessions[activeProvider]) {
+    await connectProvider(activeProvider);
+    if (!sessions[activeProvider]) return;
+  }
+  const finalPrompt = `${invitedInstruction()}
+
+${modeInstruction()}
+
+Scott's room prompt:
+${text}`;
+  input.value = '';
+  appendMessage('user', text);
+  setStatus(`Room is working in ${activeProvider}...`);
+  const method = activeProvider === 'codex' ? client.sendCodexMessage : client.sendClaudeMessage;
+  const result = await method({
+    sessionId: sessions[activeProvider],
+    message: finalPrompt,
+    roleContext: roomContext,
+    transcript
+  });
+  if (!result.ok) {
+    appendMessage('assistant', result.error || 'The room could not respond.');
+    setStatus('Room response failed.');
+    return;
+  }
+  appendMessage('assistant', result.reply || result.message || '');
+  setStatus('Room response complete.');
+}
+
+document.querySelectorAll('[data-mode]').forEach((button) => {
+  button.addEventListener('click', () => {
+    mode = button.dataset.mode;
+    document.querySelectorAll('[data-mode]').forEach((item) => item.classList.remove('text-primary'));
+    button.classList.add('text-primary');
+    setStatus(`Mode: ${button.textContent.trim()}`);
+  });
+});
+document.getElementById('connect-codex-button').addEventListener('click', () => connectProvider('codex'));
+document.getElementById('connect-claude-button').addEventListener('click', () => connectProvider('claude'));
+document.getElementById('open-invite-button').addEventListener('click', () => {
+  const panel = document.getElementById('invite-panel');
+  panel.classList.toggle('hidden');
+  renderInviteResults(document.getElementById('invite-search-input').value);
+  if (!panel.classList.contains('hidden')) document.getElementById('invite-search-input').focus();
+});
+document.getElementById('invite-search-input').addEventListener('input', (event) => renderInviteResults(event.target.value));
+document.getElementById('send-message-button').addEventListener('click', sendRoomPrompt);
+document.getElementById('room-input').addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' && !event.shiftKey) {
+    event.preventDefault();
+    sendRoomPrompt();
+  }
+});
+document.getElementById('clear-button').addEventListener('click', () => {
+  transcript = [];
+  document.getElementById('chat-transcript').innerHTML = '';
+  setStatus('Visible room chat cleared.');
+});
+document.getElementById('yes-button').addEventListener('click', () => { document.getElementById('room-input').value = 'Yes'; });
+document.getElementById('no-button').addEventListener('click', () => { document.getElementById('room-input').value = 'No'; });
+document.getElementById('confirm-button').addEventListener('click', () => { document.getElementById('room-input').value = 'Confirm'; });
+loadRoom();
+</script>
+</body></html>

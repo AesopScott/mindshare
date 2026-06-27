@@ -4,16 +4,22 @@
   "automation_id": "tess-autonomy-evaluation",
   "logic_owner": "C:\\Users\\scott\\Code\\mindshare\\roles\\autonomy-engineer\\scripts\\autonomy_level_monitor.py",
   "mode": "scheduled",
-  "checked_at": "2026-06-25T07:21:49-06:00",
+  "checked_at": "2026-06-25T15:34:24-06:00",
   "result": "no_change",
   "counts": {
-    "canonical_files": 13,
+    "canonical_files": 37,
     "repairs": 0,
     "conflicts": 0
   },
   "repairs": [],
   "conflicts": [],
   "canonical_roles": {
+    "Theo Nakamura": {
+      "role": "Theo Nakamura",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\ai-systems-engineering-director\\Autonomy.md"
+    },
     "Tess": {
       "role": "Tess",
       "level": 4,
@@ -26,17 +32,101 @@
       "label": "Level 4 Senior Staff (Scoped Autonomy)",
       "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\Autonomy.md"
     },
+    "Isla Monroe": {
+      "role": "Isla Monroe",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\compliance-director\\Autonomy.md"
+    },
+    "Jordan Hale": {
+      "role": "Jordan Hale",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\customer-success-director\\Autonomy.md"
+    },
+    "Nia Calder": {
+      "role": "Nia Calder",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\engineering-director\\Autonomy.md"
+    },
     "Paige": {
       "role": "Paige",
       "level": 3,
       "label": "Level 3 Staff",
       "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-assistant\\Autonomy.md"
     },
+    "Leon Archer": {
+      "role": "Leon Archer",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\executive-operations-director\\Autonomy.md"
+    },
+    "Kai Bennett": {
+      "role": "Kai Bennett",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\experience-design-director\\Autonomy.md"
+    },
     "Cole": {
       "role": "Cole",
       "level": 4,
       "label": "Level 4 Senior Staff (Scoped Autonomy)",
       "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\hr-director\\Autonomy.md"
+    },
+    "Adrian Moss": {
+      "role": "Adrian Moss",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\legal-director\\Autonomy.md"
+    },
+    "Morgan Vale": {
+      "role": "Morgan Vale",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\operations-director\\Autonomy.md"
+    },
+    "Celia Grant": {
+      "role": "Celia Grant",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\partnerships-director\\Autonomy.md"
+    },
+    "Mila Chen": {
+      "role": "Mila Chen",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\people-operations-director\\Autonomy.md"
+    },
+    "Mateo Ruiz": {
+      "role": "Mateo Ruiz",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\platform-engineering-director\\Autonomy.md"
+    },
+    "Mira Patel": {
+      "role": "Mira Patel",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\pmo-director\\Autonomy.md"
+    },
+    "Priya Sen": {
+      "role": "Priya Sen",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\product-director\\Autonomy.md"
+    },
+    "Gabe Rowan": {
+      "role": "Gabe Rowan",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\product-management-director\\Autonomy.md"
+    },
+    "Elise Hart": {
+      "role": "Elise Hart",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\product-operations-director\\Autonomy.md"
     },
     "Ana": {
       "role": "Ana",
@@ -50,11 +140,65 @@
       "label": "Level 3 Staff",
       "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\release-manager\\Autonomy.md"
     },
+    "Sloane Mercer": {
+      "role": "Sloane Mercer",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\revenue-director\\Autonomy.md"
+    },
+    "Drew Collins": {
+      "role": "Drew Collins",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\sales-director\\Autonomy.md"
+    },
+    "Harper Quinn": {
+      "role": "Harper Quinn",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\security-engineering-director\\Autonomy.md"
+    },
+    "Nora Voss": {
+      "role": "Nora Voss",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\service-design-director\\Autonomy.md"
+    },
+    "June Park": {
+      "role": "June Park",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-operations-director\\Autonomy.md"
+    },
     "June": {
       "role": "June",
       "level": 3,
       "label": "Level 3 Staff",
       "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\staff-writer\\Autonomy.md"
+    },
+    "Samira Knox": {
+      "role": "Samira Knox",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\support-director\\Autonomy.md"
+    },
+    "Owen Kline": {
+      "role": "Owen Kline",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\technology-director\\Autonomy.md"
+    },
+    "Amara Hayes": {
+      "role": "Amara Hayes",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\user-research-director\\Autonomy.md"
+    },
+    "Victor Lane": {
+      "role": "Victor Lane",
+      "level": 3,
+      "label": "Level 3 Staff",
+      "path": "C:\\Users\\scott\\Code\\mindshare\\roles\\vendor-management-director\\Autonomy.md"
     },
     "Imani": {
       "role": "Imani",

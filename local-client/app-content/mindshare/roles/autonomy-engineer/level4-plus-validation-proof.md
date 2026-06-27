@@ -105,3 +105,33 @@ Current proof changes:
 - Tess/Reid durability remains open for validation/evaluation source and display changes.
 
 Denied actions held: no promotion, demotion, revocation, runtime activation, cadence or target-thread change, Git/GitHub/release action, production change, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-25T11:26:35-06:00 - Level 4+ Validation Refresh (scheduled)
+
+Result: `watch`
+
+Standing monitor: `no_change`; canonical `Autonomy.md` files checked: `37`; repairs: `0`; conflicts: `0`.
+
+Current proof changes:
+
+- Repaired active evaluation snapshot stale pipeline standing: REC-001 through REC-005, REC-007 through REC-009, and REC-011 through REC-026 now show Level 3 Staff instead of Level 2 Trainee.
+- Cole Level 3 completeness proof is current at `2026-06-25T11:22:50-06:00`; 24 pipeline roles checked, 24 completeness repairs recorded, and 0 Level 3 required-file findings remain.
+- Cole broader Level 4 validation remains `watch` with `56` medium findings and no high findings.
+- Mae automation-health proof is current at `2026-06-25T11:21:28-06:00`; checked `16` active configs with `0` critical and `0` warning findings.
+- Tess standing monitor found no demotion drift across `37` canonical autonomy files.
+- Tess/Reid durability remains open for autonomy/evaluation/validation source, display, Electron-bundled source, Mojo role-source, and Watch role-source changes.
+
+Denied actions held: no promotion, demotion, revocation, runtime activation, cadence or target-thread change, Git/GitHub/release action, production change, external communication, spending, secrets, or authority expansion.
+
+## 2026-06-25T15:34:24-06:00 - Level 4+ Validation Refresh (scheduled)
+
+Result: `watch`
+
+Standing monitor: `no_change`; canonical `Autonomy.md` files checked: `37`; repairs: `0`; conflicts: `0`.
+
+Open findings remain unchanged:
+
+- Cole remains `Level 4 Senior Staff` with broader validation findings: `56` medium findings and no high findings; structural WhoAmI/file repairs route to Cole/Ana, autonomy-context wording to Cole/Tess.
+- Tess/Reid Git promotion durability remains open for autonomy/evaluation/validation source, display, Electron-bundled source, Mojo role-source, and Watch role-source changes.
+
+Denied actions held: no promotion, demotion, revocation, runtime activation, cadence or target-thread change, Git/GitHub/release action, production change, external communication, spending, secrets, or authority expansion.

@@ -6,7 +6,7 @@ description: Build role agents for a root organization or multi-agent corporatio
 # Role
 ## Versioning
 
-Current version: 0.21.0.
+Current version: 0.22.0.
 
 Follow semantic versioning for this skill:
 
@@ -18,6 +18,7 @@ When changing this skill, update `Current version` and add a `Changelog` entry w
 
 ## Changelog
 
+- 2026-06-27 - v0.22.0 - Made `WhoAmI.md` a first-class required role artifact created from `templates/WhoAmI.md`, including Autonomy Context for office injection and Cole Level 3 readiness validation.
 - 2026-06-22 - v0.21.0 - Added Level 1 New Hire packet visibility rule: completed Level 1 packets must be represented in `roles.md` as non-activated roster-visible candidates and routed to Liz for org-chart mirroring.
 - 2026-06-22 - v0.20.0 - Added mandatory title-to-role research gate: role descriptions, Level 1 New Hire packets, and role contracts must research what the title/function actually does before drafting responsibilities.
 - 2026-06-21 - v0.19.0 - Added role-home office default: medium reasoning and standard/default speed settings unless Scott asks otherwise.
@@ -361,22 +362,23 @@ Creating the role-home session is activation plumbing only. It does not create a
    - Record the exact approval evidence when lifecycle status moves beyond `Unauthorized`.
    - Do not mark a role `Authorized role`, `Authorized agent`, or built from inference.
 19. Create `roles/<role-slug>/role-agent.md` from `templates/role-agent.md`, including the culture standards, role-description research basis, handoff check goal, and assigned handoff files. The assigned files must include `G:\My Drive\Mindshare\05 Role Handoffs\channels\heartbeat.md` for every role.
-20. Create or update `G:\My Drive\Mindshare\<role-slug>.md` from `memory-template.md`, replacing `[role-name]` and `[proper-role-name]`, and mark it with the same maturity level, role lifecycle status, handoff check goal, and assigned handoff files. The assigned files must include `G:\My Drive\Mindshare\05 Role Handoffs\channels\heartbeat.md` for every role. Do this for every role. Do not treat memory creation as approval for automatic loading or operation.
-21. When Scott asks to create, hire, or build the new employee, create or locate the role-home Codex session in the correct project, send the activation packet there, record the session id/title in repo memory, Obsidian mirror, and organization roster, and announce the activation or replacement in Communications. If Scott explicitly says draft, proposed, candidate-only, recommendation-only, or do not activate, keep the role as draft/candidate and create the session spec only when Scott asks for the room.
-22. After the individual is created, any org-chart/status detail changes, or any Level 1 New Hire packet is completed, update `G:\My Drive\Mindshare\roles.md` first when needed, then write the Liz org-chart handoff to `G:\My Drive\Mindshare\channels\training.md` with `roles.md` as the source of truth, the source artifacts, requested org-chart update, and boundary notes.
-23. After any new individual creation or activation, write the Cole welcome handoff to `G:\My Drive\Mindshare\channels\recruiting.md` with `roles.md` as the source of truth, the source artifacts, requested welcome/file-set check, and boundary notes.
-24. If the role is agent-ready, create a draft agent-build handoff that names the next skill:
+20. Create `roles/<role-slug>/WhoAmI.md` from `templates/WhoAmI.md`, including first-person identity, title, current stage, active boundaries, assigned handoff files, and an `Autonomy Context` section. The card must be safe to inject into the role-home office session and must say that awareness of autonomy context does not grant authority.
+21. Create or update `G:\My Drive\Mindshare\<role-slug>.md` from `memory-template.md`, replacing `[role-name]` and `[proper-role-name]`, and mark it with the same maturity level, role lifecycle status, handoff check goal, and assigned handoff files. The assigned files must include `G:\My Drive\Mindshare\05 Role Handoffs\channels\heartbeat.md` for every role. Do this for every role. Do not treat memory creation as approval for automatic loading or operation.
+22. When Scott asks to create, hire, or build the new employee, create or locate the role-home Codex session in the correct project, send the activation packet there, record the session id/title in repo memory, Obsidian mirror, and organization roster, and announce the activation or replacement in Communications. If Scott explicitly says draft, proposed, candidate-only, recommendation-only, or do not activate, keep the role as draft/candidate and create the session spec only when Scott asks for the room.
+23. After the individual is created, any org-chart/status detail changes, or any Level 1 New Hire packet is completed, update `G:\My Drive\Mindshare\roles.md` first when needed, then write the Liz org-chart handoff to `G:\My Drive\Mindshare\channels\training.md` with `roles.md` as the source of truth, the source artifacts, requested org-chart update, and boundary notes.
+24. After any new individual creation or activation, write the Cole welcome handoff to `G:\My Drive\Mindshare\channels\recruiting.md` with `roles.md` as the source of truth, the source artifacts, requested welcome/file-set check, and boundaries.
+25. If the role is agent-ready, create a draft agent-build handoff that names the next skill:
    - `/define-agent` when the agent brief does not exist
    - `/design-agent` when the brief exists but the design does not
    - `/build-agent` when design exists and implementation is approved
    - `/evaluate-agent` when proof is needed before activation or authority expansion
-25. If the role is not agent-ready, explicitly list the missing criteria.
-26. If the role should become a skill, create a draft `roles/<role-slug>/SKILL.draft.md` or recommend running a skill-creation pass.
-27. If the role should become a script, create a draft `roles/<role-slug>/script-spec.md` with inputs, outputs, command, idempotency, errors, and test cases.
-28. If the role should become a hook, create a draft `roles/<role-slug>/hook-spec.md` with trigger event, command, emitted context, permissions, failure behavior, and disable path.
-29. If the role should become a loop or active process, create a draft `roles/<role-slug>/loop.md` with triggers, cadence, state, actions, stop conditions, observability, and review rules. Mark it draft until Scott approves the loop.
-30. If the role owns a workflow, create a draft `roles/<role-slug>/workflow.md` with stages, handoffs, approvals, and artifacts.
-31. Run the shared MAPS memory helper for `/role` only after the artifact exists and clearly states professional maturity and role lifecycle status. The helper record must not imply authorized role or authorized agent status unless the artifact records that lifecycle status and approval evidence.
+26. If the role is not agent-ready, explicitly list the missing criteria.
+27. If the role should become a skill, create a draft `roles/<role-slug>/SKILL.draft.md` or recommend running a skill-creation pass.
+28. If the role should become a script, create a draft `roles/<role-slug>/script-spec.md` with inputs, outputs, command, idempotency, errors, and test cases.
+29. If the role should become a hook, create a draft `roles/<role-slug>/hook-spec.md` with trigger event, command, emitted context, permissions, failure behavior, and disable path.
+30. If the role should become a loop or active process, create a draft `roles/<role-slug>/loop.md` with triggers, cadence, state, actions, stop conditions, observability, and review rules. Mark it draft until Scott approves the loop.
+31. If the role owns a workflow, create a draft `roles/<role-slug>/workflow.md` with stages, handoffs, approvals, and artifacts.
+32. Run the shared MAPS memory helper for `/role` only after the artifact exists and clearly states professional maturity and role lifecycle status. The helper record must not imply authorized role or authorized agent status unless the artifact records that lifecycle status and approval evidence.
 
 ## Completion report
 
@@ -401,6 +403,7 @@ If the skill is blocked, say what answer, artifact, access, approval, or tool is
 Create or update:
 
 - `roles/<role-slug>/role-agent.md`: completed role-agent contract.
+- `roles/<role-slug>/WhoAmI.md`: required office identity card with Autonomy Context and authority boundary.
 - `roles/<role-slug>/workflow.md`: only when the role owns a workflow.
 - `roles/<role-slug>/session.md`: only when Scott approved activation but Codex thread tools were unavailable, as a blocked draft role-home session spec.
 - `roles/<role-slug>/loop.md`: only when the role is loop-backed or agentic.

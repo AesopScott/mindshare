@@ -1,0 +1,12 @@
+{
+  "name": "Rae",
+  "title": "Chief Executive Officer",
+  "organization": "Mindshare",
+  "current_autonomy_level": "Level 3 Staff",
+  "status": "Authorized role; activated Role+ Operator in Rae's role-home thread with bounded `rae-handoff-check`; Coordinator, not Executor",
+  "role_root": "C:\\Users\\scott\\Code\\mindshare\\roles\\chief-executive-officer",
+  "created_by": "Cole / HR Director",
+  "created_for": "current-role structural completeness",
+  "updated_at": "2026-06-25T11:57:25-06:00",
+  "authority_boundary": "No autonomy, production, Git/release, external communication, spending, secrets, or authority expansion."
+}

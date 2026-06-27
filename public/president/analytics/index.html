@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cloudflare Analytics | Mindshare Central</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        background: '#0c1324',
+        surface: '#0c1324',
+        'surface-container': '#181f31',
+        'surface-container-high': '#232a3c',
+        'on-surface': '#dce2fa',
+        'on-surface-variant': '#c6c6cd',
+        primary: '#dae2fd',
+        outline: '#45464d',
+        success: '#84f2c5',
+        warning: '#f5d77a'
+      },
+      fontFamily: {
+        body: ['Inter', 'sans-serif'],
+        headline: ['Montserrat', 'sans-serif']
+      }
+    }
+  }
+};
+</script>
+<style>
+body {
+  font-family: Inter, sans-serif;
+}
+.glass-panel {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(34px);
+}
+.metric-card {
+  background: rgba(12, 19, 36, 0.68);
+  border: 1px solid rgba(218, 226, 253, 0.1);
+}
+.bar {
+  background: linear-gradient(90deg, rgba(218, 226, 253, 0.9), rgba(132, 242, 197, 0.72));
+}
+</style>
+</head>
+<body class="min-h-screen bg-background text-on-surface overflow-x-hidden">
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-10 h-[80px] bg-white/5 backdrop-blur-xl border-b border-white/10">
+<div class="flex items-center gap-12">
+<a class="font-headline text-3xl tracking-tight text-on-surface" href="../../index.html">MINDSHARE</a>
+<nav class="hidden md:flex gap-8">
+<a class="font-body text-sm uppercase tracking-[0.12em] text-on-surface-variant hover:text-primary" href="../index.html">Dashboard</a>
+<a class="font-body text-sm uppercase tracking-[0.12em] text-primary border-b border-primary pb-1" href="index.html">Analytics</a>
+<a class="font-body text-sm uppercase tracking-[0.12em] text-on-surface-variant hover:text-primary" href="../../our-team/index.html">Team</a>
+<a class="font-body text-sm uppercase tracking-[0.12em] text-on-surface-variant hover:text-primary" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-5">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary" id="refreshButton" title="Refresh analytics">refresh</button>
+<span class="material-symbols-outlined text-on-surface-variant">analytics</span>
+</div>
+</header>
+<main class="relative min-h-screen pt-[112px] px-8 pb-12">
+<div class="absolute inset-0 -z-10">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(218,226,253,0.12),transparent_28%),radial-gradient(circle_at_78%_0%,rgba(132,242,197,0.08),transparent_28%)]"></div>
+<div class="absolute inset-0 bg-background/90"></div>
+</div>
+<section class="mx-auto max-w-7xl glass-panel rounded-xl p-8 md:p-12">
+<div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-10">
+<div>
+<p class="text-xs uppercase tracking-[0.3em] text-on-surface-variant mb-4">Cloudflare Analytics</p>
+<h1 class="font-headline text-4xl md:text-5xl tracking-wide text-primary">Most Active Websites</h1>
+<p class="mt-4 max-w-3xl text-on-surface-variant leading-7">A president-level traffic view: the 10 busiest Cloudflare zones by request volume, ordered for fast operational awareness rather than deep analyst drilldown.</p>
+</div>
+<div class="metric-card rounded-lg px-5 py-4 min-w-[220px]">
+<p class="text-xs uppercase tracking-[0.22em] text-on-surface-variant">Status</p>
+<p class="mt-2 text-lg text-primary" id="statusLabel">Loading</p>
+</div>
+</div>
+<div class="mb-8 flex flex-wrap items-center gap-3">
+<button class="range-button rounded-full border border-primary/40 px-5 py-2 text-sm uppercase tracking-[0.16em] text-primary bg-primary/10" data-range="24h">24 Hours</button>
+<button class="range-button rounded-full border border-white/15 px-5 py-2 text-sm uppercase tracking-[0.16em] text-on-surface-variant hover:text-primary hover:border-primary/40" data-range="7d">7 Days</button>
+<button class="range-button rounded-full border border-white/15 px-5 py-2 text-sm uppercase tracking-[0.16em] text-on-surface-variant hover:text-primary hover:border-primary/40" data-range="30d">30 Days</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+<div class="metric-card rounded-lg p-5">
+<p class="text-xs uppercase tracking-[0.22em] text-on-surface-variant">Requests</p>
+<p class="mt-3 text-3xl font-semibold" id="requestMetric">-</p>
+</div>
+<div class="metric-card rounded-lg p-5">
+<p class="text-xs uppercase tracking-[0.22em] text-on-surface-variant">Visits</p>
+<p class="mt-3 text-3xl font-semibold" id="visitMetric">-</p>
+</div>
+<div class="metric-card rounded-lg p-5">
+<p class="text-xs uppercase tracking-[0.22em] text-on-surface-variant">Data Served</p>
+<p class="mt-3 text-3xl font-semibold" id="byteMetric">-</p>
+</div>
+</div>
+<div class="metric-card rounded-xl overflow-hidden">
+<div class="grid grid-cols-[56px_1fr_150px_130px_120px] gap-4 px-5 py-4 text-xs uppercase tracking-[0.18em] text-on-surface-variant border-b border-white/10">
+<span>Rank</span>
+<span>Website</span>
+<span>Requests</span>
+<span>Visits</span>
+<span>Share</span>
+</div>
+<div id="siteRows"></div>
+</div>
+<div class="mt-8 grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6">
+<div class="metric-card rounded-lg p-6">
+<h2 class="font-headline text-xl text-primary mb-3">Recommendation</h2>
+<p class="text-on-surface-variant leading-7">I would keep this page intentionally sparse: the ranking tells Scott where attention is flowing, the three summary metrics show scale, and each row gets a proportional activity bar. A second click later can open a deeper zone view with threats, cache ratio, errors, country mix, and deployment markers.</p>
+</div>
+<div class="metric-card rounded-lg p-6">
+<h2 class="font-headline text-xl text-primary mb-3">Data Contract</h2>
+<p class="text-on-surface-variant leading-7" id="dataContract">Live data is loaded through MindShare Central using Cloudflare's GraphQL Analytics API. The token stays in the Electron main process, not in this page.</p>
+</div>
+</div>
+</section>
+</main>
+<script>
+const rowsEl = document.getElementById('siteRows');
+const statusEl = document.getElementById('statusLabel');
+const requestMetric = document.getElementById('requestMetric');
+const visitMetric = document.getElementById('visitMetric');
+const byteMetric = document.getElementById('byteMetric');
+const dataContract = document.getElementById('dataContract');
+const rangeButtons = Array.from(document.querySelectorAll('.range-button'));
+let activeRange = '24h';
+
+function formatNumber(value) {
+  return new Intl.NumberFormat().format(Number(value || 0));
+}
+
+function formatBytes(value) {
+  const bytes = Number(value || 0);
+  if (bytes < 1024) return `${bytes} B`;
+  const units = ['KB', 'MB', 'GB', 'TB'];
+  let size = bytes / 1024;
+  let index = 0;
+  while (size >= 1024 && index < units.length - 1) {
+    size /= 1024;
+    index += 1;
+  }
+  return `${size.toFixed(size >= 100 ? 0 : 1)} ${units[index]}`;
+}
+
+function renderRows(sites) {
+  const max = Math.max(...sites.map((site) => site.requests), 1);
+  rowsEl.innerHTML = sites.map((site) => {
+    const share = Math.round((site.requests / max) * 100);
+    return `<div class="grid grid-cols-[56px_1fr_150px_130px_120px] gap-4 px-5 py-4 items-center border-b border-white/5 last:border-b-0">
+      <span class="text-on-surface-variant">${site.rank}</span>
+      <div>
+        <p class="font-semibold text-primary">${site.name}</p>
+        ${site.error ? `<p class="mt-1 text-xs text-warning">${site.error}</p>` : ''}
+      </div>
+      <span>${formatNumber(site.requests)}</span>
+      <span class="text-on-surface-variant">${formatNumber(site.visits)}</span>
+      <div class="h-2 rounded-full bg-white/10 overflow-hidden"><div class="bar h-full" style="width:${share}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+function renderEmpty(message) {
+  rowsEl.innerHTML = `<div class="px-5 py-10 text-on-surface-variant">${message}</div>`;
+}
+
+async function loadAnalytics() {
+  statusEl.textContent = 'Loading';
+  if (!window.MindShareLocalClient?.getCloudflareTopSites) {
+    statusEl.textContent = 'Local client required';
+    dataContract.textContent = 'Open this page inside MindShare Central to load Cloudflare Analytics without exposing credentials to the browser.';
+    renderEmpty('Cloudflare Analytics requires the MindShare Central local client.');
+    return;
+  }
+  const result = await window.MindShareLocalClient.getCloudflareTopSites({ range: activeRange });
+  if (!result.ok) {
+    statusEl.textContent = result.code === 'missing_credentials'
+      ? 'Credentials needed'
+      : result.code === 'analytics_permission_required'
+        ? 'Analytics permission needed'
+        : 'Cloudflare error';
+    dataContract.textContent = result.error || 'Cloudflare Analytics could not be loaded.';
+    requestMetric.textContent = '-';
+    visitMetric.textContent = '-';
+    byteMetric.textContent = '-';
+    renderEmpty(result.error || 'No analytics data available.');
+    return;
+  }
+  const sites = result.sites || [];
+  statusEl.textContent = `Live - ${result.window?.label || '24 hours'}`;
+  requestMetric.textContent = formatNumber(result.summary?.requests);
+  visitMetric.textContent = formatNumber(result.summary?.visits);
+  byteMetric.textContent = formatBytes(result.summary?.bytes);
+  const credentialNote = result.source?.credentialsLoaded ? 'Cloudflare credentials are loaded locally.' : 'Cloudflare credentials were not detected.';
+  dataContract.textContent = `${credentialNote} Loaded ${sites.length} of ${result.summary?.zoneCount || 0} active Cloudflare zones. Updated ${new Date(result.updatedAt).toLocaleString()}.`;
+  if (!sites.length) {
+    renderEmpty('No active Cloudflare zones were returned for this token.');
+    return;
+  }
+  renderRows(sites);
+}
+
+function setActiveRange(range) {
+  activeRange = range;
+  for (const button of rangeButtons) {
+    const isActive = button.dataset.range === range;
+    button.classList.toggle('bg-primary/10', isActive);
+    button.classList.toggle('text-primary', isActive);
+    button.classList.toggle('border-primary/40', isActive);
+    button.classList.toggle('text-on-surface-variant', !isActive);
+    button.classList.toggle('border-white/15', !isActive);
+  }
+  loadAnalytics();
+}
+
+for (const button of rangeButtons) {
+  button.addEventListener('click', () => setActiveRange(button.dataset.range));
+}
+
+document.getElementById('refreshButton').addEventListener('click', loadAnalytics);
+loadAnalytics();
+</script>
+</body></html>

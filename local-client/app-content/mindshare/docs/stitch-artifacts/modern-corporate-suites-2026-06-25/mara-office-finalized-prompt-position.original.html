@@ -1,0 +1,325 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Mindshare Central | Mara</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-deep": "rgba(12, 19, 36, 0.6)",
+                    "metallic-gradient": "linear-gradient(135deg, #bec6e0 0%, #798098 100%)",
+                    "primary-fixed": "#dae2fd",
+                    "surface-container-high": "#232a3c",
+                    "surface-container-lowest": "#070e1e",
+                    "inverse-on-surface": "#293042",
+                    "error-container": "#93000a",
+                    "border-low-light": "rgba(255, 255, 255, 0.1)",
+                    "surface": "#0c1324",
+                    "surface-container": "#181f31",
+                    "on-tertiary": "#2a3042",
+                    "on-primary": "#283044",
+                    "secondary-fixed": "#dbe2fd",
+                    "primary-container": "#bec6e0",
+                    "on-primary-container": "#4a5268",
+                    "on-error-container": "#ffdad6",
+                    "outline": "#909097",
+                    "background": "#0c1324",
+                    "surface-container-highest": "#2e3447",
+                    "on-tertiary-fixed-variant": "#40465a",
+                    "primary": "#dae2fd",
+                    "surface-bright": "#32394c",
+                    "tertiary": "#dde2fb",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#aeb4ce",
+                    "outline-variant": "#45464d",
+                    "on-secondary": "#293044",
+                    "on-primary-fixed-variant": "#3e465c",
+                    "surface-glass": "rgba(255, 255, 255, 0.05)",
+                    "error": "#ffb4ab",
+                    "inverse-primary": "#565e74",
+                    "surface-tint": "#bec6e0",
+                    "tertiary-container": "#c0c6de",
+                    "tertiary-fixed": "#dce2fa",
+                    "on-background": "#dce2fa",
+                    "inverse-surface": "#dce2fa",
+                    "secondary-container": "#3f465c",
+                    "on-tertiary-fixed": "#151b2d",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-primary-fixed": "#131b2e",
+                    "tertiary-fixed-dim": "#c0c6de",
+                    "secondary": "#bfc6e0",
+                    "surface-variant": "#2e3447",
+                    "on-surface-variant": "#c6c6cd",
+                    "surface-dim": "#0c1324",
+                    "on-tertiary-container": "#4c5266",
+                    "on-surface": "#dce2fa",
+                    "surface-container-low": "#141b2c",
+                    "glow-accent": "rgba(190, 198, 224, 0.4)",
+                    "primary-fixed-dim": "#bec6e0",
+                    "secondary-fixed-dim": "#bfc6e0",
+                    "on-secondary-fixed": "#141b2e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "section-padding": "128px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "container-max": "1440px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Montserrat"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Montserrat"],
+                    "display-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0c1324;
+            overflow: hidden;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(190, 198, 224, 0.2);
+        }
+        .silver-edge {
+            box-shadow: inset 0 0 0 1px rgba(190, 198, 224, 0.1), 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+        .glow-text {
+            text-shadow: 0 0 15px rgba(218, 226, 253, 0.3);
+        }
+        .chat-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .chat-scroll::-webkit-scrollbar-thumb {
+            background: rgba(190, 198, 224, 0.2);
+            border-radius: 10px;
+        }
+        .typing-dot {
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
+        }
+    </style>
+</head>
+<body class="bg-surface-dim min-h-screen flex items-center justify-center p-margin-mobile md:p-0">
+<!-- Top Navigation Anchor (Manual Filter: Hidden as per prompt "No sidebars or complex panels", but TopAppBar exists in shared components so we render a simplified brand-only version or hide it based on Relevance Rule) -->
+<!-- The prompt says "No sidebars or complex panels" and "centered entirely around a clean chat window". I will omit the TopAppBar to prioritize the content canvas as per UX Goal. -->
+<!-- Ambient Background Lighting -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden">
+</div>
+<!-- Main Content Canvas -->
+<main class="relative z-10 w-full max-w-[1100px] h-[92vh] flex flex-col items-center">
+<!-- Branding Identity (Mindshare Central) -->
+<div class="mb-gutter text-center">
+<h1 class="font-display-lg text-[24px] md:text-[32px] tracking-[0.2em] text-primary uppercase glow-text">
+                Mindshare Central
+            </h1>
+<p class="font-label-sm text-on-surface-variant opacity-60 mt-2">Welcome Visitors</p>
+</div>
+<!-- Mara Chat Interface -->
+<div class="glass-panel silver-edge rounded-xl w-full h-full flex flex-col overflow-hidden relative border-t-[1px] border-l-[1px] border-white/10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYpiVcR5YVxk9maC3DZD_icrQg9HJeq0zu9qRL0cLp0083Yp88-2z0H1Mmu5oG57PC5AY_PKuH9LbyZau1Xy5qWdv_I4qF8O2FAfwxIGwWzuMmYro6EiqSe-Z3jhBzDYyVpLiqf6NNEftseiaMmNgfOU5bwVMoiXhZcXzUA_KFnwJQ9u3DCsdhmy4mXV7h8ZKZmz5yDAEkOG7UgnMgUqT3ek6Gc8ihsBB-L0_NaJWWqhjfhBcziXfoRmc6dpS04PPXAMQIQMepFctQ'); background-size: 115% auto; background-position: center top; height: 100%;">
+<!-- Chat Header -->
+<header class="h-[72px] flex items-center justify-between px-gutter border-b border-white/5 bg-white/5">
+<div class="flex items-center gap-4">
+
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-body-md text-on-surface tracking-widest font-bold">MARA | FRONT DESK</span>
+</div>
+
+</div>
+</div>
+<div class="flex gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</button>
+</div>
+</header>
+<!-- Message Area -->
+<div class="flex-1 overflow-y-auto chat-scroll p-gutter flex flex-col gap-6 bg-surface-container-lowest silver-edge rounded-xl mx-auto my-auto mt-12" id="chat-messages" style="height: 288px; flex: 0 0 auto; width: 90%; max-width: 700px; margin: 136px auto auto; background-color: rgb(7, 14, 30); border: 1px solid rgba(190, 198, 224, 0.2);">
+<!-- System Greeting -->
+<!-- Mara Message -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-primary/10 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-primary">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="bg-surface-container p-4 rounded-xl rounded-tl-none border border-white/5">
+<p class="font-body-md text-on-surface leading-relaxed">
+                                Welcome to Mindshare Central. I am <span class="text-primary font-bold">Mara</span>, your Front Desk Administrator. How can I assist with your executive operations today?
+                            </p>
+</div>
+<span class="text-[10px] font-label-sm text-on-surface-variant opacity-40">10:42 AM</span>
+</div>
+</div>
+<!-- User Message Placeholder -->
+<div class="flex gap-4 max-w-[85%] self-end flex-row-reverse">
+<div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/40 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-primary">person</span>
+</div>
+<div class="flex flex-col gap-1 items-end">
+<div class="bg-primary/10 p-4 rounded-xl rounded-tr-none border border-primary/20">
+<p class="font-body-md text-on-surface leading-relaxed">
+                                Accessing the technical logs for Sector 7.
+                            </p>
+</div>
+<span class="text-[10px] font-label-sm text-on-surface-variant opacity-40">10:43 AM</span>
+</div>
+</div>
+<!-- Mara Typing Indicator (Hidden by default, shown when user sends) -->
+<div class="flex gap-4 max-w-[85%] hidden" id="typing-indicator">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-primary/10 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-primary">smart_toy</span>
+</div>
+<div class="bg-surface-container p-4 rounded-xl rounded-tl-none border border-white/5 flex gap-1 items-center">
+<div class="typing-dot w-1.5 h-1.5 bg-primary/50 rounded-full"></div>
+<div class="typing-dot w-1.5 h-1.5 bg-primary/50 rounded-full"></div>
+<div class="typing-dot w-1.5 h-1.5 bg-primary/50 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-gutter border-t border-white/5 bg-black/20 mt-auto mt-[72px] translate-y-[48px] mt-6">
+<form class="relative group" id="chat-form">
+<input class="w-full bg-surface-container-lowest border border-white/10 rounded-lg h-14 pl-6 pr-16 text-on-surface font-body-md focus:outline-none focus:border-primary/50 transition-all placeholder:text-on-surface-variant/30" placeholder="Type your command..." style="height: 80px;" type="text">
+<button class="absolute right-2 top-2 bottom-2 w-12 bg-white text-surface-dim rounded-md flex items-center justify-center hover:bg-primary transition-all active:scale-95 group-focus-within:bg-primary" type="submit">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</form>
+<div class="flex justify-between items-center mt-4">
+<div class="flex gap-3">
+<button class="flex items-center gap-1.5 font-label-sm text-[10px] text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]">attach_file</span> ATTACH
+                        </button>
+<button class="flex items-center gap-1.5 font-label-sm text-[10px] text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]">mic</span> VOICE
+                        </button>
+</div>
+<span class="font-label-sm text-[10px] text-on-surface-variant/40 tracking-widest uppercase">Encryption: AES-256</span>
+</div>
+</div>
+</div>
+<!-- Simple Footer (Mindshare Central Technical Group) -->
+<footer class="mt-gutter flex flex-col items-center gap-2">
+<div class="flex gap-6">
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors text-[16px]" href="#">Privacy Policy</a>
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors text-[16px]" href="#">Service Status</a>
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors text-[16px]" href="#">Documentation</a>
+</div>
+<p class="font-label-sm text-on-surface-variant opacity-30 mt-4 tracking-widest uppercase text-[15px]">
+                © 2024 Mindshare Central Technical Group
+            </p>
+</footer>
+</main>
+<!-- Micro-interactions Script -->
+<script>
+        const chatForm = document.getElementById('chat-form');
+        const chatMessages = document.getElementById('chat-messages');
+        const typingIndicator = document.getElementById('typing-indicator');
+        const input = chatForm.querySelector('input');
+
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = input.value.trim();
+            if (!text) return;
+
+            // Append User Message
+            appendMessage(text, 'user');
+            input.value = '';
+
+            // Show Typing Indicator
+            typingIndicator.classList.remove('hidden');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Simulate Mara Response
+            setTimeout(() => {
+                typingIndicator.classList.add('hidden');
+                appendMessage("I've acknowledged your request. Accessing operational data now. Please stand by for decryption.", 'mara');
+            }, 2000);
+        });
+
+        function appendMessage(text, role) {
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const messageDiv = document.createElement('div');
+            
+            if (role === 'user') {
+                messageDiv.className = 'flex gap-4 max-w-[85%] self-end flex-row-reverse slide-up';
+                messageDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/40 flex-shrink-0 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[16px] text-primary">person</span>
+                    </div>
+                    <div class="flex flex-col gap-1 items-end">
+                        <div class="bg-primary/10 p-4 rounded-xl rounded-tr-none border border-primary/20">
+                            <p class="font-body-md text-on-surface leading-relaxed">${text}</p>
+                        </div>
+                        <span class="text-[10px] font-label-sm text-on-surface-variant opacity-40">${time}</span>
+                    </div>
+                `;
+            } else {
+                messageDiv.className = 'flex gap-4 max-w-[85%] slide-up';
+                messageDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-surface-container-high border border-primary/10 flex-shrink-0 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[16px] text-primary">smart_toy</span>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <div class="bg-surface-container p-4 rounded-xl rounded-tl-none border border-white/5">
+                            <p class="font-body-md text-on-surface leading-relaxed">${text}</p>
+                        </div>
+                        <span class="text-[10px] font-label-sm text-on-surface-variant opacity-40">${time}</span>
+                    </div>
+                `;
+            }
+            
+            // Insert before typing indicator
+            chatMessages.insertBefore(messageDiv, typingIndicator);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    </script>
+<style>
+        .slide-up {
+            animation: slideUp 0.3s ease-out forwards;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+
+</body></html>

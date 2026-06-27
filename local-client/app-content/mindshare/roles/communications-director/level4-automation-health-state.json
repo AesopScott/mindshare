@@ -4,16 +4,16 @@
   "automation_id": "mae-automation-health-check",
   "logic_owner": "C:\\Users\\scott\\Code\\mindshare\\roles\\communications-director\\scripts\\level4automation.py",
   "mode": "scheduled",
-  "checked_at": "2026-06-25T07:21:47-06:00",
+  "checked_at": "2026-06-25T19:23:26-06:00",
   "autonomy_level": 4,
   "stage": "Senior Staff (Scoped Autonomy)",
   "status": "operational",
   "result": "pass",
   "counts": {
-    "active_configs_checked": 18,
+    "active_configs_checked": 16,
     "critical": 0,
     "warning": 0,
-    "pass": 18
+    "pass": 16
   },
   "release_management_request_present": true,
   "results": [
@@ -258,43 +258,11 @@
       "findings": []
     },
     {
-      "automation_id": "tess-level-4-autonomy-backlog-processing",
-      "config_path": "C:\\Users\\scott\\.codex\\automations\\tess-level-4-autonomy-backlog-processing\\automation.toml",
-      "kind": "cron",
-      "status": "ACTIVE",
-      "target_thread_id": "",
-      "watched_count": 0,
-      "missing_watched_paths": [],
-      "watch_state_exists": false,
-      "hard_error_marker": false,
-      "output_size": null,
-      "pending_packet": false,
-      "reid_route_present": true,
-      "severity": "pass",
-      "findings": []
-    },
-    {
       "automation_id": "vik-daily-role-memory-maintenance",
       "config_path": "C:\\Users\\scott\\.codex\\automations\\vik-daily-role-memory-maintenance\\automation.toml",
       "kind": "cron",
       "status": "ACTIVE",
       "target_thread_id": "",
-      "watched_count": 0,
-      "missing_watched_paths": [],
-      "watch_state_exists": false,
-      "hard_error_marker": false,
-      "output_size": null,
-      "pending_packet": false,
-      "reid_route_present": true,
-      "severity": "pass",
-      "findings": []
-    },
-    {
-      "automation_id": "vik-visible-backlog-research",
-      "config_path": "C:\\Users\\scott\\.codex\\automations\\vik-visible-backlog-research\\automation.toml",
-      "kind": "heartbeat",
-      "status": "ACTIVE",
-      "target_thread_id": "019ee0cf-d067-7e60-92ae-41ea66a75746",
       "watched_count": 0,
       "missing_watched_paths": [],
       "watch_state_exists": false,

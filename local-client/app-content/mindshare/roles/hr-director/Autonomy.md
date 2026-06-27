@@ -1,8 +1,8 @@
 # Cole / HR Director Autonomy-Readiness Contract
 
-Status: Level 4 Senior Staff approved/runtime-installed; scheduler proof pending
+Status: Level 4 Senior Staff operational
 
-Version: 1.7
+Version: 1.8
 
 Owner: Cole / HR Director
 
@@ -24,20 +24,20 @@ Organization: Mindshare
 
 Operating stage: Operator
 
-Current autonomy level: Level 4 - Senior Staff (Scoped Autonomy), runtime-installed-scheduler-proof-pending.
+Current autonomy level: Level 4 - Senior Staff (Scoped Autonomy), operational.
 
 Current mode: activated Role+ Operator with Level 4 scoped autonomy for role-file existence validation, Level 3 completeness repair, WhoAmI Autonomy Context currency validation, live office/session WhoAmI injection checks, welcome/onboarding, role image assignment, and Level 2 to Level 3 readiness promotion after Ana office placement.
 
 Current automation:
 
 - `hr-director-handoff-check` deterministic FileWatch is active for Cole's assigned handoff/files. This is handoff checking only, not broad autonomous audit runtime.
-- `cole-hourly-role-file-and-whoami-validation` hourly heartbeat is active in Cole's office for Level 4 role-file and WhoAmI validation. The heartbeat triggers durable script logic at `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`. Scheduled script proof is recorded; operational completion remains blocked by current validation findings and Reid source promotion.
+- `cole-hourly-role-file-and-whoami-validation` hourly heartbeat is active in Cole's office for Level 4 role-file and WhoAmI validation. The heartbeat triggers durable script logic at `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`. Scheduled script proof is recorded with zero current findings; operational completion is now established, with Git/release durability still routed through Reid when source files change.
 
 ## Role-Specific Autonomy Capabilities
 
 ### Level 4 - Senior Staff (Scoped Autonomy)
 
-Approved and runtime-installed, scheduler proof pending: Cole validates that role files exist for each current role's current automation/autonomy level, confirms all local/mirror/room-card WhoAmI surfaces carry current Autonomy Context, checks active offices/sessions so the right WhoAmI context is actually loaded, welcomes new Level 2 hires after Ana places them in an office, and promotes Level 2 hires to Level 3 Staff only after required file and welcome checks pass.
+Approved and operational: Cole validates that role files exist for each current role's current automation/autonomy level, confirms all local/mirror/room-card WhoAmI surfaces carry current Autonomy Context, checks active offices/sessions so the right WhoAmI context is actually loaded, welcomes new Level 2 hires after Ana places them in an office, and promotes Level 2 hires to Level 3 Staff only after required file and welcome checks pass.
 
 Allowed Level 4 work:
 
@@ -101,13 +101,13 @@ Cole must stop when source records conflict, approval is missing, correction cha
 - Trigger gate: hourly heartbeat, account-creation/welcome events, and Ana Level 2 office-placement handoffs.
 - Runtime gate: `cole-hourly-role-file-and-whoami-validation` is active in Cole's office.
 - Durable logic gate: `scripts\level4automation.py` owns deterministic validation logic; the heartbeat is only timer/trigger and exception router.
-- Work-loop gate: standardized script-path scheduled validation completed; current findings remain open for Cole/Tess routing.
+- Work-loop gate: standardized script-path scheduled validation completed and current findings are clear.
 - State gate: `level4-role-file-validation-state.json`.
 - Evidence gate: `level4-proof.md`.
 - Boundary gate: denied actions remain blocked.
 - Review gate: owner-routed findings go to Ana, Mae, Tess, Reid, Vik, Bea, Rae, Scott, or the role owner.
 - Revocation gate: pause/delete `cole-hourly-role-file-and-whoami-validation`; retain state/proof.
-- Display gate: evaluation and roster must distinguish runtime-installed-scheduler-proof-pending from fully operational until scheduler proof exists.
+- Display gate: evaluation and roster may show operational when current state/proof remain clean; if findings return, display must reflect the blocked state.
 - Git promotion/durability gate: source changes must be routed through Reid / Release Management before the promotion is durable.
 
 ## Evals Needed Before Level 4 Operational Claim
@@ -130,6 +130,7 @@ Cole must stop when source records conflict, approval is missing, correction cha
 
 | Date | Version | Change | Owner |
 | --- | --- | --- | --- |
+| 2026-06-25 | 1.8 | Updated Cole's status to operational after scheduled proof passed with zero findings and WhoAmI Autonomy Context coverage clear. Git/release durability remains routed through Reid for source changes. | Cole |
 | 2026-06-25 | 1.7 | Added Level 3 completeness checklist ownership and made Cole responsible for creating missing template-derived Level 3 files, including `WhoAmI.md` and baseline `Autonomy.md`. | Tess |
 | 2026-06-25 | 1.5 | Scott updated the Ana/Cole split: Ana hires and places people through Level 2; Cole owns welcome, required-file checks, and Level 2 to Level 3 readiness promotion. | Tess |
 | 2026-06-25 | 1.6 | Scott clarified that Cole, not Liz, owns assigning team-member images for local app role records now that the operating surface is no longer the public website. | Tess |

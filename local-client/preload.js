@@ -6,11 +6,16 @@ contextBridge.exposeInMainWorld('MindShareLocalClient', {
   listSessions: () => ipcRenderer.invoke('mindshare:sessions'),
   resetSession: (payload) => ipcRenderer.invoke('mindshare:session-reset', payload),
   loadRoleContext: (payload) => ipcRenderer.invoke('mindshare:role-context', payload),
+  loadConferenceRoomContext: () => ipcRenderer.invoke('mindshare:conference-room-context'),
+  listConferenceRoomInviteCandidates: () => ipcRenderer.invoke('mindshare:conference-room-invite-candidates'),
   runTessLevel4Automation: (payload) => ipcRenderer.invoke('mindshare:tess-level4-automation', payload),
   runVikAutomation: (payload) => ipcRenderer.invoke('mindshare:vik-automation', payload),
   controlAutomation: (payload) => ipcRenderer.invoke('mindshare:automation-control', payload),
   sendCodexMessage: (payload) => ipcRenderer.invoke('mindshare:codex-message', payload),
   sendClaudeMessage: (payload) => ipcRenderer.invoke('mindshare:claude-message', payload),
+  connectDeepSeek: (payload) => ipcRenderer.invoke('mindshare:deepseek-connect', payload),
+  sendDeepSeekMessage: (payload) => ipcRenderer.invoke('mindshare:deepseek-message', payload),
+  getDeepSeekBalance: () => ipcRenderer.invoke('mindshare:deepseek-balance'),
   listConfigurationFiles: () => ipcRenderer.invoke('mindshare:configuration-files'),
   openConfigurationFile: (payload) => ipcRenderer.invoke('mindshare:open-configuration-file', payload),
   triggerMicrophoneShortcut: () => ipcRenderer.invoke('mindshare:microphone-shortcut'),
@@ -19,5 +24,8 @@ contextBridge.exposeInMainWorld('MindShareLocalClient', {
   copyText: (payload) => ipcRenderer.invoke('mindshare:copy-text', payload),
   showFile: (payload) => ipcRenderer.invoke('mindshare:show-file', payload),
   installSkill: (payload) => ipcRenderer.invoke('mindshare:install-skill', payload),
-  installSkills: (payload) => ipcRenderer.invoke('mindshare:install-skills', payload)
+  installSkills: (payload) => ipcRenderer.invoke('mindshare:install-skills', payload),
+  getCloudflareTopSites: (payload) => ipcRenderer.invoke('mindshare:cloudflare-top-sites', payload),
+  getMeetupDashboard: (payload) => ipcRenderer.invoke('mindshare:meetup-dashboard', payload),
+  generateKlingVideo: (payload) => ipcRenderer.invoke('mindshare:kling-generate-video', payload)
 });

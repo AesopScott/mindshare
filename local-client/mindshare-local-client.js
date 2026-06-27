@@ -14,7 +14,8 @@ const MAX_TRANSCRIPT_ITEM_CHARS = 1600;
 const MAX_TRANSCRIPT_CHARS = 10000;
 const DEFAULT_CONTEXT_WINDOWS = {
   codex: 1000000,
-  claude: 200000
+  claude: 200000,
+  deepseek: 128000
 };
 const officeWorkspaceInstruction = `This office is an active local workspace session.
 
@@ -90,7 +91,7 @@ function resetProviderSession(payload = {}) {
     if (indexedId) ids.add(indexedId);
     sessionIndex.delete(indexedKey);
   } else if (roleSlug) {
-    ['codex', 'claude'].forEach((candidateProvider) => {
+    ['codex', 'claude', 'deepseek'].forEach((candidateProvider) => {
       const indexedKey = providerSessionKey(candidateProvider, roleSlug);
       const indexedId = sessionIndex.get(indexedKey);
       if (indexedId) ids.add(indexedId);
@@ -1225,6 +1226,103 @@ async function readRoleFile(roleRoot, fileName) {
   }
 }
 
+async function readOptionalText(filePath) {
+  try {
+    return {
+      path: filePath,
+      exists: true,
+      content: await fs.readFile(filePath, 'utf8')
+    };
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      return { path: filePath, exists: false, content: '' };
+    }
+    return { path: filePath, exists: false, content: `Unable to read file: ${error.message || String(error)}` };
+  }
+}
+
+function parseConferenceRoomOccupants(rosterText) {
+  const occupants = [];
+  const seen = new Set();
+  for (const rawLine of String(rosterText || '').split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith('#') || line.startsWith('|') || /^[-*]\s*$/.test(line)) continue;
+    const match = line.match(/^(?:[-*]\s*)?([A-Z][A-Za-z]+(?:\s+[A-Z][A-Za-z]+)?)\s+[—-]\s+(.+)$/);
+    if (!match) continue;
+    const name = match[1].trim();
+    const title = match[2].replace(/\s{2,}.*/, '').trim();
+    const key = name.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    occupants.push({ name, title });
+  }
+  return occupants;
+}
+
+function listConferenceRoomInviteCandidates() {
+  return Object.entries(ROLE_CATALOG)
+    .map(([slug, role]) => ({
+      slug,
+      name: role.name,
+      title: role.title,
+      level: role.level,
+      office: role.office
+    }))
+    .sort((left, right) => left.name.localeCompare(right.name));
+}
+
+async function loadConferenceRoomContext() {
+  const roomRoot = path.join(repoRoot, 'rooms');
+  const roomFile = await readOptionalText(path.join(roomRoot, 'conference-room.md'));
+  const protocolFile = await readOptionalText(path.join(roomRoot, 'conference-room-prompt-protocol.md'));
+  const cultureFile = await readOptionalText(path.join(repoRoot, 'MINDSHARE_CULTURE.md'));
+  const rosterFile = await readOptionalText('G:\\My Drive\\Mindshare\\roles.md');
+  const occupants = parseConferenceRoomOccupants(rosterFile.content);
+  const fallbackOccupants = [
+    { name: 'Scott', title: 'Human Owner / Final Authority' },
+    { name: 'Rae', title: 'Chief Executive Officer' },
+    { name: 'Vik', title: 'ASPA' },
+    { name: 'Tess', title: 'Autonomy Engineer' },
+    { name: 'Reid', title: 'Release Manager' },
+    { name: 'Cole', title: 'HR Director' },
+    { name: 'Ana', title: 'Recruiter' },
+    { name: 'Mae', title: 'Communications Director' }
+  ];
+  const files = [
+    { fileName: 'conference-room.md', path: roomFile.path, exists: roomFile.exists, content: roomFile.content },
+    { fileName: 'conference-room-prompt-protocol.md', path: protocolFile.path, exists: protocolFile.exists, content: protocolFile.content },
+    { fileName: 'roles.md', path: rosterFile.path, exists: rosterFile.exists, content: rosterFile.content },
+    { fileName: 'MINDSHARE_CULTURE.md', path: cultureFile.path, exists: cultureFile.exists, content: cultureFile.content }
+  ];
+  const whoAmI = `# Who Am I
+
+I am the MindShare Conference Room, the shared conversation surface for Scott and invited Mindshare roles.
+
+I am not a manager, authority grant, autonomous runtime, or production system. I facilitate bounded room conversations by loading the conference-room contract, resolving invited participants, and helping each invited role speak when useful.
+
+Current status: workflow-backed room.
+
+Authority boundary: I do not activate roles, approve actions, expand authority, contact outsiders, spend money, change production, or write memory unless Scott explicitly asks or the project memory contract requires it.
+
+Participation logic: when Scott invites everyone, a subset, a team, or asks for objections/round robin/decision pass, I use the room contract and prompt protocol to assemble role context, ask every invited role whether they should speak, and synthesize a concise room response.`;
+
+  const candidates = listConferenceRoomInviteCandidates();
+  return {
+    ok: true,
+    occupants: occupants.length ? occupants : fallbackOccupants,
+    inviteCandidates: candidates,
+    roomContext: {
+      name: 'MindShare Conference Room',
+      title: 'Shared Conversation Surface',
+      level: 'Workflow-backed room',
+      office: 'MindShare Conference Room',
+      roleRoot: roomRoot,
+      whoAmI,
+      files
+    }
+  };
+}
+
 function synthesizeWhoAmI(role, files) {
   const existing = files.find((file) => file.fileName === 'WhoAmI.md' && file.exists);
   if (existing) {
@@ -1404,6 +1502,24 @@ function normalizeUsage(provider, usage = {}, extra = {}) {
     source: extra.source || `${provider}-cli`,
     measuredAt: new Date().toISOString()
   };
+}
+
+function providerRuntimeContext(provider, model) {
+  const providerLabel = provider === 'claude'
+    ? 'Claude CLI'
+    : provider === 'deepseek'
+      ? 'DeepSeek API'
+      : 'Codex CLI';
+  const modelLabel = model || (
+    provider === 'claude'
+      ? 'sonnet'
+      : provider === 'deepseek'
+        ? 'deepseek-v4-flash'
+        : 'Codex CLI selected model'
+  );
+  return `Current runtime provider: ${providerLabel}.
+Current runtime model: ${modelLabel}.
+If the user asks which model or provider is being used, answer from these two current runtime lines. Do not infer the current provider or model from prior transcript messages.`;
 }
 
 async function pythonLaunch() {
@@ -1678,6 +1794,8 @@ async function sendCodexMessage(payload) {
 
 Respond from inside the active role context when one is selected. Use first person as that role.
 
+${providerRuntimeContext('codex')}
+
 ${officeWorkspaceInstruction}
 
 ${buildRolePromptContext(session.roleContext)}
@@ -1734,6 +1852,267 @@ USER: ${message}
   return { ok: true, reply, tokenUsage };
 }
 
+function resolveDeepSeekApiKey() {
+  const fromEnv = process.env.DEEPSEEK_API_KEY || process.env.DEEP_SEEK_API_KEY || process.env.DEEPSEEK_KEY;
+  if (fromEnv) return fromEnv;
+
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const envPath = path.resolve(__dirname, '..', '..', 'mojo', '.env');
+    const raw = fs.readFileSync(envPath, 'utf8');
+    const lines = raw.split(/\r?\n/);
+    const labelPatterns = [
+      /polaris\s+routines\s*[-\/]?\s*deepseek/i,
+      /deep\s*seek\s+routines\s*[-\/]?\s*mod\s+gen/i,
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const trimmed = lines[i].trim();
+      if (labelPatterns[0].test(trimmed)) {
+        for (let j = i + 1; j < lines.length; j++) {
+          const next = lines[j].trim();
+          if (next && !next.startsWith('#')) return next.replace(/^['"]|['"]$/g, '');
+        }
+      }
+    }
+    for (let i = 0; i < lines.length; i++) {
+      const trimmed = lines[i].trim();
+      if (labelPatterns[1].test(trimmed)) {
+        for (let j = i + 1; j < lines.length; j++) {
+          const next = lines[j].trim();
+          if (next && !next.startsWith('#')) return next.replace(/^['"]|['"]$/g, '');
+        }
+      }
+    }
+  } catch (_) {
+    // file absent or unreadable — fall through
+  }
+
+  return '';
+}
+
+async function connectDeepSeek(payload = {}) {
+  const apiKey = resolveDeepSeekApiKey();
+  if (!apiKey) {
+    return {
+      ok: false,
+      action: 'config',
+      message: 'No DeepSeek API key found. Add DEEPSEEK_API_KEY to your .env or Mojo .env file.'
+    };
+  }
+  if (payload?.checkOnly) {
+    return {
+      ok: true,
+      message: 'DeepSeek API key is present and ready.'
+    };
+  }
+  const sessionPayload = await createOrReuseProviderSession('deepseek', payload);
+  return {
+    ok: true,
+    sessionId: sessionPayload.sessionId,
+    initialMessage: sessionPayload.initialMessage,
+    reused: sessionPayload.reused,
+    message: 'Connected to DeepSeek API.',
+    roleContext: sessionPayload.roleContext,
+    messages: sessionPayload.messages
+  };
+}
+
+async function getDeepSeekBalance() {
+  const apiKey = resolveDeepSeekApiKey();
+  if (!apiKey) {
+    return {
+      ok: false,
+      action: 'config',
+      error: 'No DeepSeek API key found. Add DEEPSEEK_API_KEY to your .env or Mojo .env file.'
+    };
+  }
+
+  const baseUrl = (process.env.DEEPSEEK_API_BASE_URL || 'https://api.deepseek.com').replace(/\/+$/, '');
+  let response;
+  try {
+    response = await fetch(`${baseUrl}/user/balance`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        Accept: 'application/json'
+      }
+    });
+  } catch (error) {
+    return {
+      ok: false,
+      error: `DeepSeek balance request failed: ${error.message || String(error)}`
+    };
+  }
+
+  let payload;
+  try {
+    payload = await response.json();
+  } catch {
+    return {
+      ok: false,
+      error: `DeepSeek balance returned an unreadable response (HTTP ${response.status}).`
+    };
+  }
+
+  if (!response.ok) {
+    return {
+      ok: false,
+      action: response.status === 401 || response.status === 403 ? 'config' : 'error',
+      error: payload?.error?.message || payload?.message || response.statusText || 'DeepSeek balance request failed.'
+    };
+  }
+
+  const balanceInfos = Array.isArray(payload.balance_infos) ? payload.balance_infos : [];
+  const usdBalance = balanceInfos.find((entry) => String(entry.currency || '').toUpperCase() === 'USD');
+  const selected = usdBalance || balanceInfos[0] || null;
+  if (!selected) {
+    return {
+      ok: false,
+      error: 'DeepSeek balance response did not include a balance entry.',
+      raw: payload
+    };
+  }
+
+  const totalBalance = Number(selected.total_balance || 0);
+  const grantedBalance = Number(selected.granted_balance || 0);
+  const toppedUpBalance = Number(selected.topped_up_balance || 0);
+  const currency = String(selected.currency || 'USD').toUpperCase();
+  return {
+    ok: true,
+    currency,
+    totalBalance,
+    grantedBalance,
+    toppedUpBalance,
+    formatted: new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(totalBalance),
+    balanceInfos
+  };
+}
+
+async function sendDeepSeekMessage(payload) {
+  const sessionId = String(payload?.sessionId || '');
+  const message = String(payload?.message || '').trim();
+  if (!sessions.has(sessionId)) {
+    return { ok: false, error: 'No active DeepSeek session.' };
+  }
+  if (!message) {
+    if (!Array.isArray(payload?.attachments) || payload.attachments.length === 0) {
+      return { ok: false, error: 'Message is empty.' };
+    }
+  }
+
+  const apiKey = resolveDeepSeekApiKey();
+  if (!apiKey) {
+    return {
+      ok: false,
+      action: 'config',
+      error: 'No DeepSeek API key found. Add DEEPSEEK_API_KEY to your .env or Mojo .env file.'
+    };
+  }
+
+  const session = sessions.get(sessionId);
+  if (payload?.roleContext) {
+    session.roleContext = payload.roleContext;
+  }
+  session.provider = session.provider || 'deepseek';
+  const transcriptItems = Array.isArray(payload?.transcript) ? payload.transcript : session.messages.slice(-MAX_TRANSCRIPT_ITEMS);
+  const transcript = compactTranscript(transcriptItems);
+  const attachmentText = formatAttachments(payload?.attachments);
+  const model = process.env.DEEPSEEK_MODEL || 'deepseek-v4-flash';
+  const systemPrompt = `You are connected to the MindShare local office chat.
+
+Respond from inside the active role context when one is selected. Use first person as that role.
+
+${providerRuntimeContext('deepseek', model)}
+
+${officeWorkspaceInstruction}
+
+${buildRolePromptContext(session.roleContext)}`;
+
+  const userContent = `Recent conversation only. Older turns stay visible in MindShare but are not resent to keep API token use bounded:
+${transcript || '(new session)'}
+
+Attached files for this turn:
+${attachmentText}
+
+If an attached file has a local path, you may inspect it if your runtime supports reading that file type. For image files, treat the local path as the image attachment reference.
+
+USER: ${message}`;
+
+  const baseUrl = (process.env.DEEPSEEK_API_BASE_URL || 'https://api.deepseek.com').replace(/\/+$/, '');
+
+  let response;
+  try {
+    response = await fetch(`${baseUrl}/chat/completions`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userContent }
+        ]
+      })
+    });
+  } catch (error) {
+    return {
+      ok: false,
+      error: `DeepSeek API request failed: ${error.message || String(error)}`
+    };
+  }
+
+  let parsed;
+  try {
+    parsed = await response.json();
+  } catch {
+    return {
+      ok: false,
+      error: `DeepSeek API returned an unreadable response (HTTP ${response.status}).`
+    };
+  }
+
+  if (!response.ok) {
+    const errorText = parsed?.error?.message || parsed?.message || response.statusText || 'DeepSeek API request failed.';
+    const isAuthError = response.status === 401 || response.status === 403;
+    return {
+      ok: false,
+      action: isAuthError ? 'config' : 'error',
+      error: isAuthError
+        ? 'DeepSeek API authentication failed. Check your DEEPSEEK_API_KEY in .env or Mojo .env.'
+        : errorText
+    };
+  }
+
+  const reply = parsed?.choices?.[0]?.message?.content || '';
+  if (!reply) {
+    return { ok: false, error: 'DeepSeek API returned an empty response.' };
+  }
+
+  const rawUsage = parsed?.usage;
+  const tokenUsage = rawUsage
+    ? normalizeUsage('deepseek', {
+      input_tokens: rawUsage.prompt_tokens,
+      output_tokens: rawUsage.completion_tokens
+    }, {
+      model,
+      source: 'deepseek-api'
+    })
+    : null;
+
+  session.messages.push({ role: 'user', content: message });
+  session.messages.push({ role: 'assistant', content: reply });
+  session.updatedAt = new Date().toISOString();
+  return { ok: true, reply, tokenUsage };
+}
+
 async function sendClaudeMessage(payload) {
   const sessionId = String(payload?.sessionId || '');
   const message = String(payload?.message || '').trim();
@@ -1764,9 +2143,12 @@ async function sendClaudeMessage(payload) {
   const transcriptItems = Array.isArray(payload?.transcript) ? payload.transcript : session.messages.slice(-MAX_TRANSCRIPT_ITEMS);
   const transcript = compactTranscript(transcriptItems);
   const attachmentText = formatAttachments(payload?.attachments);
+  const claudeModel = 'sonnet';
   const prompt = `You are connected to the MindShare local office chat.
 
 Respond from inside the active role context when one is selected. Use first person as that role.
+
+${providerRuntimeContext('claude', claudeModel)}
 
 ${officeWorkspaceInstruction}
 
@@ -1799,7 +2181,7 @@ USER: ${message}
     'bypassPermissions',
     '--dangerously-skip-permissions',
     '--model',
-    'sonnet'
+    claudeModel
   ], { timeout: 900000, input: prompt });
 
   if (!result.ok) {
@@ -1848,14 +2230,18 @@ USER: ${message}
 module.exports = {
   connectCodex,
   connectClaude,
+  connectDeepSeek,
   listSessions,
   resetProviderSession,
   loadRoleContext,
+  loadConferenceRoomContext,
+  listConferenceRoomInviteCandidates,
   listConfigurationFiles,
   openConfigurationFile,
   runTessLevel4Automation,
   runVikAutomation,
+  getDeepSeekBalance,
   sendCodexMessage,
-  sendClaudeMessage
+  sendClaudeMessage,
+  sendDeepSeekMessage
 };
-

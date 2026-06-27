@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>MindShare Central | Recruiting Central</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        background: '#020204',
+        surface: '#0c1324',
+        'surface-container': '#151b2d',
+        primary: '#bec6e0',
+        'primary-fixed': '#dae2fd',
+        'on-surface': '#dce1fb',
+        'on-surface-variant': '#aeb6cf',
+        outline: '#454b61'
+      },
+      fontFamily: {
+        display: ['Montserrat', 'sans-serif'],
+        body: ['Inter', 'sans-serif']
+      }
+    }
+  }
+};
+</script>
+<style>
+body {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(91, 141, 255, 0.16), transparent 28rem),
+    radial-gradient(circle at 82% 10%, rgba(84, 244, 214, 0.08), transparent 24rem),
+    #020204;
+  color: #dce1fb;
+  font-family: Inter, sans-serif;
+}
+.panel {
+  background: rgba(12, 19, 36, 0.78);
+  border: 1px solid rgba(190, 198, 224, 0.18);
+  backdrop-filter: blur(28px);
+}
+.field {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(190, 198, 224, 0.16);
+}
+.field:focus {
+  border-color: rgba(218, 226, 253, 0.62);
+  box-shadow: 0 0 0 3px rgba(190, 198, 224, 0.12);
+  outline: none;
+}
+select.field {
+  background-color: #080d1d;
+  color: #f2f5ff;
+}
+select.field option {
+  background-color: #080d1d;
+  color: #f2f5ff;
+}
+.status-dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 999px;
+  background: rgba(174, 182, 207, 0.36);
+}
+.status-dot.ready {
+  background: #79f2c0;
+  box-shadow: 0 0 16px rgba(121, 242, 192, 0.45);
+}
+</style>
+</head>
+<body class="min-h-screen">
+<header class="sticky top-0 z-40 h-20 border-b border-white/10 bg-surface/85 backdrop-blur-xl">
+<div class="mx-auto flex h-full max-w-[1500px] items-center justify-between px-6 md:px-12">
+<a class="font-display text-2xl font-semibold tracking-wider text-primary-fixed" href="../../index.html">MindShare Central</a>
+<nav class="hidden items-center gap-8 md:flex">
+<a class="text-sm text-on-surface-variant transition hover:text-primary" href="../../index.html">Home</a>
+<a class="text-sm text-on-surface-variant transition hover:text-primary" href="../../our-team/index.html">Our Team</a>
+<a class="text-sm text-on-surface-variant transition hover:text-primary" href="../../services/index.html">Services</a>
+<a class="border-b-2 border-primary pb-1 text-sm font-semibold text-primary" href="../index.html">Tools</a>
+</nav>
+</div>
+</header>
+<main class="mx-auto grid max-w-[1500px] gap-6 px-6 py-8 md:grid-cols-[360px_minmax(0,1fr)] md:px-12">
+<aside class="panel rounded-xl p-6">
+<p class="text-[10px] uppercase tracking-[0.26em] text-on-surface-variant">Internal Tool</p>
+<h1 class="mt-3 font-display text-4xl font-semibold text-primary-fixed">Recruiting Central</h1>
+<p class="mt-4 text-sm leading-7 text-on-surface-variant">Create a role, let Ana hire it to Level 2, then let Cole complete Level 3 readiness and file coverage.</p>
+<div class="mt-8 grid gap-4">
+<div class="rounded-xl border border-white/10 bg-black/25 p-4">
+<div class="flex items-center gap-4">
+<img class="h-16 w-16 rounded-xl object-cover" src="../../assets/team/ana.webp" alt="Ana">
+<div>
+<h2 class="font-display text-xl font-semibold text-primary-fixed">Ana</h2>
+<p class="text-sm text-on-surface-variant">Recruiter</p>
+</div>
+</div>
+<p class="mt-3 text-xs uppercase tracking-[0.18em] text-primary">Level 2 hiring lane</p>
+</div>
+<div class="rounded-xl border border-white/10 bg-black/25 p-4">
+<div class="flex items-center gap-4">
+<img class="h-16 w-16 rounded-xl object-cover" src="../../assets/team/cole.webp" alt="Cole">
+<div>
+<h2 class="font-display text-xl font-semibold text-primary-fixed">Cole</h2>
+<p class="text-sm text-on-surface-variant">HR Director</p>
+</div>
+</div>
+<p class="mt-3 text-xs uppercase tracking-[0.18em] text-primary">Level 3 readiness lane</p>
+</div>
+</div>
+<a class="mt-8 inline-flex w-full items-center justify-center rounded-lg border border-primary/40 bg-primary/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary transition hover:bg-primary/20" href="../index.html">Back to Tools</a>
+</aside>
+<section class="space-y-6">
+<div class="panel rounded-xl p-6">
+<div class="flex flex-wrap items-start justify-between gap-4">
+<div>
+<p class="text-[10px] uppercase tracking-[0.26em] text-on-surface-variant">Role Intake</p>
+<h2 class="mt-2 font-display text-2xl font-semibold text-primary-fixed">New role draft</h2>
+</div>
+<span class="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs uppercase tracking-[0.18em] text-primary">Design mockup v1</span>
+</div>
+<div class="mt-6 grid gap-4 md:grid-cols-2">
+<label class="block">
+<span class="text-xs uppercase tracking-[0.18em] text-on-surface-variant">Title</span>
+<input class="field mt-2 w-full rounded-lg px-4 py-3 text-primary-fixed placeholder:text-on-surface-variant" placeholder="Example: Community Director">
+</label>
+<label class="block">
+<span class="text-xs uppercase tracking-[0.18em] text-on-surface-variant">Division</span>
+<select class="field mt-2 w-full rounded-lg px-4 py-3 text-primary-fixed" id="division-select"></select>
+</label>
+<label class="block">
+<span class="text-xs uppercase tracking-[0.18em] text-on-surface-variant">Department</span>
+<select class="field mt-2 w-full rounded-lg px-4 py-3 text-primary-fixed" id="department-select"></select>
+</label>
+<label class="block md:col-span-2">
+<span class="text-xs uppercase tracking-[0.18em] text-on-surface-variant">Function</span>
+<textarea class="field mt-2 h-28 w-full rounded-lg px-4 py-3 text-primary-fixed placeholder:text-on-surface-variant" placeholder="What this role owns, who they serve, and what decisions they support."></textarea>
+</label>
+</div>
+<div class="mt-5 flex flex-wrap gap-3">
+<button class="rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-primary-fixed" type="button">Draft Role</button>
+<button class="rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-primary-fixed" type="button">Run Ana</button>
+<button class="rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-primary-fixed" type="button">Run Cole</button>
+</div>
+</div>
+<div class="grid gap-6 xl:grid-cols-2">
+<article class="panel rounded-xl p-6">
+<p class="text-[10px] uppercase tracking-[0.26em] text-on-surface-variant">Ana Creates</p>
+<h3 class="mt-2 font-display text-2xl font-semibold text-primary-fixed">Level 2 role package</h3>
+<ul class="mt-5 space-y-3 text-sm text-on-surface-variant">
+<li class="flex items-center gap-3"><span class="status-dot ready"></span><span><strong class="text-primary-fixed">name.md</strong> name, title, aliases, and invocation identity</span></li>
+<li class="flex items-center gap-3"><span class="status-dot ready"></span><span><strong class="text-primary-fixed">WhoAmI.md</strong> identity card and session injection surface</span></li>
+<li class="flex items-center gap-3"><span class="status-dot ready"></span><span><strong class="text-primary-fixed">role-agent.md</strong> role contract and boundaries</span></li>
+<li class="flex items-center gap-3"><span class="status-dot ready"></span><span><strong class="text-primary-fixed">personality.md</strong> voice and working style</span></li>
+<li class="flex items-center gap-3"><span class="status-dot ready"></span><span><strong class="text-primary-fixed">memory.md</strong> durable role memory seed</span></li>
+<li class="flex items-center gap-3"><span class="status-dot ready"></span><span><strong class="text-primary-fixed">state.json</strong> structured role identity, routing, and level metadata</span></li>
+</ul>
+</article>
+<article class="panel rounded-xl p-6">
+<p class="text-[10px] uppercase tracking-[0.26em] text-on-surface-variant">Cole Verifies</p>
+<h3 class="mt-2 font-display text-2xl font-semibold text-primary-fixed">Level 3 completeness</h3>
+<ul class="mt-5 space-y-3 text-sm text-on-surface-variant">
+<li class="flex items-center gap-3"><span class="status-dot"></span><span><strong class="text-primary-fixed">File verification</strong> required Level 3 files are present</span></li>
+<li class="flex items-center gap-3"><span class="status-dot"></span><span><strong class="text-primary-fixed">Image assignment</strong> role portrait is present</span></li>
+<li class="flex items-center gap-3"><span class="status-dot"></span><span><strong class="text-primary-fixed">Proof note</strong> Level 3 readiness evidence is recorded</span></li>
+<li class="flex items-center gap-3"><span class="status-dot"></span><span><strong class="text-primary-fixed">Standard maintenance</strong> team-member-file-structure.md stays current</span></li>
+</ul>
+</article>
+</div>
+<details class="panel rounded-xl p-6" open>
+<summary class="cursor-pointer font-display text-xl font-semibold text-primary-fixed">Role file drawer</summary>
+<div class="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+<div class="rounded-lg border border-white/10 bg-black/25 p-4 text-sm text-on-surface-variant"><strong class="text-primary-fixed">name.md</strong><br>Ana creates name, title, aliases, and invocation identity.</div>
+<div class="rounded-lg border border-white/10 bg-black/25 p-4 text-sm text-on-surface-variant"><strong class="text-primary-fixed">WhoAmI.md</strong><br>Ana creates, Cole verifies injection readiness.</div>
+<div class="rounded-lg border border-white/10 bg-black/25 p-4 text-sm text-on-surface-variant"><strong class="text-primary-fixed">role-agent.md</strong><br>Ana creates role contract.</div>
+<div class="rounded-lg border border-white/10 bg-black/25 p-4 text-sm text-on-surface-variant"><strong class="text-primary-fixed">personality.md</strong><br>Ana creates voice and style.</div>
+<div class="rounded-lg border border-white/10 bg-black/25 p-4 text-sm text-on-surface-variant"><strong class="text-primary-fixed">memory.md</strong><br>Ana seeds, Cole checks durability.</div>
+<div class="rounded-lg border border-white/10 bg-black/25 p-4 text-sm text-on-surface-variant"><strong class="text-primary-fixed">state.json</strong><br>Ana creates structured role identity, routing, and level metadata.</div>
+<div class="rounded-lg border border-white/10 bg-black/25 p-4 text-sm text-on-surface-variant"><strong class="text-primary-fixed">Level 3 verification record</strong><br>Cole records Level 3 completeness evidence.</div>
+<div class="rounded-lg border border-white/10 bg-black/25 p-4 text-sm text-on-surface-variant"><strong class="text-primary-fixed">role image</strong><br>Cole owns portrait assignment.</div>
+<div class="rounded-lg border border-white/10 bg-black/25 p-4 text-sm text-on-surface-variant"><strong class="text-primary-fixed">team-member-file-structure.md</strong><br>Cole maintains the current role-file structure standard.</div>
+</div>
+</details>
+</section>
+</main>
+<script>
+const recruitingDivisions = [
+  {
+    label: 'Strategy & Operations',
+    departments: ['Executive Leadership', 'PMO', 'Human Resources', 'Recruiting', 'Risk Management']
+  },
+  {
+    label: 'Product & Design',
+    departments: ['Product Management', 'Service Design', 'Experience Design', 'User Research']
+  },
+  {
+    label: 'Technology & Data',
+    departments: ['Engineering', 'Platform Engineering', 'Data Engineering', 'AI Engineering', 'Security']
+  },
+  {
+    label: 'Revenue & Market',
+    departments: ['Sales', 'Marketing', 'Partnerships', 'Customer Success', 'Support']
+  },
+  {
+    label: 'Finance',
+    departments: ['Accounting', 'Accounts Payable', 'Accounts Receivable', 'Purchasing', 'Tax']
+  },
+  {
+    label: 'Administration',
+    departments: ['People Operations', 'Legal', 'Compliance', 'Vendor Management']
+  }
+];
+
+const divisionSelect = document.getElementById('division-select');
+const departmentSelect = document.getElementById('department-select');
+
+function renderDivisionOptions() {
+  divisionSelect.innerHTML = recruitingDivisions.map((division, index) => (
+    `<option value="${index}">${division.label}</option>`
+  )).join('');
+}
+
+function renderDepartmentOptions() {
+  const selectedDivision = recruitingDivisions[Number(divisionSelect.value)] || recruitingDivisions[0];
+  departmentSelect.innerHTML = selectedDivision.departments.map((department) => (
+    `<option value="${department}">${department}</option>`
+  )).join('');
+}
+
+renderDivisionOptions();
+divisionSelect.value = '2';
+renderDepartmentOptions();
+divisionSelect.addEventListener('change', renderDepartmentOptions);
+</script>
+</body>
+</html>

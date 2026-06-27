@@ -807,3 +807,220 @@ Level 3 completeness repairs:
 - REC-026 / Victor Lane / Vendor Management Director: created 9 files under `C:\Users\scott\Code\mindshare\roles\vendor-management-director`
 
 Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T11:32:16-06:00 - Script Validation (scheduled)
+
+Result: fail
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 33
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 5
+Findings: 56
+
+Sample findings:
+
+- medium / Rae / required-file:WhoAmI.md: missing - C:\Users\scott\Code\mindshare\roles\chief-executive-officer\WhoAmI.md -> Cole/Ana
+- medium / Rae / required-file:loop.md: missing - C:\Users\scott\Code\mindshare\roles\chief-executive-officer\loop.md -> Cole/Ana
+- medium / Rae / required-file:state.json: missing - C:\Users\scott\Code\mindshare\roles\chief-executive-officer\state.json -> Cole/Ana
+- medium / Mara / required-file:automation.md: missing - C:\Users\scott\Code\mindshare\roles\front-desk-administrator\automation.md -> Cole/Ana
+- medium / Finn / required-file:automation.md: missing - C:\Users\scott\Code\mindshare\roles\finance-director\automation.md -> Cole/Ana
+- medium / Ana / required-file:WhoAmI.md: missing - C:\Users\scott\Code\mindshare\roles\recruiter\WhoAmI.md -> Cole/Ana
+- medium / Cal / required-file:automation.md: missing - C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-manager\automation.md -> Cole/Ana
+- medium / Cal / required-file:loop.md: missing - C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-manager\loop.md -> Cole/Ana
+- medium / Cal / required-file:state.json: missing - C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-manager\state.json -> Cole/Ana
+- medium / Liz / required-file:loop.md: missing - C:\Users\scott\Code\mojo\roles\mojo-website-manager\loop.md -> Cole/Ana
+- medium / Mae / required-file:WhoAmI.md: missing - C:\Users\scott\Code\mindshare\roles\communications-director\WhoAmI.md -> Cole/Ana
+- medium / Reid / required-file:WhoAmI.md: missing - C:\Users\scott\Code\mindshare\roles\release-manager\WhoAmI.md -> Cole/Ana
+- ... 44 additional findings in state JSON.
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T11:57:25-06:00 - Script Validation (scheduled)
+
+Result: file_completeness_completed
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 46
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 9
+Findings: 0
+
+Current roster file/context repairs:
+
+- Rae: created 4 files and updated 1 WhoAmI surfaces under `C:\Users\scott\Code\mindshare\roles\chief-executive-officer`
+- Paige: created 0 files and updated 1 WhoAmI surfaces under `C:\Users\scott\Code\mindshare\roles\personal-assistant`
+- Mara: created 1 files and updated 2 WhoAmI surfaces under `C:\Users\scott\Code\mindshare\roles\front-desk-administrator`
+- Finn: created 0 files and updated 2 WhoAmI surfaces under `C:\Users\scott\Code\mindshare\roles\finance-director`
+- Ana: created 2 files and updated 1 WhoAmI surfaces under `C:\Users\scott\Code\mindshare\roles\recruiter`
+- Cal: created 1 files and updated 2 WhoAmI surfaces under `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-manager`
+- Vik: created 0 files and updated 2 WhoAmI surfaces under `C:\Users\scott\Code\mojo\roles\maps-agentic-systems-program-architect`
+- Liz: created 1 files and updated 2 WhoAmI surfaces under `C:\Users\scott\Code\mojo\roles\mojo-website-manager`
+- Mae: created 2 files and updated 1 WhoAmI surfaces under `C:\Users\scott\Code\mindshare\roles\communications-director`
+- Reid: created 2 files and updated 1 WhoAmI surfaces under `C:\Users\scott\Code\mindshare\roles\release-manager`
+- Tess: created 2 files and updated 1 WhoAmI surfaces under `C:\Users\scott\Code\mindshare\roles\autonomy-engineer`
+- June: created 0 files and updated 2 WhoAmI surfaces under `C:\Users\scott\Code\mindshare\roles\staff-writer`
+- Bea: created 0 files and updated 2 WhoAmI surfaces under `C:\Users\scott\Code\mojo\roles\mojo-maps-engineer`
+- Imani Brooks: created 1 files and updated 1 WhoAmI surfaces under `C:\Users\scott\Code\mojo\roles\data-engineering-director`
+- Lane: created 0 files and updated 3 WhoAmI surfaces under `C:\Users\scott\Code\mojo\roles\lab-operator`
+- Jay: created 4 files and updated 0 WhoAmI surfaces under `C:\Users\scott\Code\watch\roles\meetup-coordinator`
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T11:57:54-06:00 - Script Validation (scheduled)
+
+Result: pass
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 46
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 9
+Findings: 0
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T12:31:58-06:00 - Script Validation (scheduled)
+
+Result: pass
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 46
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 9
+Findings: 0
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T12:33:36-06:00 - Script Validation (scheduled)
+
+Result: pass
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 46
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 9
+Findings: 0
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T13:31:30-06:00 - Script Validation (scheduled)
+
+Result: pass
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 46
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 9
+Findings: 0
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T14:32:11-06:00 - Script Validation (scheduled)
+
+Result: pass
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 46
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 9
+Findings: 0
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T15:34:24-06:00 - Script Validation (scheduled)
+
+Result: pass
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 46
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 9
+Findings: 0
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T16:35:49-06:00 - Script Validation (scheduled)
+
+Result: pass
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 46
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 9
+Findings: 0
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T17:35:31-06:00 - Script Validation (scheduled)
+
+Result: pass
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 46
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 9
+Findings: 0
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T18:37:10-06:00 - Script Validation (scheduled)
+
+Result: pass
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 46
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 9
+Findings: 0
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T19:38:58-06:00 - Script Validation (scheduled)
+
+Result: pass
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 46
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 9
+Findings: 0
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.
+
+## 2026-06-25T20:38:28-06:00 - Script Validation (scheduled)
+
+Result: pass
+
+Logic owner: `C:\Users\scott\Code\mindshare\roles\hr-director\scripts\level4automation.py`
+Roles checked: 17
+Level 3 pipeline roles checked: 24
+WhoAmI surfaces checked: 46
+Level 2 readiness items waiting for Cole: 0
+Session injection targets: 9
+Findings: 0
+
+Denied actions held: no promotion above Level 3 Staff, role activation, authority edits, Git/release, production, external communication, spending, or secrets.

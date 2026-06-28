@@ -61,7 +61,7 @@ function publicSessionSnapshot(sessionId, session) {
     roleSlug: session.roleSlug || '',
     roleContext: session.roleContext || null,
     messages: Array.isArray(session.messages)
-      ? session.messages.map((item) => ({
+      ? session.messages.filter((item) => !item.hidden).map((item) => ({
         role: item.role,
         text: item.text || item.content || ''
       }))
@@ -222,7 +222,9 @@ async function createOrReuseProviderSession(provider, payload = {}) {
   sessions.set(sessionId, {
     provider,
     roleSlug: requestedRoleSlug,
-    messages: initialMessage ? [{ role: 'user', content: initialMessage }] : [],
+    messages: [],
+    officePrimer: initialMessage,
+    officePrimerSent: false,
     roleContext: roleContext?.ok ? roleContext.roleContext : null,
     createdAt: now,
     updatedAt: now
@@ -234,7 +236,7 @@ async function createOrReuseProviderSession(provider, payload = {}) {
     ...publicSessionSnapshot(sessionId, sessions.get(sessionId)),
     ok: true,
     reused: false,
-    initialMessage
+    initialMessage: null
   };
 }
 
@@ -1475,6 +1477,24 @@ ${omittedCount > 0 ? `MindShare note: ${omittedCount} loaded file section(s) wer
 ${missing || '(None)'}`;
 }
 
+function hiddenOfficePrimerBlock(session) {
+  if (!session || session.officePrimerSent) return '';
+  const primer = String(session.officePrimer || '').trim();
+  if (!primer) return '';
+  return `# Session Primer
+
+${primer}
+
+This primer is injected once per local provider session and hidden from the visible MindShare Central chat.`;
+}
+
+function markHiddenOfficePrimerSent(session) {
+  if (!session || session.officePrimerSent) return;
+  if (String(session.officePrimer || '').trim()) {
+    session.officePrimerSent = true;
+  }
+}
+
 function compactTranscript(transcriptItems) {
   const items = (Array.isArray(transcriptItems) ? transcriptItems : [])
     .slice(-MAX_TRANSCRIPT_ITEMS)
@@ -1933,6 +1953,8 @@ ${providerRuntimeContext('codex')}
 
 ${officeWorkspaceInstruction}
 
+${hiddenOfficePrimerBlock(session)}
+
 ${buildRolePromptContext(session.roleContext)}
 
 Recent conversation only. Older turns stay visible in MindShare but are not resent to keep CLI token use bounded:
@@ -1967,6 +1989,7 @@ USER: ${message}
     const recovered = extractCodexReply(result.stdout);
     if (recovered.reply) {
       const reply = `${recovered.reply}\n\n[MindShare note: Codex stopped before a clean completion event (${result.code || 'error'}). This is the partial response recovered from the session output.]`;
+      markHiddenOfficePrimerSent(session);
       session.messages.push({ role: 'user', content: message });
       session.messages.push({ role: 'assistant', content: reply });
       session.updatedAt = new Date().toISOString();
@@ -1981,6 +2004,7 @@ USER: ${message}
   const { events, reply } = extractCodexReply(result.stdout);
   const usageEvent = [...events].reverse().find((event) => event.type === 'turn.completed' && event.usage);
   const tokenUsage = usageEvent?.usage ? normalizeUsage('codex', usageEvent.usage) : null;
+  markHiddenOfficePrimerSent(session);
   session.messages.push({ role: 'user', content: message });
   session.messages.push({ role: 'assistant', content: reply });
   session.updatedAt = new Date().toISOString();
@@ -2167,6 +2191,8 @@ ${providerRuntimeContext('deepseek', model)}
 
 ${officeWorkspaceInstruction}
 
+${hiddenOfficePrimerBlock(session)}
+
 ${buildRolePromptContext(session.roleContext)}`;
 
   const userContent = `Recent conversation only. Older turns stay visible in MindShare but are not resent to keep API token use bounded:
@@ -2242,6 +2268,7 @@ USER: ${message}`;
     })
     : null;
 
+  markHiddenOfficePrimerSent(session);
   session.messages.push({ role: 'user', content: message });
   session.messages.push({ role: 'assistant', content: reply });
   session.updatedAt = new Date().toISOString();
@@ -2516,6 +2543,8 @@ ${providerRuntimeContext('claude', claudeModel)}
 
 ${officeWorkspaceInstruction}
 
+${hiddenOfficePrimerBlock(session)}
+
 ${buildRolePromptContext(session.roleContext)}
 
 Recent conversation only. Older turns stay visible in MindShare but are not resent to keep CLI token use bounded:
@@ -2585,6 +2614,7 @@ USER: ${message}
       source: 'claude-cli-json'
     })
     : null;
+  markHiddenOfficePrimerSent(session);
   session.messages.push({ role: 'user', content: message });
   session.messages.push({ role: 'assistant', content: reply });
   session.updatedAt = new Date().toISOString();

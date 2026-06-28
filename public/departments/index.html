@@ -1017,8 +1017,15 @@ Configuration is loaded from the local MindShare workspace.
                 /^Vik automation failed in Electron/.test(text);
         }
 
+        function isOfficePrimerMessage(message) {
+            const text = String(message?.text || message?.content || '').trim();
+            return /^This is .+'s office\.$/.test(text);
+        }
+
         function conversationMessages(messages) {
-            return Array.isArray(messages) ? messages.filter((message) => !isAutomationStatusMessage(message)) : [];
+            return Array.isArray(messages)
+                ? messages.filter((message) => !isAutomationStatusMessage(message) && !isOfficePrimerMessage(message))
+                : [];
         }
 
         function persistOfficeState() {
@@ -2274,22 +2281,9 @@ Configuration is loaded from the local MindShare workspace.
         }
 
         function injectOfficeEntry(roleSession, text, options = {}) {
-            const officeText = text || `This is ${roleSession.name}'s office.`;
-            const officeNeedle = `${roleSession.name.toLowerCase()}'s office`;
-            const hasOfficeEntry = roleSession.messages.some((message) =>
-                String(message.text || message.content || '').toLowerCase().includes(officeNeedle)
-            );
-            const latestMessage = roleSession.messages[roleSession.messages.length - 1];
-            const latestIsOfficeEntry = String(latestMessage?.text || latestMessage?.content || '').toLowerCase().includes(officeNeedle);
-            if (roleSession.officeInjected && hasOfficeEntry && (!options.forceVisible || latestIsOfficeEntry)) {
-                return;
-            }
             roleSession.officeInjected = true;
-            if (!hasOfficeEntry || options.forceVisible) {
-                addChatMessageToRole(roleSession, 'user', officeText);
-            } else {
-                persistOfficeState();
-            }
+            roleSession.messages = conversationMessages(roleSession.messages);
+            persistOfficeState();
         }
 
         function showOfficeContext({ name, title, level, image, filesText }) {

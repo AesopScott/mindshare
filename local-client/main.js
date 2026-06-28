@@ -1150,6 +1150,42 @@ function installSkills(names) {
   return { ok: failed.length === 0, installed, failed, templates, roots: skillsInstallRoots };
 }
 
+function installEditableContextMenu(webContents) {
+  webContents.on('context-menu', (_event, params) => {
+    if (!params.isEditable) return;
+
+    const template = [];
+    const suggestions = Array.isArray(params.dictionarySuggestions)
+      ? params.dictionarySuggestions.slice(0, 8)
+      : [];
+
+    if (params.misspelledWord && suggestions.length) {
+      for (const suggestion of suggestions) {
+        template.push({
+          label: suggestion,
+          click: () => webContents.replaceMisspelling(suggestion)
+        });
+      }
+      template.push({ type: 'separator' });
+    } else if (params.misspelledWord) {
+      template.push({ label: 'No spelling suggestions', enabled: false });
+      template.push({ type: 'separator' });
+    }
+
+    template.push(
+      { role: 'undo', enabled: params.editFlags?.canUndo },
+      { role: 'redo', enabled: params.editFlags?.canRedo },
+      { type: 'separator' },
+      { role: 'cut', enabled: params.editFlags?.canCut },
+      { role: 'copy', enabled: params.editFlags?.canCopy },
+      { role: 'paste', enabled: params.editFlags?.canPaste },
+      { role: 'selectAll', enabled: params.editFlags?.canSelectAll }
+    );
+
+    Menu.buildFromTemplate(template).popup({ window: BrowserWindow.fromWebContents(webContents) });
+  });
+}
+
 function createWindow() {
   const window = new BrowserWindow({
     width: 1440,
@@ -1160,10 +1196,12 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
+      spellcheck: true,
       webviewTag: true
     }
   });
 
+  installEditableContextMenu(window.webContents);
   window.maximize();
   if (!require('node:fs').existsSync(path.join(bundledPublicRoot, 'index.html'))) {
     throw new Error(`MindShare Central canonical public UI is missing: ${bundledPublicRoot}`);

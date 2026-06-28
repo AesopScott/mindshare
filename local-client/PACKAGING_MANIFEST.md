@@ -37,13 +37,13 @@ These are product-owned files that should be packaged into the installed app.
 | App metadata | `local-client/package.json`, `local-client/package-lock.json` | app root | Required for build and dependency lock. |
 | App assets | `local-client/assets/` | app assets | Icons and app-owned static assets. |
 | App scripts | `local-client/scripts/` | app scripts | Build/sync scripts; runtime scripts only when explicitly marked. |
-| Public UI | `public/` | `app-content/mindshare/public/` | Home, departments, offices, tools, contact, and website-derived UI used by Central. |
-| Mindshare role content | selected `roles/` | `app-content/mindshare/roles/` | Role files needed for offices and context loading. Exclude volatile proof/state unless promoted to app state. |
+| Public UI | `local-client/app-content/mindshare/public/` | `app-content/mindshare/public/` | Canonical Home, departments, offices, tools, contact, and Central UI surfaces. Repo-level `public/` is mirror or backup only and must not overwrite this tree. |
+| Mindshare role content | selected `roles/` | `app-content/mindshare/roles/` | Role files needed for offices and context loading, including copied Mojo/Watch role files. Exclude volatile proof/state unless promoted to app state. |
 | Mindshare agent content | selected `agents/` | `app-content/mindshare/agents/` | Only active/needed role-office support files. Deprecated agent profile/brief files should not be bundled unless still referenced. |
 | Global org files | selected global files | `app-content/mindshare/global/` | Roster, role artifacts, autonomy taxonomy, and app-level manifest files. |
 | MAPS/org docs | selected `docs/`, `catalogs/`, `phases/`, `rooms/`, `templates/` | `app-content/mindshare/...` | Only docs used by Central, role context, configuration, or tools. |
-| Mojo MAPS content | selected `C:\Users\scott\Code\mojo\assets\maps`, `maps`, roles, agents | `app-content/mojo/...` | Only content needed by Central UI and role offices. |
-| Watch content | selected Watch roles/agents | `app-content/watch/...` | Only active roles/offices that Central can load. |
+| Mojo MAPS content | selected `C:\Users\scott\Code\mojo\assets\maps`, `maps`, and agents | `app-content/mojo/...` | Mojo role files are copied into Mindshare roles and loaded from `app-content/mindshare/roles/`. |
+| Watch content | selected Watch agents | `app-content/watch/...` | Watch role files are copied into Mindshare roles and loaded from `app-content/mindshare/roles/`. |
 | README | `local-client/README.md`, installer README | app/release root | User-facing install/run guidance. |
 
 ## Do Not Ship
@@ -91,8 +91,8 @@ The installer may check for these, but should not bundle credentials or authenti
 ## Current Cleanup Decisions
 
 - The Chrome extension/native-host path is deprecated for Mindshare Central and should be excluded from installer builds.
-- `local-client/app-content/` is generated content. It may exist in the repo while we are iterating, but installer packaging should treat it as build output from this manifest, not hand-maintained source.
-- Canonical app UI currently lives in `public/` and is synced into `local-client/app-content/mindshare/public/`.
+- `local-client/app-content/` is mixed content. `local-client/app-content/mindshare/public/` is hand-maintained canonical app UI; other app-content subtrees are generated package content.
+- Canonical app UI lives in `local-client/app-content/mindshare/public/`. Repo-level `public/` is mirror or backup only and must not be used as the source for app packaging.
 - We should shrink the sync script before building the installer so it copies only manifest-approved paths.
 
 ## Maintenance Rules

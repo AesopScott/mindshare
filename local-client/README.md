@@ -14,7 +14,7 @@ npm run sync-content
 npm start
 ```
 
-`npm run sync-content` rebuilds runtime content into `local-client/app-content` so the packaged app does not depend on Scott's local repo paths.
+`npm run sync-content` refreshes generated runtime content into `local-client/app-content` while preserving the canonical app UI at `local-client/app-content/mindshare/public`. The repo-level `public/` collection is mirror or backup only.
 
 ## Build The Installer
 
@@ -38,14 +38,14 @@ Do not commit the generated `release/` files. They are build artifacts and are i
 
 The bundled content currently includes:
 
-- MindShare public pages, roles, agents, catalogs, docs, phases, rooms, scripts, skills, templates, `AGENTS.md`, and `project-foundation.md`
+- MindShare Central UI from `local-client/app-content/mindshare/public/`, plus centralized roles, agents, catalogs, docs, phases, rooms, scripts, skills, templates, `AGENTS.md`, and `project-foundation.md`
 - MindShare global roster files copied into `app-content/mindshare/global/`
 - Mojo MAPS content from `assets/maps/`
 - Mojo MAPS web pages from `maps/`
-- Mojo role and agent files
-- Watch role and agent files
+- Mojo agent files and MAPS content; Mojo role files are copied into centralized MindShare roles before packaging
+- Watch agent files; Watch role files are copied into centralized MindShare roles before packaging
 
-The sync is exact for `app-content`: the script clears that folder, verifies the path is inside `local-client`, and then copies fresh content while excluding Git data, local CLI state, node modules, cache folders, env files, logs, and common key/certificate files.
+The sync is exact for generated app-content areas, but it deliberately preserves `app-content/mindshare/public` because that tree is the canonical app UI. The script verifies paths are inside `local-client` and then copies fresh generated content while excluding Git data, local CLI state, node modules, cache folders, env files, logs, and common key/certificate files.
 
 `app-content/manifest.json` records the bundled content using portable paths so the executable does not carry Scott's machine paths as runtime dependencies.
 

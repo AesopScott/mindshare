@@ -18,13 +18,13 @@ const {
   getDeepSeekBalance,
   sendCodexMessage,
   sendClaudeMessage,
+  sendComboMessage,
   sendDeepSeekMessage,
   listConfigurationFiles,
   openConfigurationFile
 } = require('./mindshare-local-client');
 
 const bundledPublicRoot = path.join(__dirname, 'app-content', 'mindshare', 'public');
-const devPublicRoot = path.join(__dirname, '..', 'public');
 const skillsSourceRoot = path.join(__dirname, 'app-content', 'mojo', 'assets', 'maps', 'skills');
 const sharedTemplatesRoot = path.join(__dirname, 'app-content', 'mojo', 'assets', 'maps', 'templates');
 const codexHome = process.env.CODEX_HOME || path.join(os.homedir(), '.codex');
@@ -400,6 +400,72 @@ async function fetchMeetupGroupMembersFromGraphQL(group) {
   };
 }
 
+async function fetchMeetupNetworkGroups() {
+  const query = `query ($input: ProNetworkGroupsSearchInput!) {
+    proNetwork(urlname: "advanced-ai-concepts") {
+      id
+      name
+      urlname
+      networkAnalytics {
+        totalCountries
+        totalGroups
+        totalMembers
+      }
+      groupsSearch(input: $input) {
+        totalCount
+        edges {
+          node {
+            id
+            name
+            urlname
+            city
+            state
+            country
+            link
+            stats {
+              memberCounts {
+                all
+              }
+            }
+          }
+        }
+      }
+    }
+  }`;
+  const payload = await meetupGraphQL(query, {
+    input: {
+      first: 100,
+      sort: 'createdDate',
+      desc: true
+    }
+  });
+  const network = payload?.data?.proNetwork;
+  const search = network?.groupsSearch;
+  const edges = Array.isArray(search?.edges) ? search.edges : [];
+  const groups = edges
+    .map((edge) => edge.node)
+    .filter(Boolean)
+    .map((node) => ({
+      id: String(node.id || ''),
+      name: String(node.name || ''),
+      urlname: String(node.urlname || ''),
+      city: String(node.city || '').trim() || String(node.name || '').replace(/^Advanced AI Concepts[-\s]*/i, '').trim(),
+      state: String(node.state || ''),
+      country: String(node.country || ''),
+      link: String(node.link || `https://www.meetup.com/${node.urlname || ''}/`),
+      members: Number(node.stats?.memberCounts?.all || 0),
+      memberStatus: 'oauth-graphql'
+    }));
+  return {
+    groups,
+    networkAnalytics: {
+      totalCountries: Number(network?.networkAnalytics?.totalCountries || 0),
+      totalGroups: Number(network?.networkAnalytics?.totalGroups || search?.totalCount || groups.length),
+      totalMembers: Number(network?.networkAnalytics?.totalMembers || 0)
+    }
+  };
+}
+
 function extractMeetupMembers(html) {
   const patterns = [
     /"memberCount"\s*:\s*(\d+)/i,
@@ -461,33 +527,43 @@ async function fetchMeetupGroupMembersFromPublicPage(group) {
 
 async function getMeetupDashboard(payload = {}) {
   const sort = String(payload.sort || 'members-desc');
-  const discovered = discoverMeetupGroups();
-  const queue = [...discovered];
-  const groups = [];
-  const workers = Array.from({ length: Math.min(6, queue.length || 1) }, async () => {
-    while (queue.length) {
-      const group = queue.shift();
-      groups.push(await fetchMeetupGroupMembers(group));
-    }
-  });
-  await Promise.all(workers);
+  let groups = [];
+  let networkAnalytics = null;
+  let countSource = 'Meetup OAuth GraphQL via Mojo .env token store';
+  try {
+    const network = await fetchMeetupNetworkGroups();
+    groups = network.groups;
+    networkAnalytics = network.networkAnalytics;
+  } catch (error) {
+    const discovered = discoverMeetupGroups();
+    const queue = [...discovered];
+    const workers = Array.from({ length: Math.min(6, queue.length || 1) }, async () => {
+      while (queue.length) {
+        const group = queue.shift();
+        groups.push(await fetchMeetupGroupMembers(group));
+      }
+    });
+    await Promise.all(workers);
+    countSource = `Meetup public group pages fallback; OAuth roster failed: ${error.message || error}`;
+  }
   groups.sort((left, right) => {
     if (sort === 'members-asc') return left.members - right.members || left.city.localeCompare(right.city);
     if (sort === 'city') return left.city.localeCompare(right.city);
     return right.members - left.members || left.city.localeCompare(right.city);
   });
-  const totalMembers = groups.reduce((sum, group) => sum + Number(group.members || 0), 0);
+  const chapterMemberships = groups.reduce((sum, group) => sum + Number(group.members || 0), 0);
+  const totalMembers = Number(networkAnalytics?.totalMembers || 0) || chapterMemberships;
   return {
     ok: true,
     groups,
     totalMembers,
+    chapterMemberships,
+    networkAnalytics,
     groupCount: groups.length,
     sort,
     source: {
-      groupSource: 'C:\\Users\\scott\\Code\\mojo\\watch',
-      countSource: groups.some((group) => group.memberStatus === 'oauth-graphql')
-        ? 'Meetup OAuth GraphQL via Mojo .env token store'
-        : 'Meetup public group pages fallback'
+      groupSource: countSource.startsWith('Meetup OAuth') ? 'Meetup Pro Network advanced-ai-concepts' : 'C:\\Users\\scott\\Code\\mojo\\watch',
+      countSource
     },
     updatedAt: new Date().toISOString()
   };
@@ -1089,10 +1165,10 @@ function createWindow() {
   });
 
   window.maximize();
-  const publicRoot = require('node:fs').existsSync(path.join(bundledPublicRoot, 'index.html'))
-    ? bundledPublicRoot
-    : devPublicRoot;
-  window.loadFile(path.join(publicRoot, 'index.html'));
+  if (!require('node:fs').existsSync(path.join(bundledPublicRoot, 'index.html'))) {
+    throw new Error(`MindShare Central canonical public UI is missing: ${bundledPublicRoot}`);
+  }
+  window.loadFile(path.join(bundledPublicRoot, 'index.html'));
   window.webContents.on('render-process-gone', (_event, details) => {
     console.error('MindShare renderer process exited.', details);
   });
@@ -1151,6 +1227,7 @@ ipcMain.handle('mindshare:automation-control', async (_event, payload = {}) => {
 });
 ipcMain.handle('mindshare:codex-message', async (_event, payload) => sendCodexMessage(payload));
 ipcMain.handle('mindshare:claude-message', async (_event, payload) => sendClaudeMessage(payload));
+ipcMain.handle('mindshare:combo-message', async (_event, payload) => sendComboMessage(payload));
 ipcMain.handle('mindshare:deepseek-connect', async (_event, payload) => connectDeepSeek(payload));
 ipcMain.handle('mindshare:deepseek-message', async (_event, payload) => sendDeepSeekMessage(payload));
 ipcMain.handle('mindshare:deepseek-balance', async () => getDeepSeekBalance());

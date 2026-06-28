@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "role": "Vik / ASPA",
+  "automation_id": "vik-visible-backlog-research",
+  "logic_owner": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\scripts\\level4automation.py",
+  "mode": "scheduled",
+  "checked_at": "2026-06-25T09:26:30-06:00",
+  "current_policy": "Level 4 scoped backlog research",
+  "result": "source_conflict",
+  "counts": {
+    "backlog_items": 48,
+    "queue_state_items": 54,
+    "eligible_items": 0,
+    "complete_items": 48,
+    "cancelled_items": 0,
+    "errored_items": 0,
+    "source_conflicts": 1
+  },
+  "sources": {
+    "autonomy": "C:\\Users\\scott\\Code\\mojo\\roles\\maps-agentic-systems-program-architect\\Autonomy.md",
+    "backlog": "C:\\Users\\scott\\Code\\mojo\\agents\\vik-aspa\\architecture-backlog.md",
+    "queue_state": "C:\\Users\\scott\\.codex\\automations\\vik-handoff-check\\channel_queue_guard_state.json",
+    "reports_dir": "C:\\Users\\scott\\.codex\\automations\\vik-handoff-check\\reports"
+  },
+  "next_eligible_item": null,
+  "eligible_items": [],
+  "source_conflict": {
+    "present": true,
+    "items": [
+      {
+        "type": "queue_state_items_missing_from_backlog",
+        "item_ids": [
+          "VA-049",
+          "VA-050",
+          "VA-051",
+          "VA-052",
+          "VA-053",
+          "VA-054"
+        ]
+      }
+    ],
+    "required_owner_route": "Scott/Tess/Vik review; do not repair by inventing backlog rows or deleting queue-state items without owner approval."
+  },
+  "gate_status": {
+    "contract": "pass",
+    "backlog": "pass",
+    "queue_state": "pass",
+    "state": "pass_after_write",
+    "boundary": "pass_denied_actions_held"
+  },
+  "denied_actions_held": [
+    "no Claude research execution by script",
+    "no backlog or queue mutation",
+    "no implementation",
+    "no Git/GitHub/release action",
+    "no production",
+    "no external communication",
+    "no spending",
+    "no secrets",
+    "no authority expansion",
+    "no runtime activation",
+    "no promotion",
+    "no Level 5 or Level 6 activation"
+  ]
+}

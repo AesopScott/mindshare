@@ -81,7 +81,6 @@ webview, iframe {
 <nav class="hidden items-center gap-8 md:flex">
 <a class="text-sm text-on-surface-variant transition-colors hover:text-primary" href="../index.html">Home</a>
 <a class="text-sm text-on-surface-variant transition-colors hover:text-primary" href="../our-team/index.html">Our Team</a>
-<a class="text-sm text-on-surface-variant transition-colors hover:text-primary" href="../services/index.html">Services</a>
 
 <a class="border-b-2 border-primary pb-1 text-sm font-semibold text-primary" href="index.html">Tools</a>
 </nav>
@@ -95,39 +94,34 @@ webview, iframe {
 <h1 class="font-display-lg text-3xl font-semibold text-primary-fixed">Tools</h1>
 <div class="inline-flex rounded-lg border border-white/10 bg-black/35 p-1" aria-label="Tool scope" role="tablist">
 <button class="tool-scope-toggle is-active rounded-md border border-transparent px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-fixed transition hover:border-primary/50" type="button" data-tool-scope="external" role="tab" aria-selected="true">External</button>
-<button class="tool-scope-toggle rounded-md border border-transparent px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-on-surface-variant transition hover:border-primary/50 hover:text-primary" type="button" data-tool-scope="maps" role="tab" aria-selected="false">Maps</button>
 <button class="tool-scope-toggle rounded-md border border-transparent px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-on-surface-variant transition hover:border-primary/50 hover:text-primary" type="button" data-tool-scope="internal" role="tab" aria-selected="false">Personnel</button>
 </div>
 </div>
 </div>
 <div class="mt-8 space-y-3" id="tool-list">
-<a class="tool-button flex min-h-[108px] w-full flex-col justify-center rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" href="automation-central/index.html" data-tool-id="automation-central" data-tool-scope="internal" hidden>
+<a class="tool-button flex min-h-[108px] w-full flex-col justify-center rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" href="automation-central/index.html" data-tool-id="automation-central" data-tool-scope="internal">
 <span class="block text-sm font-semibold text-primary-fixed">Automation Central</span>
 <span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Define Level 4, Level 5, and Level 6 autonomy capabilities for Tess to build.</span>
 </a>
-<button class="tool-button flex min-h-[108px] w-full flex-col justify-center rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="maps-skills" data-tool-scope="maps" onclick="selectTool('maps-skills')" hidden>
-<span class="block text-sm font-semibold text-primary-fixed">MAPS Skills</span>
-<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Browse the Multi-Agent Pipeline Skills catalog: M0&ndash;M11 base and augmented skills.</span>
-</button>
-<a class="tool-button flex min-h-[108px] w-full flex-col justify-center rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" href="recruiting-central/index.html" data-tool-id="recruiting-central" data-tool-scope="internal" hidden>
+<a class="tool-button flex min-h-[108px] w-full flex-col justify-center rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" href="recruiting-central/index.html" data-tool-id="recruiting-central" data-tool-scope="internal">
 <span class="block text-sm font-semibold text-primary-fixed">Recruiting Central</span>
 <span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Design, hire, and promote new roles through Ana and Cole's onboarding lanes.</span>
 </a>
 <button class="tool-button is-active w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="claude-balance" data-tool-scope="external" onclick="selectTool('claude-balance')">
 <span class="block text-sm font-semibold text-primary-fixed">Claude Balance</span>
-<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Open Claude usage and plan-limit details.</span>
-</button>
-<button class="tool-button w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="kling-video" data-tool-scope="external" onclick="selectTool('kling-video')">
-<span class="block text-sm font-semibold text-primary-fixed">Kling AI Video</span>
-<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Create AI video and image assets in Kling AI's studio.</span>
+<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Open Claude subscription and usage status in the embedded tool frame.</span>
 </button>
 <button class="tool-button w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="openai-balance" data-tool-scope="external" onclick="selectTool('openai-balance')">
-<span class="block text-sm font-semibold text-primary-fixed">OpenAI API Usage</span>
-<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Open OpenAI API billing credits and usage details.</span>
+<span class="block text-sm font-semibold text-primary-fixed">OpenAI Balance</span>
+<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Open OpenAI usage and billing status in the embedded tool frame.</span>
 </button>
 <button class="tool-button w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="openai-images" data-tool-scope="external" onclick="selectTool('openai-images')">
 <span class="block text-sm font-semibold text-primary-fixed">OpenAI Images</span>
 <span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Generate employee portraits and other image assets in the OpenAI Playground.</span>
+</button>
+<button class="tool-button w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="kling-video" data-tool-scope="external" onclick="selectTool('kling-video')">
+<span class="block text-sm font-semibold text-primary-fixed">Kling AI Video</span>
+<span class="mt-1 block text-xs leading-relaxed text-on-surface-variant">Create AI video and image assets in Kling AI's studio.</span>
 </button>
 <button class="tool-button w-full rounded-lg border border-white/10 px-4 py-4 text-left transition-colors hover:border-primary/50" type="button" data-tool-id="purelymail-inbox" data-tool-scope="external" onclick="selectTool('purelymail-inbox')">
 <span class="block text-sm font-semibold text-primary-fixed">Purelymail Inbox</span>
@@ -141,12 +135,12 @@ External tools keep their own login, billing, credits, and action controls. Mind
 <section class="glass-panel-heavy flex min-w-0 flex-1 flex-col overflow-hidden rounded-xl">
 <div class="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-4">
 <div class="min-w-0">
-<p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant" id="tool-eyebrow">Claude Usage Settings</p>
+<p class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-on-surface-variant" id="tool-eyebrow">Subscription Status</p>
 <h2 class="truncate font-display-lg text-xl font-semibold text-primary-fixed" id="tool-title">Claude Balance</h2>
 </div>
 <div class="flex shrink-0 items-center gap-3">
 <button class="rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-on-surface-variant transition hover:border-primary/50 hover:text-primary" id="reload-tool" type="button">Reload</button>
-<a class="rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-primary transition hover:bg-primary/20" id="open-external" href="https://claude.ai/settings/usage" target="_blank" rel="noreferrer">Open</a>
+<a class="rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-primary transition hover:bg-primary/20" id="open-external" href="https://platform.openai.com/playground/images" target="_blank" rel="noreferrer">Open</a>
 </div>
 </div>
 <div class="min-h-0 flex-1">
@@ -160,11 +154,12 @@ External tools keep their own login, billing, credits, and action controls. Mind
 </main>
 <script>
 const tools = {
-  'maps-skills': {
-    title: 'MAPS Skills Catalog',
-    eyebrow: 'Multi-Agent Pipeline Skills',
-    scope: 'internal',
-    kind: 'panel'
+  'claude-balance': {
+    title: 'Claude Balance',
+    eyebrow: 'Subscription Status',
+    scope: 'external',
+    url: 'https://claude.ai/settings/billing',
+    workflow: 'subscription'
   },
   'recruiting-central': {
     title: 'Recruiting Central',
@@ -172,26 +167,19 @@ const tools = {
     scope: 'internal',
     kind: 'recruiting'
   },
+  'openai-balance': {
+    title: 'OpenAI Balance',
+    eyebrow: 'Usage + Billing',
+    scope: 'external',
+    url: 'https://platform.openai.com/usage',
+    workflow: 'subscription'
+  },
   'openai-images': {
     title: 'OpenAI Images Playground',
     eyebrow: 'Image Generation',
     scope: 'external',
     url: 'https://platform.openai.com/playground/images',
     workflow: 'image'
-  },
-  'openai-balance': {
-    title: 'OpenAI API Usage',
-    eyebrow: 'OpenAI API Billing + Credits',
-    scope: 'external',
-    url: 'https://platform.openai.com/settings/organization/billing/credit-grants',
-    workflow: 'account'
-  },
-  'claude-balance': {
-    title: 'Claude Balance',
-    eyebrow: 'Claude Usage Settings',
-    scope: 'external',
-    url: 'https://claude.ai/settings/usage',
-    workflow: 'account'
   },
   'kling-video': {
     title: 'Kling AI Video',
@@ -861,9 +849,8 @@ let activeTool = 'claude-balance';
 let activeToolScope = 'external';
 
 const toolScopeNotes = {
-  external: 'External tools keep their own login, billing, credits, and action controls. MindShare only provides the local frame.',
-  maps: 'MAPS tools support agent and multi-agent design, buildout, evaluation, deployment, observation, and improvement.',
   internal: 'Internal tools are packaged with MindShare Central and run from local project content.',
+  external: 'External tools keep their own login, billing, credits, and action controls. MindShare only provides the local frame.'
 };
 
 function toolWebview() {
@@ -883,7 +870,26 @@ function unloadToolWebview() {
 }
 
 function renderTool(toolId) {
-  const tool = tools[toolId] || tools['maps-skills'];
+  const tool = tools[toolId];
+  if (!tool) {
+    activeTool = null;
+    document.getElementById('tool-title').textContent = 'Select a Tool';
+    document.getElementById('tool-eyebrow').textContent = 'Connected Tools';
+    document.querySelectorAll('[data-tool-id]').forEach((button) => button.classList.remove('is-active'));
+    unloadToolWebview();
+    const webview = toolWebview();
+    const iframe = document.getElementById('tool-iframe');
+    const catalog = document.getElementById('tool-catalog');
+    const reloadBtn = document.getElementById('reload-tool');
+    const openBtn = document.getElementById('open-external');
+    webview.classList.add('hidden');
+    iframe.classList.add('hidden');
+    reloadBtn.classList.add('hidden');
+    openBtn.classList.add('hidden');
+    catalog.innerHTML = '<div class="flex h-full items-center justify-center text-center text-sm text-on-surface-variant">Choose a tool from the left.</div>';
+    catalog.classList.remove('hidden');
+    return;
+  }
   activeTool = toolId;
   if (tool.scope && tool.scope !== activeToolScope) {
     setToolScope(tool.scope, { renderFirst: false });
@@ -956,7 +962,7 @@ function selectTool(toolId) {
 }
 
 function setToolScope(scope, options = {}) {
-  if (!['external', 'maps', 'internal'].includes(scope)) return;
+  if (!['internal', 'external'].includes(scope)) return;
   activeToolScope = scope;
   document.querySelectorAll('[data-tool-scope][role="tab"]').forEach((button) => {
     const selected = button.dataset.toolScope === scope;
@@ -999,7 +1005,7 @@ document.getElementById('reload-tool').addEventListener('click', () => {
 window.addEventListener('pagehide', unloadToolWebview);
 window.addEventListener('beforeunload', unloadToolWebview);
 
-// Deep-link support: #maps-skills (or any tool id) selects that tool on load.
+// Deep-link support selects a tool on load when the hash matches a current tool id.
 function toolFromHash() {
   const id = (location.hash || '').replace(/^#/, '');
   return tools[id] ? id : null;

@@ -17,6 +17,29 @@ const DEFAULT_CONTEXT_WINDOWS = {
   claude: 200000,
   deepseek: 128000
 };
+const REVIEWABLE_CODE_EXTENSIONS = new Set([
+  '.cjs',
+  '.css',
+  '.html',
+  '.js',
+  '.jsx',
+  '.mjs',
+  '.ps1',
+  '.py',
+  '.sh',
+  '.ts',
+  '.tsx'
+]);
+const REVIEW_SKIP_DIRS = new Set([
+  '.git',
+  '.next',
+  '.turbo',
+  'dist',
+  'node_modules',
+  'out',
+  'target',
+  'vendor'
+]);
 const officeWorkspaceInstruction = `This office is an active local workspace session.
 
 You may inspect and modify files in the local workspace when the user's request and the active role's authority allow it. Do not treat filesystem access as permission by itself. Respect role boundaries, approval gates, production/release limits, external communication limits, spending limits, and secrets boundaries. If a requested edit is outside role authority or needs approval, explain the blocker and request the needed approval.`;
@@ -52,6 +75,65 @@ function truncateText(value, maxChars) {
   const text = String(value || '');
   if (text.length <= maxChars) return text;
   return `${text.slice(0, Math.max(0, maxChars - 140))}\n\n[MindShare truncated ${text.length - maxChars} excess characters from this section before sending to the CLI.]`;
+}
+
+async function readFileHash(filePath) {
+  const buffer = await fs.readFile(filePath);
+  return crypto.createHash('sha256').update(buffer).digest('hex');
+}
+
+function isReviewableCodeFile(filePath) {
+  return REVIEWABLE_CODE_EXTENSIONS.has(path.extname(filePath).toLowerCase());
+}
+
+async function walkReviewableCodeFiles(root, files = []) {
+  const entries = await safeReadDir(root, { withFileTypes: true });
+  for (const entry of entries) {
+    if (entry.name.startsWith('.') && entry.name !== '.codex') continue;
+    const entryPath = path.join(root, entry.name);
+    if (entry.isDirectory()) {
+      if (REVIEW_SKIP_DIRS.has(entry.name)) continue;
+      await walkReviewableCodeFiles(entryPath, files);
+    } else if (entry.isFile() && isReviewableCodeFile(entryPath)) {
+      files.push(entryPath);
+    }
+  }
+  return files;
+}
+
+async function snapshotReviewableCodeFiles(root = repoRoot) {
+  const files = await walkReviewableCodeFiles(root);
+  const snapshot = new Map();
+  await Promise.all(files.map(async (filePath) => {
+    try {
+      const stats = await fs.stat(filePath);
+      snapshot.set(path.resolve(filePath), {
+        size: stats.size,
+        mtimeMs: stats.mtimeMs,
+        hash: await readFileHash(filePath)
+      });
+    } catch {
+      // Ignore transient files that disappear during a build turn.
+    }
+  }));
+  return snapshot;
+}
+
+async function changedReviewableCodeFiles(before, root = repoRoot) {
+  const after = await snapshotReviewableCodeFiles(root);
+  const changed = [];
+  for (const [filePath, current] of after.entries()) {
+    const previous = before.get(filePath);
+    if (!previous || previous.hash !== current.hash) {
+      changed.push({
+        path: filePath,
+        relativePath: path.relative(root, filePath),
+        status: previous ? 'modified' : 'added',
+        size: current.size
+      });
+    }
+  }
+  return changed.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
 }
 
 function pushWithinBudget(parts, next, maxChars) {
@@ -233,7 +315,7 @@ const ROLE_CATALOG = {
     "level": "Level 3 Staff",
     "office": "Bea's office",
     "rolePath": [
-      "mojo",
+      "mindshare",
       "roles",
       "mojo-maps-engineer"
     ],
@@ -254,7 +336,7 @@ const ROLE_CATALOG = {
     "level": "Level 3 Staff",
     "office": "Cal's office",
     "rolePath": [
-      "mojo",
+      "mindshare",
       "roles",
       "maps-agentic-systems-program-manager"
     ],
@@ -295,7 +377,7 @@ const ROLE_CATALOG = {
     "level": "Level 3 Staff",
     "office": "Imani's office",
     "rolePath": [
-      "mojo",
+      "mindshare",
       "roles",
       "data-engineering-director"
     ],
@@ -316,7 +398,7 @@ const ROLE_CATALOG = {
     "level": "Level 3 Staff",
     "office": "Lane's office",
     "rolePath": [
-      "mojo",
+      "mindshare",
       "roles",
       "lab-operator"
     ],
@@ -378,7 +460,7 @@ const ROLE_CATALOG = {
     "level": "Level 5 Policy Autonomy",
     "office": "Vik's office",
     "rolePath": [
-      "mojo",
+      "mindshare",
       "roles",
       "maps-agentic-systems-program-architect"
     ],
@@ -515,7 +597,7 @@ const ROLE_CATALOG = {
     "level": "Released",
     "office": "Matt's historical office",
     "rolePath": [
-      "mojo",
+      "mindshare",
       "roles",
       "released-maps-agentic-systems-program-manager"
     ],
@@ -534,7 +616,7 @@ const ROLE_CATALOG = {
     "level": "Level 3 Staff",
     "office": "Liz's office",
     "rolePath": [
-      "mojo",
+      "mindshare",
       "roles",
       "mojo-website-manager"
     ],
@@ -594,7 +676,7 @@ const ROLE_CATALOG = {
     "level": "Level 3 Staff",
     "office": "Jay's office",
     "rolePath": [
-      "watch",
+      "mindshare",
       "roles",
       "meetup-coordinator"
     ],
@@ -1605,8 +1687,9 @@ async function runPythonAutomation(scriptPath, mode, env) {
 
 async function runVikAutomation(payload = {}) {
   const appContentRoot = await resolveAppContentRoot();
+  const mindshareRoot = path.join(appContentRoot, 'mindshare');
   const mojoRoot = path.join(appContentRoot, 'mojo');
-  const roleRoot = path.join(mojoRoot, 'roles', 'maps-agentic-systems-program-architect');
+  const roleRoot = path.join(mindshareRoot, 'roles', 'maps-agentic-systems-program-architect');
   const automationRoot = path.join(mojoRoot, 'automations', 'vik-handoff-check');
   const env = {
     VIK_ROLE_ROOT: roleRoot,
@@ -1627,6 +1710,64 @@ async function runVikAutomation(payload = {}) {
   };
 }
 
+const configurationFileDescriptions = {
+  'AGENTS.md': 'Repository instructions, role routing, and operating rules loaded by coding agents.',
+  'project-foundation.md': 'MAPS control artifact for project foundation, source roots, and durable memory rules.',
+  'gate.md': 'Tool-gate policy that defines approval and execution boundaries.',
+  'gate-exceptions.md': 'Approved gate exceptions for narrowly scoped files, roles, or functions.',
+  'roles.md': 'Organization roster, role structure, reporting lines, and current standing notes.',
+  'role-artifacts.md': 'Inventory of role artifacts, source locations, file gaps, and ownership status.',
+  'team-member-file-structure.md': 'Canonical checklist for required team-member files and role completeness.',
+  'name.md': 'Identity card with name, title, organization, autonomy level, and role path.',
+  'role-agent.md': 'Role contract defining job, scope, boundaries, handoffs, and operating authority.',
+  'personality.md': 'Role voice, temperament, collaboration style, and interaction preferences.',
+  'workflow.md': 'Role work process, expected inputs, outputs, checks, and handoff flow.',
+  'memory.md': 'Durable role memory, history, current context, and important operating notes.',
+  'WhoAmI.md': 'Session identity card injected into prompts so the role knows who it is.',
+  'Autonomy.md': 'Autonomy contract defining current level and level 4, 5, and 6 capabilities.',
+  'state.json': 'Structured current-state record for identity, standing, paths, and runtime metadata.',
+  'gate-blocks.md': 'Known gate limitations, blocked actions, and approval routes for the role.',
+  'session.md': 'Session routing, thread, or office context for the role.',
+  'automation-old.md': 'Legacy automation definition retained for reference after the automation reset.',
+  'loop-old.md': 'Legacy schedule or loop definition retained for reference after the automation reset.',
+  'hook-spec-old.md': 'Legacy hook proposal retained for reference after the automation reset.',
+  'script-spec-old.md': 'Legacy script proposal retained for reference after the automation reset.',
+  'level4automation-old.py': 'Legacy level 4 automation script retained for reference after the automation reset.',
+  'level5automation-old.py': 'Legacy level 5 automation script retained for reference after the automation reset.'
+};
+
+function configurationFileTitle(fileName) {
+  const parsed = path.parse(fileName);
+  if (fileName === 'AGENTS.md') return 'AGENTS';
+  const base = parsed.name || fileName;
+  return base
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+}
+
+function configurationFileDescription(fileName) {
+  if (configurationFileDescriptions[fileName]) return configurationFileDescriptions[fileName];
+  const ext = path.extname(fileName).toLowerCase();
+  if (ext === '.md') return 'Markdown source file for this role, agent, or global operating record.';
+  if (ext === '.json') return 'Structured data file used by MindShare Central or role runtime checks.';
+  if (ext === '.py') return 'Python script used by a role, automation, or support workflow.';
+  return 'Source file available for local review and editing.';
+}
+
+function configurationFileRecord(filePath, missing = false) {
+  const name = path.basename(filePath);
+  return {
+    name,
+    title: configurationFileTitle(name),
+    description: configurationFileDescription(name),
+    path: filePath,
+    missing
+  };
+}
+
 async function collectFiles(rootPath) {
   const ignoredNames = new Set(['.git', '.claude', '.codex', '.obsidian', 'node_modules', '__pycache__', '.pytest_cache']);
   const files = [];
@@ -1635,7 +1776,7 @@ async function collectFiles(rootPath) {
     if (ignoredNames.has(entry.name)) continue;
     const entryPath = path.join(rootPath, entry.name);
     if (entry.isFile()) {
-      files.push({ name: entry.name, path: entryPath, missing: false });
+      files.push(configurationFileRecord(entryPath, false));
     }
   }
   return files.sort((a, b) => a.path.localeCompare(b.path));
@@ -1671,11 +1812,7 @@ async function listConfigurationFiles() {
   ];
   const globalFiles = [];
   for (const candidate of globalCandidates) {
-    globalFiles.push({
-      name: path.basename(candidate),
-      path: candidate,
-      missing: !await pathExistsForConfiguration(candidate)
-    });
+    globalFiles.push(configurationFileRecord(candidate, !await pathExistsForConfiguration(candidate)));
   }
 
   const groups = [{
@@ -1687,8 +1824,6 @@ async function listConfigurationFiles() {
 
   groups.push(
     ...await discoverDirectoryGroups(path.join(roots.mindshare, 'roles'), 'Mindshare Role', 'role'),
-    ...await discoverDirectoryGroups(path.join(roots.mojo, 'roles'), 'Mojo Role', 'role'),
-    ...await discoverDirectoryGroups(path.join(roots.watch, 'roles'), 'Watch Role', 'role'),
     ...await discoverDirectoryGroups(path.join(roots.mindshare, 'agents'), 'Mindshare Agent', 'agent'),
     ...await discoverDirectoryGroups(path.join(roots.mojo, 'agents'), 'Mojo Agent', 'agent'),
     ...await discoverDirectoryGroups(path.join(roots.watch, 'agents'), 'Watch Agent', 'agent')
@@ -2113,6 +2248,235 @@ USER: ${message}`;
   return { ok: true, reply, tokenUsage };
 }
 
+function parseDeepSeekReview(reply) {
+  const text = String(reply || '').trim();
+  const jsonMatch = text.match(/```json\s*([\s\S]*?)```/i) || text.match(/(\{[\s\S]*\})/);
+  if (jsonMatch) {
+    try {
+      const parsed = JSON.parse(jsonMatch[1] || jsonMatch[0]);
+      return {
+        passed: Boolean(parsed.passed),
+        summary: String(parsed.summary || ''),
+        findings: Array.isArray(parsed.findings) ? parsed.findings.map((finding) => String(finding)) : [],
+        notFixed: String(parsed.not_fixed || parsed.notFixed || '')
+      };
+    } catch {
+      // Fall through to text heuristics.
+    }
+  }
+  const passed = /\bpass(ed|es)?\b/i.test(text) && !/\bfail(ed|ure)?\b|bug|risk|issue|regression/i.test(text);
+  return {
+    passed,
+    summary: text.slice(0, 800),
+    findings: passed ? [] : [text.slice(0, 1600)],
+    notFixed: passed ? '' : 'DeepSeek is review-only in Combo mode and did not modify this file.'
+  };
+}
+
+async function reviewFileWithDeepSeek(file) {
+  const apiKey = resolveDeepSeekApiKey();
+  if (!apiKey) {
+    return {
+      path: file.relativePath,
+      absolutePath: file.path,
+      status: 'error',
+      passed: false,
+      summary: 'DeepSeek API key is missing.',
+      findings: ['Add DEEPSEEK_API_KEY to .env or Mojo .env, then restart MindShare Central.'],
+      notFixed: 'DeepSeek did not review or fix this file because authentication is not configured.'
+    };
+  }
+
+  let source = '';
+  try {
+    source = await fs.readFile(file.path, 'utf8');
+  } catch (error) {
+    return {
+      path: file.relativePath,
+      absolutePath: file.path,
+      status: 'error',
+      passed: false,
+      summary: `Could not read file for review: ${error.message || error}`,
+      findings: [],
+      notFixed: 'DeepSeek did not review or fix this file because MindShare could not read it.'
+    };
+  }
+
+  const model = process.env.DEEPSEEK_REVIEW_MODEL || process.env.DEEPSEEK_MODEL || 'deepseek-v4-flash';
+  const prompt = `You are DeepSeek reviewing one file changed by a Claude build turn in MindShare Central Combo mode.
+
+Review only. Do not rewrite the file. Do not propose broad refactors. Focus on concrete bugs, syntax errors, unsafe behavior, broken UI logic, incorrect async flow, API misuse, and regressions likely caused by this change.
+
+Return strict JSON only:
+{
+  "passed": true or false,
+  "summary": "one sentence",
+  "findings": ["specific issues, empty when passed"],
+  "not_fixed": "why DeepSeek did not fix it; always say review-only if issues remain"
+}
+
+File: ${file.relativePath}
+
+Code:
+\`\`\`
+${truncateText(source, 45000)}
+\`\`\``;
+
+  const baseUrl = (process.env.DEEPSEEK_API_BASE_URL || 'https://api.deepseek.com').replace(/\/+$/, '');
+  let response;
+  try {
+    response = await fetch(`${baseUrl}/chat/completions`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role: 'system', content: 'You are a precise code reviewer. Return strict JSON only.' },
+          { role: 'user', content: prompt }
+        ],
+        temperature: 0
+      })
+    });
+  } catch (error) {
+    return {
+      path: file.relativePath,
+      absolutePath: file.path,
+      status: 'error',
+      passed: false,
+      summary: `DeepSeek review request failed: ${error.message || String(error)}`,
+      findings: [],
+      notFixed: 'DeepSeek did not fix this file because the review request failed.'
+    };
+  }
+
+  const payload = await response.json().catch(() => null);
+  if (!response.ok) {
+    return {
+      path: file.relativePath,
+      absolutePath: file.path,
+      status: 'error',
+      passed: false,
+      summary: payload?.error?.message || payload?.message || response.statusText || 'DeepSeek review failed.',
+      findings: [],
+      notFixed: 'DeepSeek did not fix this file because the API review failed.'
+    };
+  }
+
+  const reply = payload?.choices?.[0]?.message?.content || '';
+  const parsed = parseDeepSeekReview(reply);
+  return {
+    path: file.relativePath,
+    absolutePath: file.path,
+    status: parsed.passed ? 'passed' : 'failed',
+    passed: parsed.passed,
+    summary: parsed.summary || (parsed.passed ? 'Passed DeepSeek review.' : 'DeepSeek reported review findings.'),
+    findings: parsed.findings,
+    notFixed: parsed.notFixed || (parsed.passed ? '' : 'DeepSeek is review-only in Combo mode and did not modify this file.'),
+    raw: reply
+  };
+}
+
+async function sendComboMessage(payload) {
+  const codexSessionId = String(payload?.codexSessionId || '');
+  const claudeSessionId = String(payload?.claudeSessionId || '');
+  if (!sessions.has(codexSessionId)) return { ok: false, error: 'No active Codex session for Combo communication.' };
+  const buildRequested = Boolean(payload?.buildRequested);
+  if (!buildRequested) {
+    const codexPayload = await sendCodexMessage({
+      ...payload,
+      sessionId: codexSessionId
+    });
+    return {
+      ...codexPayload,
+      combo: {
+        mode: 'chat',
+        reviews: [],
+        changedFiles: [],
+        passedCount: 0,
+        failedCount: 0
+      }
+    };
+  }
+  if (!sessions.has(claudeSessionId)) return { ok: false, error: 'No active Claude session for Combo builds.' };
+
+  const before = await snapshotReviewableCodeFiles(repoRoot);
+  const claudePayload = await sendClaudeMessage({
+    ...payload,
+    sessionId: claudeSessionId
+  });
+  if (!claudePayload.ok) return claudePayload;
+
+  const changedFiles = await changedReviewableCodeFiles(before, repoRoot);
+  const reviews = [];
+  for (const file of changedFiles.slice(0, 30)) {
+    reviews.push(await reviewFileWithDeepSeek(file));
+  }
+  const skipped = changedFiles.slice(30).map((file) => ({
+    path: file.relativePath,
+    absolutePath: file.path,
+    status: 'skipped',
+    passed: false,
+    summary: 'Skipped because Combo limits one turn to 30 reviewed files.',
+    findings: [],
+    notFixed: 'DeepSeek did not review or fix this file because the review limit was reached.'
+  }));
+  const allReviews = [...reviews, ...skipped];
+  const passedCount = allReviews.filter((review) => review.status === 'passed').length;
+  const failedCount = allReviews.filter((review) => review.status === 'failed' || review.status === 'error').length;
+
+  const codexPrompt = `Combo mode completed a Claude build turn and DeepSeek code review.
+
+Write the in-app response to Scott. Be concise and human. Mention:
+- Claude performed the build.
+- DeepSeek reviewed ${allReviews.length} changed code/script file(s).
+- ${passedCount} passed and ${failedCount} need attention.
+- Tell Scott the Code Review drawer has file-level results.
+
+Do not claim DeepSeek fixed anything. It is review-only.
+
+Original user request:
+${String(payload?.message || '').trim()}
+
+Claude build response:
+${truncateText(claudePayload.reply || '', 6000)}
+
+DeepSeek review results:
+${truncateText(JSON.stringify(allReviews.map((review) => ({
+  path: review.path,
+  status: review.status,
+  summary: review.summary,
+  findings: review.findings,
+  notFixed: review.notFixed
+})), null, 2), 8000)}
+`;
+
+  const codexPayload = await sendCodexMessage({
+    ...payload,
+    sessionId: codexSessionId,
+    message: codexPrompt,
+    attachments: []
+  });
+
+  return {
+    ok: true,
+    reply: codexPayload.ok
+      ? codexPayload.reply
+      : `${claudePayload.reply || 'Claude build completed.'}\n\nDeepSeek reviewed ${allReviews.length} changed code/script file(s): ${passedCount} passed, ${failedCount} need attention. Open the Code Review drawer for details.`,
+    tokenUsage: codexPayload.tokenUsage || claudePayload.tokenUsage || null,
+    combo: {
+      claude: claudePayload,
+      codex: codexPayload,
+      reviews: allReviews,
+      changedFiles,
+      passedCount,
+      failedCount
+    }
+  };
+}
+
 async function sendClaudeMessage(payload) {
   const sessionId = String(payload?.sessionId || '');
   const message = String(payload?.message || '').trim();
@@ -2243,5 +2607,6 @@ module.exports = {
   getDeepSeekBalance,
   sendCodexMessage,
   sendClaudeMessage,
+  sendComboMessage,
   sendDeepSeekMessage
 };

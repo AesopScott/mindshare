@@ -1,11 +1,16 @@
 ﻿{
-    "generatedAt":  "2026-06-27T12:57:00.5489290Z",
+    "generatedAt":  "2026-06-28T13:45:25.3994935Z",
     "contentRoot":  ".",
     "copiedSources":  [
                           {
-                              "source":  "mindshare/public",
+                              "source":  "local-client/app-content/mindshare/public",
                               "destination":  "mindshare/public",
-                              "type":  "directory"
+                              "type":  "canonical-directory"
+                          },
+                          {
+                              "source":  "local-client/app-content/mindshare/public",
+                              "destination":  "public",
+                              "type":  "mirror-directory"
                           },
                           {
                               "source":  "mindshare/roles",
@@ -88,11 +93,6 @@
                               "type":  "directory"
                           },
                           {
-                              "source":  "mojo/roles",
-                              "destination":  "mojo/roles",
-                              "type":  "directory"
-                          },
-                          {
                               "source":  "queue.toml",
                               "destination":  "mojo/automations/vik-handoff-check/queue.toml",
                               "type":  "file"
@@ -115,11 +115,6 @@
                           {
                               "source":  "watch/agents",
                               "destination":  "watch/agents",
-                              "type":  "directory"
-                          },
-                          {
-                              "source":  "watch/roles",
-                              "destination":  "watch/roles",
                               "type":  "directory"
                           }
                       ],

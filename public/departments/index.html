@@ -77,10 +77,16 @@
         #new-session-button {
             color: #f8e7a2;
         }
+        #code-review-button {
+            color: #ffd6a3;
+        }
         #clear-screen-button:hover,
         #trim-session-button:hover,
         #new-session-button:hover {
             color: #fff3bd;
+        }
+        #code-review-button:hover {
+            color: #ffe1b8;
         }
         .notification-badge {
             min-width: 1rem;
@@ -278,7 +284,6 @@
 <nav class="hidden md:flex space-x-8 items-center h-full">
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary font-body-md transition-colors duration-300" href="../index.html">Home</a>
 <a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 font-body-md" href="../our-team/index.html">Our Team</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary font-body-md transition-colors duration-300" href="../services/index.html">Services</a>
 
 </nav>
 <div class="flex items-center space-x-6">
@@ -481,8 +486,13 @@ Configuration is loaded from the local MindShare workspace.
 </div>
 </div>
 <!-- Input Zone -->
-<div class="p-6 border-t border-white/10 glass-panel-heavy z-10">
-<div class="w-full relative group">
+<div class="px-6 py-2 border-t border-white/10 glass-panel-heavy z-10">
+<div class="w-full relative group pt-12">
+<div class="absolute -top-1 left-0 z-10 flex h-12 flex-wrap items-center gap-2" aria-label="Prompt quick responses">
+<button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-quick-prompt="Yes">Yes</button>
+<button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-quick-prompt="No">No</button>
+<button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-quick-prompt="Confirm">Confirm</button>
+</div>
 <textarea class="w-full bg-surface-container-low border border-white/10 rounded-xl px-6 py-4 pb-14 pr-32 focus:border-primary transition-all focus:ring-0 text-on-surface font-body-md resize-none custom-scrollbar" id="chat-input" placeholder="Query Neural Suite..." rows="3"></textarea>
 <div class="absolute left-4 bottom-3 flex items-center gap-2" aria-label="Prompt engine selector">
 <button class="prompt-engine-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="prompt-engine-codex" type="button" data-prompt-engine="codex">
@@ -490,6 +500,12 @@ Configuration is loaded from the local MindShare workspace.
 </button>
 <button class="prompt-engine-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="prompt-engine-claude" type="button" data-prompt-engine="claude">
 <span class="inline-block h-1.5 w-1.5 rounded-full align-middle mr-2 bg-current opacity-70"></span>Claude
+</button>
+<button class="prompt-engine-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="prompt-engine-deepseek" type="button" data-prompt-engine="deepseek">
+<span class="inline-block h-1.5 w-1.5 rounded-full align-middle mr-2 bg-current opacity-70"></span>DeepSeek
+</button>
+<button class="prompt-engine-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="prompt-engine-combo" type="button" data-prompt-engine="combo">
+<span class="inline-block h-1.5 w-1.5 rounded-full align-middle mr-2 bg-current opacity-70"></span>Combo
 </button>
 </div>
 <div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-3">
@@ -505,17 +521,30 @@ Configuration is loaded from the local MindShare workspace.
 </div>
 </div>
 <div class="hidden pt-3 flex flex-wrap gap-2" id="attachment-tray"></div>
-<div class="pt-3 flex flex-wrap items-center gap-2" aria-label="Prompt quick actions">
+<div class="grid h-12 grid-cols-1 gap-1 md:grid-cols-[auto_auto] md:items-center md:justify-between">
+<div class="flex h-full flex-wrap items-center gap-2" aria-label="Prompt quick actions">
+<button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="code-review-button" type="button">Code Review <span id="code-review-count">0</span></button>
 <button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="clear-screen-button" type="button">Clear</button>
 <button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="trim-session-button" type="button">Trim</button>
 <button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" id="new-session-button" type="button">New Session</button>
-<button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-quick-prompt="Yes">Yes</button>
-<button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-quick-prompt="No">No</button>
-<button class="prompt-action-button rounded-md px-3 py-1.5 font-label-sm text-[10px] uppercase tracking-widest transition-all" type="button" data-quick-prompt="Confirm">Confirm</button>
 </div>
-<div class="grid grid-cols-1 gap-1 pt-2 md:grid-cols-[1fr_auto] md:items-start">
-<div class="min-h-5 font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/60" id="chat-status" aria-live="polite"></div>
 <div class="min-h-5 text-right font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/70" id="token-usage-status">Tokens: no turns yet</div>
+</div>
+<div class="h-0 overflow-hidden font-label-sm text-[10px] uppercase tracking-widest text-on-surface-variant/60" id="chat-status" aria-live="polite"></div>
+</div>
+<div class="hidden absolute inset-y-0 right-0 z-40 w-[520px] max-w-[calc(100vw-2rem)] border-l border-primary-fixed-dim/30 bg-black/90 shadow-2xl backdrop-blur-xl" id="code-review-drawer">
+<div class="flex h-full flex-col">
+<div class="flex items-start justify-between gap-4 border-b border-white/10 px-5 py-4">
+<div>
+<div class="font-label-sm text-[10px] uppercase tracking-[0.24em] text-primary">Combo Review</div>
+<h3 class="mt-1 font-display-lg text-xl font-semibold text-primary-fixed">Code Review</h3>
+<p class="mt-1 text-xs leading-relaxed text-on-surface-variant" id="code-review-summary">No Combo reviews yet.</p>
+</div>
+<button class="rounded-md p-2 text-on-surface-variant hover:text-primary" id="code-review-close" type="button" aria-label="Close code review drawer">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-4" id="code-review-list"></div>
 </div>
 </div>
 </div>
@@ -855,7 +884,9 @@ Configuration is loaded from the local MindShare workspace.
         let activeRoleContext = null;
         let codexAvailable = false;
         let claudeAvailable = false;
+        let deepseekAvailable = false;
         let activeEngine = 'codex';
+        let latestCodeReviews = [];
         const roleSessions = {};
         const sessionNotifications = [];
         const notificationTimers = {};
@@ -1002,9 +1033,11 @@ Configuration is loaded from the local MindShare workspace.
                         department: session.department,
                         codexSessionId: session.codexSessionId,
                         claudeSessionId: session.claudeSessionId,
+                        deepseekSessionId: session.deepseekSessionId,
                         roleContext: session.roleContext,
                         image: session.image || '',
                         messages: conversationMessages(session.messages),
+                        codeReviews: Array.isArray(session.codeReviews) ? session.codeReviews : [],
                         draftText: session.draftText || '',
                         tokenUsage: session.tokenUsage || null,
                         officeInjected: session.officeInjected,
@@ -1016,6 +1049,7 @@ Configuration is loaded from the local MindShare workspace.
                     activeEngine,
                     codexAvailable,
                     claudeAvailable,
+                    deepseekAvailable,
                     roleSessions: serializableSessions
                 }));
             } catch (error) {
@@ -1031,6 +1065,7 @@ Configuration is loaded from the local MindShare workspace.
                 activeEngine = saved.activeEngine || activeEngine;
                 codexAvailable = Boolean(saved.codexAvailable);
                 claudeAvailable = Boolean(saved.claudeAvailable);
+                deepseekAvailable = Boolean(saved.deepseekAvailable);
                 Object.entries(saved.roleSessions || {}).forEach(([slug, session]) => {
                     roleSessions[slug] = {
                         slug,
@@ -1040,9 +1075,11 @@ Configuration is loaded from the local MindShare workspace.
                         department: session.department || '',
                         codexSessionId: session.codexSessionId || null,
                         claudeSessionId: session.claudeSessionId || null,
+                        deepseekSessionId: session.deepseekSessionId || null,
                         roleContext: session.roleContext || null,
                         image: session.image || findRoleEntry(slug)?.image || '',
                         messages: conversationMessages(session.messages),
+                        codeReviews: Array.isArray(session.codeReviews) ? session.codeReviews : [],
                         draftText: session.draftText || '',
                         tokenUsage: session.tokenUsage || null,
                         promptQueue: [],
@@ -1055,6 +1092,7 @@ Configuration is loaded from the local MindShare workspace.
                 if (saved.activeRoleSlug && roleSessions[saved.activeRoleSlug]) {
                     activeRoleSlug = saved.activeRoleSlug;
                     activeRoleContext = roleSessions[activeRoleSlug].roleContext;
+                    latestCodeReviews = Array.isArray(roleSessions[activeRoleSlug].codeReviews) ? roleSessions[activeRoleSlug].codeReviews : [];
                 }
             } catch (error) {
                 console.warn('Could not restore MindShare office state.', error);
@@ -1066,14 +1104,17 @@ Configuration is loaded from the local MindShare workspace.
             if (!client) {
                 codexAvailable = false;
                 claudeAvailable = false;
+                deepseekAvailable = false;
                 return;
             }
-            const [codexResult, claudeResult] = await Promise.allSettled([
+            const [codexResult, claudeResult, deepseekResult] = await Promise.allSettled([
                 client.connectCodex ? client.connectCodex({ checkOnly: true }) : Promise.resolve({ ok: false }),
-                client.connectClaude ? client.connectClaude({ checkOnly: true }) : Promise.resolve({ ok: false })
+                client.connectClaude ? client.connectClaude({ checkOnly: true }) : Promise.resolve({ ok: false }),
+                client.connectDeepSeek ? client.connectDeepSeek({ checkOnly: true }) : Promise.resolve({ ok: false })
             ]);
             codexAvailable = Boolean(codexResult.status === 'fulfilled' && codexResult.value?.ok);
             claudeAvailable = Boolean(claudeResult.status === 'fulfilled' && claudeResult.value?.ok);
+            deepseekAvailable = Boolean(deepseekResult.status === 'fulfilled' && deepseekResult.value?.ok);
             setProviderReady('codex', codexAvailable);
             setProviderReady('claude', claudeAvailable);
             persistOfficeState();
@@ -1083,7 +1124,7 @@ Configuration is loaded from the local MindShare workspace.
             const client = mindShareLocalClient();
             if (!client?.listSessions) {
                 Object.values(roleSessions).forEach((session) => {
-                    if (session.codexSessionId || session.claudeSessionId) {
+                    if (session.codexSessionId || session.claudeSessionId || session.deepseekSessionId) {
                         session.connectionIssue = true;
                     }
                 });
@@ -1094,6 +1135,7 @@ Configuration is loaded from the local MindShare workspace.
 
             const liveCodex = new Set();
             const liveClaude = new Set();
+            const liveDeepSeek = new Set();
             (payload.sessions || []).forEach((snapshot) => {
                 const slug = snapshot.roleSlug;
                 if (!slug) return;
@@ -1108,6 +1150,9 @@ Configuration is loaded from the local MindShare workspace.
                 if (snapshot.provider === 'claude') {
                     roleSession.claudeSessionId = snapshot.sessionId;
                     liveClaude.add(snapshot.sessionId);
+                } else if (snapshot.provider === 'deepseek') {
+                    roleSession.deepseekSessionId = snapshot.sessionId;
+                    liveDeepSeek.add(snapshot.sessionId);
                 } else if (snapshot.provider === 'codex') {
                     roleSession.codexSessionId = snapshot.sessionId;
                     liveCodex.add(snapshot.sessionId);
@@ -1132,6 +1177,10 @@ Configuration is loaded from the local MindShare workspace.
                 }
                 if (session.claudeSessionId && !liveClaude.has(session.claudeSessionId)) {
                     session.claudeSessionId = null;
+                    removed = true;
+                }
+                if (session.deepseekSessionId && !liveDeepSeek.has(session.deepseekSessionId)) {
+                    session.deepseekSessionId = null;
                     removed = true;
                 }
                 if (removed && !hasConnectedOfficeSession(session)) {
@@ -1172,8 +1221,10 @@ Configuration is loaded from the local MindShare workspace.
                     image,
                     codexSessionId: null,
                     claudeSessionId: null,
+                    deepseekSessionId: null,
                     roleContext: null,
                     messages: [],
+                    codeReviews: [],
                     draftText: '',
                     tokenUsage: null,
                     promptQueue: [],
@@ -1184,6 +1235,7 @@ Configuration is loaded from the local MindShare workspace.
                 };
             } else {
                 Object.assign(roleSessions[slug], { name, title, level, department: department || roleSessions[slug].department, image: image || roleSessions[slug].image || '' });
+                if (!Array.isArray(roleSessions[slug].codeReviews)) roleSessions[slug].codeReviews = [];
             }
             return roleSessions[slug];
         }
@@ -1377,6 +1429,7 @@ Configuration is loaded from the local MindShare workspace.
             mainWindowTitle.textContent = `${name} · ${title} · ${level}`;
             activeRoleSlug = slug;
             activeRoleContext = roleSession.roleContext;
+            latestCodeReviews = Array.isArray(roleSession.codeReviews) ? roleSession.codeReviews : [];
             if (input) input.value = roleSession.draftText || '';
             persistOfficeState();
             setChatDepartmentBackdrop(roleSession.department);
@@ -1390,6 +1443,7 @@ Configuration is loaded from the local MindShare workspace.
             renderOfficeRunsControl(findRoleEntry(slug));
             renderTokenUsage(roleSession);
             renderOfficeWorkingState(roleSession);
+            renderCodeReviewDrawer();
             closeContextDropdowns();
             showOfficeContext({
                 name,
@@ -1920,6 +1974,89 @@ Configuration is loaded from the local MindShare workspace.
                 .replaceAll("'", '&#039;');
         }
 
+        function engineLabel(engine) {
+            if (engine === 'claude') return 'Claude';
+            if (engine === 'deepseek') return 'DeepSeek';
+            if (engine === 'combo') return 'Combo';
+            return 'Codex';
+        }
+
+        function comboNeedsBuild(message, attachments = []) {
+            const text = String(message || '').toLowerCase();
+            const hasFileAttachment = Array.isArray(attachments) && attachments.some((attachment) => attachment?.path || attachment?.name);
+            if (hasFileAttachment) return true;
+            return /\b(build|code|implement|edit|change|modify|patch|fix|create file|write file|update file|refactor|script|css|html|javascript|typescript|component|function|test|review code|run tests)\b/.test(text);
+        }
+
+        function renderCodeReviewDrawer() {
+            const list = document.getElementById('code-review-list');
+            const summary = document.getElementById('code-review-summary');
+            const count = document.getElementById('code-review-count');
+            const reviews = activeRoleSlug && roleSessions[activeRoleSlug]?.codeReviews
+                ? roleSessions[activeRoleSlug].codeReviews
+                : latestCodeReviews;
+            const passed = reviews.filter((review) => review.status === 'passed').length;
+            const failed = reviews.filter((review) => ['failed', 'error'].includes(review.status)).length;
+            if (count) count.textContent = String(reviews.length);
+            if (summary) {
+                summary.textContent = reviews.length
+                    ? `${reviews.length} reviewed file${reviews.length === 1 ? '' : 's'} · ${passed} passed · ${failed} need attention.`
+                    : 'No Combo reviews yet.';
+            }
+            if (!list) return;
+            if (!reviews.length) {
+                list.innerHTML = `
+                    <div class="rounded-lg border border-dashed border-white/15 p-5 text-sm leading-relaxed text-on-surface-variant">
+                        Select Combo, send a build prompt, and DeepSeek review results will appear here for changed code/script files.
+                    </div>
+                `;
+                return;
+            }
+            list.innerHTML = reviews.map((review) => {
+                const passedReview = review.status === 'passed';
+                const statusClass = passedReview ? 'text-emerald-200 border-emerald-300/30 bg-emerald-300/10' : 'text-yellow-200 border-yellow-300/30 bg-yellow-300/10';
+                const label = passedReview ? 'Passed' : (review.status === 'skipped' ? 'Skipped' : 'Needs Attention');
+                return `
+                    <details class="mb-3 rounded-lg border border-white/10 bg-surface-container-lowest p-4" ${passedReview ? '' : 'open'}>
+                        <summary class="cursor-pointer list-none">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="min-w-0">
+                                    <div class="truncate font-mono text-xs text-primary-fixed">${escapeHtml(review.path || review.absolutePath || 'Unknown file')}</div>
+                                    <p class="mt-2 text-sm leading-relaxed text-on-surface-variant">${escapeHtml(review.summary || '')}</p>
+                                </div>
+                                <span class="shrink-0 rounded-md border px-2 py-1 font-label-sm text-[10px] uppercase tracking-widest ${statusClass}">${label}</span>
+                            </div>
+                        </summary>
+                        <div class="mt-4 space-y-3 border-t border-white/10 pt-3">
+                            ${(review.findings || []).length ? `
+                                <div>
+                                    <div class="font-label-sm text-[10px] uppercase tracking-widest text-primary">Findings</div>
+                                    <ul class="mt-2 space-y-2">
+                                        ${(review.findings || []).map((finding) => `<li class="text-sm leading-relaxed text-on-surface-variant">${escapeHtml(finding)}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            ` : '<p class="text-sm text-emerald-200">DeepSeek found no blocking issues.</p>'}
+                            ${review.notFixed ? `
+                                <div>
+                                    <div class="font-label-sm text-[10px] uppercase tracking-widest text-yellow-200">Not Fixed By DeepSeek</div>
+                                    <p class="mt-2 text-sm leading-relaxed text-on-surface-variant">${escapeHtml(review.notFixed)}</p>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </details>
+                `;
+            }).join('');
+        }
+
+        function openCodeReviewDrawer() {
+            renderCodeReviewDrawer();
+            document.getElementById('code-review-drawer')?.classList.remove('hidden');
+        }
+
+        function closeCodeReviewDrawer() {
+            document.getElementById('code-review-drawer')?.classList.add('hidden');
+        }
+
         function closeConfigurationPanel() {
             const panel = document.getElementById('configuration-panel');
             const button = document.getElementById('configuration-button');
@@ -1998,11 +2135,16 @@ Configuration is loaded from the local MindShare workspace.
                     ? group.files.map((file) => {
                         const index = configurationFileIndex.push(file) - 1;
                         const isMissing = Boolean(file.missing);
+                        const title = file.title || file.name;
+                        const description = file.description || 'Source file available for local review and editing.';
                         return `
                             <div class="grid grid-cols-[1fr_auto_auto] items-center gap-3 border-t border-white/10 px-4 py-3">
                                 <div class="min-w-0">
-                                    <div class="truncate text-sm font-medium ${isMissing ? 'text-red-200' : 'text-primary-fixed'}">${escapeHtml(file.name)}${isMissing ? ' · Missing' : ''}</div>
-                                    <div class="truncate text-xs text-on-surface-variant">${escapeHtml(file.path)}</div>
+                                    <div class="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
+                                        <span class="truncate text-sm font-semibold ${isMissing ? 'text-red-200' : 'text-primary-fixed'}">${escapeHtml(title)}${isMissing ? ' · Missing' : ''}</span>
+                                        <span class="text-xs leading-relaxed text-on-surface-variant">${escapeHtml(description)}</span>
+                                    </div>
+                                    <div class="truncate text-xs text-[#f6a34d]">${escapeHtml(file.path)}</div>
                                 </div>
                                 <button class="rounded-md border border-white/15 bg-white/5 px-3 py-2 text-xs font-bold uppercase tracking-wider text-on-surface transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40" type="button" data-config-file-index="${index}" data-config-editor="notepad" ${isMissing ? 'disabled' : ''}>Notepad</button>
                                 <button class="rounded-md border border-primary-fixed-dim/35 bg-primary-fixed-dim/10 px-3 py-2 text-xs font-bold uppercase tracking-wider text-primary-fixed transition hover:bg-primary-fixed-dim/20 disabled:cursor-not-allowed disabled:opacity-40" type="button" data-config-file-index="${index}" data-config-editor="vscode" ${isMissing ? 'disabled' : ''}>VS Code</button>
@@ -2064,7 +2206,7 @@ Configuration is loaded from the local MindShare workspace.
                 document.getElementById('configuration-status').textContent = result?.error || `Could not open ${file.path}.`;
                 return;
             }
-            document.getElementById('configuration-status').textContent = `Opened ${file.name} in ${editor === 'vscode' ? 'VS Code' : 'Notepad'}.`;
+            document.getElementById('configuration-status').textContent = `Opened ${file.title || file.name} in ${editor === 'vscode' ? 'VS Code' : 'Notepad'}.`;
         }
 
         function addChatMessage(role, text) {
@@ -2081,12 +2223,12 @@ Configuration is loaded from the local MindShare workspace.
             const transcript = document.getElementById('chat-transcript');
             const isUser = role === 'user';
             const row = document.createElement('div');
-            row.className = `max-w-4xl mx-auto mb-6 flex gap-4 ${isUser ? 'flex-row-reverse' : ''}`;
+            row.className = `max-w-4xl mx-auto mb-3 flex gap-3 ${isUser ? 'flex-row-reverse' : ''}`;
             row.innerHTML = `
                 <div class="${isUser ? 'metallic-silver text-on-primary' : 'glass-panel-heavy border border-primary/30 text-primary'} w-9 h-9 rounded-lg flex items-center justify-center shrink-0">
                     <span class="material-symbols-outlined text-[20px]">${isUser ? 'person' : 'smart_toy'}</span>
                 </div>
-                <div class="${isUser ? 'bg-primary-container text-primary-fixed rounded-tr-none' : 'glass-panel-heavy text-on-surface rounded-tl-none silver-edge'} max-w-3xl p-5 rounded-2xl whitespace-pre-wrap leading-relaxed font-body-md">${escapeHtml(text)}</div>
+                <div class="${isUser ? 'bg-primary-container text-primary-fixed rounded-tr-none' : 'glass-panel-heavy text-on-surface rounded-tl-none silver-edge'} max-w-3xl px-4 py-3 rounded-xl whitespace-pre-wrap leading-snug font-body-md">${escapeHtml(text)}</div>
             `;
             transcript.appendChild(row);
             transcript.scrollTop = transcript.scrollHeight;
@@ -2195,7 +2337,7 @@ Configuration is loaded from the local MindShare workspace.
                     </span>
                     <span class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-on-surface-variant">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        ${session.processing ? (session.processingEngine === 'claude' ? 'Claude' : 'Codex') : 'Queued'}
+                        ${session.processing ? engineLabel(session.processingEngine) : 'Queued'}
                         ${session.promptQueue?.length ? ` · ${session.promptQueue.length}` : ''}
                     </span>
                 </button>
@@ -2219,7 +2361,7 @@ Configuration is loaded from the local MindShare workspace.
             const detail = document.getElementById('office-working-detail');
             const title = document.getElementById('main-window-title');
             const isWorking = Boolean(roleSession?.processing);
-            const engine = roleSession?.processingEngine === 'claude' ? 'Claude' : 'Codex';
+            const engine = engineLabel(roleSession?.processingEngine);
             frame?.classList.toggle('is-working', isWorking);
             banner?.classList.toggle('hidden', !isWorking);
             banner?.classList.toggle('is-visible', isWorking);
@@ -2445,19 +2587,24 @@ Configuration is loaded from the local MindShare workspace.
 
         function setProviderReady(engine, ready) {
             const dot = document.getElementById(engine === 'claude' ? 'claude-ready-dot' : 'codex-ready-dot');
-            if (!dot) return;
-            dot.classList.toggle('is-ready', Boolean(ready));
-            dot.classList.toggle('animate-pulse', Boolean(ready));
+            if (engine !== 'deepseek' && dot) {
+                dot.classList.toggle('is-ready', Boolean(ready));
+                dot.classList.toggle('animate-pulse', Boolean(ready));
+            }
             renderPromptEngineSelector();
         }
 
         function renderPromptEngineSelector() {
             const codexButton = document.getElementById('prompt-engine-codex');
             const claudeButton = document.getElementById('prompt-engine-claude');
-            if (!codexButton || !claudeButton) return;
+            const deepseekButton = document.getElementById('prompt-engine-deepseek');
+            const comboButton = document.getElementById('prompt-engine-combo');
+            if (!codexButton || !claudeButton || !deepseekButton || !comboButton) return;
             const buttons = [
                 { button: codexButton, engine: 'codex', available: codexAvailable },
-                { button: claudeButton, engine: 'claude', available: claudeAvailable }
+                { button: claudeButton, engine: 'claude', available: claudeAvailable },
+                { button: deepseekButton, engine: 'deepseek', available: deepseekAvailable },
+                { button: comboButton, engine: 'combo', available: codexAvailable && claudeAvailable }
             ];
             buttons.forEach(({ button, engine, available }) => {
                 const isActive = activeEngine === engine;
@@ -2465,45 +2612,55 @@ Configuration is loaded from the local MindShare workspace.
                 button.classList.toggle('is-unavailable', !available);
                 button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
                 button.title = available
-                    ? `Send next prompt to ${engine === 'claude' ? 'Claude' : 'Codex'}`
-                    : `${engine === 'claude' ? 'Claude' : 'Codex'} is not connected yet`;
+                    ? (engine === 'combo' ? 'Use Codex for chat, Claude for file builds, and DeepSeek for code review' : `Send next prompt to ${engineLabel(engine)}`)
+                    : (engine === 'combo' ? 'Combo requires Codex and Claude to be connected' : `${engineLabel(engine)} is not connected yet`);
             });
         }
 
         function setPromptEngine(engine) {
-            if (!['codex', 'claude'].includes(engine)) return;
+            if (!['codex', 'claude', 'deepseek', 'combo'].includes(engine)) return;
             activeEngine = engine;
             renderPromptEngineSelector();
             persistOfficeState();
-            const available = engine === 'claude' ? claudeAvailable : codexAvailable;
+            const available = engine === 'combo'
+                ? (codexAvailable && claudeAvailable)
+                : (engine === 'claude' ? claudeAvailable : (engine === 'deepseek' ? deepseekAvailable : codexAvailable));
             if (!available) {
-                setChatStatus(`${engine === 'claude' ? 'Claude' : 'Codex'} selected. Connect ${engine === 'claude' ? 'Claude' : 'Codex'} before sending.`);
+                setChatStatus(engine === 'combo'
+                    ? 'Combo selected. Connect Codex and Claude before sending; DeepSeek will review changed code files automatically.'
+                    : `${engineLabel(engine)} selected. Connect ${engineLabel(engine)} before sending.`);
             } else {
-                setChatStatus(`Next prompt will use ${engine === 'claude' ? 'Claude' : 'Codex'}.`);
+                setChatStatus(engine === 'combo'
+                    ? 'Next prompt will use Combo: Codex communication, Claude build, DeepSeek review.'
+                    : `Next prompt will use ${engineLabel(engine)}.`);
             }
         }
 
         async function resolvePromptEngineForSend() {
-            let available = activeEngine === 'claude' ? claudeAvailable : codexAvailable;
+            let available = activeEngine === 'combo'
+                ? (codexAvailable && claudeAvailable)
+                : (activeEngine === 'claude' ? claudeAvailable : (activeEngine === 'deepseek' ? deepseekAvailable : codexAvailable));
             if (available) return activeEngine;
 
-            setChatStatus(`Checking ${activeEngine === 'claude' ? 'Claude' : 'Codex'} connection...`);
+            setChatStatus(`Checking ${engineLabel(activeEngine)} connection...`);
             await refreshProviderReadiness();
-            available = activeEngine === 'claude' ? claudeAvailable : codexAvailable;
+            available = activeEngine === 'combo'
+                ? (codexAvailable && claudeAvailable)
+                : (activeEngine === 'claude' ? claudeAvailable : (activeEngine === 'deepseek' ? deepseekAvailable : codexAvailable));
             if (available) return activeEngine;
 
-            const fallback = codexAvailable ? 'codex' : (claudeAvailable ? 'claude' : null);
+            const fallback = codexAvailable ? 'codex' : (claudeAvailable ? 'claude' : (deepseekAvailable ? 'deepseek' : null));
             if (!fallback) return null;
 
             activeEngine = fallback;
             renderPromptEngineSelector();
             persistOfficeState();
-            setChatStatus(`Switched to available ${fallback === 'claude' ? 'Claude' : 'Codex'} connection.`);
+            setChatStatus(`Switched to available ${engineLabel(fallback)} connection.`);
             return fallback;
         }
 
         function hasConnectedOfficeSession(roleSession) {
-            return Boolean(roleSession?.codexSessionId || roleSession?.claudeSessionId);
+            return Boolean(roleSession?.codexSessionId || roleSession?.claudeSessionId || roleSession?.deepseekSessionId);
         }
 
         function setOfficeStatusDot(id, litClass, dimClass, isLit) {
@@ -2557,8 +2714,9 @@ Configuration is loaded from the local MindShare workspace.
         async function ensureProviderSession(roleSession, engine) {
             const client = mindShareLocalClient();
             const isClaude = engine === 'claude';
-            const connect = isClaude ? client?.connectClaude : client?.connectCodex;
-            const sessionKey = isClaude ? 'claudeSessionId' : 'codexSessionId';
+            const isDeepSeek = engine === 'deepseek';
+            const connect = isClaude ? client?.connectClaude : (isDeepSeek ? client?.connectDeepSeek : client?.connectCodex);
+            const sessionKey = isClaude ? 'claudeSessionId' : (isDeepSeek ? 'deepseekSessionId' : 'codexSessionId');
             if (!connect) {
                 return {
                     ok: false,
@@ -2582,6 +2740,8 @@ Configuration is loaded from the local MindShare workspace.
                 setProviderReady(engine, true);
                 if (isClaude) {
                     claudeAvailable = true;
+                } else if (isDeepSeek) {
+                    deepseekAvailable = true;
                 } else {
                     codexAvailable = true;
                 }
@@ -2598,6 +2758,8 @@ Configuration is loaded from the local MindShare workspace.
                 setProviderReady(engine, false);
                 if (isClaude) {
                     claudeAvailable = false;
+                } else if (isDeepSeek) {
+                    deepseekAvailable = false;
                 } else {
                     codexAvailable = false;
                 }
@@ -2609,6 +2771,8 @@ Configuration is loaded from the local MindShare workspace.
             setProviderReady(engine, true);
             if (isClaude) {
                 claudeAvailable = true;
+            } else if (isDeepSeek) {
+                deepseekAvailable = true;
             } else {
                 codexAvailable = true;
             }
@@ -2904,13 +3068,20 @@ Configuration is loaded from the local MindShare workspace.
 
             const queuedPrompt = roleSession.promptQueue.shift();
             const engine = queuedPrompt.engine || 'codex';
-            let available = engine === 'claude' ? claudeAvailable : codexAvailable;
+            const comboBuildRequested = engine === 'combo' && comboNeedsBuild(queuedPrompt.message, queuedPrompt.attachments);
+            let available = engine === 'combo'
+                ? (codexAvailable && (!comboBuildRequested || claudeAvailable))
+                : (engine === 'claude' ? claudeAvailable : (engine === 'deepseek' ? deepseekAvailable : codexAvailable));
             if (!available) {
                 await refreshProviderReadiness();
-                available = engine === 'claude' ? claudeAvailable : codexAvailable;
+                available = engine === 'combo'
+                    ? (codexAvailable && (!comboBuildRequested || claudeAvailable))
+                    : (engine === 'claude' ? claudeAvailable : (engine === 'deepseek' ? deepseekAvailable : codexAvailable));
             }
             if (!available) {
-                addChatMessageToRole(roleSession, 'system', `Connect ${engine === 'claude' ? 'Claude' : 'Codex'} before this queued prompt can run.`);
+                addChatMessageToRole(roleSession, 'system', engine === 'combo'
+                    ? (comboBuildRequested ? 'Connect Codex and Claude before this queued Combo build prompt can run.' : 'Connect Codex before this queued Combo chat prompt can run.')
+                    : `Connect ${engineLabel(engine)} before this queued prompt can run.`);
                 renderActiveSessions();
                 if (roleSession.promptQueue.length) {
                     processPromptQueue(roleSession);
@@ -2918,12 +3089,17 @@ Configuration is loaded from the local MindShare workspace.
                 return;
             }
 
-            const sessionPayload = await ensureProviderSession(roleSession, engine);
-            if (!sessionPayload.ok) {
+            const codexSessionPayload = engine === 'combo' ? await ensureProviderSession(roleSession, 'codex') : null;
+            const claudeSessionPayload = engine === 'combo' && comboBuildRequested ? await ensureProviderSession(roleSession, 'claude') : null;
+            const sessionPayload = engine === 'combo' ? null : await ensureProviderSession(roleSession, engine);
+            const failedSessionPayload = engine === 'combo'
+                ? (!codexSessionPayload?.ok ? codexSessionPayload : (comboBuildRequested && !claudeSessionPayload?.ok ? claudeSessionPayload : null))
+                : (!sessionPayload?.ok ? sessionPayload : null);
+            if (failedSessionPayload) {
                 if (hasConnectedOfficeSession(roleSession)) {
                     markOfficeSessionIssue(roleSession);
                 }
-                addChatError(sessionPayload.message || sessionPayload.error || `Could not connect ${roleSession.name}'s ${engine === 'claude' ? 'Claude' : 'Codex'} office session.`);
+                addChatError(failedSessionPayload.message || failedSessionPayload.error || `Could not connect ${roleSession.name}'s ${engineLabel(engine)} office session.`);
                 renderActiveSessions();
                 return;
             }
@@ -2936,27 +3112,44 @@ Configuration is loaded from the local MindShare workspace.
             persistOfficeState();
             renderActiveSessions();
             if (activeRoleSlug === roleSession.slug) {
-                setChatStatus(`${roleSession.name} is working in ${engine === 'claude' ? 'Claude' : 'Codex'}${roleSession.promptQueue.length ? ` · ${roleSession.promptQueue.length} queued` : ''}...`);
+                setChatStatus(`${roleSession.name} is working in ${engineLabel(engine)}${roleSession.promptQueue.length ? ` · ${roleSession.promptQueue.length} queued` : ''}...`);
             }
 
             try {
                 const client = mindShareLocalClient();
-                const send = engine === 'claude' ? client?.sendClaudeMessage : client?.sendCodexMessage;
+                const send = engine === 'combo'
+                    ? client?.sendComboMessage
+                    : (engine === 'claude' ? client?.sendClaudeMessage : (engine === 'deepseek' ? client?.sendDeepSeekMessage : client?.sendCodexMessage));
                 if (!send) {
                     markOfficeSessionIssue(roleSession);
-                    addChatMessageToRole(roleSession, 'system', `MindShare Local Client is not connected. Start the local client, reconnect ${engine === 'claude' ? 'Claude' : 'Codex'}, then send again.`);
+                    addChatMessageToRole(roleSession, 'system', `MindShare Local Client is not connected. Start the local client, reconnect ${engineLabel(engine)}, then send again.`);
                     if (activeRoleSlug === roleSession.slug) clearChatStatus();
                     return;
                 }
-                const payload = await send({ sessionId: sessionPayload.sessionId, message: queuedPrompt.message, roleContext: roleSession.roleContext, transcript, attachments: queuedPrompt.attachments });
+                const payload = engine === 'combo'
+                    ? await send({
+                        codexSessionId: codexSessionPayload.sessionId,
+                        claudeSessionId: claudeSessionPayload?.sessionId || '',
+                        buildRequested: comboBuildRequested,
+                        message: queuedPrompt.message,
+                        roleContext: roleSession.roleContext,
+                        transcript,
+                        attachments: queuedPrompt.attachments
+                    })
+                    : await send({ sessionId: sessionPayload.sessionId, message: queuedPrompt.message, roleContext: roleSession.roleContext, transcript, attachments: queuedPrompt.attachments });
                 if (!payload.ok) {
                     markOfficeSessionIssue(roleSession);
-                    addChatMessageToRole(roleSession, 'system', payload.error || payload.reply || 'Codex returned an error.');
+                    addChatMessageToRole(roleSession, 'system', payload.error || payload.reply || `${engineLabel(engine)} returned an error.`);
                     if (activeRoleSlug === roleSession.slug) clearChatStatus();
                     return;
                 }
                 markOfficeSessionConnected(roleSession);
                 applyTokenUsage(roleSession, payload.tokenUsage);
+                if (engine === 'combo') {
+                    roleSession.codeReviews = payload.combo?.reviews || [];
+                    latestCodeReviews = roleSession.codeReviews;
+                    renderCodeReviewDrawer();
+                }
                 addChatMessageToRole(roleSession, 'assistant', payload.reply || '(No response)');
                 addSessionCompletionNotification(roleSession);
                 if (activeRoleSlug === roleSession.slug) clearChatStatus();
@@ -2994,6 +3187,8 @@ Configuration is loaded from the local MindShare workspace.
             renderOfficeRunsControl(findRoleEntry(roleSession.slug));
             renderTokenUsage(roleSession);
             renderOfficeWorkingState(roleSession);
+            latestCodeReviews = Array.isArray(roleSession.codeReviews) ? roleSession.codeReviews : [];
+            renderCodeReviewDrawer();
             const input = document.getElementById('chat-input');
             if (input) input.value = roleSession.draftText || '';
             showOfficeContext({
@@ -3036,6 +3231,10 @@ Configuration is loaded from the local MindShare workspace.
             document.getElementById('connect-claude-button').addEventListener('click', connectClaude);
             document.getElementById('prompt-engine-codex').addEventListener('click', () => setPromptEngine('codex'));
             document.getElementById('prompt-engine-claude').addEventListener('click', () => setPromptEngine('claude'));
+            document.getElementById('prompt-engine-deepseek').addEventListener('click', () => setPromptEngine('deepseek'));
+            document.getElementById('prompt-engine-combo').addEventListener('click', () => setPromptEngine('combo'));
+            document.getElementById('code-review-button').addEventListener('click', openCodeReviewDrawer);
+            document.getElementById('code-review-close').addEventListener('click', closeCodeReviewDrawer);
             document.getElementById('work-queue-button').addEventListener('click', toggleWorkQueuePanel);
             document.getElementById('work-queue-close').addEventListener('click', closeWorkQueuePanel);
             document.getElementById('work-queue-panel').addEventListener('click', (event) => {

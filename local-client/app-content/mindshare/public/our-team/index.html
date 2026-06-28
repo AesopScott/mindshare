@@ -141,6 +141,39 @@
         .active-nav-border {
             border-bottom: 2px solid #bec6e0;
         }
+        .division-departments {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 10;
+            box-sizing: border-box;
+            width: 11.25rem;
+            height: 7.5rem;
+            max-width: calc(100% - 3rem);
+            padding: 0.72rem 0.85rem;
+            background: rgba(7, 13, 31, 0.76);
+            border: 1px solid rgba(218, 226, 253, 0.34);
+            backdrop-filter: blur(14px);
+            text-align: left;
+        }
+        .division-departments ul {
+            margin: 0;
+            padding-left: 1.05rem;
+            list-style-type: disc !important;
+            list-style-position: outside;
+        }
+        .division-departments li {
+            display: list-item;
+            margin: 0.2rem 0;
+            color: #dce1fb;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.66rem;
+            line-height: 1.18;
+            letter-spacing: 0;
+        }
+        .division-departments li::marker {
+            color: #bec6e0;
+        }
     </style>
 </head>
 <body class="bg-background">
@@ -153,7 +186,6 @@
 <div class="hidden md:flex items-center gap-8">
 <a class="font-body-md text-body-md uppercase tracking-widest text-on-surface/70 hover:text-on-surface transition-colors" href="../index.html">Home</a>
 <a class="font-body-md text-body-md uppercase tracking-widest text-primary font-bold border-b-2 border-primary pb-1" href="index.html">Our Team</a>
-<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface/70 hover:text-on-surface transition-colors" href="../services/index.html">Services</a>
 
 </div>
 </nav>
@@ -174,6 +206,15 @@
 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A professional, architectural view of a minimalist corporate boardroom with floor-to-ceiling glass windows overlooking a modern city skyline at dusk. The lighting is cold and sophisticated, with deep navy and slate blue tones throughout. The space is empty, conveying a sense of silent strategic power and architectural prestige. High-end minimal furniture completes the elite executive atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCncQpZgW_XdAwZBoJuomI7BalDRyBDIf0nWgUn4UoQJcS7yFucxdFd4u-PX6W7O9QQNH3CQztgRGDYr_GnoFhNKH6ui0r0WyxM4r9dPTS7ulkRfTgJzxB0H4r_KgwRwhzvDx9cYVJLRl3a55Xc4QFWCixwjFSg8XIznhAht_ciALSWeQ1-E2AHxHyjQlxxJTQ5RWlBSIRW96Jd-iAVri8FhxD9pa3vlnQlZ7HGM8rO8q4kSXij5c5T94BFuRyoiumN9hoQ-BtveZ9J')">
 </div>
 <div class="absolute inset-0 image-overlay"></div>
+<div class="division-departments" aria-label="Strategy and Operations departments">
+<ul>
+<li>Executive Leadership</li>
+<li>PMO</li>
+<li>Human Resources</li>
+<li>Recruiting</li>
+<li>Risk Management</li>
+</ul>
+</div>
 <div class="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end h-1/2">
 <span class="text-label-sm font-label-sm text-primary-fixed-dim uppercase tracking-widest mb-2">Division 01</span>
 <h3 class="text-headline-md font-headline-md text-on-surface mb-6 min-h-[5.25rem]">Strategy and Operations</h3>
@@ -190,6 +231,14 @@
 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A high-end architectural shot of a design studio with drafting tables and large digital screens. The environment is dominated by glass partitions and brushed steel textures. Soft, indirect lighting illuminates a clean, minimalist workspace. The palette is a sophisticated mix of charcoal, silver, and muted navy, reflecting a professional atmosphere of creative precision and luxury design." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAF7B8sOYNd8H8WYKZsGCwBZtV2ze6xLE0OQw1A0iBaa9P-Uk8XTd7aOV6FF950U-07RZlBXuRpcw2gJO1gi_v_yNdqisKo9yptISC1YL-dQFsPapbfnZ057_chA6pqJxOzGqd7tAMOcue6rjR6HrxIuQBkOcLioCcmzMJxbV9YLHea6OWrOk4ociHSzx2UfwnqVT0gBipcIGU56TmXhUxMOj_sA1LmOYqcB7wpKxR_MWrQN7N35uJW3gpPyFkCTaV7ramY7N8D2nua')">
 </div>
 <div class="absolute inset-0 image-overlay"></div>
+<div class="division-departments" aria-label="Product and Design departments">
+<ul>
+<li>Product Management</li>
+<li>Service Design</li>
+<li>Experience Design</li>
+<li>User Research</li>
+</ul>
+</div>
 <div class="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end h-1/2">
 <span class="text-label-sm font-label-sm text-primary-fixed-dim uppercase tracking-widest mb-2">Division 02</span>
 <h3 class="text-headline-md font-headline-md text-on-surface mb-6 min-h-[5.25rem]">Product and Design</h3>
@@ -206,6 +255,15 @@
 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDyRonNayA9aB9dbE9pmX3szWvXl4WL1n3XgbbDUVOIqXPfZ1LoMC2FM3BW6G8Ttm0hTVcELaS6YysNh7rUjH1uOX5X3v1PCy_dDEhuKG6p82XHat2z_8QbzjS09cVXf6lGgFNqL6AFkkUx0lBxG_Wd_RbYgihQcsqOpcNxuU80YVpHsBPiTYCB0UDRmlmvDFx6zAcbCqjdB8iq_YoO6GG5V9UoemsqLytlofmdFarhYusMJ5FtJMaZyDIK7XLFZ4WEmkorMktdAoDR')">
 </div>
 <div class="absolute inset-0 image-overlay"></div>
+<div class="division-departments" aria-label="Technology and Data departments">
+<ul>
+<li>Engineering</li>
+<li>Platform Engineering</li>
+<li>Data Engineering</li>
+<li>AI Engineering</li>
+<li>Security</li>
+</ul>
+</div>
 <div class="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end h-1/2">
 <span class="text-label-sm font-label-sm text-primary-fixed-dim uppercase tracking-widest mb-2">Division 03</span>
 <h3 class="text-headline-md font-headline-md text-on-surface mb-6 min-h-[5.25rem]">Technology and Data</h3>
@@ -222,6 +280,15 @@
 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="An expansive, wide-angle architectural photograph of a sleek, glass-enclosed atrium in a luxury financial district. The lighting is crisp and cool, featuring sharp highlights on polished granite floors and metallic pillars. The mood is powerful and active, suggesting a hub of global commerce and high-stakes market activity. The color scheme focuses on deep slates and reflective silver surfaces." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBa6y_x82K0oyDcT8elcFN21fLdXUmsPMxAzXFfbXKMvyqM4z6LNhIM-ywNViodMhi_4FkaZ6tN8tz4Is_JfdZIqdYL4MPokhvRuZbG2Mp7NvFqrxKNekixJvveWcf3dkBBsEG_XLWXm4zU42Gcv0egOz9p6V6gJkr5WGV06vXpWPywl5Z--cxSNNR4RvccjSKbGZbonKo1jBsL8N7adHYgaoLir4wU7cUx62lgDZe-7x8KZ19-5NPGp1EqecJWfQ50XZDo9s-4EX3K')">
 </div>
 <div class="absolute inset-0 image-overlay"></div>
+<div class="division-departments" aria-label="Revenue and Market departments">
+<ul>
+<li>Sales</li>
+<li>Marketing</li>
+<li>Partnerships</li>
+<li>Customer Success</li>
+<li>Support</li>
+</ul>
+</div>
 <div class="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end h-1/2">
 <span class="text-label-sm font-label-sm text-primary-fixed-dim uppercase tracking-widest mb-2">Division 04</span>
 <h3 class="text-headline-md font-headline-md text-on-surface mb-6 min-h-[5.25rem]">Revenue and Market</h3>
@@ -238,6 +305,15 @@
 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A meticulously composed architectural shot of a high-security financial vault area, redesigned as a modern glass-and-steel office corridor. Transparent surfaces meet heavy, dark masonry. The lighting is focused and dramatic, highlighting the structural integrity of the building. The scene evokes trust, permanence, and financial sophistication through its architectural language of strength and transparency." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC78k-Y-md3tPkbhzGli5xqQ9ptK3K0-_fjv9aQrlX9S0rOjrgB-KrRDrEPnqDIeCjcTfajLD8f3gt8W8bVB5nDDZwjzneCdEbVKIrj8UH9GdTQ-gcIJtNwgjz8RNrpLddwSU92OQ9at5wybK2sa1Sp7X0ZW-wuHNynTGPCad7Ft8CXhyNLFKiiSs1hwQXHPhwZA-WJRcGecADmBoylXyJ_G41baxrmo726_pkT-6TW3ljktqWSU-7rpesS_vacG6j87eNjlbfn_FA-')">
 </div>
 <div class="absolute inset-0 image-overlay"></div>
+<div class="division-departments" aria-label="Finance departments">
+<ul>
+<li>Accounting</li>
+<li>Accounts Payable</li>
+<li>Accounts Receivable</li>
+<li>Purchasing</li>
+<li>Tax</li>
+</ul>
+</div>
 <div class="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end h-1/2">
 <span class="text-label-sm font-label-sm text-primary-fixed-dim uppercase tracking-widest mb-2">Division 05</span>
 <h3 class="text-headline-md font-headline-md text-on-surface mb-6 min-h-[5.25rem]">Finance</h3>
@@ -254,6 +330,14 @@
 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A clean, minimalist architectural view of a luxury lobby and reception space. High ceilings, white marble details, and dark steel accents define the aesthetic. The lighting is bright and welcoming yet strictly professional. The mood is one of seamless efficiency and high-level hospitality, reflecting the architectural precision of an elite corporate headquarters at the center of a metropolitan hub." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3rDu10JbcQ_6gCGEuHcfFhp2jIJ6I9qSteJR8tI6cTE1YubkqY0a7KnrNQHZs2S4irhU9pL_y2Wkf2TaxC-im3wAnaClfzriy6Jf47APbjPcir7bI-mFtwgCTIFNaiRKw-naobvgC-GA3iss7C3nD9VNwT8CVkNyJ92xVQXoClfbEdpIuc040j0sns2QHcfqcwFg4IUL-v6kw8ahwDdbqdPICqr5lPAffTWSeKOxy4gGoZpy1Q30aSOJpYzdU7YF4_inFBs-0bNzc')">
 </div>
 <div class="absolute inset-0 image-overlay"></div>
+<div class="division-departments" aria-label="Administration departments">
+<ul>
+<li>People Operations</li>
+<li>Legal</li>
+<li>Compliance</li>
+<li>Vendor Management</li>
+</ul>
+</div>
 <div class="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end h-1/2">
 <span class="text-label-sm font-label-sm text-primary-fixed-dim uppercase tracking-widest mb-2">Division 06</span>
 <h3 class="text-headline-md font-headline-md text-on-surface mb-6 min-h-[5.25rem]">Administration</h3>

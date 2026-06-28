@@ -14,7 +14,7 @@ npm start
 
 The app loads:
 
-- `C:\Users\scott\Code\mindshare\public\departments\index.html`
+- `C:\Users\scott\Code\mindshare\local-client\app-content\mindshare\public\departments\index.html`
 - `preload.js`, which exposes `window.MindShareLocalClient`
 - `mindshare-local-client.js`, which checks Codex install/login state and sends prompts through local Codex CLI
 

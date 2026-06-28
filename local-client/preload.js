@@ -13,6 +13,7 @@ contextBridge.exposeInMainWorld('MindShareLocalClient', {
   controlAutomation: (payload) => ipcRenderer.invoke('mindshare:automation-control', payload),
   sendCodexMessage: (payload) => ipcRenderer.invoke('mindshare:codex-message', payload),
   sendClaudeMessage: (payload) => ipcRenderer.invoke('mindshare:claude-message', payload),
+  sendComboMessage: (payload) => ipcRenderer.invoke('mindshare:combo-message', payload),
   connectDeepSeek: (payload) => ipcRenderer.invoke('mindshare:deepseek-connect', payload),
   sendDeepSeekMessage: (payload) => ipcRenderer.invoke('mindshare:deepseek-message', payload),
   getDeepSeekBalance: () => ipcRenderer.invoke('mindshare:deepseek-balance'),

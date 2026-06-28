@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta http-equiv="refresh" content="60">
+  <title>Lane Token Usage</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f1ea;
+      --panel: #fffdf8;
+      --ink: #1f2933;
+      --muted: #6b7280;
+      --line: #d8d2c4;
+      --codex: #0f766e;
+      --claude: #c2410c;
+      --accent: #e7decf;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: linear-gradient(180deg, #efe7da 0%, #f7f4ee 240px, #f4f1ea 100%); color: var(--ink); font-family: Georgia, "Times New Roman", serif; }
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 18px 40px; }
+    h1, h2, h3 { margin: 0; }
+    h1 { font-size: 30px; letter-spacing: 0.01em; }
+    h2 { font-size: 18px; margin-bottom: 14px; }
+    p { margin: 0; }
+    .meta { margin-top: 8px; color: var(--muted); font-size: 13px; }
+    .version-banner { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 12px; border: 1px solid var(--codex); border-radius: 8px; background: rgba(15,118,110,0.08); color: var(--ink); font-family: Consolas, "SFMono-Regular", monospace; font-size: 13px; font-weight: 700; }
+    .live-status { display: inline-flex; gap: 8px; align-items: center; margin-top: 10px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; background: #fffaf2; color: var(--muted); font-size: 12px; }
+    .pulse { width: 8px; height: 8px; border-radius: 999px; background: var(--codex); box-shadow: 0 0 0 4px rgba(15,118,110,0.12); }
+    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-top: 22px; box-shadow: 0 10px 30px rgba(31,41,51,0.05); }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 16px; }
+    .stat { background: var(--accent); border-radius: 10px; padding: 14px; border-left: 4px solid var(--line); }
+    .stat.codex { border-left-color: var(--codex); }
+    .stat.claude { border-left-color: var(--claude); }
+    .stat .k { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .stat .v { margin-top: 6px; font-size: 22px; font-weight: 700; font-family: Consolas, "SFMono-Regular", monospace; }
+    .split { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; align-items: start; }
+    .lists { display: grid; gap: 14px; }
+    ul { margin: 10px 0 0; padding-left: 18px; }
+    li { margin: 6px 0; }
+    .muted { color: var(--muted); font-size: 12px; }
+    svg { width: 100%; height: auto; display: block; background: #fffaf2; border-radius: 10px; border: 1px solid var(--line); }
+    .axis, .grid { stroke: var(--line); stroke-width: 1; }
+    .grid { stroke-dasharray: 3 5; }
+    .series { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .codex { stroke: var(--codex); }
+    .claude { stroke: var(--claude); }
+    .dot { fill: #fff; stroke-width: 2; }
+    .label { fill: var(--muted); font-size: 12px; }
+    .legend { display: flex; gap: 18px; margin-top: 12px; color: var(--muted); font-size: 13px; }
+    .swatch { width: 20px; height: 3px; display: inline-block; vertical-align: middle; margin-right: 8px; border-radius: 999px; }
+    .swatch.codex { background: var(--codex); }
+    .swatch.claude { background: var(--claude); }
+    .note { margin-top: 14px; padding: 12px 14px; background: #fbf7ef; border: 1px solid var(--line); border-radius: 10px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13px; }
+    th, td { padding: 9px 10px; border-bottom: 1px solid var(--line); }
+    th { text-align: left; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .num { text-align: right; font-family: Consolas, "SFMono-Regular", monospace; }
+    .total-row td { border-top: 2px solid var(--line); font-weight: 700; }
+    code { font-family: Consolas, "SFMono-Regular", monospace; font-size: 12px; }
+    @media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Daily Token Usage</h1>
+    <p class="meta">Source <code>roles/lab-operator/token usage.md</code> | Data through 2026-06-25 20:30:53 MDT | Build 20260625203251</p>
+    <p class="version-banner">Report v20:32</p>
+    <p class="live-status"><span class="pulse"></span><span>Live view refreshes every 60 seconds after hourly rebuilds.</span></p>
+    <section class="panel">
+      <h2>Summary</h2>
+      <div class="stats">
+        <div class="stat codex"><div class="k">Codex total</div><div class="v">588,765,180</div></div>
+        <div class="stat claude"><div class="k">Claude total</div><div class="v">38,274,029</div></div>
+        <div class="stat"><div class="k">Grand total</div><div class="v">627,039,209</div></div>
+        <div class="stat"><div class="k">Hourly windows</div><div class="v">52</div></div>
+      </div>
+      <div class="split" style="margin-top:18px;">
+        <div>
+          <h3>Largest Claude sessions</h3>
+          <ul>
+            <li><strong>13,226,355</strong> - a1c92d3a-0647-400b-99ef-daa6e4222cee <span class="muted">(C:\Users\scott\Code\Aesop\.claude\worktrees\modest-wozniak-41c6ce)</span></li>
+<li><strong>4,477,417</strong> - 94189610-3bd7-4814-8c85-82e9f509857f <span class="muted">(C:\Users\scott\Code\mojo)</span></li>
+<li><strong>1,980,802</strong> - 94189610-3bd7-4814-8c85-82e9f509857f <span class="muted">(C:\Users\scott\Code\mojo)</span></li>
+          </ul>
+        </div>
+        <div class="lists">
+          <div>
+            <h3>Largest Codex rooms</h3>
+            <ul>
+              <li><strong>35,769,191</strong> - Tess - 4 - Autonomy Engineer <span class="muted">(019eec2c-bb6b-7b03-8c97-f73cf63dc7a8)</span></li>
+<li><strong>32,688,451</strong> - Tess - 4 - Autonomy Engineer <span class="muted">(019eec2c-bb6b-7b03-8c97-f73cf63dc7a8)</span></li>
+<li><strong>25,657,459</strong> - Tess - 4 - Autonomy Engineer <span class="muted">(019eec2c-bb6b-7b03-8c97-f73cf63dc7a8)</span></li>
+            </ul>
+          </div>
+          <div class="note"><strong>Confidence:</strong> Codex rows come from visible-message estimates because exact thread token fields are unavailable. Claude rows use exact local JSONL usage fields including input, output, cache_create, and cache_read tokens. Confidence mix: estimate-visible: 14; exact: 11; exact-local-jsonl: 39; exact-local-jsonl-delta: 190; exact-local-jsonl-last-usage-sum: 76; no-activity: 25.</div>
+        </div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Codex Usage By Room</h2>
+      <p class="meta">Rolling 24 hours ending 2026-06-25 20:30:53 MDT.</p>
+      <table>
+        <thead>
+          <tr><th>Room / Role</th><th>Repo / CWD</th><th class="num">Input</th><th class="num">Output</th><th class="num">Cache Read</th><th class="num">Total</th><th class="num">Share</th><th class="num">Rows</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019eec2c-bb6b-7b03-8c97-f73cf63dc7a8</div></td><td></td><td class="num">195,471,311</td><td class="num">623,742</td><td class="num">185,895,424</td><td class="num">196,095,053</td><td class="num">60.1%</td><td class="num">11</td></tr>
+<tr><td><strong>Liz - Web Manager</strong><div class="muted">019ef4df-006a-7ee0-93d2-94ee1e143336</div></td><td></td><td class="num">20,378,932</td><td class="num">62,711</td><td class="num">19,235,072</td><td class="num">20,441,643</td><td class="num">6.3%</td><td class="num">2</td></tr>
+<tr><td><strong>Finn - 3 - Director of Finance</strong><div class="muted">019ef46f-ac78-7932-bcb3-5426c5259a62</div></td><td></td><td class="num">18,193,893</td><td class="num">41,018</td><td class="num">17,374,208</td><td class="num">18,234,911</td><td class="num">5.6%</td><td class="num">5</td></tr>
+<tr><td><strong>Cole - 4 - HR</strong><div class="muted">019efbcf-4894-7413-9975-cad9594794f8</div></td><td></td><td class="num">15,736,507</td><td class="num">52,161</td><td class="num">14,103,168</td><td class="num">15,788,668</td><td class="num">4.8%</td><td class="num">9</td></tr>
+<tr><td><strong>Reid - 3 - Release Manager</strong><div class="muted">019ee143-3f32-7093-9a24-acd3558fc52e</div></td><td></td><td class="num">14,158,514</td><td class="num">35,613</td><td class="num">12,321,024</td><td class="num">14,194,127</td><td class="num">4.4%</td><td class="num">11</td></tr>
+<tr><td><strong>Ana - 4 - Recruiter</strong><div class="muted">019ee052-168c-7da3-a3c3-df936e5c1c92</div></td><td></td><td class="num">13,785,053</td><td class="num">53,101</td><td class="num">11,934,592</td><td class="num">13,838,154</td><td class="num">4.2%</td><td class="num">4</td></tr>
+<tr><td><strong>Lane - Mojo Lab Admin</strong><div class="muted">019eedc7-9e34-78c2-9792-5e8c1787fd46</div></td><td></td><td class="num">13,012,799</td><td class="num">31,050</td><td class="num">12,001,792</td><td class="num">13,043,849</td><td class="num">4.0%</td><td class="num">9</td></tr>
+<tr><td><strong>Vik - AI Architect</strong><div class="muted">019ee0cf-d067-7e60-92ae-41ea66a75746</div></td><td></td><td class="num">8,069,377</td><td class="num">17,836</td><td class="num">6,455,680</td><td class="num">8,087,213</td><td class="num">2.5%</td><td class="num">7</td></tr>
+<tr><td><strong>Tess Level 4 autonomy backlog processing</strong><div class="muted">019efc02-4490-7b40-8a56-e20ffebac273</div></td><td></td><td class="num">7,491,466</td><td class="num">50,700</td><td class="num">6,825,088</td><td class="num">7,542,166</td><td class="num">2.3%</td><td class="num">1</td></tr>
+<tr><td><strong>Check Cloudflare SSL readiness</strong><div class="muted">019efb0c-2304-7292-ae11-6397226c028a</div></td><td></td><td class="num">2,863,334</td><td class="num">7,076</td><td class="num">2,399,104</td><td class="num">2,870,410</td><td class="num">0.9%</td><td class="num">2</td></tr>
+<tr><td><strong>June - 3 - Staff Writer</strong><div class="muted">019eed17-7348-7593-b2ae-661027ba9cb2</div></td><td></td><td class="num">2,075,245</td><td class="num">10,904</td><td class="num">1,547,392</td><td class="num">2,086,149</td><td class="num">0.6%</td><td class="num">5</td></tr>
+<tr><td><strong>MAPS local migration delta refresh</strong><div class="muted">019effd6-d40c-7d21-9c23-627492508fb0</div></td><td></td><td class="num">1,708,250</td><td class="num">20,208</td><td class="num">1,596,416</td><td class="num">1,728,458</td><td class="num">0.5%</td><td class="num">1</td></tr>
+<tr><td><strong>Mae - 4 - Comms Director</strong><div class="muted">019ee122-4c9b-72b2-b506-bbd25466bf15</div></td><td></td><td class="num">1,517,965</td><td class="num">5,169</td><td class="num">903,936</td><td class="num">1,523,134</td><td class="num">0.5%</td><td class="num">3</td></tr>
+<tr><td><strong>MAPS local migration delta refresh</strong><div class="muted">019efef6-5edb-74a0-9553-0cda69c05010</div></td><td></td><td class="num">1,356,176</td><td class="num">19,116</td><td class="num">1,211,392</td><td class="num">1,375,292</td><td class="num">0.4%</td><td class="num">1</td></tr>
+<tr><td><strong>MAPS local migration delta refresh</strong><div class="muted">019effd6-f7c8-7503-8f08-567cdfdb7872</div></td><td></td><td class="num">1,358,931</td><td class="num">15,936</td><td class="num">1,237,376</td><td class="num">1,374,867</td><td class="num">0.4%</td><td class="num">1</td></tr>
+<tr><td><strong>MAPS local migration delta refresh</strong><div class="muted">019effd6-9b60-72b3-93df-146f92831b9b</div></td><td></td><td class="num">1,340,303</td><td class="num">16,091</td><td class="num">1,249,024</td><td class="num">1,356,394</td><td class="num">0.4%</td><td class="num">1</td></tr>
+<tr><td><strong>MAPS local migration delta refresh</strong><div class="muted">019efef5-f505-77d2-ae3b-c5a415dc7c22</div></td><td></td><td class="num">1,325,549</td><td class="num">15,938</td><td class="num">1,167,488</td><td class="num">1,341,487</td><td class="num">0.4%</td><td class="num">1</td></tr>
+<tr><td><strong>MAPS local migration delta refresh</strong><div class="muted">019efef6-0d89-7713-a328-cdfef74cbe6e</div></td><td></td><td class="num">915,174</td><td class="num">10,853</td><td class="num">748,800</td><td class="num">926,027</td><td class="num">0.3%</td><td class="num">1</td></tr>
+<tr><td><strong>MAPS local migration delta refresh</strong><div class="muted">019effd7-59ec-7222-b3a2-b84f66a9e47c</div></td><td></td><td class="num">749,204</td><td class="num">8,735</td><td class="num">676,096</td><td class="num">757,939</td><td class="num">0.2%</td><td class="num">1</td></tr>
+<tr><td><strong>MAPS local migration delta refresh</strong><div class="muted">019efef5-9e70-7213-beda-66cd9b169a77</div></td><td></td><td class="num">654,002</td><td class="num">11,414</td><td class="num">597,248</td><td class="num">665,416</td><td class="num">0.2%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019eff50-27f8-72e0-8d8d-1f4c11f2ad18</div></td><td></td><td class="num">486,001</td><td class="num">2,757</td><td class="num">414,208</td><td class="num">488,758</td><td class="num">0.1%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess Level 4 autonomy script</strong><div class="muted">019eff5e-2b4d-7c10-9124-2bfbcec51677</div></td><td></td><td class="num">412,481</td><td class="num">3,506</td><td class="num">356,736</td><td class="num">415,987</td><td class="num">0.1%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019eff50-db3f-79b1-ba7c-e2449f15d0a6</div></td><td></td><td class="num">367,205</td><td class="num">3,044</td><td class="num">289,536</td><td class="num">370,249</td><td class="num">0.1%</td><td class="num">1</td></tr>
+<tr><td><strong>Imani - 3 - Data Engineering Director</strong><div class="muted">019efc1d-b79a-7dd2-9a62-a7ff4e901cde</div></td><td></td><td class="num">269,691</td><td class="num">315</td><td class="num">136,448</td><td class="num">270,006</td><td class="num">0.1%</td><td class="num">1</td></tr>
+<tr><td><strong>Use open SSH session with Codex</strong><div class="muted">019efb41-347c-79a2-988e-221dfe87d32d</div></td><td></td><td class="num">210,453</td><td class="num">3,416</td><td class="num">113,664</td><td class="num">213,869</td><td class="num">0.1%</td><td class="num">1</td></tr>
+<tr><td><strong>Vik daily role memory maintenance</strong><div class="muted">019efb9f-6841-7742-b18e-7e9bf96b82a5</div></td><td></td><td class="num">149,401</td><td class="num">1,709</td><td class="num">125,056</td><td class="num">151,110</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Vik daily role memory maintenance</strong><div class="muted">019efef2-42db-7111-a637-a8c424b60968</div></td><td></td><td class="num">110,033</td><td class="num">1,422</td><td class="num">91,520</td><td class="num">111,455</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Vik daily role memory maintenance</strong><div class="muted">019efb9e-d74b-7fe2-8f18-26f6ff7b8e38</div></td><td></td><td class="num">86,616</td><td class="num">926</td><td class="num">67,584</td><td class="num">87,542</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Mara - 3 - Front Desk Administrator</strong><div class="muted">019efcf9-792f-7d83-9cae-757015181e67</div></td><td></td><td class="num">64,303</td><td class="num">398</td><td class="num">11,008</td><td class="num">64,701</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019eff2d-affd-7e21-8714-9ba84e9728af</div></td><td></td><td class="num">63,172</td><td class="num">174</td><td class="num">15,104</td><td class="num">63,346</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Paige - 3 - Executive Assistant</strong><div class="muted">019eedc1-b201-7fb2-a5bd-9e1c6957fa39</div></td><td></td><td class="num">62,629</td><td class="num">306</td><td class="num">32,512</td><td class="num">62,935</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Imani - old Mojo office attempt</strong><div class="muted">019efc0c-becc-71b0-b095-f254fc4063fb</div></td><td></td><td class="num">45,922</td><td class="num">631</td><td class="num">39,680</td><td class="num">46,553</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Bea - Mojo MAPS Engineer</strong><div class="muted">019eff16-7fa9-7763-a5c6-599df68b69bd</div></td><td></td><td class="num">30,799</td><td class="num">113</td><td class="num">4,992</td><td class="num">30,912</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019f002e-c4ad-7c63-8eca-704348a0f339</div></td><td></td><td class="num">30,376</td><td class="num">259</td><td class="num">4,992</td><td class="num">30,635</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019eff2d-1a1b-7903-bdc9-2a5866ecbb2f</div></td><td></td><td class="num">30,451</td><td class="num">163</td><td class="num">2,432</td><td class="num">30,614</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019eff4f-8769-7bf0-b2f0-6a15d0d340e8</div></td><td></td><td class="num">30,324</td><td class="num">277</td><td class="num">4,992</td><td class="num">30,601</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019eff2b-1b66-7a20-99bc-4c92bcc49d10</div></td><td></td><td class="num">30,240</td><td class="num">236</td><td class="num">4,992</td><td class="num">30,476</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019eff47-7953-7f03-904a-d6ff899b3eba</div></td><td></td><td class="num">30,309</td><td class="num">104</td><td class="num">16,768</td><td class="num">30,413</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019eff16-efc9-7160-9a0e-b1dd393dd7c7</div></td><td></td><td class="num">30,173</td><td class="num">96</td><td class="num">4,992</td><td class="num">30,269</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Cole - 4 - HR</strong><div class="muted">019f004c-e08c-7291-b909-8e4f78774cfb</div></td><td></td><td class="num">29,860</td><td class="num">97</td><td class="num">2,432</td><td class="num">29,957</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Cole - 4 - HR</strong><div class="muted">019f004e-466e-7ed2-8be2-18f08a0cf18a</div></td><td></td><td class="num">29,861</td><td class="num">19</td><td class="num">4,992</td><td class="num">29,880</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019eff0c-0a1f-75a3-bd42-37a4ab5c2d88</div></td><td></td><td class="num">28,579</td><td class="num">103</td><td class="num">2,432</td><td class="num">28,682</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019eff0a-2de0-7e61-b89d-4eef13c8b5bb</div></td><td></td><td class="num">28,586</td><td class="num">82</td><td class="num">2,432</td><td class="num">28,668</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>Tess - 4 - Autonomy Engineer</strong><div class="muted">019efefd-134f-7e12-aec3-48ab618a4643</div></td><td></td><td class="num">28,533</td><td class="num">76</td><td class="num">2,432</td><td class="num">28,609</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>MindShare local office chat - no role selected</strong><div class="muted">019eff09-b319-7773-85b0-72ebaa18c084</div></td><td></td><td class="num">19,283</td><td class="num">75</td><td class="num">4,992</td><td class="num">19,358</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>MindShare local office chat - no role selected</strong><div class="muted">019eff0b-c443-7380-a399-a5baa281dc23</div></td><td></td><td class="num">19,281</td><td class="num">73</td><td class="num">4,992</td><td class="num">19,354</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>MindShare local office chat - no role selected</strong><div class="muted">019efefa-bb42-7b03-bf8b-b9a33a5c214d</div></td><td></td><td class="num">19,260</td><td class="num">54</td><td class="num">4,992</td><td class="num">19,314</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>MindShare local office chat - no role selected</strong><div class="muted">019efef8-2a85-74d1-b21b-856cac3b1efc</div></td><td></td><td class="num">19,270</td><td class="num">34</td><td class="num">2,432</td><td class="num">19,304</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>MindShare local office chat - no role selected</strong><div class="muted">019efef6-feb1-79a0-8a93-a627beb8882e</div></td><td></td><td class="num">19,271</td><td class="num">16</td><td class="num">4,992</td><td class="num">19,287</td><td class="num">0.0%</td><td class="num">1</td></tr>
+<tr><td><strong>MindShare local Codex session - no active role</strong><div class="muted">019f0023-939c-7550-8cf4-750301148211</div></td><td></td><td class="num">18,897</td><td class="num">5</td><td class="num">4,992</td><td class="num">18,902</td><td class="num">0.0%</td><td class="num">1</td></tr>
+          <tr class="total-row"><td>Last 24h Total</td><td></td><td></td><td></td><td></td><td class="num">326,093,103</td><td class="num">100.0%</td><td></td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="panel">
+      <h2>Hourly Totals By Interface</h2>
+      <svg viewBox="0 0 960 340" role="img" aria-label="Hourly token totals for Codex and Claude">
+        <line class="grid" x1="64" y1="308.00" x2="940" y2="308.00" />
+<text class="label" x="56" y="312.00" text-anchor="end">0</text>
+<line class="grid" x1="64" y1="238.00" x2="940" y2="238.00" />
+<text class="label" x="56" y="242.00" text-anchor="end">15,625,000</text>
+<line class="grid" x1="64" y1="168.00" x2="940" y2="168.00" />
+<text class="label" x="56" y="172.00" text-anchor="end">31,250,000</text>
+<line class="grid" x1="64" y1="98.00" x2="940" y2="98.00" />
+<text class="label" x="56" y="102.00" text-anchor="end">46,875,000</text>
+<line class="grid" x1="64" y1="28.00" x2="940" y2="28.00" />
+<text class="label" x="56" y="32.00" text-anchor="end">62,500,000</text>
+        <line class="axis" x1="64" y1="308" x2="940" y2="308" />
+        <line class="axis" x1="64" y1="28" x2="64" y2="308" />
+        <polyline class="series codex" points="64.00,308.00 81.18,308.00 98.35,308.00 115.53,308.00 132.71,308.00 149.88,308.00 167.06,307.95 184.24,307.96 201.41,302.41 218.59,306.00 235.76,306.30 252.94,306.18 270.12,155.80 287.29,130.43 304.47,181.72 321.65,258.30 338.82,297.46 356.00,300.67 373.18,292.48 390.35,299.57 407.53,295.80 424.71,295.92 441.88,261.69 459.06,300.40 476.24,299.51 493.41,301.88 510.59,300.16 527.76,286.36 544.94,297.85 562.12,298.21 579.29,274.94 596.47,223.71 613.65,28.09 630.82,291.42 648.00,246.08 665.18,274.94 682.35,168.90 699.53,223.71 716.71,28.09 733.88,308.00 751.06,308.00 768.24,308.00 785.41,308.00 802.59,308.00 819.76,308.00 836.94,193.50 854.12,137.59 871.29,108.74 888.47,177.68 905.65,182.99 922.82,241.00 940.00,189.97" />
+        <circle class="dot codex" cx="64.00" cy="308.00" r="3" />
+<circle class="dot codex" cx="81.18" cy="308.00" r="3" />
+<circle class="dot codex" cx="98.35" cy="308.00" r="3" />
+<circle class="dot codex" cx="115.53" cy="308.00" r="3" />
+<circle class="dot codex" cx="132.71" cy="308.00" r="3" />
+<circle class="dot codex" cx="149.88" cy="308.00" r="3" />
+<circle class="dot codex" cx="167.06" cy="307.95" r="3" />
+<circle class="dot codex" cx="184.24" cy="307.96" r="3" />
+<circle class="dot codex" cx="201.41" cy="302.41" r="3" />
+<circle class="dot codex" cx="218.59" cy="306.00" r="3" />
+<circle class="dot codex" cx="235.76" cy="306.30" r="3" />
+<circle class="dot codex" cx="252.94" cy="306.18" r="3" />
+<circle class="dot codex" cx="270.12" cy="155.80" r="3" />
+<circle class="dot codex" cx="287.29" cy="130.43" r="3" />
+<circle class="dot codex" cx="304.47" cy="181.72" r="3" />
+<circle class="dot codex" cx="321.65" cy="258.30" r="3" />
+<circle class="dot codex" cx="338.82" cy="297.46" r="3" />
+<circle class="dot codex" cx="356.00" cy="300.67" r="3" />
+<circle class="dot codex" cx="373.18" cy="292.48" r="3" />
+<circle class="dot codex" cx="390.35" cy="299.57" r="3" />
+<circle class="dot codex" cx="407.53" cy="295.80" r="3" />
+<circle class="dot codex" cx="424.71" cy="295.92" r="3" />
+<circle class="dot codex" cx="441.88" cy="261.69" r="3" />
+<circle class="dot codex" cx="459.06" cy="300.40" r="3" />
+<circle class="dot codex" cx="476.24" cy="299.51" r="3" />
+<circle class="dot codex" cx="493.41" cy="301.88" r="3" />
+<circle class="dot codex" cx="510.59" cy="300.16" r="3" />
+<circle class="dot codex" cx="527.76" cy="286.36" r="3" />
+<circle class="dot codex" cx="544.94" cy="297.85" r="3" />
+<circle class="dot codex" cx="562.12" cy="298.21" r="3" />
+<circle class="dot codex" cx="579.29" cy="274.94" r="3" />
+<circle class="dot codex" cx="596.47" cy="223.71" r="3" />
+<circle class="dot codex" cx="613.65" cy="28.09" r="3" />
+<circle class="dot codex" cx="630.82" cy="291.42" r="3" />
+<circle class="dot codex" cx="648.00" cy="246.08" r="3" />
+<circle class="dot codex" cx="665.18" cy="274.94" r="3" />
+<circle class="dot codex" cx="682.35" cy="168.90" r="3" />
+<circle class="dot codex" cx="699.53" cy="223.71" r="3" />
+<circle class="dot codex" cx="716.71" cy="28.09" r="3" />
+<circle class="dot codex" cx="733.88" cy="308.00" r="3" />
+<circle class="dot codex" cx="751.06" cy="308.00" r="3" />
+<circle class="dot codex" cx="768.24" cy="308.00" r="3" />
+<circle class="dot codex" cx="785.41" cy="308.00" r="3" />
+<circle class="dot codex" cx="802.59" cy="308.00" r="3" />
+<circle class="dot codex" cx="819.76" cy="308.00" r="3" />
+<circle class="dot codex" cx="836.94" cy="193.50" r="3" />
+<circle class="dot codex" cx="854.12" cy="137.59" r="3" />
+<circle class="dot codex" cx="871.29" cy="108.74" r="3" />
+<circle class="dot codex" cx="888.47" cy="177.68" r="3" />
+<circle class="dot codex" cx="905.65" cy="182.99" r="3" />
+<circle class="dot codex" cx="922.82" cy="241.00" r="3" />
+<circle class="dot codex" cx="940.00" cy="189.97" r="3" />
+        <polyline class="series claude" points="64.00,308.00 81.18,308.00 98.35,308.00 115.53,308.00 132.71,308.00 149.88,308.00 167.06,288.98 184.24,298.99 201.41,275.47 218.59,308.00 235.76,308.00 252.94,308.00 270.12,200.54 287.29,308.00 304.47,308.00 321.65,308.00 338.82,308.00 356.00,308.00 373.18,308.00 390.35,308.00 407.53,308.00 424.71,308.00 441.88,308.00 459.06,308.00 476.24,308.00 493.41,308.00 510.59,308.00 527.76,308.00 544.94,308.00 562.12,308.00 579.29,308.00 596.47,308.00 613.65,308.00 630.82,308.00 648.00,308.00 665.18,308.00 682.35,308.00 699.53,308.00 716.71,308.00 733.88,308.00 751.06,308.00 768.24,308.00 785.41,308.00 802.59,308.00 819.76,308.00 836.94,308.00 854.12,306.57 871.29,308.00 888.47,308.00 905.65,308.00 922.82,307.84 940.00,306.14" />
+        <circle class="dot claude" cx="64.00" cy="308.00" r="3" />
+<circle class="dot claude" cx="81.18" cy="308.00" r="3" />
+<circle class="dot claude" cx="98.35" cy="308.00" r="3" />
+<circle class="dot claude" cx="115.53" cy="308.00" r="3" />
+<circle class="dot claude" cx="132.71" cy="308.00" r="3" />
+<circle class="dot claude" cx="149.88" cy="308.00" r="3" />
+<circle class="dot claude" cx="167.06" cy="288.98" r="3" />
+<circle class="dot claude" cx="184.24" cy="298.99" r="3" />
+<circle class="dot claude" cx="201.41" cy="275.47" r="3" />
+<circle class="dot claude" cx="218.59" cy="308.00" r="3" />
+<circle class="dot claude" cx="235.76" cy="308.00" r="3" />
+<circle class="dot claude" cx="252.94" cy="308.00" r="3" />
+<circle class="dot claude" cx="270.12" cy="200.54" r="3" />
+<circle class="dot claude" cx="287.29" cy="308.00" r="3" />
+<circle class="dot claude" cx="304.47" cy="308.00" r="3" />
+<circle class="dot claude" cx="321.65" cy="308.00" r="3" />
+<circle class="dot claude" cx="338.82" cy="308.00" r="3" />
+<circle class="dot claude" cx="356.00" cy="308.00" r="3" />
+<circle class="dot claude" cx="373.18" cy="308.00" r="3" />
+<circle class="dot claude" cx="390.35" cy="308.00" r="3" />
+<circle class="dot claude" cx="407.53" cy="308.00" r="3" />
+<circle class="dot claude" cx="424.71" cy="308.00" r="3" />
+<circle class="dot claude" cx="441.88" cy="308.00" r="3" />
+<circle class="dot claude" cx="459.06" cy="308.00" r="3" />
+<circle class="dot claude" cx="476.24" cy="308.00" r="3" />
+<circle class="dot claude" cx="493.41" cy="308.00" r="3" />
+<circle class="dot claude" cx="510.59" cy="308.00" r="3" />
+<circle class="dot claude" cx="527.76" cy="308.00" r="3" />
+<circle class="dot claude" cx="544.94" cy="308.00" r="3" />
+<circle class="dot claude" cx="562.12" cy="308.00" r="3" />
+<circle class="dot claude" cx="579.29" cy="308.00" r="3" />
+<circle class="dot claude" cx="596.47" cy="308.00" r="3" />
+<circle class="dot claude" cx="613.65" cy="308.00" r="3" />
+<circle class="dot claude" cx="630.82" cy="308.00" r="3" />
+<circle class="dot claude" cx="648.00" cy="308.00" r="3" />
+<circle class="dot claude" cx="665.18" cy="308.00" r="3" />
+<circle class="dot claude" cx="682.35" cy="308.00" r="3" />
+<circle class="dot claude" cx="699.53" cy="308.00" r="3" />
+<circle class="dot claude" cx="716.71" cy="308.00" r="3" />
+<circle class="dot claude" cx="733.88" cy="308.00" r="3" />
+<circle class="dot claude" cx="751.06" cy="308.00" r="3" />
+<circle class="dot claude" cx="768.24" cy="308.00" r="3" />
+<circle class="dot claude" cx="785.41" cy="308.00" r="3" />
+<circle class="dot claude" cx="802.59" cy="308.00" r="3" />
+<circle class="dot claude" cx="819.76" cy="308.00" r="3" />
+<circle class="dot claude" cx="836.94" cy="308.00" r="3" />
+<circle class="dot claude" cx="854.12" cy="306.57" r="3" />
+<circle class="dot claude" cx="871.29" cy="308.00" r="3" />
+<circle class="dot claude" cx="888.47" cy="308.00" r="3" />
+<circle class="dot claude" cx="905.65" cy="308.00" r="3" />
+<circle class="dot claude" cx="922.82" cy="307.84" r="3" />
+<circle class="dot claude" cx="940.00" cy="306.14" r="3" />
+        <text class="label" x="64.00" y="326" text-anchor="middle">00:56</text>
+<text class="label" x="81.18" y="326" text-anchor="middle">01:57</text>
+<text class="label" x="98.35" y="326" text-anchor="middle">02:59</text>
+<text class="label" x="115.53" y="326" text-anchor="middle">04:00</text>
+<text class="label" x="132.71" y="326" text-anchor="middle">05:00</text>
+<text class="label" x="149.88" y="326" text-anchor="middle">06:00</text>
+<text class="label" x="167.06" y="326" text-anchor="middle">07:00</text>
+<text class="label" x="184.24" y="326" text-anchor="middle">08:00</text>
+<text class="label" x="201.41" y="326" text-anchor="middle">09:00</text>
+<text class="label" x="218.59" y="326" text-anchor="middle">10:00</text>
+<text class="label" x="235.76" y="326" text-anchor="middle">11:00</text>
+<text class="label" x="252.94" y="326" text-anchor="middle">12:00</text>
+<text class="label" x="270.12" y="326" text-anchor="middle">13:00</text>
+<text class="label" x="287.29" y="326" text-anchor="middle">14:00</text>
+<text class="label" x="304.47" y="326" text-anchor="middle">15:00</text>
+<text class="label" x="321.65" y="326" text-anchor="middle">16:00</text>
+<text class="label" x="338.82" y="326" text-anchor="middle">17:00</text>
+<text class="label" x="356.00" y="326" text-anchor="middle">18:00</text>
+<text class="label" x="373.18" y="326" text-anchor="middle">19:00</text>
+<text class="label" x="390.35" y="326" text-anchor="middle">20:00</text>
+<text class="label" x="407.53" y="326" text-anchor="middle">21:00</text>
+<text class="label" x="424.71" y="326" text-anchor="middle">22:00</text>
+<text class="label" x="441.88" y="326" text-anchor="middle">23:00</text>
+<text class="label" x="459.06" y="326" text-anchor="middle">00:00</text>
+<text class="label" x="476.24" y="326" text-anchor="middle">01:00</text>
+<text class="label" x="493.41" y="326" text-anchor="middle">02:00</text>
+<text class="label" x="510.59" y="326" text-anchor="middle">03:00</text>
+<text class="label" x="527.76" y="326" text-anchor="middle">04:00</text>
+<text class="label" x="544.94" y="326" text-anchor="middle">05:00</text>
+<text class="label" x="562.12" y="326" text-anchor="middle">06:00</text>
+<text class="label" x="579.29" y="326" text-anchor="middle">15:00</text>
+<text class="label" x="596.47" y="326" text-anchor="middle">17:00</text>
+<text class="label" x="613.65" y="326" text-anchor="middle">18:00</text>
+<text class="label" x="630.82" y="326" text-anchor="middle">19:00</text>
+<text class="label" x="648.00" y="326" text-anchor="middle">20:00</text>
+<text class="label" x="665.18" y="326" text-anchor="middle">21:00</text>
+<text class="label" x="682.35" y="326" text-anchor="middle">22:00</text>
+<text class="label" x="699.53" y="326" text-anchor="middle">23:00</text>
+<text class="label" x="716.71" y="326" text-anchor="middle">00:00</text>
+<text class="label" x="733.88" y="326" text-anchor="middle">08:00</text>
+<text class="label" x="751.06" y="326" text-anchor="middle">09:00</text>
+<text class="label" x="768.24" y="326" text-anchor="middle">10:00</text>
+<text class="label" x="785.41" y="326" text-anchor="middle">11:00</text>
+<text class="label" x="802.59" y="326" text-anchor="middle">12:00</text>
+<text class="label" x="819.76" y="326" text-anchor="middle">13:00</text>
+<text class="label" x="836.94" y="326" text-anchor="middle">14:00</text>
+<text class="label" x="854.12" y="326" text-anchor="middle">15:00</text>
+<text class="label" x="871.29" y="326" text-anchor="middle">16:00</text>
+<text class="label" x="888.47" y="326" text-anchor="middle">17:00</text>
+<text class="label" x="905.65" y="326" text-anchor="middle">18:00</text>
+<text class="label" x="922.82" y="326" text-anchor="middle">19:00</text>
+<text class="label" x="940.00" y="326" text-anchor="middle">20:00</text>
+      </svg>
+      <div class="legend">
+        <span><span class="swatch codex"></span>Codex</span>
+        <span><span class="swatch claude"></span>Claude</span>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Hourly Aggregate Table</h2>
+      <table>
+        <thead>
+          <tr><th>Window (MDT)</th><th class="num">Codex</th><th class="num">Claude</th><th class="num">Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>23:56–00:56</td><td class="num">235</td><td class="num">0</td><td class="num">235</td></tr>
+<tr><td>00:57–01:57</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>01:59–02:59</td><td class="num">900</td><td class="num">0</td><td class="num">900</td></tr>
+<tr><td>03:00–04:00</td><td class="num">260</td><td class="num">0</td><td class="num">260</td></tr>
+<tr><td>04:00–05:00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>05:00–06:00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>06:00–07:00</td><td class="num">10,200</td><td class="num">4,244,670</td><td class="num">4,254,870</td></tr>
+<tr><td>07:00–08:00</td><td class="num">9,950</td><td class="num">2,010,258</td><td class="num">2,020,208</td></tr>
+<tr><td>08:00–09:00</td><td class="num">1,248,434</td><td class="num">7,262,210</td><td class="num">8,510,644</td></tr>
+<tr><td>09:00–10:00</td><td class="num">447,505</td><td class="num">0</td><td class="num">447,505</td></tr>
+<tr><td>10:00–11:00</td><td class="num">379,497</td><td class="num">0</td><td class="num">379,497</td></tr>
+<tr><td>11:00–12:00</td><td class="num">406,916</td><td class="num">0</td><td class="num">406,916</td></tr>
+<tr><td>12:00–13:00</td><td class="num">33,973,017</td><td class="num">23,985,678</td><td class="num">57,958,695</td></tr>
+<tr><td>13:00–14:00</td><td class="num">39,635,760</td><td class="num">0</td><td class="num">39,635,760</td></tr>
+<tr><td>14:00–15:00</td><td class="num">28,188,353</td><td class="num">0</td><td class="num">28,188,353</td></tr>
+<tr><td>15:00–16:00</td><td class="num">11,093,751</td><td class="num">0</td><td class="num">11,093,751</td></tr>
+<tr><td>16:00–17:00</td><td class="num">2,351,681</td><td class="num">0</td><td class="num">2,351,681</td></tr>
+<tr><td>17:00–18:00</td><td class="num">1,636,282</td><td class="num">0</td><td class="num">1,636,282</td></tr>
+<tr><td>18:00–19:00</td><td class="num">3,463,729</td><td class="num">0</td><td class="num">3,463,729</td></tr>
+<tr><td>19:00–20:00</td><td class="num">1,881,496</td><td class="num">0</td><td class="num">1,881,496</td></tr>
+<tr><td>20:00–21:00</td><td class="num">2,723,029</td><td class="num">0</td><td class="num">2,723,029</td></tr>
+<tr><td>21:00–22:00</td><td class="num">2,696,410</td><td class="num">0</td><td class="num">2,696,410</td></tr>
+<tr><td>22:00–23:00</td><td class="num">10,336,452</td><td class="num">0</td><td class="num">10,336,452</td></tr>
+<tr><td>23:00–00:00</td><td class="num">1,697,486</td><td class="num">0</td><td class="num">1,697,486</td></tr>
+<tr><td>00:00–01:00</td><td class="num">1,894,531</td><td class="num">0</td><td class="num">1,894,531</td></tr>
+<tr><td>01:00–02:00</td><td class="num">1,365,774</td><td class="num">0</td><td class="num">1,365,774</td></tr>
+<tr><td>02:00–03:00</td><td class="num">1,750,194</td><td class="num">0</td><td class="num">1,750,194</td></tr>
+<tr><td>03:00–04:00</td><td class="num">4,829,246</td><td class="num">0</td><td class="num">4,829,246</td></tr>
+<tr><td>04:00–05:00</td><td class="num">2,266,388</td><td class="num">0</td><td class="num">2,266,388</td></tr>
+<tr><td>05:00–06:00</td><td class="num">2,185,823</td><td class="num">0</td><td class="num">2,185,823</td></tr>
+<tr><td>14:00–15:00</td><td class="num">7,379,658</td><td class="num">0</td><td class="num">7,379,658</td></tr>
+<tr><td>16:00–17:00</td><td class="num">18,815,685</td><td class="num">0</td><td class="num">18,815,685</td></tr>
+<tr><td>17:00–18:00</td><td class="num">62,480,828</td><td class="num">0</td><td class="num">62,480,828</td></tr>
+<tr><td>18:00–19:00</td><td class="num">3,700,291</td><td class="num">0</td><td class="num">3,700,291</td></tr>
+<tr><td>19:00–20:00</td><td class="num">13,822,316</td><td class="num">0</td><td class="num">13,822,316</td></tr>
+<tr><td>20:00–21:00</td><td class="num">7,379,658</td><td class="num">0</td><td class="num">7,379,658</td></tr>
+<tr><td>21:00–22:00</td><td class="num">31,048,623</td><td class="num">0</td><td class="num">31,048,623</td></tr>
+<tr><td>22:00–23:00</td><td class="num">18,815,685</td><td class="num">0</td><td class="num">18,815,685</td></tr>
+<tr><td>23:00–00:00</td><td class="num">62,480,828</td><td class="num">0</td><td class="num">62,480,828</td></tr>
+<tr><td>07:00–08:00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>08:00–09:00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>09:00–10:00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>10:00–11:00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>11:00–12:00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>12:00–13:00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td>13:00–14:00</td><td class="num">25,558,531</td><td class="num">0</td><td class="num">25,558,531</td></tr>
+<tr><td>14:00–15:00</td><td class="num">38,037,342</td><td class="num">319,117</td><td class="num">38,356,459</td></tr>
+<tr><td>15:00–16:00</td><td class="num">44,477,790</td><td class="num">0</td><td class="num">44,477,790</td></tr>
+<tr><td>16:00–17:00</td><td class="num">29,088,613</td><td class="num">0</td><td class="num">29,088,613</td></tr>
+<tr><td>17:00–18:00</td><td class="num">27,904,709</td><td class="num">0</td><td class="num">27,904,709</td></tr>
+<tr><td>18:00–19:00</td><td class="num">14,955,014</td><td class="num">36,812</td><td class="num">14,991,826</td></tr>
+<tr><td>19:00–20:00</td><td class="num">26,346,310</td><td class="num">415,284</td><td class="num">26,761,594</td></tr>
+          <tr class="total-row"><td>Total</td><td class="num">588,765,180</td><td class="num">38,274,029</td><td class="num">627,039,209</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script>
+    window.setTimeout(function () {
+      var url = new URL(window.location.href);
+      url.searchParams.set('v', '20260625203251');
+      url.searchParams.set('r', Date.now().toString());
+      window.location.replace(url.toString());
+    }, 60000);
+  </script>
+</body>
+</html>
